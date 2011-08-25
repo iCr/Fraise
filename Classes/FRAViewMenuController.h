@@ -31,7 +31,6 @@ Unless required by applicable law or agreed to in writing, software distributed 
 - (void)performHideStatusBar;
 - (IBAction)showInvisibleCharactersAction:(id)sender;
 - (IBAction)viewDocumentInSeparateWindowAction:(id)sender;
-- (IBAction)viewDocumentInFullScreenAction:(id)sender;
 
 - (IBAction)showTabBarAction:(id)sender;
 - (void)performHideTabBar;

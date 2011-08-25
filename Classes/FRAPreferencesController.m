@@ -179,7 +179,6 @@ static id sharedInstance = nil;
 	[dictionary setValue:[NSNumber numberWithBool:NO] forKey:@"HasInsertedDefaultSnippets"];
 	[dictionary setValue:[NSNumber numberWithBool:NO] forKey:@"HasImportedFromVersion2"];
 	[dictionary setValue:[NSNumber numberWithBool:NO] forKey:@"HasInsertedDefaultCommands3"];
-	[dictionary setValue:[NSNumber numberWithBool:NO] forKey:@"UserHasBeenShownAlertHowToReturnFromFullScreen"];
 	[dictionary setValue:[NSNumber numberWithBool:NO] forKey:@"UpdateDocumentAutomaticallyWithoutWarning"];
 	[dictionary setValue:[NSNumber numberWithInteger:4] forKey:@"SpacesPerTabEntabDetab"];
 	[dictionary setValue:[NSNumber numberWithInteger:15] forKey:@"TimeBetweenDocumentUpdateChecks"];

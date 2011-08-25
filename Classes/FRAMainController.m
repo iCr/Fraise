@@ -25,7 +25,7 @@ Unless required by applicable law or agreed to in writing, software distributed 
 
 @implementation FRAMainController
 
-@synthesize isInFullScreenMode, singleDocumentWindowWasOpenBeforeEnteringFullScreen, operationQueue;
+@synthesize operationQueue;
 
 
 static id sharedInstance = nil;
@@ -89,9 +89,7 @@ static id sharedInstance = nil;
 	
 	[[FRATextMenuController sharedInstance] buildSyntaxDefinitionsMenu];
 	[[FRATextMenuController sharedInstance] buildEncodingsMenus];
-	
-	isInFullScreenMode = NO;
-	
+
 	[FRAVarious updateCheckIfAnotherApplicationHasChangedDocumentsTimer];
 	
 }

@@ -149,9 +149,6 @@ static id sharedInstance = nil;
 - (void)insertSnippet:(id)snippet
 {
 	FRATextView *textView = FRACurrentTextView;
-	if ([FRAMain isInFullScreenMode]) {
-		textView = [[FRAInterface fullScreenDocument] valueForKey:@"thirdTextView"];
-	}
 	if (textView == nil) {
 		NSBeep();
 		return;

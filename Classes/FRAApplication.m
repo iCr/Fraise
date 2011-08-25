@@ -22,7 +22,6 @@ Unless required by applicable law or agreed to in writing, software distributed 
 #import "FRATextMenuController.h"
 #import "FRAInterfacePerformer.h"
 #import "FRAMainController.h"
-#import "FRAFullScreenWindow.h"
 #import "FRASnippetsController.h"
 #import "FRAShortcutsController.h"
 #import "FRACommandsController.h"
@@ -98,29 +97,6 @@ Unless required by applicable law or agreed to in writing, software distributed 
 						[FRADefaults setValue:[NSArchiver archivedDataWithRootObject:[NSFont fontWithName:[oldFont fontName] size:size]] forKey:@"TextFont"];
 						return;
 					}
-				}
-			}
-			
-			
-		} else if (eventWindow == [FRAInterface fullScreenWindow]) {
-			if ([FRAMain isInFullScreenMode]) {
-				flags = [event modifierFlags] & NSDeviceIndependentModifierFlagsMask;
-				keyCode = [event keyCode];
-				if (keyCode == 0x35 && flags == 0) { // 35 is Escape,
-					[(FRAFullScreenWindow *)[FRAInterface fullScreenWindow] returnFromFullScreen];
-					return;
-				} else if (keyCode == 0x07 && flags == 1048576) { // 07 is X, 1048576 is Command
-					[(NSTextView *)[[FRAInterface fullScreenWindow] firstResponder] cut:nil];
-					return;
-				} else if (keyCode == 0x08 && flags == 1048576) { // 08 is C
-					[(NSTextView *)[[FRAInterface fullScreenWindow] firstResponder] copy:nil];
-					return;
-				} else if (keyCode == 0x09 && flags == 1048576) { // 09 is V
-					[(NSTextView *)[[FRAInterface fullScreenWindow] firstResponder] paste:nil];
-					return;
-				} else if (keyCode == 0x06 && flags == 1048576) { // 06 is Z
-					[[(NSTextView *)[[FRAInterface fullScreenWindow] firstResponder] undoManager] undo];
-					return;
 				}
 			}
 			
