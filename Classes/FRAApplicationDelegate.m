@@ -66,7 +66,7 @@ static id sharedInstance = nil;
 {
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory, NSUserDomainMask, YES);
     NSString *basePath = ([paths count] > 0) ? [paths objectAtIndex:0] : NSTemporaryDirectory();
-    return [basePath stringByAppendingPathComponent:@"Fraise"];
+    return [basePath stringByAppendingPathComponent:@"Strawberry"];
 }
 
 
@@ -97,7 +97,7 @@ static id sharedInstance = nil;
         [fileManager createDirectoryAtPath:applicationSupportFolder withIntermediateDirectories:YES attributes:nil error:nil];
     }
 
-	NSString *storePath = [applicationSupportFolder stringByAppendingPathComponent: @"Fraise3.fraise"];
+	NSString *storePath = [applicationSupportFolder stringByAppendingPathComponent: @"Strawberry3.strawberry"];
 	
 	NSURL *url = [NSURL fileURLWithPath:storePath];
     persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
@@ -267,7 +267,7 @@ static id sharedInstance = nil;
 		[FRAOpenSave openAllTheseFiles:filesToOpenArray];
 		[FRACurrentProject selectionDidChange];
 		filesToOpenArray = nil;
-	} else { // Open previously opened documents/projects only if Fraise wasn't opened by e.g. dragging a document onto the icon
+	} else { // Open previously opened documents/projects only if Strawberry wasn't opened by e.g. dragging a document onto the icon
 		
 		if ([[FRADefaults valueForKey:@"OpenAllDocumentsIHadOpen"] boolValue] == YES && [[FRADefaults valueForKey:@"OpenDocuments"] count] > 0) {
 			shouldCreateEmptyDocument = NO;
@@ -367,7 +367,7 @@ static id sharedInstance = nil;
 
 - (void)applicationDidBecomeActive:(NSNotification *)aNotification
 {
-	if ([[FRADefaults valueForKey:@"CheckIfDocumentHasBeenUpdated"] boolValue] == YES) { // Check for updates directly when Fraise gets focus
+	if ([[FRADefaults valueForKey:@"CheckIfDocumentHasBeenUpdated"] boolValue] == YES) { // Check for updates directly when Strawberry gets focus
 		[FRAVarious checkIfDocumentsHaveBeenUpdatedByAnotherApplication];
 	}
 }
@@ -385,11 +385,11 @@ static id sharedInstance = nil;
 		
 		NSFileManager *fileManager = [NSFileManager defaultManager];
 		NSString *applicationSupportFolder = [self applicationSupportFolder];
-		if (![fileManager fileExistsAtPath:[applicationSupportFolder stringByAppendingPathComponent:@"Fraise.fraise"] isDirectory:NULL]) {
+		if (![fileManager fileExistsAtPath:[applicationSupportFolder stringByAppendingPathComponent:@"Strawberry.strawberry"] isDirectory:NULL]) {
 			return;
 		}
 		
-		NSURL *url = [NSURL fileURLWithPath:[applicationSupportFolder stringByAppendingPathComponent:@"Fraise.fraise"]];
+		NSURL *url = [NSURL fileURLWithPath:[applicationSupportFolder stringByAppendingPathComponent:@"Strawberry.strawberry"]];
 		NSPersistentStoreCoordinator *persistentStoreCoordinatorVersion2 = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:managedObjectModelVersion2];
 		if (![persistentStoreCoordinatorVersion2 addPersistentStoreWithType:NSBinaryStoreType configuration:nil URL:url options:nil error:nil]){
 			return;

@@ -203,7 +203,7 @@ static id sharedInstance = nil;
 		[FRACurrentProject selectionDidChange];	
 	} else {
 		NSSavePanel *savePanel = [NSSavePanel savePanel];
-		[savePanel setAllowedFileTypes:[NSArray arrayWithObject:@"fraiseProject"]];
+		[savePanel setAllowedFileTypes:[NSArray arrayWithObject:@"strawberryProject"]];
 		[savePanel beginSheetForDirectory:[FRAInterface whichDirectoryForSave]
 									 file:nil
 						   modalForWindow:newProjectWindow
@@ -223,7 +223,7 @@ static id sharedInstance = nil;
 	if (returnCode == NSOKButton) {
 		[[FRAProjectsController sharedDocumentController] newDocument:nil];
 		[FRACurrentProject setFileURL:[NSURL fileURLWithPath:[sheet filename]]];
-		[FRACurrentProject saveToURL:[NSURL fileURLWithPath:[sheet filename]] ofType:@"fraiseProject" forSaveOperation:NSSaveOperation error:nil];
+		[FRACurrentProject saveToURL:[NSURL fileURLWithPath:[sheet filename]] ofType:@"strawberryProject" forSaveOperation:NSSaveOperation error:nil];
 		[FRACurrentProject updateWindowTitleBarForDocument:nil];
 		[FRACurrentProject saveDocument:nil];
 	}

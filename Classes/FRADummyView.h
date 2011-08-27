@@ -21,7 +21,7 @@ and limitations under the License.
 
 @interface FRADummyView : NSView {
 
-	NSImage *fraiseImage;
+	NSImage *strawberryImage;
 	NSMutableDictionary *attributes;
 	NSMutableDictionary *whiteAttributes;
 	

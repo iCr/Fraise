@@ -128,17 +128,17 @@ static id sharedInstance = nil;
 
 - (void)installCommandLineUtility
 {
-	NSString *fraisePath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"fraise"];
-	NSData *fraiseData = [[NSData alloc] initWithContentsOfFile:fraisePath];
-	NSString *fraiseManPagePath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"fraise.1"];
-	NSData *fraiseManPageData = [[NSData alloc] initWithContentsOfFile:fraiseManPagePath];
+	NSString *path = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"berry"];
+	NSData *data = [[NSData alloc] initWithContentsOfFile:path];
+	NSString *manPagePath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"berry.1"];
+	NSData *manPageData = [[NSData alloc] initWithContentsOfFile:manPagePath];
 	
 	NSTask *task = [[NSTask alloc] init];
     NSPipe *pipe = [[NSPipe alloc] init];
     NSFileHandle *writeHandle = [pipe fileHandleForWriting];
 	
     [task setLaunchPath:@"/usr/libexec/authopen"];
-    [task setArguments:[NSArray arrayWithObjects:@"-c", @"-m", @"0755", @"-w", @"/usr/bin/fraise", nil]];
+    [task setArguments:[NSArray arrayWithObjects:@"-c", @"-m", @"0755", @"-w", @"/usr/bin/berry", nil]];
     [task setStandardInput:pipe];
 	
 	[task launch];
@@ -146,7 +146,7 @@ static id sharedInstance = nil;
 	NSInteger status;
 	signal(SIGPIPE, SIG_IGN); // One seems to need this code if someone writes the wrong password three times, otherwise it crashes the application
 	@try {
-		[writeHandle writeData:fraiseData];
+		[writeHandle writeData:data];
 		
 		close([writeHandle fileDescriptor]); // Close it manually
 		[writeHandle setValue:[NSNumber numberWithUnsignedShort:1] forKey:@"_flags"];
@@ -167,11 +167,11 @@ static id sharedInstance = nil;
 		writeHandle = [pipe fileHandleForWriting];
 		
 		[task setLaunchPath:@"/usr/libexec/authopen"];
-		[task setArguments:[NSArray arrayWithObjects:@"-c", @"-w", @"/usr/share/man/man1/fraise.1", nil]];
+		[task setArguments:[NSArray arrayWithObjects:@"-c", @"-w", @"/usr/share/man/man1/berry.1", nil]];
 		[task setStandardInput:pipe];
 		
 		[task launch];
-		[writeHandle writeData:fraiseManPageData];
+		[writeHandle writeData:manPageData];
 		
 		close([writeHandle fileDescriptor]); // Close it manually
 		[writeHandle setValue:[NSNumber numberWithUnsignedShort:1] forKey:@"_flags"];

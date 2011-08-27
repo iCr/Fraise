@@ -28,10 +28,10 @@ and limitations under the License.
         
 		gradient = [[NSGradient alloc] initWithStartingColor:[NSColor colorWithCalibratedWhite:0.12 alpha:1.0] endingColor:[NSColor colorWithCalibratedWhite:0.38 alpha:1.0]];
 		
-		fraiseImage = [NSImage imageNamed:@"FRAMainIcon.icns"];
+		strawberryImage = [NSImage imageNamed:@"FRAMainIcon.icns"];
 		[[NSGraphicsContext currentContext] setImageInterpolation:NSImageInterpolationHigh];
-		[fraiseImage setSize:NSMakeSize(128.0, 128.0)];
-		[[fraiseImage bestRepresentationForRect:NSMakeRect(0.0, 0.0, 128.0, 128.0) context:nil hints:nil] setSize:NSMakeSize(128.0, 128.0)];
+		[strawberryImage setSize:NSMakeSize(128.0, 128.0)];
+		[[strawberryImage bestRepresentationForRect:NSMakeRect(0.0, 0.0, 128.0, 128.0) context:nil hints:nil] setSize:NSMakeSize(128.0, 128.0)];
 		
 		attributes = [[NSMutableDictionary alloc] init];
 		[attributes setValue:[NSFont boldSystemFontOfSize:20] forKey:NSFontAttributeName];
@@ -72,11 +72,11 @@ and limitations under the License.
 		[attributedString drawAtPoint:NSMakePoint(((attributedStringSize.width / -2) + bounds.size.width / 2), (attributedStringSize.height / -2) + (bounds.size.height / 2) - 38)];
 		
 		NSRect centeredRect = rect;
-		centeredRect.size = [fraiseImage size];
+		centeredRect.size = [strawberryImage size];
 		centeredRect.origin.x += ((rect.size.width - centeredRect.size.width) / 2.0);
 		centeredRect.origin.y = ((rect.size.height - centeredRect.size.height) / 2.0) + 48;
 		
-		[fraiseImage drawInRect:centeredRect fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:0.80];
+		[strawberryImage drawInRect:centeredRect fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:0.80];
 	}
 }
 

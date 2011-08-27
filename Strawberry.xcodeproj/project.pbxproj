@@ -425,7 +425,7 @@
 		7F980A230B73B4F4000A9140 /* Toolbar Icons */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "Toolbar Icons"; path = "Graphics/Toolbar Icons"; sourceTree = "<group>"; };
 		7F980A510B73B5B9000A9140 /* Preferences Icons */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "Preferences Icons"; path = "Graphics/Preferences Icons"; sourceTree = "<group>"; };
 		7F980A890B73B629000A9140 /* berry.1 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.man; name = berry.1; path = "Command Line Utility/berry.1"; sourceTree = "<group>"; };
-		7F980A8A0B73B629000A9140 /* berry_main.m */ = {isa = PBXFileReference; fileEncoding = 4; name = berry_main.m; path = "Command Line Utility/berry_main.m"; sourceTree = "<group>"; };
+		7F980A8A0B73B629000A9140 /* berry_main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = berry_main.m; path = "Command Line Utility/berry_main.m"; sourceTree = "<group>"; };
 		7F980A8F0B73B641000A9140 /* ODBEditorSuite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ODBEditorSuite.h; path = Other/ODBEditorSuite.h; sourceTree = "<group>"; };
 		7F980A910B73B652000A9140 /* FRADataModel3.xcdatamodel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.xcdatamodel; name = FRADataModel3.xcdatamodel; path = Other/FRADataModel3.xcdatamodel; sourceTree = "<group>"; };
 		7F980A930B73B660000A9140 /* SyntaxDefinitions.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = SyntaxDefinitions.plist; path = Other/SyntaxDefinitions.plist; sourceTree = "<group>"; };
@@ -615,6 +615,7 @@
 			);
 			name = Classes;
 			sourceTree = "<group>";
+			wrapsLines = 0;
 		};
 		2A37F4AFFDCFA73011CA2CEA /* Other Sources */ = {
 			isa = PBXGroup;

@@ -172,7 +172,7 @@ static id sharedInstance = nil;
 	[openPanel setResolvesAliases:YES];		
 	[openPanel beginSheetForDirectory:[FRAInterface whichDirectoryForOpen] 
 							file:nil 
-						   types:[NSArray arrayWithObject:@"fraiseCommands"] 
+						   types:[NSArray arrayWithObject:@"strawberryCommands"] 
 				  modalForWindow:commandsWindow
 				   modalDelegate:self
 				  didEndSelector:@selector(openPanelDidEnd:returnCode:contextInfo:)
@@ -228,7 +228,7 @@ static id sharedInstance = nil;
 - (void)exportCommands
 {
 	NSSavePanel *savePanel = [NSSavePanel savePanel];
-	[savePanel setRequiredFileType:@"fraiseCommands"];
+	[savePanel setRequiredFileType:@"strawberryCommands"];
 	[savePanel beginSheetForDirectory:[FRAInterface whichDirectoryForSave]				
 								 file:[[[commandCollectionsArrayController selectedObjects] objectAtIndex:0] valueForKey:@"name"]
 					   modalForWindow:commandsWindow

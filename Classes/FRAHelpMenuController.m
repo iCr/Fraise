@@ -39,7 +39,7 @@ and limitations under the License.
 					  @selector(installCommandLineUtiltiySheetDidEnd:returnCode:contextInfo:),
 					  nil,
 					  nil,
-					  NSLocalizedString(@"If you choose Install fraise will be installed in /usr/bin and its man page in /usr/share/man/man1 and you can use it directly in the Terminal (you may need to authenticate twice with an administrators username and password). Otherwise you can choose to place all the files you need on the Desktop and install it manually.", @"Indicate that if you choose Install fraise will be installed in /usr/bin and its man page in /usr/share/man/man1 and you can use it directly in the Terminal (you may need to authenticate twice with an administrators username and password). Otherwise you can choose to place all the files you need on the desktop and install it manually. in Install-command-line-utility sheet"));
+					  NSLocalizedString(@"If you choose Install berry will be installed in /usr/bin and its man page in /usr/share/man/man1 and you can use it directly in the Terminal (you may need to authenticate twice with an administrators username and password). Otherwise you can choose to place all the files you need on the Desktop and install it manually.", @"Indicate that if you choose Install berry will be installed in /usr/bin and its man page in /usr/share/man/man1 and you can use it directly in the Terminal (you may need to authenticate twice with an administrators username and password). Otherwise you can choose to place all the files you need on the desktop and install it manually. in Install-command-line-utility sheet"));
 }
 
 
@@ -51,15 +51,15 @@ and limitations under the License.
 		NSFileManager *fileManager = [NSFileManager defaultManager];
 		NSWorkspace *workspace = [NSWorkspace sharedWorkspace];
 		NSString *pathToFolder = [[NSHomeDirectory() stringByAppendingPathComponent:@"Desktop"]
-        stringByAppendingPathComponent:@"Fraise command-line utility"];
+        stringByAppendingPathComponent:@"Strawberry command-line utility"];
 		[fileManager createDirectoryAtPath:pathToFolder withIntermediateDirectories:YES attributes:nil error:nil];
 		
-		[workspace performFileOperation:NSWorkspaceCopyOperation source:[[NSBundle mainBundle] resourcePath] destination:pathToFolder files:[NSArray arrayWithObjects:@"fraise", @"fraise.1", @"fraise - installation instructions", nil] tag:NULL];
+		[workspace performFileOperation:NSWorkspaceCopyOperation source:[[NSBundle mainBundle] resourcePath] destination:pathToFolder files:[NSArray arrayWithObjects:@"berry", @"berry.1", @"berry - installation instructions", nil] tag:NULL];
 	}
 }
 
 
-- (IBAction)fraiseHelp:(id)sender
+- (IBAction)strawberryHelp:(id)sender
 {
 	[[NSWorkspace sharedWorkspace] openFile:[[NSBundle mainBundle] pathForResource:@"Fraise-Manual" ofType:@"pdf"]];
 }
