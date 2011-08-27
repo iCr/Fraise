@@ -67,7 +67,7 @@
 		7F5097710D95A65500D62D67 /* FRADefaultUnsavedIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F50976F0D95A65500D62D67 /* FRADefaultUnsavedIcon.png */; };
 		7F5097720D95A65500D62D67 /* FRADefaultIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F5097700D95A65500D62D67 /* FRADefaultIcon.png */; };
 		7F51225C0BA72E7E00183863 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F51225B0BA72E7E00183863 /* QuartzCore.framework */; };
-		7F5C266C0B73BF5C00D2EDDC /* fraise_main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F980A8A0B73B629000A9140 /* fraise_main.m */; };
+		7F5C266C0B73BF5C00D2EDDC /* berry_main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F980A8A0B73B629000A9140 /* berry_main.m */; };
 		7F5C266D0B73BF6C00D2EDDC /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A7FEA54F5311CA2CBB /* Cocoa.framework */; };
 		7F5C26740B73BF9B00D2EDDC /* fraise in Resources */ = {isa = PBXBuildFile; fileRef = 7F5C26650B73BF2200D2EDDC /* fraise */; };
 		7F5C26B10B73C03A00D2EDDC /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F5C26B00B73C03A00D2EDDC /* Carbon.framework */; };
@@ -100,7 +100,7 @@
 		7F980A410B73B4F4000A9140 /* Syntax Definitions in Resources */ = {isa = PBXBuildFile; fileRef = 7F9809E70B73B4F4000A9140 /* Syntax Definitions */; };
 		7F980A420B73B4F4000A9140 /* Toolbar Icons in Resources */ = {isa = PBXBuildFile; fileRef = 7F980A230B73B4F4000A9140 /* Toolbar Icons */; };
 		7F980A610B73B5B9000A9140 /* Preferences Icons in Resources */ = {isa = PBXBuildFile; fileRef = 7F980A510B73B5B9000A9140 /* Preferences Icons */; };
-		7F980A8B0B73B629000A9140 /* fraise.1 in Resources */ = {isa = PBXBuildFile; fileRef = 7F980A890B73B629000A9140 /* fraise.1 */; };
+		7F980A8B0B73B629000A9140 /* berry.1 in Resources */ = {isa = PBXBuildFile; fileRef = 7F980A890B73B629000A9140 /* berry.1 */; };
 		7F980A920B73B652000A9140 /* FRADataModel3.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = 7F980A910B73B652000A9140 /* FRADataModel3.xcdatamodel */; };
 		7F980A970B73B660000A9140 /* SyntaxDefinitions.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7F980A930B73B660000A9140 /* SyntaxDefinitions.plist */; };
 		7F980A980B73B660000A9140 /* DefaultSnippets.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7F980A940B73B660000A9140 /* DefaultSnippets.plist */; };
@@ -424,8 +424,8 @@
 		7F9809E70B73B4F4000A9140 /* Syntax Definitions */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "Syntax Definitions"; sourceTree = "<group>"; };
 		7F980A230B73B4F4000A9140 /* Toolbar Icons */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "Toolbar Icons"; path = "Graphics/Toolbar Icons"; sourceTree = "<group>"; };
 		7F980A510B73B5B9000A9140 /* Preferences Icons */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "Preferences Icons"; path = "Graphics/Preferences Icons"; sourceTree = "<group>"; };
-		7F980A890B73B629000A9140 /* fraise.1 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.man; name = fraise.1; path = "Command Line Utility/fraise.1"; sourceTree = "<group>"; };
-		7F980A8A0B73B629000A9140 /* fraise_main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = fraise_main.m; path = "Command Line Utility/fraise_main.m"; sourceTree = "<group>"; };
+		7F980A890B73B629000A9140 /* berry.1 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.man; name = berry.1; path = "Command Line Utility/berry.1"; sourceTree = "<group>"; };
+		7F980A8A0B73B629000A9140 /* berry_main.m */ = {isa = PBXFileReference; fileEncoding = 4; name = berry_main.m; path = "Command Line Utility/berry_main.m"; sourceTree = "<group>"; };
 		7F980A8F0B73B641000A9140 /* ODBEditorSuite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ODBEditorSuite.h; path = Other/ODBEditorSuite.h; sourceTree = "<group>"; };
 		7F980A910B73B652000A9140 /* FRADataModel3.xcdatamodel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.xcdatamodel; name = FRADataModel3.xcdatamodel; path = Other/FRADataModel3.xcdatamodel; sourceTree = "<group>"; };
 		7F980A930B73B660000A9140 /* SyntaxDefinitions.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = SyntaxDefinitions.plist; path = Other/SyntaxDefinitions.plist; sourceTree = "<group>"; };
@@ -980,8 +980,8 @@
 		7F980A860B73B619000A9140 /* Command Line Utility */ = {
 			isa = PBXGroup;
 			children = (
-				7F980A890B73B629000A9140 /* fraise.1 */,
-				7F980A8A0B73B629000A9140 /* fraise_main.m */,
+				7F980A890B73B629000A9140 /* berry.1 */,
+				7F980A8A0B73B629000A9140 /* berry_main.m */,
 			);
 			name = "Command Line Utility";
 			sourceTree = "<group>";
@@ -1082,7 +1082,7 @@
 /* Begin PBXProject section */
 		2A37F4A9FDCFA73011CA2CEA /* Project object */ = {
 			isa = PBXProject;
-			buildConfigurationList = C05733CB08A9546B00998B17 /* Build configuration list for PBXProject "Fraise" */;
+			buildConfigurationList = C05733CB08A9546B00998B17 /* Build configuration list for PBXProject "Strawberry" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 1;
@@ -1122,7 +1122,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7F5C26740B73BF9B00D2EDDC /* fraise in Resources */,
-				7F980A8B0B73B629000A9140 /* fraise.1 in Resources */,
+				7F980A8B0B73B629000A9140 /* berry.1 in Resources */,
 				7FB9116B101E6245008DB1DA /* InfoPlist.strings in Resources */,
 				1FB593BA113EE34600ECB6C0 /* Localizable.strings in Resources */,
 				7F9809D20B73B4E1000A9140 /* FRADocumentIcon.icns in Resources */,
@@ -1193,7 +1193,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7F5C266C0B73BF5C00D2EDDC /* fraise_main.m in Sources */,
+				7F5C266C0B73BF5C00D2EDDC /* berry_main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1730,7 +1730,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		C05733CB08A9546B00998B17 /* Build configuration list for PBXProject "Fraise" */ = {
+		C05733CB08A9546B00998B17 /* Build configuration list for PBXProject "Strawberry" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C05733CC08A9546B00998B17 /* Debug */,
