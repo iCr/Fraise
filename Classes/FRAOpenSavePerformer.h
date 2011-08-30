@@ -26,18 +26,18 @@ and limitations under the License.
 + (FRAOpenSavePerformer *)sharedInstance;
 
 - (void)openAllTheseFiles:(NSArray *)arrayOfFiles;
-- (void)shouldOpen:(NSString *)path withEncoding:(NSStringEncoding)chosenEncoding;
-- (void)shouldOpenPartTwo:(NSString *)path withEncoding:(NSStringEncoding)chosenEncoding data:(NSData *)textData;
-- (void)performOpenWithPath:(NSString *)path contents:(NSString *)textString encoding:(NSStringEncoding)encoding;
+- (void)shouldOpen:(NSURL *)path withEncoding:(NSStringEncoding)chosenEncoding;
+- (void)shouldOpenPartTwo:(NSURL *)path withEncoding:(NSStringEncoding)chosenEncoding data:(NSData *)textData;
+- (void)performOpenWithPath:(NSURL *)path contents:(NSString *)textString encoding:(NSStringEncoding)encoding;
 
 - (void)performSaveOfDocument:(id)document fromSaveAs:(BOOL)fromSaveAs;
-- (void)performSaveOfDocument:(id)document path:(NSString *)path fromSaveAs:(BOOL)fromSaveAs aCopy:(BOOL)aCopy;
-- (void)performDataSaveWith:(NSData *)data path:(NSString *)path;
-- (void)updateAfterSaveForDocument:(id)document path:(NSString *)path;
+- (void)performSaveOfDocument:(id)document path:(NSURL *)path fromSaveAs:(BOOL)fromSaveAs aCopy:(BOOL)aCopy;
+- (void)performDataSaveWith:(NSData *)data path:(NSURL *)path;
+- (void)updateAfterSaveForDocument:(id)document path:(NSURL *)path;
 
-- (NSDictionary *)getExtraMetaDataFromPath:(NSString *)path;
-- (void)resetExtraMetaData:(NSDictionary *)dictionary path:(NSString *)path;
+- (NSDictionary *)getExtraMetaDataFromPath:(NSURL *)path;
+- (void)resetExtraMetaData:(NSDictionary *)dictionary path:(NSURL *)path;
 
-- (BOOL)isPathVisible:(NSString *)path;
-- (BOOL)isPartOfSVN:(NSString *)path;
+- (BOOL)isPathVisible:(NSURL *)path;
+- (BOOL)isPartOfSVN:(NSURL *)path;
 @end

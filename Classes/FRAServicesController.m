@@ -98,7 +98,7 @@ static id sharedInstance = nil;
 	}
 	
 	NSString *path = [[pboard propertyListForType:NSFilenamesPboardType] objectAtIndex:0];
-	[FRAOpenSave shouldOpen:path withEncoding:0];
+	[FRAOpenSave shouldOpen:[NSURL URLWithString:path] withEncoding:0];
 }
 
 

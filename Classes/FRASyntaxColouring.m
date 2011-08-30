@@ -305,7 +305,7 @@ and limitations under the License.
 	if ([syntaxDictionary valueForKey:@"beginInstruction"]) {
 		beginInstruction = [syntaxDictionary valueForKey:@"beginInstruction"];
 	} else {
-beginInstruction:@"";
+        beginInstruction = @"";
 	}
 	
 	if ([syntaxDictionary valueForKey:@"endInstruction"]) {

@@ -50,7 +50,7 @@ and limitations under the License.
 - (void)performDeleteCollection;
 
 - (void)importSnippets;
-- (void)performSnippetsImportWithPath:(NSString *)path;
+- (void)performSnippetsImportWithPath:(NSURL *)path;
 - (void)exportSnippets;
 
 - (NSManagedObjectContext *)managedObjectContext;

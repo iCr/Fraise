@@ -189,29 +189,20 @@ static id sharedInstance = nil;
 {
 	[self openSnippetsWindow];
 	NSOpenPanel *openPanel = [NSOpenPanel openPanel];
-	[openPanel setResolvesAliases:YES];		
-	[openPanel beginSheetForDirectory:[FRAInterface whichDirectoryForOpen] 
-							file:nil 
-						   types:[NSArray arrayWithObjects:@"frac", @"smlc", @"fraiseSnippets", nil] 
-					   modalForWindow:snippetsWindow
-					modalDelegate:self
-				  didEndSelector:@selector(openPanelDidEnd:returnCode:contextInfo:)
-					 contextInfo:nil];
+	[openPanel setResolvesAliases:YES];
+    [openPanel setAllowedFileTypes:[NSArray arrayWithObjects:@"frac", @"smlc", @"fraiseSnippets", nil]];
+    [openPanel setDirectoryURL:[NSURL URLWithString:[FRAInterface whichDirectoryForOpen]]];
+    [openPanel beginSheetModalForWindow:snippetsWindow completionHandler:^(NSInteger result) {
+        if (result == NSOKButton)
+            [self performSnippetsImportWithPath:[openPanel URL]];
+
+        [snippetsWindow makeKeyAndOrderFront:nil];
+    }];
 }
 
-
-- (void)openPanelDidEnd:(NSOpenPanel *)panel returnCode:(NSInteger)returnCode  contextInfo:(void  *)contextInfo
+- (void)performSnippetsImportWithPath:(NSURL *)path
 {
-	if (returnCode == NSOKButton) {
-		[self performSnippetsImportWithPath:[panel filename]];
-	}
-	[snippetsWindow makeKeyAndOrderFront:nil];
-}
-
-
-- (void)performSnippetsImportWithPath:(NSString *)path
-{
-	NSData *data = [NSData dataWithContentsOfFile:path];
+	NSData *data = [NSData dataWithContentsOfURL:path];
 	NSArray *snippets = (NSArray *)[NSKeyedUnarchiver unarchiveObjectWithData:data];
 	if ([snippets count] == 0) {
 		NSBeep();
@@ -248,44 +239,34 @@ static id sharedInstance = nil;
 - (void)exportSnippets
 {
 	NSSavePanel *savePanel = [NSSavePanel savePanel];
-	[savePanel setRequiredFileType:@"fraiseSnippets"];	
-	[savePanel beginSheetForDirectory:[FRAInterface whichDirectoryForSave]				
-								 file:[[[snippetCollectionsArrayController selectedObjects] objectAtIndex:0] valueForKey:@"name"]
-					   modalForWindow:snippetsWindow
-						modalDelegate:self
-					   didEndSelector:@selector(exportSnippetsPanelDidEnd:returnCode:contextInfo:)
-						  contextInfo:nil];
-	
+	[savePanel setAllowedFileTypes:[NSArray arrayWithObject:@"fraiseSnippets"]];
+    [savePanel setDirectoryURL:[NSURL URLWithString:[FRAInterface whichDirectoryForSave]]];
+    [savePanel beginSheetModalForWindow:snippetsWindow completionHandler:^(NSInteger result) {
+        if (result == NSOKButton) {
+            id collection = [[snippetCollectionsArrayController selectedObjects] objectAtIndex:0];
+                    
+            NSMutableArray *exportArray = [NSMutableArray array];
+            NSArray *array = [[collection mutableSetValueForKey:@"snippets"] allObjects];
+            for (id item in array) {
+                NSMutableDictionary *snippet = [NSMutableDictionary dictionary];
+                [snippet setValue:[item valueForKey:@"name"] forKey:@"name"];
+                [snippet setValue:[item valueForKey:@"text"] forKey:@"text"];
+                [snippet setValue:[collection valueForKey:@"name"] forKey:@"collectionName"];
+                [snippet setValue:[item valueForKey:@"shortcutDisplayString"] forKey:@"shortcutDisplayString"];
+                [snippet setValue:[item valueForKey:@"shortcutMenuItemKeyString"] forKey:@"shortcutMenuItemKeyString"];
+                [snippet setValue:[item valueForKey:@"shortcutModifier"] forKey:@"shortcutModifier"];
+                [snippet setValue:[item valueForKey:@"sortOrder"] forKey:@"sortOrder"];
+                [snippet setValue:[NSNumber numberWithInteger:3] forKey:@"version"];
+                [exportArray addObject:snippet];
+            }
+            
+            NSData *data = [NSKeyedArchiver archivedDataWithRootObject:exportArray];
+            [FRAOpenSave performDataSaveWith:data path:[savePanel URL]];
+        }
+        
+        [snippetsWindow makeKeyAndOrderFront:nil];
+    }];
 }
-
-
-- (void)exportSnippetsPanelDidEnd:(NSSavePanel *)sheet returnCode:(NSInteger)returnCode contextInfo:(void *)context
-{
-	if (returnCode == NSOKButton) {
-		id collection = [[snippetCollectionsArrayController selectedObjects] objectAtIndex:0];
-				
-		NSMutableArray *exportArray = [NSMutableArray array];
-		NSArray *array = [[collection mutableSetValueForKey:@"snippets"] allObjects];
-		for (id item in array) {
-			NSMutableDictionary *snippet = [NSMutableDictionary dictionary];
-			[snippet setValue:[item valueForKey:@"name"] forKey:@"name"];
-			[snippet setValue:[item valueForKey:@"text"] forKey:@"text"];
-			[snippet setValue:[collection valueForKey:@"name"] forKey:@"collectionName"];
-			[snippet setValue:[item valueForKey:@"shortcutDisplayString"] forKey:@"shortcutDisplayString"];
-			[snippet setValue:[item valueForKey:@"shortcutMenuItemKeyString"] forKey:@"shortcutMenuItemKeyString"];
-			[snippet setValue:[item valueForKey:@"shortcutModifier"] forKey:@"shortcutModifier"];
-			[snippet setValue:[item valueForKey:@"sortOrder"] forKey:@"sortOrder"];
-			[snippet setValue:[NSNumber numberWithInteger:3] forKey:@"version"];
-			[exportArray addObject:snippet];
-		}
-		
-		NSData *data = [NSKeyedArchiver archivedDataWithRootObject:exportArray];
-		[FRAOpenSave performDataSaveWith:data path:[sheet filename]];
-	}
-	
-	[snippetsWindow makeKeyAndOrderFront:nil];
-}
-
 
 - (void)windowWillClose:(NSNotification *)aNotification
 {
