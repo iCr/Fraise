@@ -56,7 +56,7 @@ and limitations under the License.
 - (void)performDeleteCollection;
 
 - (void)importCommands;
-- (void)performCommandsImportWithPath:(NSString *)path;
+- (void)performCommandsImportWithPath:(NSURL *)path;
 - (void)exportCommands;
 
 - (NSManagedObjectContext *)managedObjectContext;

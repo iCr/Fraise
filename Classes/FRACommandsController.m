@@ -169,29 +169,20 @@ static id sharedInstance = nil;
 {
 	[self openCommandsWindow];
 	NSOpenPanel *openPanel = [NSOpenPanel openPanel];
-	[openPanel setResolvesAliases:YES];		
-	[openPanel beginSheetForDirectory:[FRAInterface whichDirectoryForOpen] 
-							file:nil 
-						   types:[NSArray arrayWithObject:@"strawberryCommands"] 
-				  modalForWindow:commandsWindow
-				   modalDelegate:self
-				  didEndSelector:@selector(openPanelDidEnd:returnCode:contextInfo:)
-					 contextInfo:nil];
+	[openPanel setResolvesAliases:YES];
+    [openPanel setAllowedFileTypes:[NSArray arrayWithObject:@"strawberryCommands"]];
+    [openPanel setDirectoryURL:[NSURL URLWithString:[FRAInterface whichDirectoryForOpen]]];
+    [openPanel beginSheetModalForWindow:commandsWindow completionHandler:^(NSInteger result) {
+        if (result == NSOKButton)
+            [self performCommandsImportWithPath:[openPanel URL]];
+
+        [commandsWindow makeKeyAndOrderFront:nil];
+    }];
 }
 
-
-- (void)openPanelDidEnd:(NSOpenPanel *)panel returnCode:(NSInteger)returnCode  contextInfo:(void  *)contextInfo
+- (void)performCommandsImportWithPath:(NSURL *)path
 {
-	if (returnCode == NSOKButton) {
-		[self performCommandsImportWithPath:[panel filename]];
-	}
-	[commandsWindow makeKeyAndOrderFront:nil];
-}
-
-
-- (void)performCommandsImportWithPath:(NSString *)path
-{
-	NSData *data = [NSData dataWithContentsOfFile:path];
+	NSData *data = [NSData dataWithContentsOfURL:path];
 	NSArray *commands = (NSArray *)[NSKeyedUnarchiver unarchiveObjectWithData:data];
 	if ([commands count] == 0) {
 		return;
@@ -228,7 +219,19 @@ static id sharedInstance = nil;
 - (void)exportCommands
 {
 	NSSavePanel *savePanel = [NSSavePanel savePanel];
-	[savePanel setRequiredFileType:@"strawberryCommands"];
+    [savePanel setAllowedFileTypes:[NSArray arrayWithObject:@"strawberryCommands"]];
+    [savePanel setDirectoryURL:[NSURL URLWithString:[FRAInterface whichDirectoryForSave]]];
+    [savePanel beginSheetModalForWindow:commandsWindow completionHandler:^(NSInteger result) {
+        if (result == NSOKButton)
+            [self performSnippetsImportWithPath:[openPanel URL]];
+
+        [snippetsWindow makeKeyAndOrderFront:nil];
+    }];
+
+
+
+
+
 	[savePanel beginSheetForDirectory:[FRAInterface whichDirectoryForSave]				
 								 file:[[[commandCollectionsArrayController selectedObjects] objectAtIndex:0] valueForKey:@"name"]
 					   modalForWindow:commandsWindow
