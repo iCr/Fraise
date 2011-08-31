@@ -2,13 +2,13 @@
 <archive type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="7.10">
 	<data>
 		<int key="IBDocument.SystemTarget">1050</int>
-		<string key="IBDocument.SystemVersion">11C26</string>
-		<string key="IBDocument.InterfaceBuilderVersion">1931</string>
-		<string key="IBDocument.AppKitVersion">1138.11</string>
+		<string key="IBDocument.SystemVersion">11C24</string>
+		<string key="IBDocument.InterfaceBuilderVersion">1928</string>
+		<string key="IBDocument.AppKitVersion">1138.1</string>
 		<string key="IBDocument.HIToolboxVersion">566.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin</string>
-			<string key="NS.object.0">1931</string>
+			<string key="NS.object.0">1928</string>
 		</object>
 		<object class="NSArray" key="IBDocument.IntegratedClassDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -43,7 +43,7 @@
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<object class="NSMenuItem" id="509621229">
 						<reference key="NSMenu" ref="1050515396"/>
-						<string key="NSTitle">Fraise</string>
+						<string key="NSTitle">Strawberry</string>
 						<string key="NSKeyEquiv"/>
 						<int key="NSKeyEquivModMask">1048576</int>
 						<int key="NSMnemonicLoc">2147483647</int>
@@ -57,12 +57,12 @@
 						</object>
 						<string key="NSAction">submenuAction:</string>
 						<object class="NSMenu" key="NSSubmenu" id="636667468">
-							<string key="NSTitle">Fraise</string>
+							<string key="NSTitle">Strawberry</string>
 							<object class="NSMutableArray" key="NSMenuItems">
 								<bool key="EncodedWithXMLCoder">YES</bool>
 								<object class="NSMenuItem" id="1002730145">
 									<reference key="NSMenu" ref="636667468"/>
-									<string key="NSTitle">About Fraise</string>
+									<string key="NSTitle">About Strawberry</string>
 									<string key="NSKeyEquiv"/>
 									<int key="NSMnemonicLoc">2147483647</int>
 									<reference key="NSOnImage" ref="184541674"/>
@@ -139,7 +139,7 @@
 								</object>
 								<object class="NSMenuItem" id="398492299">
 									<reference key="NSMenu" ref="636667468"/>
-									<string key="NSTitle">Hide Fraise</string>
+									<string key="NSTitle">Hide Strawberry</string>
 									<string key="NSKeyEquiv">h</string>
 									<int key="NSKeyEquivModMask">1048576</int>
 									<int key="NSMnemonicLoc">2147483647</int>
@@ -177,7 +177,7 @@
 								</object>
 								<object class="NSMenuItem" id="63441010">
 									<reference key="NSMenu" ref="636667468"/>
-									<string key="NSTitle">Quit Fraise</string>
+									<string key="NSTitle">Quit Strawberry</string>
 									<string key="NSKeyEquiv">q</string>
 									<int key="NSKeyEquivModMask">1048576</int>
 									<int key="NSMnemonicLoc">2147483647</int>
@@ -944,16 +944,6 @@
 									<reference key="NSOnImage" ref="184541674"/>
 									<reference key="NSMixedImage" ref="1033520260"/>
 									<int key="NSTag">12</int>
-								</object>
-								<object class="NSMenuItem" id="275760708">
-									<reference key="NSMenu" ref="231327451"/>
-									<string key="NSTitle">View Document In Full Screen</string>
-									<string key="NSKeyEquiv">m</string>
-									<int key="NSKeyEquivModMask">1572864</int>
-									<int key="NSMnemonicLoc">2147483647</int>
-									<reference key="NSOnImage" ref="184541674"/>
-									<reference key="NSMixedImage" ref="1033520260"/>
-									<int key="NSTag">13</int>
 								</object>
 								<object class="NSMenuItem" id="680721489">
 									<reference key="NSMenu" ref="231327451"/>
@@ -1887,10 +1877,11 @@
 								<bool key="EncodedWithXMLCoder">YES</bool>
 								<object class="NSMenuItem" id="315166750">
 									<reference key="NSMenu" ref="281169779"/>
-									<string key="NSTitle">Fraise Help</string>
+									<string key="NSTitle">Strawberry Help</string>
 									<string key="NSKeyEquiv">?</string>
 									<int key="NSKeyEquivModMask">1048576</int>
 									<int key="NSMnemonicLoc">2147483647</int>
+									<int key="NSState">1</int>
 									<reference key="NSOnImage" ref="184541674"/>
 									<reference key="NSMixedImage" ref="1033520260"/>
 								</object>
@@ -2463,11 +2454,11 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
-						<string key="label">fraiseHelp:</string>
+						<string key="label">help:</string>
 						<reference key="source" ref="98918729"/>
 						<reference key="destination" ref="315166750"/>
 					</object>
-					<int key="connectionID">793</int>
+					<int key="connectionID">1150</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
@@ -2900,14 +2891,6 @@
 						<reference key="destination" ref="749996103"/>
 					</object>
 					<int key="connectionID">546</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
-						<string key="label">viewDocumentInFullScreenAction:</string>
-						<reference key="source" ref="765041984"/>
-						<reference key="destination" ref="275760708"/>
-					</object>
-					<int key="connectionID">547</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
@@ -3394,7 +3377,6 @@
 							<reference ref="229696986"/>
 							<reference ref="173306796"/>
 							<reference ref="749996103"/>
-							<reference ref="275760708"/>
 							<reference ref="680721489"/>
 							<reference ref="1021067126"/>
 							<reference ref="1049604851"/>
@@ -3429,11 +3411,6 @@
 					<object class="IBObjectRecord">
 						<int key="objectID">297</int>
 						<reference key="object" ref="749996103"/>
-						<reference key="parent" ref="231327451"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">298</int>
-						<reference key="object" ref="275760708"/>
 						<reference key="parent" ref="231327451"/>
 					</object>
 					<object class="IBObjectRecord">
@@ -4543,8 +4520,6 @@
 					<string>292.IBPluginDependency</string>
 					<string>295.IBPluginDependency</string>
 					<string>297.IBPluginDependency</string>
-					<string>298.IBAttributePlaceholdersKey</string>
-					<string>298.IBPluginDependency</string>
 					<string>299.IBPluginDependency</string>
 					<string>300.IBPluginDependency</string>
 					<string>301.IBPluginDependency</string>
@@ -4763,15 +4738,6 @@
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<object class="NSMutableDictionary">
-						<string key="NS.key.0">ToolTip</string>
-						<object class="IBToolTipAttribute" key="NS.object.0">
-							<string key="name">ToolTip</string>
-							<reference key="object" ref="275760708"/>
-							<string key="toolTip">Press Escape to return from full screen mode</string>
-						</object>
-					</object>
-					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -4900,7 +4866,7 @@
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">1149</int>
+			<int key="maxID">1151</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -5125,7 +5091,7 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>fraiseHelp:</string>
+							<string>help:</string>
 							<string>installCommandLineUtilityAction:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
@@ -5138,13 +5104,13 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>fraiseHelp:</string>
+							<string>help:</string>
 							<string>installCommandLineUtilityAction:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<object class="IBActionInfo">
-								<string key="name">fraiseHelp:</string>
+								<string key="name">help:</string>
 								<string key="candidateClassName">id</string>
 							</object>
 							<object class="IBActionInfo">
@@ -5620,12 +5586,10 @@
 							<string>showSyntaxColoursAction:</string>
 							<string>showTabBarAction:</string>
 							<string>splitWindowAction:</string>
-							<string>viewDocumentInFullScreenAction:</string>
 							<string>viewDocumentInSeparateWindowAction:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>id</string>
 							<string>id</string>
 							<string>id</string>
 							<string>id</string>
@@ -5655,7 +5619,6 @@
 							<string>showSyntaxColoursAction:</string>
 							<string>showTabBarAction:</string>
 							<string>splitWindowAction:</string>
-							<string>viewDocumentInFullScreenAction:</string>
 							<string>viewDocumentInSeparateWindowAction:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
@@ -5702,10 +5665,6 @@
 							</object>
 							<object class="IBActionInfo">
 								<string key="name">splitWindowAction:</string>
-								<string key="candidateClassName">id</string>
-							</object>
-							<object class="IBActionInfo">
-								<string key="name">viewDocumentInFullScreenAction:</string>
 								<string key="candidateClassName">id</string>
 							</object>
 							<object class="IBActionInfo">
@@ -5968,10 +5927,6 @@
 		<object class="NSMutableDictionary" key="IBDocument.PluginDeclaredDependencies">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin.macosx</string>
 			<integer value="1050" key="NS.object.0"/>
-		</object>
-		<object class="NSMutableDictionary" key="IBDocument.PluginDeclaredDependencyDefaults">
-			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin.macosx</string>
-			<real value="1070" key="NS.object.0"/>
 		</object>
 		<object class="NSMutableDictionary" key="IBDocument.PluginDeclaredDevelopmentDependencies">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin.InterfaceBuilder3</string>

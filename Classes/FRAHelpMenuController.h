@@ -24,5 +24,5 @@ and limitations under the License.
 
 - (IBAction)installCommandLineUtilityAction:(id)sender;
 
-- (IBAction)fraiseHelp:(id)sender;
+- (IBAction)help:(id)sender;
 @end

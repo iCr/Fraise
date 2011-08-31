@@ -30,7 +30,7 @@ and limitations under the License.
 #import "FRAProject+DocumentViewsController.h"
 #import "FRALayoutManager.h"
 
-#import "PSMTabBarControl.h"
+#import "PSMTabBarControl/PSMTabBarControl.h"
 
 @implementation FRAViewMenuController
 

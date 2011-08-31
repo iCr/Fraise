@@ -59,7 +59,7 @@ and limitations under the License.
 }
 
 
-- (IBAction)strawberryHelp:(id)sender
+- (IBAction)help:(id)sender
 {
 	[[NSWorkspace sharedWorkspace] openFile:[[NSBundle mainBundle] pathForResource:@"Fraise-Manual" ofType:@"pdf"]];
 }

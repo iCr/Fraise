@@ -24,7 +24,7 @@ and limitations under the License.
 #import "FRAViewMenuController.h"
 #import "FRALineNumbers.h"
 
-#import "PSMTabBarControl.h"
+#import "PSMTabBarControl/PSMTabBarControl.h"
 
 @implementation FRAProject (DocumentViewsController)
 
@@ -34,7 +34,6 @@ and limitations under the License.
 	[tabBarControl setTabView:tabBarTabView];
 	[tabBarControl setCanCloseOnlyTab:YES];
 	[tabBarControl setStyleNamed:@"Unified"];
-	[tabBarControl setAllowsDragBetweenWindows:YES];
 	[tabBarControl setCellMinWidth:100];
 	[tabBarControl setCellMaxWidth:280];
 	[tabBarControl setCellOptimumWidth:170];
