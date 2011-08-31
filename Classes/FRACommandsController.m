@@ -221,56 +221,40 @@ static id sharedInstance = nil;
 	NSSavePanel *savePanel = [NSSavePanel savePanel];
     [savePanel setAllowedFileTypes:[NSArray arrayWithObject:@"strawberryCommands"]];
     [savePanel setDirectoryURL:[NSURL URLWithString:[FRAInterface whichDirectoryForSave]]];
+    
+    // FIXME:How do you specify a file to be selected when the panel opens?
+    // Original code wants this file to be selected:
+    //
+    //      [[[commandCollectionsArrayController selectedObjects] objectAtIndex:0] valueForKey:@"name"]
+    //
     [savePanel beginSheetModalForWindow:commandsWindow completionHandler:^(NSInteger result) {
-        if (result == NSOKButton)
-            [self performSnippetsImportWithPath:[openPanel URL]];
-
-        [snippetsWindow makeKeyAndOrderFront:nil];
+        if (result == NSOKButton) {
+            id collection = [[commandCollectionsArrayController selectedObjects] objectAtIndex:0];
+            
+            NSMutableArray *exportArray = [NSMutableArray array];
+            NSEnumerator *enumerator = [[collection mutableSetValueForKey:@"commands"] objectEnumerator];
+            for (id item in enumerator) {
+                NSMutableDictionary *command = [[NSMutableDictionary alloc] init];
+                [command setValue:[item valueForKey:@"name"] forKey:@"name"];
+                [command setValue:[item valueForKey:@"text"] forKey:@"text"];
+                [command setValue:[collection valueForKey:@"name"] forKey:@"collectionName"];
+                [command setValue:[item valueForKey:@"shortcutDisplayString"] forKey:@"shortcutDisplayString"];
+                [command setValue:[item valueForKey:@"shortcutMenuItemKeyString"] forKey:@"shortcutMenuItemKeyString"];
+                [command setValue:[item valueForKey:@"shortcutModifier"] forKey:@"shortcutModifier"];
+                [command setValue:[item valueForKey:@"sortOrder"] forKey:@"sortOrder"];
+                [command setValue:[NSNumber numberWithInteger:3] forKey:@"version"];
+                [command setValue:[item valueForKey:@"inline"] forKey:@"inline"];
+                [command setValue:[item valueForKey:@"interpreter"] forKey:@"interpreter"];
+                [exportArray addObject:command];
+            }
+            
+            NSData *data = [NSKeyedArchiver archivedDataWithRootObject:exportArray];
+            [FRAOpenSave performDataSaveWith:data path:[savePanel URL]];
+        }
+        
+        [commandsWindow makeKeyAndOrderFront:nil];
     }];
-
-
-
-
-
-	[savePanel beginSheetForDirectory:[FRAInterface whichDirectoryForSave]				
-								 file:[[[commandCollectionsArrayController selectedObjects] objectAtIndex:0] valueForKey:@"name"]
-					   modalForWindow:commandsWindow
-						modalDelegate:self
-					   didEndSelector:@selector(exportCommandsPanelDidEnd:returnCode:contextInfo:)
-						  contextInfo:nil];
-	
 }
-
-
-- (void)exportCommandsPanelDidEnd:(NSSavePanel *)sheet returnCode:(NSInteger)returnCode contextInfo:(void *)context
-{
-	if (returnCode == NSOKButton) {
-		id collection = [[commandCollectionsArrayController selectedObjects] objectAtIndex:0];
-		
-		NSMutableArray *exportArray = [NSMutableArray array];
-		NSEnumerator *enumerator = [[collection mutableSetValueForKey:@"commands"] objectEnumerator];
-		for (id item in enumerator) {
-			NSMutableDictionary *command = [[NSMutableDictionary alloc] init];
-			[command setValue:[item valueForKey:@"name"] forKey:@"name"];
-			[command setValue:[item valueForKey:@"text"] forKey:@"text"];
-			[command setValue:[collection valueForKey:@"name"] forKey:@"collectionName"];
-			[command setValue:[item valueForKey:@"shortcutDisplayString"] forKey:@"shortcutDisplayString"];
-			[command setValue:[item valueForKey:@"shortcutMenuItemKeyString"] forKey:@"shortcutMenuItemKeyString"];
-			[command setValue:[item valueForKey:@"shortcutModifier"] forKey:@"shortcutModifier"];
-			[command setValue:[item valueForKey:@"sortOrder"] forKey:@"sortOrder"];
-			[command setValue:[NSNumber numberWithInteger:3] forKey:@"version"];
-			[command setValue:[item valueForKey:@"inline"] forKey:@"inline"];
-			[command setValue:[item valueForKey:@"interpreter"] forKey:@"interpreter"];
-			[exportArray addObject:command];
-		}
-		
-		NSData *data = [NSKeyedArchiver archivedDataWithRootObject:exportArray];
-		[FRAOpenSave performDataSaveWith:data path:[sheet filename]];
-	}
-	
-	[commandsWindow makeKeyAndOrderFront:nil];
-}
-
 
 - (void)windowWillClose:(NSNotification *)aNotification
 {
