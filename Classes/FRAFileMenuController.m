@@ -112,28 +112,19 @@ static id sharedInstance = nil;
 	if ([sender tag] == 7) {
 		[openPanel setTreatsFilePackagesAsDirectories:YES];
 	}
-	
-	[openPanel beginSheetForDirectory:[FRAInterface whichDirectoryForOpen]
-							 file:nil
-							types:nil
-				   modalForWindow:FRACurrentWindow
-					modalDelegate:self
-				   didEndSelector:@selector(openPanelDidEnd:returnCode:contextInfo:)
-					  contextInfo:nil];
-}
 
-
-- (void)openPanelDidEnd:(NSOpenPanel *)sheet returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo
-{
-	[[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"AppleShowAllFiles"];
-	
-	if (returnCode == NSOKButton) {	
-		[FRADefaults setValue:[[sheet filename] stringByDeletingLastPathComponent] forKey:@"LastOpenDirectory"];
-		NSArray *array = [sheet filenames];
-		for (id item in array) {
-			[FRAOpenSave shouldOpen:item withEncoding:[[[FRAExtraInterfaceController sharedInstance] openPanelEncodingsPopUp] selectedTag]];
-		}
-	}
+    [openPanel setDirectoryURL:[NSURL URLWithString:[FRAInterface whichDirectoryForOpen]]];
+    [openPanel beginSheetModalForWindow:FRACurrentWindow completionHandler:^(NSInteger result) {
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"AppleShowAllFiles"];
+        
+        if (result == NSOKButton) {
+            [FRADefaults setValue:[[[openPanel URL] path] stringByDeletingLastPathComponent] forKey:@"LastOpenDirectory"];
+            NSArray *array = [openPanel URLs];
+            for (id item in array) {
+                [FRAOpenSave shouldOpen:item withEncoding:[[[FRAExtraInterfaceController sharedInstance] openPanelEncodingsPopUp] selectedTag]];
+            }
+        }
+    }];
 }
 
 

@@ -563,45 +563,25 @@ static id sharedInstance = nil;
 	NSOpenPanel *openPanel = [NSOpenPanel openPanel];
 	[openPanel setCanChooseDirectories:YES];
 	[openPanel setCanChooseFiles:NO];
-	[openPanel beginSheetForDirectory:NSHomeDirectory()
-								 file:nil
-								types:nil
-					   modalForWindow:preferencesWindow
-						modalDelegate:self
-					   didEndSelector:@selector(openPanelDidEnd:returnCode:contextInfo:)
-						  contextInfo:nil];
+    [openPanel setDirectoryURL:[NSURL URLWithString:NSHomeDirectory()]];
+    [openPanel beginSheetModalForWindow:preferencesWindow completionHandler:^(NSInteger result) {
+        if (result == NSOKButton)
+            [FRADefaults setValue:[[[openPanel URL] path] stringByAbbreviatingWithTildeInPath] forKey:@"OpenAlwaysUseTextField"];
+    }];
 }
-
-
-- (void)openPanelDidEnd:(NSOpenPanel *)sheet returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo
-{
-	if (returnCode == NSOKButton) {						
-		[FRADefaults setValue:[[sheet filename] stringByAbbreviatingWithTildeInPath] forKey:@"OpenAlwaysUseTextField"];
-	}
-}
-
 
 - (IBAction)saveAsSetFolderAction:(id)sender
 {
 	NSOpenPanel *openPanel = [NSOpenPanel openPanel];
 	[openPanel setCanChooseDirectories:YES];
 	[openPanel setCanChooseFiles:NO];
-	[openPanel beginSheetForDirectory:NSHomeDirectory()
-								 file:nil
-								types:nil
-					   modalForWindow:preferencesWindow
-						modalDelegate:self
-					   didEndSelector:@selector(saveAsPanelDidEnd:returnCode:contextInfo:)
-						  contextInfo:nil];
+    [openPanel setDirectoryURL:[NSURL URLWithString:NSHomeDirectory()]];
+    [openPanel beginSheetModalForWindow:preferencesWindow completionHandler:^(NSInteger result) {
+        if (result == NSOKButton)
+            [FRADefaults setValue:[[[openPanel URL] path] stringByAbbreviatingWithTildeInPath] forKey:@"SaveAsAlwaysUseTextField"];
+    }];
 }
 
-
-- (void)saveAsPanelDidEnd:(NSOpenPanel *)sheet returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo
-{
-	if (returnCode == NSOKButton) {						
-		[FRADefaults setValue:[[sheet filename] stringByAbbreviatingWithTildeInPath] forKey:@"SaveAsAlwaysUseTextField"];
-	}
-}
 
 - (IBAction)changeGutterWidth:(id)sender {
 	NSEnumerator *documentEnumerator =  [[[FRACurrentProject documentsArrayController] arrangedObjects] objectEnumerator];
