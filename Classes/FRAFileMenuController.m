@@ -146,41 +146,33 @@ static id sharedInstance = nil;
 	if ([[FRADefaults valueForKey:@"AppendNameInSaveAs"] boolValue] == YES) {
 		[name appendString:[FRADefaults valueForKey:@"AppendNameInSaveAsWith"]];
 	}
-	[savePanel beginSheetForDirectory:[FRAInterface whichDirectoryForSave]				
-								 file:name
-					   modalForWindow:FRACurrentWindow
-						modalDelegate:self
-					   didEndSelector:@selector(savePanelDidEnd:returnCode:contextInfo:)
-						  contextInfo:nil];
+
+    [savePanel setDirectoryURL:[NSURL URLWithString:[FRAInterface whichDirectoryForSave]]];
+    [savePanel beginSheetModalForWindow:FRACurrentWindow completionHandler:^(NSInteger result) {
+        [savePanel close];
+        [FRAVarious stopModalLoop];
+        
+        if (result == NSOKButton) {						
+            if ([[FRACurrentDocument valueForKey:@"fromExternal"] boolValue] == YES) {
+                [FRAVarious sendClosedEventToExternalDocument:FRACurrentDocument];
+                [FRACurrentDocument setValue:[NSNumber numberWithBool:NO] forKey:@"fromExternal"]; // If it is "fromExternal" it shouldn't be that after it has gone through a Save As, but rather, it should be a normal document
+            }
+            
+            [FRAOpenSave performSaveOfDocument:FRACurrentDocument path:[savePanel URL] fromSaveAs:YES aCopy:NO];
+            if ([[NSFileManager defaultManager] fileExistsAtPath:[[savePanel URL] path]]) {// Check that it has actually been saved
+                [[FRAProjectsController sharedDocumentController] putInRecentWithPath:[[savePanel URL] path]];
+            }
+            [FRADefaults setValue:[[[savePanel URL] path] stringByDeletingLastPathComponent] forKey:@"LastSaveAsDirectory"];
+            [[FRACurrentDocument valueForKey:@"syntaxColouring"] setSyntaxDefinition];
+            
+            [[FRACurrentDocument valueForKey:@"syntaxColouring"] pageRecolour];
+            
+            [FRAInterface updateStatusBar];
+        }
+    }];
 	
 	[NSApp runModalForWindow:savePanel]; // Run as modal to handle if there are more than one document that needs saving
 }
-
-
-- (void)savePanelDidEnd:(NSSavePanel *)sheet returnCode:(NSInteger)returnCode contextInfo:(void *)context
-{
-	[sheet close];
-	[FRAVarious stopModalLoop];
-	
-	if (returnCode == NSOKButton) {						
-		if ([[FRACurrentDocument valueForKey:@"fromExternal"] boolValue] == YES) {
-			[FRAVarious sendClosedEventToExternalDocument:FRACurrentDocument];
-			[FRACurrentDocument setValue:[NSNumber numberWithBool:NO] forKey:@"fromExternal"]; // If it is "fromExternal" it shouldn't be that after it has gone through a Save As, but rather, it should be a normal document
-		}
-		
-		[FRAOpenSave performSaveOfDocument:FRACurrentDocument path:[sheet filename] fromSaveAs:YES aCopy:NO];
-		if ([[NSFileManager defaultManager] fileExistsAtPath:[sheet filename]]) {// Check that it has actually been saved
-			[[FRAProjectsController sharedDocumentController] putInRecentWithPath:[sheet filename]];
-		}
-		[FRADefaults setValue:[[sheet filename] stringByDeletingLastPathComponent] forKey:@"LastSaveAsDirectory"];
-		[[FRACurrentDocument valueForKey:@"syntaxColouring"] setSyntaxDefinition];
-		
-		[[FRACurrentDocument valueForKey:@"syntaxColouring"] pageRecolour];
-		
-		[FRAInterface updateStatusBar];
-	}
-}
-
 
 - (IBAction)saveACopyAsAction:(id)sender
 {
