@@ -30,19 +30,21 @@ and limitations under the License.
 	
 	IBOutlet NSView *openPanelAccessoryView;
 	IBOutlet NSPopUpButton *openPanelEncodingsPopUp;
-	//IBOutlet NSView *printAccessoryView;
+	IBOutlet NSButton *openPanelShowHiddenFilesButton;
 	
 	IBOutlet NSWindow *commandResultWindow;
 	IBOutlet NSTextView *commandResultTextView;
 	
 	IBOutlet NSWindow *newProjectWindow;
 	IBOutlet NSPanel *regularExpressionsHelpPanel;
+    
+    
 }
 
 
 @property (readonly) IBOutlet NSView *openPanelAccessoryView;
 @property (readonly) IBOutlet NSPopUpButton *openPanelEncodingsPopUp;
-//@property (readonly) IBOutlet NSView *printAccessoryView;
+@property (readonly) IBOutlet NSButton *openPanelShowHiddenFilesButton;
 @property (readonly) IBOutlet NSWindow *commandResultWindow;
 @property (readonly) IBOutlet NSTextView *commandResultTextView;
 @property (readonly) IBOutlet NSWindow *newProjectWindow;
@@ -56,15 +58,7 @@ and limitations under the License.
 - (IBAction)cancelButtonEntabDetabGoToLineWindowsAction:(id)sender;
 - (void)displayGoToLine;
 - (IBAction)goButtonGoToLineWindowAction:(id)sender;
-
-//- (IBAction)setPrintFontAction:(id)sender;
-
-- (NSPopUpButton *)openPanelEncodingsPopUp;
-- (NSView *)openPanelAccessoryView;
-//- (NSView *)printAccessoryView;
-- (NSWindow *)commandResultWindow;
--(NSTextView *)commandResultTextView;
-- (NSWindow *)newProjectWindow;
+- (IBAction)showHiddenFilesButtonAction:(id)sender;
 
 - (void)showCommandResultWindow;
 

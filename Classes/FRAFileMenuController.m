@@ -73,7 +73,6 @@ static id sharedInstance = nil;
 	[[[FRAExtraInterfaceController sharedInstance] newProjectWindow] makeKeyAndOrderFront:nil];
 }
 
-
 - (IBAction)openAction:(id)sender
 {
 	[FRABasic removeAllItemsFromMenu:[[[FRAExtraInterfaceController sharedInstance] openPanelEncodingsPopUp] menu]];
@@ -95,12 +94,9 @@ static id sharedInstance = nil;
 
 	[[[FRAExtraInterfaceController sharedInstance] openPanelEncodingsPopUp] selectItemAtIndex:0]; // Reset it to: Use settings from Preferences
 	
-	if ([sender tag] == 7) { // Needs to be set before it is created
-		[[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"AppleShowAllFiles"];
-	}
-	
 	openPanel = [[NSOpenPanel alloc] init];
 
+    [self showHiddenFiles:[[[FRAExtraInterfaceController sharedInstance] openPanelShowHiddenFilesButton] state] == NSOnState];
 	[openPanel setResolvesAliases:YES];
 	[openPanel setAllowsMultipleSelection:YES];
 	[openPanel setAccessoryView:[[FRAExtraInterfaceController sharedInstance] openPanelAccessoryView]];
@@ -115,8 +111,6 @@ static id sharedInstance = nil;
 
     [openPanel setDirectoryURL:[NSURL URLWithString:[FRAInterface whichDirectoryForOpen]]];
     [openPanel beginSheetModalForWindow:FRACurrentWindow completionHandler:^(NSInteger result) {
-        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"AppleShowAllFiles"];
-        
         if (result == NSOKButton) {
             [FRADefaults setValue:[[[openPanel URL] path] stringByDeletingLastPathComponent] forKey:@"LastOpenDirectory"];
             NSArray *array = [openPanel URLs];
@@ -125,8 +119,14 @@ static id sharedInstance = nil;
             }
         }
     }];
+    
+    [openPanel release];
 }
 
+- (void)showHiddenFiles:(BOOL)show
+{
+    [openPanel setShowsHiddenFiles:show];
+}
 
 - (IBAction)saveAction:(id)sender
 {
@@ -273,7 +273,7 @@ static id sharedInstance = nil;
 		}
 			
 	} else {
-		if (tag == 1 || tag == 7) { // All items that should be active all the time and Open Hidden...
+		if (tag == 1) { // All items that should be active all the time
 			enableMenuItem = YES;
 		} else if (tag == 6) { // Close
 			if ([NSApp mainWindow] == nil && [NSApp keyWindow] == nil) {
@@ -320,6 +320,8 @@ static id sharedInstance = nil;
 {
 	NSSavePanel *savePanel = [NSSavePanel savePanel];				
     [savePanel setDirectoryURL:[NSURL URLWithString:[FRAInterface whichDirectoryForSave]]];
+    
+    // FIXME: Need to show initial file: [document valueForKey:@"name"]
     [savePanel beginSheetModalForWindow:FRACurrentWindow completionHandler:^(NSInteger result) {
         [savePanel close];
         [FRAVarious stopModalLoop];
@@ -335,47 +337,12 @@ static id sharedInstance = nil;
             [[document valueForKey:@"syntaxColouring"] pageRecolour];
         }
     }];
-
-
-
-	
-	[savePanel beginSheetForDirectory:[FRAInterface whichDirectoryForSave]				
-								 file:[document valueForKey:@"name"]
-					   modalForWindow:FRACurrentWindow
-						modalDelegate:self
-					   didEndSelector:@selector(saveAsPanelInSaveAllDidEnd:returnCode:contextInfo:)
-						  contextInfo:(void *)[NSArray arrayWithObject:document]];
-	
-	[NSApp runModalForWindow:savePanel]; // Run as modal to handle if there are more than one document that needs saving
 }
-
-
-- (void)saveAsPanelInSaveAllDidEnd:(NSSavePanel *)sheet returnCode:(NSInteger)returnCode contextInfo:(void *)context
-{
-	[sheet close];
-	[FRAVarious stopModalLoop];
-	
-	if (returnCode == NSOKButton) {
-		id document = [(NSArray *)context objectAtIndex:0];
-		NSString *path = [sheet filename];
-		[FRAOpenSave performSaveOfDocument:document path:path fromSaveAs:NO aCopy:NO];
-		if ([[NSFileManager defaultManager] fileExistsAtPath:path]) { // Check that it has actually been saved
-			[[FRAProjectsController sharedDocumentController] putInRecentWithPath:path];
-		}
-		[FRADefaults setValue:[path stringByDeletingLastPathComponent] forKey:@"LastSaveAsDirectory"];
-		[[document valueForKey:@"syntaxColouring"] setSyntaxDefinition];
-		[[document valueForKey:@"syntaxColouring"] pageRecolour];
-	}
-}
-
 
 - (void)printAction:(id)sender 
 {
 	[FRACurrentProject printDocument:sender];
 }
-
-
-
 
 - (IBAction)revealInFinderAction:(id)sender
 {

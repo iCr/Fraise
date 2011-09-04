@@ -19,6 +19,7 @@ and limitations under the License.
 #import "FRAStandardHeader.h"
 
 #import "FRAExtraInterfaceController.h"
+#import "FRAFileMenuController.h"
 #import "FRATextMenuController.h"
 #import "FRAProjectsController.h"
 #import "FRAInterfacePerformer.h"
@@ -27,9 +28,7 @@ and limitations under the License.
 
 @implementation FRAExtraInterfaceController
 
-@synthesize openPanelAccessoryView, openPanelEncodingsPopUp, commandResultWindow, commandResultTextView, newProjectWindow;
-
-
+@synthesize openPanelAccessoryView, openPanelEncodingsPopUp, openPanelShowHiddenFilesButton, commandResultWindow, commandResultTextView, newProjectWindow;
 
 static id sharedInstance = nil;
 
@@ -116,14 +115,10 @@ static id sharedInstance = nil;
 	[[FRATextMenuController sharedInstance] performGoToLine:[lineTextFieldGoToLineWindow integerValue]];
 }
 
-
-//- (IBAction)setPrintFontAction:(id)sender
-//{
-//	NSFontManager *fontManager = [NSFontManager sharedFontManager];
-//	[fontManager setSelectedFont:[NSUnarchiver unarchiveObjectWithData:[FRADefaults valueForKey:@"PrintFont"]] isMultiple:NO];
-//	[fontManager orderFrontFontPanel:nil];
-//}
-
+- (IBAction)showHiddenFilesButtonAction:(id)sender
+{
+    [[FRAFileMenuController sharedInstance] showHiddenFiles:[sender state] == NSOnState];
+}
 
 - (NSPopUpButton *)openPanelEncodingsPopUp
 {
@@ -143,17 +138,6 @@ static id sharedInstance = nil;
 	
 	return openPanelAccessoryView;
 }
-
-
-//- (NSView *)printAccessoryView
-//{
-//	if (printAccessoryView == nil) {
-//		[NSBundle loadNibNamed:@"FRAPrintAccessoryView.nib" owner:self];
-//	}
-//	
-//	return printAccessoryView;
-//}
-
 
 - (NSWindow *)commandResultWindow
 {
