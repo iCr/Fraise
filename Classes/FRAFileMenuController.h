@@ -32,7 +32,6 @@ and limitations under the License.
 
 - (IBAction)saveAction:(id)sender;
 - (IBAction)saveAsAction:(id)sender;
-- (IBAction)saveACopyAsAction:(id)sender;
 - (IBAction)revertAction:(id)sender;
 - (void)performRevertOfDocument:(id)document;
 

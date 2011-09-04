@@ -174,31 +174,6 @@ static id sharedInstance = nil;
 	[NSApp runModalForWindow:savePanel]; // Run as modal to handle if there are more than one document that needs saving
 }
 
-- (IBAction)saveACopyAsAction:(id)sender
-{
-	NSSavePanel *savePanel = [NSSavePanel savePanel];
-	
-	NSString *copyName = [NSString stringWithFormat:@"%@ %@", [FRACurrentDocument valueForKey:@"name"], NSLocalizedString(@"copy", @"The word to indicate that the filename is a copy in Save-A-Copy-As save-panel")];
-	
-	[savePanel beginSheetForDirectory:[FRAInterface whichDirectoryForSave]				
-								 file:copyName
-					   modalForWindow:FRACurrentWindow
-						modalDelegate:self
-					   didEndSelector:@selector(saveACopyAsPanelDidEnd:returnCode:contextInfo:)
-						  contextInfo:nil];
-	
-}
-
-
-- (void)saveACopyAsPanelDidEnd:(NSSavePanel *)sheet returnCode:(NSInteger)returnCode contextInfo:(void *)context
-{
-	if (returnCode == NSOKButton) {						
-		[FRAOpenSave performSaveOfDocument:FRACurrentDocument path:[sheet filename] fromSaveAs:YES aCopy:YES];
-		[FRADefaults setValue:[[sheet filename] stringByDeletingLastPathComponent] forKey:@"LastSaveAsDirectory"];
-	}
-}
-
-
 - (IBAction)revertAction:(id)sender
 {
 	id document = FRACurrentDocument;
@@ -344,6 +319,25 @@ static id sharedInstance = nil;
 - (void)saveAsInSaveAllForDocument:(id)document
 {
 	NSSavePanel *savePanel = [NSSavePanel savePanel];				
+    [savePanel setDirectoryURL:[NSURL URLWithString:[FRAInterface whichDirectoryForSave]]];
+    [savePanel beginSheetModalForWindow:FRACurrentWindow completionHandler:^(NSInteger result) {
+        [savePanel close];
+        [FRAVarious stopModalLoop];
+        
+        if (result == NSOKButton) {
+            NSString *path = [[savePanel URL] path];
+            [FRAOpenSave performSaveOfDocument:document path:[savePanel URL] fromSaveAs:NO aCopy:NO];
+            if ([[NSFileManager defaultManager] fileExistsAtPath:path]) { // Check that it has actually been saved
+                [[FRAProjectsController sharedDocumentController] putInRecentWithPath:path];
+            }
+            [FRADefaults setValue:[path stringByDeletingLastPathComponent] forKey:@"LastSaveAsDirectory"];
+            [[document valueForKey:@"syntaxColouring"] setSyntaxDefinition];
+            [[document valueForKey:@"syntaxColouring"] pageRecolour];
+        }
+    }];
+
+
+
 	
 	[savePanel beginSheetForDirectory:[FRAInterface whichDirectoryForSave]				
 								 file:[document valueForKey:@"name"]
