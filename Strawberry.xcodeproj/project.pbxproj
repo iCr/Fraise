@@ -19,6 +19,7 @@
 		49080A4A1418EDA70092F580 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49080A241418EDA50092F580 /* Cocoa.framework */; };
 		49080A521418EDA70092F580 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 49080A501418EDA70092F580 /* InfoPlist.strings */; };
 		49080A551418EDA70092F580 /* StrawberryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 49080A541418EDA70092F580 /* StrawberryTests.m */; };
+		4921F9F41418EF3800E5D9C0 /* FRAMainIcon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 4921F9F31418EF3800E5D9C0 /* FRAMainIcon.icns */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +54,7 @@
 		49080A511418EDA70092F580 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		49080A531418EDA70092F580 /* StrawberryTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StrawberryTests.h; sourceTree = "<group>"; };
 		49080A541418EDA70092F580 /* StrawberryTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StrawberryTests.m; sourceTree = "<group>"; };
+		4921F9F31418EF3800E5D9C0 /* FRAMainIcon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = FRAMainIcon.icns; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +81,7 @@
 		49080A151418EDA50092F580 = {
 			isa = PBXGroup;
 			children = (
+				4921F9F31418EF3800E5D9C0 /* FRAMainIcon.icns */,
 				49080A2A1418EDA50092F580 /* Strawberry */,
 				49080A4D1418EDA70092F580 /* StrawberryTests */,
 				49080A231418EDA50092F580 /* Frameworks */,
@@ -234,6 +237,7 @@
 				49080A351418EDA60092F580 /* Credits.rtf in Resources */,
 				49080A3B1418EDA60092F580 /* Document.xib in Resources */,
 				49080A3E1418EDA60092F580 /* MainMenu.xib in Resources */,
+				4921F9F41418EF3800E5D9C0 /* FRAMainIcon.icns in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -452,6 +456,7 @@
 				49080A5A1418EDA70092F580 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		49080A5B1418EDA70092F580 /* Build configuration list for PBXNativeTarget "StrawberryTests" */ = {
 			isa = XCConfigurationList;
@@ -460,6 +465,7 @@
 				49080A5D1418EDA70092F580 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
