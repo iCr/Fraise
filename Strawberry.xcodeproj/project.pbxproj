@@ -23,9 +23,9 @@
 		490BB5791425488900C447E4 /* ProjectWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 490BB5781425488900C447E4 /* ProjectWindowController.m */; };
 		490BB57C1425494000C447E4 /* DocumentWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 490BB57B1425494000C447E4 /* DocumentWindowController.m */; };
 		490BB57F1425496A00C447E4 /* DocumentController.m in Sources */ = {isa = PBXBuildFile; fileRef = 490BB57E1425496A00C447E4 /* DocumentController.m */; };
+		490BB582142641F400C447E4 /* MainIcon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 490BB581142641F400C447E4 /* MainIcon.icns */; };
 		491A07FC1422DB5900959CFA /* PSMTabBarControl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 491A07FB1422DB5900959CFA /* PSMTabBarControl.framework */; };
 		491A08051422ED4E00959CFA /* PSMTabBarControl.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 491A07FB1422DB5900959CFA /* PSMTabBarControl.framework */; };
-		4921F9F41418EF3800E5D9C0 /* FRAMainIcon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 4921F9F31418EF3800E5D9C0 /* FRAMainIcon.icns */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -80,8 +80,8 @@
 		490BB57B1425494000C447E4 /* DocumentWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DocumentWindowController.m; sourceTree = "<group>"; };
 		490BB57D1425496A00C447E4 /* DocumentController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DocumentController.h; sourceTree = "<group>"; };
 		490BB57E1425496A00C447E4 /* DocumentController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DocumentController.m; sourceTree = "<group>"; };
+		490BB581142641F400C447E4 /* MainIcon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = MainIcon.icns; sourceTree = SOURCE_ROOT; };
 		491A07FB1422DB5900959CFA /* PSMTabBarControl.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PSMTabBarControl.framework; path = Frameworks/PSMTabBarControl.framework; sourceTree = "<group>"; };
-		4921F9F31418EF3800E5D9C0 /* FRAMainIcon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = FRAMainIcon.icns; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,7 +109,6 @@
 		49080A151418EDA50092F580 = {
 			isa = PBXGroup;
 			children = (
-				4921F9F31418EF3800E5D9C0 /* FRAMainIcon.icns */,
 				49080A2A1418EDA50092F580 /* Strawberry */,
 				49080A4D1418EDA70092F580 /* StrawberryTests */,
 				49080A231418EDA50092F580 /* Frameworks */,
@@ -199,6 +198,7 @@
 		490BB58014263F4800C447E4 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				490BB581142641F400C447E4 /* MainIcon.icns */,
 				49080A3C1418EDA60092F580 /* MainMenu.xib */,
 				49080A391418EDA60092F580 /* Document.xib */,
 				490BB5731425478700C447E4 /* Project.xib */,
@@ -282,8 +282,8 @@
 				49080A351418EDA60092F580 /* Credits.rtf in Resources */,
 				49080A3B1418EDA60092F580 /* Document.xib in Resources */,
 				49080A3E1418EDA60092F580 /* MainMenu.xib in Resources */,
-				4921F9F41418EF3800E5D9C0 /* FRAMainIcon.icns in Resources */,
 				490BB5751425478700C447E4 /* Project.xib in Resources */,
+				490BB582142641F400C447E4 /* MainIcon.icns in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
