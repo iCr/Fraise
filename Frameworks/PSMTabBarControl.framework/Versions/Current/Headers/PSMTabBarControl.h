@@ -15,10 +15,10 @@
 #define PSMTabDragDidEndNotification		@ "PSMTabDragDidEndNotification"
 #define PSMTabDragDidBeginNotification	@ "PSMTabDragDidBeginNotification"
 
-#define kPSMTabBarControlHeight			22
+#define kPSMTabBarControlHeight			24
 // internal cell border
 #define MARGIN_X								6
-#define MARGIN_Y								3
+#define MARGIN_Y								4
 // padding between objects
 #define kPSMTabBarCellPadding				4
 // fixed size objects
@@ -74,6 +74,7 @@ enum {
 
 	// drawing style
 	id<PSMTabStyle>							style;
+	BOOL										_onlyShowCloseOnHover;
 	BOOL										_canCloseOnlyTab;
 	BOOL										_disableTabClose;
 	BOOL										_hideForSingleTab;
@@ -126,6 +127,8 @@ enum {
 // control configuration
 - (PSMTabBarOrientation)orientation;
 - (void)setOrientation:(PSMTabBarOrientation)value;
+- (BOOL)onlyShowCloseOnHover;
+- (void)setOnlyShowCloseOnHover:(BOOL)value;
 - (BOOL)canCloseOnlyTab;
 - (void)setCanCloseOnlyTab:(BOOL)value;
 - (BOOL)disableTabClose;
@@ -179,6 +182,8 @@ enum {
 - (NSMutableArray *)representedTabViewItems;
 - (NSInteger)numberOfVisibleTabs;
 - (PSMTabBarCell *)lastVisibleTab;
+- (BOOL)isToRightOfSelectedTab:(PSMTabBarCell*)cell;
+- (BOOL)isFirstTab:(PSMTabBarCell*)cell;
 
 // special effects
 - (void)hideTabBar:(BOOL) hide animate:(BOOL)animate;

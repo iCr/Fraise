@@ -19,6 +19,12 @@
 		49080A4A1418EDA70092F580 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49080A241418EDA50092F580 /* Cocoa.framework */; };
 		49080A521418EDA70092F580 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 49080A501418EDA70092F580 /* InfoPlist.strings */; };
 		49080A551418EDA70092F580 /* StrawberryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 49080A541418EDA70092F580 /* StrawberryTests.m */; };
+		490BB5751425478700C447E4 /* Project.xib in Resources */ = {isa = PBXBuildFile; fileRef = 490BB5731425478700C447E4 /* Project.xib */; };
+		490BB5791425488900C447E4 /* ProjectWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 490BB5781425488900C447E4 /* ProjectWindowController.m */; };
+		490BB57C1425494000C447E4 /* DocumentWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 490BB57B1425494000C447E4 /* DocumentWindowController.m */; };
+		490BB57F1425496A00C447E4 /* DocumentController.m in Sources */ = {isa = PBXBuildFile; fileRef = 490BB57E1425496A00C447E4 /* DocumentController.m */; };
+		491A07FC1422DB5900959CFA /* PSMTabBarControl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 491A07FB1422DB5900959CFA /* PSMTabBarControl.framework */; };
+		491A08051422ED4E00959CFA /* PSMTabBarControl.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 491A07FB1422DB5900959CFA /* PSMTabBarControl.framework */; };
 		4921F9F41418EF3800E5D9C0 /* FRAMainIcon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 4921F9F31418EF3800E5D9C0 /* FRAMainIcon.icns */; };
 /* End PBXBuildFile section */
 
@@ -31,6 +37,19 @@
 			remoteInfo = Strawberry;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		491A08041422ED3100959CFA /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				491A08051422ED4E00959CFA /* PSMTabBarControl.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		49080A201418EDA50092F580 /* Strawberry.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Strawberry.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -54,6 +73,14 @@
 		49080A511418EDA70092F580 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		49080A531418EDA70092F580 /* StrawberryTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StrawberryTests.h; sourceTree = "<group>"; };
 		49080A541418EDA70092F580 /* StrawberryTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StrawberryTests.m; sourceTree = "<group>"; };
+		490BB5741425478700C447E4 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/Project.xib; sourceTree = "<group>"; };
+		490BB5771425488900C447E4 /* ProjectWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProjectWindowController.h; sourceTree = "<group>"; };
+		490BB5781425488900C447E4 /* ProjectWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProjectWindowController.m; sourceTree = "<group>"; };
+		490BB57A1425494000C447E4 /* DocumentWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DocumentWindowController.h; sourceTree = "<group>"; };
+		490BB57B1425494000C447E4 /* DocumentWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DocumentWindowController.m; sourceTree = "<group>"; };
+		490BB57D1425496A00C447E4 /* DocumentController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DocumentController.h; sourceTree = "<group>"; };
+		490BB57E1425496A00C447E4 /* DocumentController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DocumentController.m; sourceTree = "<group>"; };
+		491A07FB1422DB5900959CFA /* PSMTabBarControl.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PSMTabBarControl.framework; path = Frameworks/PSMTabBarControl.framework; sourceTree = "<group>"; };
 		4921F9F31418EF3800E5D9C0 /* FRAMainIcon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = FRAMainIcon.icns; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -63,6 +90,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				49080A251418EDA50092F580 /* Cocoa.framework in Frameworks */,
+				491A07FC1422DB5900959CFA /* PSMTabBarControl.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -101,6 +129,7 @@
 		49080A231418EDA50092F580 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				491A07FB1422DB5900959CFA /* PSMTabBarControl.framework */,
 				49080A241418EDA50092F580 /* Cocoa.framework */,
 				49080A481418EDA70092F580 /* SenTestingKit.framework */,
 				49080A261418EDA50092F580 /* Other Frameworks */,
@@ -123,8 +152,13 @@
 			children = (
 				49080A361418EDA60092F580 /* Document.h */,
 				49080A371418EDA60092F580 /* Document.m */,
-				49080A391418EDA60092F580 /* Document.xib */,
-				49080A3C1418EDA60092F580 /* MainMenu.xib */,
+				490BB57D1425496A00C447E4 /* DocumentController.h */,
+				490BB57E1425496A00C447E4 /* DocumentController.m */,
+				490BB57A1425494000C447E4 /* DocumentWindowController.h */,
+				490BB57B1425494000C447E4 /* DocumentWindowController.m */,
+				490BB5771425488900C447E4 /* ProjectWindowController.h */,
+				490BB5781425488900C447E4 /* ProjectWindowController.m */,
+				490BB58014263F4800C447E4 /* Resources */,
 				49080A3F1418EDA60092F580 /* Document.xcdatamodeld */,
 				49080A2B1418EDA50092F580 /* Supporting Files */,
 			);
@@ -162,6 +196,16 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		490BB58014263F4800C447E4 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				49080A3C1418EDA60092F580 /* MainMenu.xib */,
+				49080A391418EDA60092F580 /* Document.xib */,
+				490BB5731425478700C447E4 /* Project.xib */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -172,6 +216,7 @@
 				49080A1C1418EDA50092F580 /* Sources */,
 				49080A1D1418EDA50092F580 /* Frameworks */,
 				49080A1E1418EDA50092F580 /* Resources */,
+				491A08041422ED3100959CFA /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -238,6 +283,7 @@
 				49080A3B1418EDA60092F580 /* Document.xib in Resources */,
 				49080A3E1418EDA60092F580 /* MainMenu.xib in Resources */,
 				4921F9F41418EF3800E5D9C0 /* FRAMainIcon.icns in Resources */,
+				490BB5751425478700C447E4 /* Project.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -275,6 +321,9 @@
 				49080A311418EDA60092F580 /* main.m in Sources */,
 				49080A381418EDA60092F580 /* Document.m in Sources */,
 				49080A411418EDA60092F580 /* Document.xcdatamodeld in Sources */,
+				490BB5791425488900C447E4 /* ProjectWindowController.m in Sources */,
+				490BB57C1425494000C447E4 /* DocumentWindowController.m in Sources */,
+				490BB57F1425496A00C447E4 /* DocumentController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -337,6 +386,14 @@
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
+		490BB5731425478700C447E4 /* Project.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				490BB5741425478700C447E4 /* en */,
+			);
+			name = Project.xib;
+			sourceTree = "<group>";
+		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
@@ -390,6 +447,10 @@
 		49080A591418EDA70092F580 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/Frameworks\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Strawberry/Strawberry-Prefix.pch";
 				INFOPLIST_FILE = "Strawberry/Strawberry-Info.plist";
@@ -401,6 +462,10 @@
 		49080A5A1418EDA70092F580 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/Frameworks\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Strawberry/Strawberry-Prefix.pch";
 				INFOPLIST_FILE = "Strawberry/Strawberry-Info.plist";
