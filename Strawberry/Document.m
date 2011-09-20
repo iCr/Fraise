@@ -20,6 +20,23 @@
     return self;
 }
 
+/*
+- (id)initWithType:(NSString *)typeName error:(NSError **)outError
+{
+    return nil;
+}
+
+- (id)initWithContentsOfURL:(NSURL *)absoluteURL ofType:(NSString *)typeName error:(NSError **)outError
+{
+    return nil;
+}
+
+- (id)initForURL:(NSURL *)absoluteDocumentURL withContentsOfURL:(NSURL *)absoluteDocumentContentsURL ofType:(NSString *)typeName error:(NSError **)outError
+{
+    return nil;
+}
+*/
+
 - (NSString *)windowNibName
 {
     // Override returning the nib file name of the document
