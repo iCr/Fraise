@@ -8,6 +8,13 @@
 
 #import <Cocoa/Cocoa.h>
 
+@class MarkerLineNumberView;
+
 @interface ProjectWindowController : NSWindowController
+{
+    IBOutlet NSScrollView* m_scrollView;
+    IBOutlet NSTextView* m_textView;
+	MarkerLineNumberView* m_lineNumberView;
+}
 
 @end

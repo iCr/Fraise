@@ -8,6 +8,8 @@
 
 #import "ProjectWindowController.h"
 
+#import "MarkerLineNumberView.h"
+
 @implementation ProjectWindowController
 
 - (id)initWithWindow:(NSWindow *)window
@@ -24,7 +26,14 @@
 {
     [super windowDidLoad];
     
-    // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
+    // Create the lineNumberView
+    m_lineNumberView = [[MarkerLineNumberView alloc] initWithScrollView:m_scrollView];
+    [m_scrollView setVerticalRulerView:m_lineNumberView];
+    [m_scrollView setHasHorizontalRuler:NO];
+    [m_scrollView setHasVerticalRuler:YES];
+    [m_scrollView setRulersVisible:YES];
+	
+    [m_textView setFont:[NSFont userFixedPitchFontOfSize:[NSFont smallSystemFontSize]]];
 }
 
 @end

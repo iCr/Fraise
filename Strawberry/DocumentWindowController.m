@@ -8,6 +8,8 @@
 
 #import "DocumentWindowController.h"
 
+#import "MarkerLineNumberView.h"
+
 @implementation DocumentWindowController
 
 - (id)initWithWindow:(NSWindow *)window
@@ -23,8 +25,22 @@
 - (void)windowDidLoad
 {
     [super windowDidLoad];
-    
-    // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
-}
 
+    // Create the lineNumberView
+    m_lineNumberView = [[MarkerLineNumberView alloc] initWithScrollView:m_scrollView];
+    [m_scrollView setVerticalRulerView:m_lineNumberView];
+    [m_scrollView setHasHorizontalRuler:NO];
+    [m_scrollView setHasVerticalRuler:YES];
+    [m_scrollView setRulersVisible:YES];
+	
+    [m_textView setFont:[NSFont userFixedPitchFontOfSize:[NSFont smallSystemFontSize]]];
+    
+    // FIXME: This disables word wrap. Eventually we need this as a per-document flag that gets set when the document is active
+    NSSize layoutSize = [m_textView maxSize];
+    layoutSize.width = layoutSize.height;
+    [m_textView setMaxSize:layoutSize];
+    [[m_textView textContainer] setWidthTracksTextView:NO];
+    [m_textView setHorizontallyResizable:YES];
+    [[m_textView textContainer] setContainerSize:layoutSize];
+}
 @end
