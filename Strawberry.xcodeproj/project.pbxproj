@@ -26,6 +26,9 @@
 		490BB582142641F400C447E4 /* MainIcon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 490BB581142641F400C447E4 /* MainIcon.icns */; };
 		491A07FC1422DB5900959CFA /* PSMTabBarControl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 491A07FB1422DB5900959CFA /* PSMTabBarControl.framework */; };
 		491A08051422ED4E00959CFA /* PSMTabBarControl.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 491A07FB1422DB5900959CFA /* PSMTabBarControl.framework */; };
+		49DEEEE714280B3000F97C1B /* NoodleLineNumberMarker.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DEEEE414280B3000F97C1B /* NoodleLineNumberMarker.m */; };
+		49DEEEE814280B3000F97C1B /* NoodleLineNumberView.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DEEEE614280B3000F97C1B /* NoodleLineNumberView.m */; };
+		49DEEEEB14280C5000F97C1B /* MarkerLineNumberView.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DEEEEA14280C5000F97C1B /* MarkerLineNumberView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -82,6 +85,12 @@
 		490BB57E1425496A00C447E4 /* DocumentController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DocumentController.m; sourceTree = "<group>"; };
 		490BB581142641F400C447E4 /* MainIcon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = MainIcon.icns; sourceTree = SOURCE_ROOT; };
 		491A07FB1422DB5900959CFA /* PSMTabBarControl.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PSMTabBarControl.framework; path = Frameworks/PSMTabBarControl.framework; sourceTree = "<group>"; };
+		49DEEEE314280B3000F97C1B /* NoodleLineNumberMarker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NoodleLineNumberMarker.h; path = NoodleLineNumber/NoodleLineNumberMarker.h; sourceTree = "<group>"; };
+		49DEEEE414280B3000F97C1B /* NoodleLineNumberMarker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NoodleLineNumberMarker.m; path = NoodleLineNumber/NoodleLineNumberMarker.m; sourceTree = "<group>"; };
+		49DEEEE514280B3000F97C1B /* NoodleLineNumberView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NoodleLineNumberView.h; path = NoodleLineNumber/NoodleLineNumberView.h; sourceTree = "<group>"; };
+		49DEEEE614280B3000F97C1B /* NoodleLineNumberView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NoodleLineNumberView.m; path = NoodleLineNumber/NoodleLineNumberView.m; sourceTree = "<group>"; };
+		49DEEEE914280C5000F97C1B /* MarkerLineNumberView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MarkerLineNumberView.h; path = NoodleLineNumber/MarkerLineNumberView.h; sourceTree = "<group>"; };
+		49DEEEEA14280C5000F97C1B /* MarkerLineNumberView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MarkerLineNumberView.m; path = NoodleLineNumber/MarkerLineNumberView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,6 +158,7 @@
 		49080A2A1418EDA50092F580 /* Strawberry */ = {
 			isa = PBXGroup;
 			children = (
+				49DEEED714280A4300F97C1B /* NoodleLineNumber */,
 				49080A361418EDA60092F580 /* Document.h */,
 				49080A371418EDA60092F580 /* Document.m */,
 				490BB57D1425496A00C447E4 /* DocumentController.h */,
@@ -204,6 +214,19 @@
 				490BB5731425478700C447E4 /* Project.xib */,
 			);
 			name = Resources;
+			sourceTree = "<group>";
+		};
+		49DEEED714280A4300F97C1B /* NoodleLineNumber */ = {
+			isa = PBXGroup;
+			children = (
+				49DEEEE914280C5000F97C1B /* MarkerLineNumberView.h */,
+				49DEEEEA14280C5000F97C1B /* MarkerLineNumberView.m */,
+				49DEEEE314280B3000F97C1B /* NoodleLineNumberMarker.h */,
+				49DEEEE414280B3000F97C1B /* NoodleLineNumberMarker.m */,
+				49DEEEE514280B3000F97C1B /* NoodleLineNumberView.h */,
+				49DEEEE614280B3000F97C1B /* NoodleLineNumberView.m */,
+			);
+			name = NoodleLineNumber;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -324,6 +347,9 @@
 				490BB5791425488900C447E4 /* ProjectWindowController.m in Sources */,
 				490BB57C1425494000C447E4 /* DocumentWindowController.m in Sources */,
 				490BB57F1425496A00C447E4 /* DocumentController.m in Sources */,
+				49DEEEE714280B3000F97C1B /* NoodleLineNumberMarker.m in Sources */,
+				49DEEEE814280B3000F97C1B /* NoodleLineNumberView.m in Sources */,
+				49DEEEEB14280C5000F97C1B /* MarkerLineNumberView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -447,6 +473,7 @@
 		49080A591418EDA70092F580 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Frameworks\"",
@@ -462,6 +489,7 @@
 		49080A5A1418EDA70092F580 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Frameworks\"",

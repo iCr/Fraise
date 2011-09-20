@@ -8,6 +8,8 @@
 
 #import "Document.h"
 
+#import "DocumentWindowController.h"
+
 @implementation Document
 
 - (id)init
@@ -20,17 +22,16 @@
     return self;
 }
 
-- (NSString *)windowNibName
+- (void)makeWindowControllers
 {
-    // Override returning the nib file name of the document
-    // If you need to use a subclass of NSWindowController or if your document supports multiple NSWindowControllers, you should remove this method and override -makeWindowControllers instead.
-    return @"Document";
+    // FIXME: For now just make a DocumentWindowController. Later on we need to deal with ProjectWindowControllers
+    DocumentWindowController* controller = [[DocumentWindowController alloc] initWithWindowNibName:@"Document"];
+    [self addWindowController:controller];
 }
 
 - (void)windowControllerDidLoadNib:(NSWindowController *)aController
 {
     [super windowControllerDidLoadNib:aController];
-    // Add any code here that needs to be executed once the windowController has loaded the document's window.
 }
 
 + (BOOL)autosavesInPlace
