@@ -34,6 +34,13 @@
     [m_scrollView setRulersVisible:YES];
 	
     [m_textView setFont:[NSFont userFixedPitchFontOfSize:[NSFont smallSystemFontSize]]];
+    
+    // FIXME: This disables word wrap. Eventually we need this as a per-document flag that gets set when the document is active
+    NSSize layoutSize = [m_textView maxSize];
+    layoutSize.width = layoutSize.height;
+    [m_textView setMaxSize:layoutSize];
+    [[m_textView textContainer] setWidthTracksTextView:NO];
+    [m_textView setHorizontallyResizable:YES];
+    [[m_textView textContainer] setContainerSize:layoutSize];
 }
-
 @end

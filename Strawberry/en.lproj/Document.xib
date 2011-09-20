@@ -164,7 +164,7 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 								<object class="NSScroller" id="532716719">
 									<reference key="NSNextResponder" ref="709949080"/>
 									<int key="NSvFlags">256</int>
-									<string key="NSFrame">{{669, 1}, {15, 543}}</string>
+									<string key="NSFrame">{{669, 1}, {15, 537}}</string>
 									<reference key="NSSuperview" ref="709949080"/>
 									<string key="NSReuseIdentifierKey">_NS:1473</string>
 									<reference key="NSTarget" ref="709949080"/>
@@ -174,8 +174,8 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 								</object>
 								<object class="NSScroller" id="1033582648">
 									<reference key="NSNextResponder" ref="709949080"/>
-									<int key="NSvFlags">-2147483392</int>
-									<string key="NSFrame">{{-100, -100}, {87, 18}}</string>
+									<int key="NSvFlags">256</int>
+									<string key="NSFrame">{{1, 529}, {677, 15}}</string>
 									<reference key="NSSuperview" ref="709949080"/>
 									<reference key="NSNextKeyView" ref="967532729"/>
 									<string key="NSReuseIdentifierKey">_NS:1461</string>
@@ -190,7 +190,7 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 							<reference key="NSSuperview" ref="568628114"/>
 							<reference key="NSNextKeyView" ref="967532729"/>
 							<string key="NSReuseIdentifierKey">_NS:900</string>
-							<int key="NSsFlags">133138</int>
+							<int key="NSsFlags">133170</int>
 							<reference key="NSVScroller" ref="532716719"/>
 							<reference key="NSHScroller" ref="1033582648"/>
 							<reference key="NSContentView" ref="967532729"/>
