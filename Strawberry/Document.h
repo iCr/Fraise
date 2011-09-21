@@ -8,6 +8,13 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface Document : NSPersistentDocument
+@interface Document : NSDocument
+{
+    NSMutableString* m_contents;
+    NSStringEncoding m_encoding;
+}
+
+@property(readwrite, copy) NSString* contents;
+@property(readwrite, assign) NSStringEncoding encoding;
 
 @end

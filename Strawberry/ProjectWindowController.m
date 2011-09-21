@@ -8,32 +8,11 @@
 
 #import "ProjectWindowController.h"
 
-#import "MarkerLineNumberView.h"
-
 @implementation ProjectWindowController
 
-- (id)initWithWindow:(NSWindow *)window
+- (void)setDocument:(NSDocument *)document
 {
-    self = [super initWithWindow:window];
-    if (self) {
-        // Initialization code here.
-    }
-    
-    return self;
-}
-
-- (void)windowDidLoad
-{
-    [super windowDidLoad];
-    
-    // Create the lineNumberView
-    m_lineNumberView = [[MarkerLineNumberView alloc] initWithScrollView:m_scrollView];
-    [m_scrollView setVerticalRulerView:m_lineNumberView];
-    [m_scrollView setHasHorizontalRuler:NO];
-    [m_scrollView setHasVerticalRuler:YES];
-    [m_scrollView setRulersVisible:YES];
-	
-    [m_textView setFont:[NSFont userFixedPitchFontOfSize:[NSFont smallSystemFontSize]]];
+    // FIXME: Save contents of window to old document and load new one
 }
 
 @end

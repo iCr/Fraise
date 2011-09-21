@@ -7,58 +7,20 @@
 	<key>CFBundleDocumentTypes</key>
 	<array>
 		<dict>
-			<key>CFBundleTypeName</key>
-			<string>Unknown document</string>
-			<key>CFBundleTypeRole</key>
-			<string>Viewer</string>
-			<key>LSIsAppleDefaultForType</key>
-			<true/>
-			<key>LSItemContentTypes</key>
-			<array>
-				<string>public.data</string>
-			</array>
-			<key>NSDocumentClass</key>
-			<string>Document</string>
-		</dict>
-		<dict>
 			<key>CFBundleTypeExtensions</key>
 			<array>
-				<string>binary</string>
+				<string>txt</string>
 			</array>
 			<key>CFBundleTypeMIMETypes</key>
 			<array>
-				<string>application/octet-stream</string>
+				<string>text/plain</string>
 			</array>
 			<key>CFBundleTypeName</key>
-			<string>Binary</string>
+			<string>Text</string>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
-			<key>LSTypeIsPackage</key>
-			<false/>
 			<key>NSDocumentClass</key>
 			<string>Document</string>
-			<key>NSPersistentStoreTypeKey</key>
-			<string>Binary</string>
-		</dict>
-		<dict>
-			<key>CFBundleTypeExtensions</key>
-			<array>
-				<string>sqlite</string>
-			</array>
-			<key>CFBundleTypeMIMETypes</key>
-			<array>
-				<string>application/octet-stream</string>
-			</array>
-			<key>CFBundleTypeName</key>
-			<string>SQLite</string>
-			<key>CFBundleTypeRole</key>
-			<string>Editor</string>
-			<key>LSTypeIsPackage</key>
-			<false/>
-			<key>NSDocumentClass</key>
-			<string>Document</string>
-			<key>NSPersistentStoreTypeKey</key>
-			<string>SQLite</string>
 		</dict>
 		<dict>
 			<key>CFBundleTypeExtensions</key>
@@ -85,6 +47,20 @@
 			<string>Document</string>
 			<key>NSPersistentStoreTypeKey</key>
 			<string>XML</string>
+		</dict>
+		<dict>
+			<key>CFBundleTypeName</key>
+			<string>Unknown document</string>
+			<key>CFBundleTypeRole</key>
+			<string>Viewer</string>
+			<key>LSIsAppleDefaultForType</key>
+			<true/>
+			<key>LSItemContentTypes</key>
+			<array>
+				<string>public.data</string>
+			</array>
+			<key>NSDocumentClass</key>
+			<string>Document</string>
 		</dict>
 	</array>
 	<key>CFBundleExecutable</key>

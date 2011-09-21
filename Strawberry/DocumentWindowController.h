@@ -6,15 +6,8 @@
 //  Copyright (c) 2011 Apple. All rights reserved.
 //
 
-#import <Cocoa/Cocoa.h>
+#import "WindowController.h"
 
-@class MarkerLineNumberView;
-
-@interface DocumentWindowController : NSWindowController
-{
-    IBOutlet NSScrollView* m_scrollView;
-    IBOutlet NSTextView* m_textView;
-	MarkerLineNumberView* m_lineNumberView;
-}
+@interface DocumentWindowController : WindowController
 
 @end
