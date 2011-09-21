@@ -172,8 +172,6 @@
 		49080A2A1418EDA50092F580 /* Strawberry */ = {
 			isa = PBXGroup;
 			children = (
-				4935BB6D142A2FCF00BE3F49 /* WindowController.h */,
-				4935BB6E142A2FCF00BE3F49 /* WindowController.m */,
 				49DEEEF81428EE9A00F97C1B /* DBPrefsWindowController */,
 				49DEEED714280A4300F97C1B /* NoodleLineNumber */,
 				49F512981428F5A1000FCA43 /* AppController.h */,
@@ -188,6 +186,8 @@
 				49DEEEFE1428EEE600F97C1B /* PrefsWindowController.m */,
 				490BB5771425488900C447E4 /* ProjectWindowController.h */,
 				490BB5781425488900C447E4 /* ProjectWindowController.m */,
+				4935BB6D142A2FCF00BE3F49 /* WindowController.h */,
+				4935BB6E142A2FCF00BE3F49 /* WindowController.m */,
 				490BB58014263F4800C447E4 /* Resources */,
 				49080A3F1418EDA60092F580 /* Document.xcdatamodeld */,
 				49080A2B1418EDA50092F580 /* Supporting Files */,

@@ -10,9 +10,9 @@
 
 @implementation ProjectWindowController
 
-- (void)setDocument:(NSDocument *)document
-{
-    // FIXME: Save contents of window to old document and load new one
-}
+//- (void)setDocument:(NSDocument *)document
+//{
+//    // FIXME: Save contents of window to old document and load new one
+//}
 
 @end

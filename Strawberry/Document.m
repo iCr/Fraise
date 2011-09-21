@@ -30,7 +30,7 @@
     if (![[self windowControllers] count])
         return;
         
-    NSAttributedString* string = [[NSAttributedString alloc]initWithString:self.contents];
+    NSAttributedString* string = [[NSAttributedString alloc]initWithString:self.contents ? self.contents : @""];
     [[((WindowController*) [[self windowControllers] objectAtIndex:0]).textView textStorage] setAttributedString:string];
 }
 
@@ -44,6 +44,8 @@
 
 - (void)windowControllerDidLoadNib:(NSWindowController *)controller
 {
+    [super windowControllerDidLoadNib:controller];
+    
     // FIXME: For now assume a single WindowController
     if (self.contents)
         [self updateTextView];
@@ -76,12 +78,5 @@
     // FIXME: Make sure file is ready to save (get text from TextView, call breakUndoCoalescing)
     return [self.contents dataUsingEncoding:self.encoding];
 }
-
-/*
-- (BOOL)writeToURL:(NSURL *)absoluteURL ofType:(NSString *)typeName error:(NSError **)outError
-{
-    return NO;
-}
-*/
 
 @end
