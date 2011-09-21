@@ -30,6 +30,10 @@
 		49DEEEE714280B3000F97C1B /* NoodleLineNumberMarker.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DEEEE414280B3000F97C1B /* NoodleLineNumberMarker.m */; };
 		49DEEEE814280B3000F97C1B /* NoodleLineNumberView.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DEEEE614280B3000F97C1B /* NoodleLineNumberView.m */; };
 		49DEEEEB14280C5000F97C1B /* MarkerLineNumberView.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DEEEEA14280C5000F97C1B /* MarkerLineNumberView.m */; };
+		49DEEEFC1428EEAE00F97C1B /* DBPrefsWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DEEEFB1428EEAE00F97C1B /* DBPrefsWindowController.m */; };
+		49DEEEFF1428EEE600F97C1B /* PrefsWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DEEEFE1428EEE600F97C1B /* PrefsWindowController.m */; };
+		49DEEF011428EFB100F97C1B /* Preferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49DEEF001428EFB100F97C1B /* Preferences.xib */; };
+		49F5129A1428F5A1000FCA43 /* AppController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49F512991428F5A1000FCA43 /* AppController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -94,6 +98,13 @@
 		49DEEEE614280B3000F97C1B /* NoodleLineNumberView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NoodleLineNumberView.m; path = NoodleLineNumber/NoodleLineNumberView.m; sourceTree = "<group>"; };
 		49DEEEE914280C5000F97C1B /* MarkerLineNumberView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MarkerLineNumberView.h; path = NoodleLineNumber/MarkerLineNumberView.h; sourceTree = "<group>"; };
 		49DEEEEA14280C5000F97C1B /* MarkerLineNumberView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MarkerLineNumberView.m; path = NoodleLineNumber/MarkerLineNumberView.m; sourceTree = "<group>"; };
+		49DEEEFA1428EEAE00F97C1B /* DBPrefsWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DBPrefsWindowController.h; path = DBPrefsWindowController/DBPrefsWindowController.h; sourceTree = "<group>"; };
+		49DEEEFB1428EEAE00F97C1B /* DBPrefsWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DBPrefsWindowController.m; path = DBPrefsWindowController/DBPrefsWindowController.m; sourceTree = "<group>"; };
+		49DEEEFD1428EEE600F97C1B /* PrefsWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefsWindowController.h; sourceTree = "<group>"; };
+		49DEEEFE1428EEE600F97C1B /* PrefsWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrefsWindowController.m; sourceTree = "<group>"; };
+		49DEEF001428EFB100F97C1B /* Preferences.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Preferences.xib; sourceTree = "<group>"; };
+		49F512981428F5A1000FCA43 /* AppController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppController.h; sourceTree = "<group>"; };
+		49F512991428F5A1000FCA43 /* AppController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -163,13 +174,18 @@
 			children = (
 				4935BB6D142A2FCF00BE3F49 /* WindowController.h */,
 				4935BB6E142A2FCF00BE3F49 /* WindowController.m */,
+				49DEEEF81428EE9A00F97C1B /* DBPrefsWindowController */,
 				49DEEED714280A4300F97C1B /* NoodleLineNumber */,
+				49F512981428F5A1000FCA43 /* AppController.h */,
+				49F512991428F5A1000FCA43 /* AppController.m */,
 				49080A361418EDA60092F580 /* Document.h */,
 				49080A371418EDA60092F580 /* Document.m */,
 				490BB57D1425496A00C447E4 /* DocumentController.h */,
 				490BB57E1425496A00C447E4 /* DocumentController.m */,
 				490BB57A1425494000C447E4 /* DocumentWindowController.h */,
 				490BB57B1425494000C447E4 /* DocumentWindowController.m */,
+				49DEEEFD1428EEE600F97C1B /* PrefsWindowController.h */,
+				49DEEEFE1428EEE600F97C1B /* PrefsWindowController.m */,
 				490BB5771425488900C447E4 /* ProjectWindowController.h */,
 				490BB5781425488900C447E4 /* ProjectWindowController.m */,
 				490BB58014263F4800C447E4 /* Resources */,
@@ -216,6 +232,7 @@
 				490BB581142641F400C447E4 /* MainIcon.icns */,
 				49080A3C1418EDA60092F580 /* MainMenu.xib */,
 				49080A391418EDA60092F580 /* Document.xib */,
+				49DEEF001428EFB100F97C1B /* Preferences.xib */,
 				490BB5731425478700C447E4 /* Project.xib */,
 			);
 			name = Resources;
@@ -232,6 +249,15 @@
 				49DEEEE614280B3000F97C1B /* NoodleLineNumberView.m */,
 			);
 			name = NoodleLineNumber;
+			sourceTree = "<group>";
+		};
+		49DEEEF81428EE9A00F97C1B /* DBPrefsWindowController */ = {
+			isa = PBXGroup;
+			children = (
+				49DEEEFA1428EEAE00F97C1B /* DBPrefsWindowController.h */,
+				49DEEEFB1428EEAE00F97C1B /* DBPrefsWindowController.m */,
+			);
+			name = DBPrefsWindowController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -312,6 +338,7 @@
 				49080A3E1418EDA60092F580 /* MainMenu.xib in Resources */,
 				490BB5751425478700C447E4 /* Project.xib in Resources */,
 				490BB582142641F400C447E4 /* MainIcon.icns in Resources */,
+				49DEEF011428EFB100F97C1B /* Preferences.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -356,6 +383,9 @@
 				49DEEEE814280B3000F97C1B /* NoodleLineNumberView.m in Sources */,
 				49DEEEEB14280C5000F97C1B /* MarkerLineNumberView.m in Sources */,
 				4935BB6F142A2FCF00BE3F49 /* WindowController.m in Sources */,
+				49DEEEFC1428EEAE00F97C1B /* DBPrefsWindowController.m in Sources */,
+				49DEEEFF1428EEE600F97C1B /* PrefsWindowController.m in Sources */,
+				49F5129A1428F5A1000FCA43 /* AppController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
