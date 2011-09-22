@@ -11,6 +11,7 @@
 @interface PrefsWindowController : DBPrefsWindowController
 {
     IBOutlet NSView* m_generalPrefsView;
+    IBOutlet NSView* m_themesPrefsView;
     IBOutlet NSView* m_advancedPrefsView;
 }
 

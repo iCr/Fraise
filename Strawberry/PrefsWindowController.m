@@ -14,8 +14,10 @@
 {
     NSImage* advancedIcon = [[NSImage alloc] initByReferencingFile:@"/System/Library/CoreServices/CoreTypes.bundle/Contents/Resources/ToolbarAdvanced.icns"];
     NSImage* generalIcon = [[NSImage alloc] initByReferencingFile:@"/System/Library/CoreServices/CoreTypes.bundle/Contents/Resources/General.icns"];
+    NSImage* themesIcon = [[NSImage alloc] initByReferencingFile:@"/System/Library/CoreServices/CoreTypes.bundle/Contents/Resources/ProfileFontAndColor.icns"];
 
     [self addView:m_generalPrefsView label:@"General" image:generalIcon];
+    [self addView:m_themesPrefsView label:@"Themes" image:themesIcon];
     [self addView:m_advancedPrefsView label:@"Advanced" image:advancedIcon];
     
     [advancedIcon release];
