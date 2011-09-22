@@ -10,6 +10,7 @@
 
 #import "PrefsWindowController.h"
 
+
 @implementation AppController
 
 - (BOOL)applicationShouldHandleReopen:(NSApplication *)theApplication hasVisibleWindows:(BOOL)flag

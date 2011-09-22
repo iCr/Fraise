@@ -6,11 +6,13 @@
 //  Copyright (c) 2011 Apple. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import "PrefController.h"
 
-@interface ThemeController : NSObject
+@interface PrefThemesController : PrefController
 {
     IBOutlet NSTableView* m_table;
 }
+
++ (PrefThemesController*) controller;
 
 @end

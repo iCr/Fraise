@@ -30,12 +30,16 @@
 		49DEEEEB14280C5000F97C1B /* MarkerLineNumberView.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DEEEEA14280C5000F97C1B /* MarkerLineNumberView.m */; };
 		49DEEEFC1428EEAE00F97C1B /* DBPrefsWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DEEEFB1428EEAE00F97C1B /* DBPrefsWindowController.m */; };
 		49DEEEFF1428EEE600F97C1B /* PrefsWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DEEEFE1428EEE600F97C1B /* PrefsWindowController.m */; };
-		49DEEF011428EFB100F97C1B /* Preferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49DEEF001428EFB100F97C1B /* Preferences.xib */; };
 		49F5129A1428F5A1000FCA43 /* AppController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49F512991428F5A1000FCA43 /* AppController.m */; };
-		49F512C4142B9305000FCA43 /* ThemeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49F512C3142B9305000FCA43 /* ThemeController.m */; };
 		49F512C8142B93C8000FCA43 /* Document.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49F512C5142B93C8000FCA43 /* Document.xib */; };
 		49F512C9142B93C8000FCA43 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49F512C6142B93C8000FCA43 /* MainMenu.xib */; };
 		49F512CA142B93C8000FCA43 /* Project.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49F512C7142B93C8000FCA43 /* Project.xib */; };
+		49F512CE142B94DF000FCA43 /* PrefAdvanced.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49F512CB142B94DF000FCA43 /* PrefAdvanced.xib */; };
+		49F512CF142B94DF000FCA43 /* PrefGeneral.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49F512CC142B94DF000FCA43 /* PrefGeneral.xib */; };
+		49F512D0142B94DF000FCA43 /* PrefThemes.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49F512CD142B94DF000FCA43 /* PrefThemes.xib */; };
+		49F512D6142B9573000FCA43 /* PrefAdvancedController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49F512D5142B9573000FCA43 /* PrefAdvancedController.m */; };
+		49F512D9142B9582000FCA43 /* PrefThemesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49F512D8142B9582000FCA43 /* PrefThemesController.m */; };
+		49F512DC142B9653000FCA43 /* PrefController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49F512DB142B9653000FCA43 /* PrefController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -103,14 +107,20 @@
 		49DEEEFB1428EEAE00F97C1B /* DBPrefsWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DBPrefsWindowController.m; path = DBPrefsWindowController/DBPrefsWindowController.m; sourceTree = "<group>"; };
 		49DEEEFD1428EEE600F97C1B /* PrefsWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefsWindowController.h; sourceTree = "<group>"; };
 		49DEEEFE1428EEE600F97C1B /* PrefsWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrefsWindowController.m; sourceTree = "<group>"; };
-		49DEEF001428EFB100F97C1B /* Preferences.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Preferences.xib; sourceTree = "<group>"; };
 		49F512981428F5A1000FCA43 /* AppController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppController.h; sourceTree = "<group>"; };
 		49F512991428F5A1000FCA43 /* AppController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppController.m; sourceTree = "<group>"; };
-		49F512C2142B9305000FCA43 /* ThemeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThemeController.h; sourceTree = "<group>"; };
-		49F512C3142B9305000FCA43 /* ThemeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThemeController.m; sourceTree = "<group>"; };
 		49F512C5142B93C8000FCA43 /* Document.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Document.xib; sourceTree = "<group>"; };
 		49F512C6142B93C8000FCA43 /* MainMenu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainMenu.xib; sourceTree = "<group>"; };
 		49F512C7142B93C8000FCA43 /* Project.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Project.xib; sourceTree = "<group>"; };
+		49F512CB142B94DF000FCA43 /* PrefAdvanced.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PrefAdvanced.xib; sourceTree = "<group>"; };
+		49F512CC142B94DF000FCA43 /* PrefGeneral.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PrefGeneral.xib; sourceTree = "<group>"; };
+		49F512CD142B94DF000FCA43 /* PrefThemes.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PrefThemes.xib; sourceTree = "<group>"; };
+		49F512D4142B9573000FCA43 /* PrefAdvancedController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefAdvancedController.h; sourceTree = "<group>"; };
+		49F512D5142B9573000FCA43 /* PrefAdvancedController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrefAdvancedController.m; sourceTree = "<group>"; };
+		49F512D7142B9582000FCA43 /* PrefThemesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefThemesController.h; sourceTree = "<group>"; };
+		49F512D8142B9582000FCA43 /* PrefThemesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrefThemesController.m; sourceTree = "<group>"; };
+		49F512DA142B9653000FCA43 /* PrefController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefController.h; sourceTree = "<group>"; };
+		49F512DB142B9653000FCA43 /* PrefController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrefController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -180,6 +190,7 @@
 			children = (
 				49DEEEF81428EE9A00F97C1B /* DBPrefsWindowController */,
 				49DEEED714280A4300F97C1B /* NoodleLineNumber */,
+				49F512DD142B9662000FCA43 /* Prefs */,
 				49F512981428F5A1000FCA43 /* AppController.h */,
 				49F512991428F5A1000FCA43 /* AppController.m */,
 				49080A361418EDA60092F580 /* Document.h */,
@@ -190,12 +201,8 @@
 				490BB57B1425494000C447E4 /* DocumentWindowController.m */,
 				4935BB7D142B78AF00BE3F49 /* LVColorWellCell.h */,
 				4935BB7E142B78AF00BE3F49 /* LVColorWellCell.m */,
-				49DEEEFD1428EEE600F97C1B /* PrefsWindowController.h */,
-				49DEEEFE1428EEE600F97C1B /* PrefsWindowController.m */,
 				490BB5771425488900C447E4 /* ProjectWindowController.h */,
 				490BB5781425488900C447E4 /* ProjectWindowController.m */,
-				49F512C2142B9305000FCA43 /* ThemeController.h */,
-				49F512C3142B9305000FCA43 /* ThemeController.m */,
 				4935BB6D142A2FCF00BE3F49 /* WindowController.h */,
 				4935BB6E142A2FCF00BE3F49 /* WindowController.m */,
 				490BB58014263F4800C447E4 /* Resources */,
@@ -241,9 +248,11 @@
 			children = (
 				49F512C5142B93C8000FCA43 /* Document.xib */,
 				49F512C6142B93C8000FCA43 /* MainMenu.xib */,
+				49F512CB142B94DF000FCA43 /* PrefAdvanced.xib */,
+				49F512CC142B94DF000FCA43 /* PrefGeneral.xib */,
+				49F512CD142B94DF000FCA43 /* PrefThemes.xib */,
 				49F512C7142B93C8000FCA43 /* Project.xib */,
 				490BB581142641F400C447E4 /* MainIcon.icns */,
-				49DEEF001428EFB100F97C1B /* Preferences.xib */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -268,6 +277,21 @@
 				49DEEEFB1428EEAE00F97C1B /* DBPrefsWindowController.m */,
 			);
 			name = DBPrefsWindowController;
+			sourceTree = "<group>";
+		};
+		49F512DD142B9662000FCA43 /* Prefs */ = {
+			isa = PBXGroup;
+			children = (
+				49F512DA142B9653000FCA43 /* PrefController.h */,
+				49F512DB142B9653000FCA43 /* PrefController.m */,
+				49F512D4142B9573000FCA43 /* PrefAdvancedController.h */,
+				49F512D5142B9573000FCA43 /* PrefAdvancedController.m */,
+				49F512D7142B9582000FCA43 /* PrefThemesController.h */,
+				49F512D8142B9582000FCA43 /* PrefThemesController.m */,
+				49DEEEFD1428EEE600F97C1B /* PrefsWindowController.h */,
+				49DEEEFE1428EEE600F97C1B /* PrefsWindowController.m */,
+			);
+			name = Prefs;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -345,10 +369,12 @@
 				49080A2F1418EDA60092F580 /* InfoPlist.strings in Resources */,
 				49080A351418EDA60092F580 /* Credits.rtf in Resources */,
 				490BB582142641F400C447E4 /* MainIcon.icns in Resources */,
-				49DEEF011428EFB100F97C1B /* Preferences.xib in Resources */,
 				49F512C8142B93C8000FCA43 /* Document.xib in Resources */,
 				49F512C9142B93C8000FCA43 /* MainMenu.xib in Resources */,
 				49F512CA142B93C8000FCA43 /* Project.xib in Resources */,
+				49F512CE142B94DF000FCA43 /* PrefAdvanced.xib in Resources */,
+				49F512CF142B94DF000FCA43 /* PrefGeneral.xib in Resources */,
+				49F512D0142B94DF000FCA43 /* PrefThemes.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -397,7 +423,9 @@
 				49DEEEFF1428EEE600F97C1B /* PrefsWindowController.m in Sources */,
 				49F5129A1428F5A1000FCA43 /* AppController.m in Sources */,
 				4935BB7F142B78AF00BE3F49 /* LVColorWellCell.m in Sources */,
-				49F512C4142B9305000FCA43 /* ThemeController.m in Sources */,
+				49F512D6142B9573000FCA43 /* PrefAdvancedController.m in Sources */,
+				49F512D9142B9582000FCA43 /* PrefThemesController.m in Sources */,
+				49F512DC142B9653000FCA43 /* PrefController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

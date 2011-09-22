@@ -10,9 +10,9 @@
 
 @interface PrefsWindowController : DBPrefsWindowController
 {
-    IBOutlet NSView* m_generalPrefsView;
-    IBOutlet NSView* m_themesPrefsView;
-    IBOutlet NSView* m_advancedPrefsView;
+    IBOutlet NSView* m_view;
+    
+    NSMutableArray* m_panels;
 }
 
 @end

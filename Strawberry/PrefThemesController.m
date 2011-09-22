@@ -6,9 +6,29 @@
 //  Copyright (c) 2011 Apple. All rights reserved.
 //
 
-#import "ThemeController.h"
+#import "PrefThemesController.h"
 
-@implementation ThemeController
+@implementation PrefThemesController
+
++ (PrefThemesController*) controller
+{
+    return [[[PrefThemesController alloc] init] autorelease];
+}
+
+- (NSString*)label
+{
+    return @"Themes";
+}
+
+- (NSString*)nibName
+{
+    return @"PrefThemes";
+}
+
+- (NSImage*)image
+{
+    return [[[NSImage alloc] initByReferencingFile:@"/System/Library/CoreServices/CoreTypes.bundle/Contents/Resources/ProfileFontAndColor.icns"] autorelease];
+}
 
 /*
 - (void)awakeFromNib
