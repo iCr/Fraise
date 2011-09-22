@@ -40,6 +40,7 @@
 		49F512D6142B9573000FCA43 /* PrefAdvancedController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49F512D5142B9573000FCA43 /* PrefAdvancedController.m */; };
 		49F512D9142B9582000FCA43 /* PrefThemesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49F512D8142B9582000FCA43 /* PrefThemesController.m */; };
 		49F512DC142B9653000FCA43 /* PrefController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49F512DB142B9653000FCA43 /* PrefController.m */; };
+		49F512E0142BF9B7000FCA43 /* PrefGeneralController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49F512DF142BF9B7000FCA43 /* PrefGeneralController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -121,6 +122,8 @@
 		49F512D8142B9582000FCA43 /* PrefThemesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrefThemesController.m; sourceTree = "<group>"; };
 		49F512DA142B9653000FCA43 /* PrefController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefController.h; sourceTree = "<group>"; };
 		49F512DB142B9653000FCA43 /* PrefController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrefController.m; sourceTree = "<group>"; };
+		49F512DE142BF9B6000FCA43 /* PrefGeneralController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefGeneralController.h; sourceTree = "<group>"; };
+		49F512DF142BF9B7000FCA43 /* PrefGeneralController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrefGeneralController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -286,6 +289,8 @@
 				49F512DB142B9653000FCA43 /* PrefController.m */,
 				49F512D4142B9573000FCA43 /* PrefAdvancedController.h */,
 				49F512D5142B9573000FCA43 /* PrefAdvancedController.m */,
+				49F512DE142BF9B6000FCA43 /* PrefGeneralController.h */,
+				49F512DF142BF9B7000FCA43 /* PrefGeneralController.m */,
 				49F512D7142B9582000FCA43 /* PrefThemesController.h */,
 				49F512D8142B9582000FCA43 /* PrefThemesController.m */,
 				49DEEEFD1428EEE600F97C1B /* PrefsWindowController.h */,
@@ -426,6 +431,7 @@
 				49F512D6142B9573000FCA43 /* PrefAdvancedController.m in Sources */,
 				49F512D9142B9582000FCA43 /* PrefThemesController.m in Sources */,
 				49F512DC142B9653000FCA43 /* PrefController.m in Sources */,
+				49F512E0142BF9B7000FCA43 /* PrefGeneralController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

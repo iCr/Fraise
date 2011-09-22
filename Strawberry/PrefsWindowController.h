@@ -10,8 +10,6 @@
 
 @interface PrefsWindowController : DBPrefsWindowController
 {
-    IBOutlet NSView* m_view;
-    
     NSMutableArray* m_panels;
 }
 

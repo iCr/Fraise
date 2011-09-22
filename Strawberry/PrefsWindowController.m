@@ -8,27 +8,26 @@
 
 #import "PrefsWindowController.h"
 
-#import "PrefThemesController.h"
 #import "PrefAdvancedController.h"
+#import "PrefGeneralController.h"
+#import "PrefThemesController.h"
 
 @implementation PrefsWindowController
 
 + (NSString *)nibName;
 {
-    return @"PrefGeneral";
+    return @"";
 }
 
 - (void)setupToolbar
 {
-    NSImage* icon = [[[NSImage alloc] initByReferencingFile:@"/System/Library/CoreServices/CoreTypes.bundle/Contents/Resources/General.icns"] autorelease];
-    [[PrefsWindowController sharedPrefsWindowController] addView:m_view label:@"General" image:icon];
-    
     if (!m_panels)
         [m_panels release];
         
     m_panels = [[NSMutableArray alloc] init];
     
     // FIXME: Add other panels in a generic way
+    [m_panels addObject:[PrefGeneralController controller]];
     [m_panels addObject:[PrefThemesController controller]];
     [m_panels addObject:[PrefAdvancedController controller]];
     
