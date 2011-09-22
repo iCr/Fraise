@@ -12,14 +12,11 @@
 		49080A311418EDA60092F580 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 49080A301418EDA60092F580 /* main.m */; };
 		49080A351418EDA60092F580 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 49080A331418EDA60092F580 /* Credits.rtf */; };
 		49080A381418EDA60092F580 /* Document.m in Sources */ = {isa = PBXBuildFile; fileRef = 49080A371418EDA60092F580 /* Document.m */; };
-		49080A3B1418EDA60092F580 /* Document.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49080A391418EDA60092F580 /* Document.xib */; };
-		49080A3E1418EDA60092F580 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49080A3C1418EDA60092F580 /* MainMenu.xib */; };
 		49080A411418EDA60092F580 /* Document.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 49080A3F1418EDA60092F580 /* Document.xcdatamodeld */; };
 		49080A491418EDA70092F580 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49080A481418EDA70092F580 /* SenTestingKit.framework */; };
 		49080A4A1418EDA70092F580 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49080A241418EDA50092F580 /* Cocoa.framework */; };
 		49080A521418EDA70092F580 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 49080A501418EDA70092F580 /* InfoPlist.strings */; };
 		49080A551418EDA70092F580 /* StrawberryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 49080A541418EDA70092F580 /* StrawberryTests.m */; };
-		490BB5751425478700C447E4 /* Project.xib in Resources */ = {isa = PBXBuildFile; fileRef = 490BB5731425478700C447E4 /* Project.xib */; };
 		490BB5791425488900C447E4 /* ProjectWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 490BB5781425488900C447E4 /* ProjectWindowController.m */; };
 		490BB57C1425494000C447E4 /* DocumentWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 490BB57B1425494000C447E4 /* DocumentWindowController.m */; };
 		490BB57F1425496A00C447E4 /* DocumentController.m in Sources */ = {isa = PBXBuildFile; fileRef = 490BB57E1425496A00C447E4 /* DocumentController.m */; };
@@ -35,6 +32,10 @@
 		49DEEEFF1428EEE600F97C1B /* PrefsWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DEEEFE1428EEE600F97C1B /* PrefsWindowController.m */; };
 		49DEEF011428EFB100F97C1B /* Preferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49DEEF001428EFB100F97C1B /* Preferences.xib */; };
 		49F5129A1428F5A1000FCA43 /* AppController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49F512991428F5A1000FCA43 /* AppController.m */; };
+		49F512C4142B9305000FCA43 /* ThemeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49F512C3142B9305000FCA43 /* ThemeController.m */; };
+		49F512C8142B93C8000FCA43 /* Document.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49F512C5142B93C8000FCA43 /* Document.xib */; };
+		49F512C9142B93C8000FCA43 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49F512C6142B93C8000FCA43 /* MainMenu.xib */; };
+		49F512CA142B93C8000FCA43 /* Project.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49F512C7142B93C8000FCA43 /* Project.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,8 +74,6 @@
 		49080A341418EDA60092F580 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
 		49080A361418EDA60092F580 /* Document.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Document.h; sourceTree = "<group>"; };
 		49080A371418EDA60092F580 /* Document.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Document.m; sourceTree = "<group>"; };
-		49080A3A1418EDA60092F580 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/Document.xib; sourceTree = "<group>"; };
-		49080A3D1418EDA60092F580 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		49080A401418EDA60092F580 /* Document.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Document.xcdatamodel; sourceTree = "<group>"; };
 		49080A471418EDA70092F580 /* StrawberryTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StrawberryTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		49080A481418EDA70092F580 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
@@ -82,7 +81,6 @@
 		49080A511418EDA70092F580 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		49080A531418EDA70092F580 /* StrawberryTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StrawberryTests.h; sourceTree = "<group>"; };
 		49080A541418EDA70092F580 /* StrawberryTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StrawberryTests.m; sourceTree = "<group>"; };
-		490BB5741425478700C447E4 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/Project.xib; sourceTree = "<group>"; };
 		490BB5771425488900C447E4 /* ProjectWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProjectWindowController.h; sourceTree = "<group>"; };
 		490BB5781425488900C447E4 /* ProjectWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProjectWindowController.m; sourceTree = "<group>"; };
 		490BB57A1425494000C447E4 /* DocumentWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DocumentWindowController.h; sourceTree = "<group>"; };
@@ -108,6 +106,11 @@
 		49DEEF001428EFB100F97C1B /* Preferences.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Preferences.xib; sourceTree = "<group>"; };
 		49F512981428F5A1000FCA43 /* AppController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppController.h; sourceTree = "<group>"; };
 		49F512991428F5A1000FCA43 /* AppController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppController.m; sourceTree = "<group>"; };
+		49F512C2142B9305000FCA43 /* ThemeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThemeController.h; sourceTree = "<group>"; };
+		49F512C3142B9305000FCA43 /* ThemeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThemeController.m; sourceTree = "<group>"; };
+		49F512C5142B93C8000FCA43 /* Document.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Document.xib; sourceTree = "<group>"; };
+		49F512C6142B93C8000FCA43 /* MainMenu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainMenu.xib; sourceTree = "<group>"; };
+		49F512C7142B93C8000FCA43 /* Project.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Project.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -191,6 +194,8 @@
 				49DEEEFE1428EEE600F97C1B /* PrefsWindowController.m */,
 				490BB5771425488900C447E4 /* ProjectWindowController.h */,
 				490BB5781425488900C447E4 /* ProjectWindowController.m */,
+				49F512C2142B9305000FCA43 /* ThemeController.h */,
+				49F512C3142B9305000FCA43 /* ThemeController.m */,
 				4935BB6D142A2FCF00BE3F49 /* WindowController.h */,
 				4935BB6E142A2FCF00BE3F49 /* WindowController.m */,
 				490BB58014263F4800C447E4 /* Resources */,
@@ -234,11 +239,11 @@
 		490BB58014263F4800C447E4 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				49F512C5142B93C8000FCA43 /* Document.xib */,
+				49F512C6142B93C8000FCA43 /* MainMenu.xib */,
+				49F512C7142B93C8000FCA43 /* Project.xib */,
 				490BB581142641F400C447E4 /* MainIcon.icns */,
-				49080A3C1418EDA60092F580 /* MainMenu.xib */,
-				49080A391418EDA60092F580 /* Document.xib */,
 				49DEEF001428EFB100F97C1B /* Preferences.xib */,
-				490BB5731425478700C447E4 /* Project.xib */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -339,11 +344,11 @@
 			files = (
 				49080A2F1418EDA60092F580 /* InfoPlist.strings in Resources */,
 				49080A351418EDA60092F580 /* Credits.rtf in Resources */,
-				49080A3B1418EDA60092F580 /* Document.xib in Resources */,
-				49080A3E1418EDA60092F580 /* MainMenu.xib in Resources */,
-				490BB5751425478700C447E4 /* Project.xib in Resources */,
 				490BB582142641F400C447E4 /* MainIcon.icns in Resources */,
 				49DEEF011428EFB100F97C1B /* Preferences.xib in Resources */,
+				49F512C8142B93C8000FCA43 /* Document.xib in Resources */,
+				49F512C9142B93C8000FCA43 /* MainMenu.xib in Resources */,
+				49F512CA142B93C8000FCA43 /* Project.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -392,6 +397,7 @@
 				49DEEEFF1428EEE600F97C1B /* PrefsWindowController.m in Sources */,
 				49F5129A1428F5A1000FCA43 /* AppController.m in Sources */,
 				4935BB7F142B78AF00BE3F49 /* LVColorWellCell.m in Sources */,
+				49F512C4142B9305000FCA43 /* ThemeController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -430,36 +436,12 @@
 			name = Credits.rtf;
 			sourceTree = "<group>";
 		};
-		49080A391418EDA60092F580 /* Document.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				49080A3A1418EDA60092F580 /* en */,
-			);
-			name = Document.xib;
-			sourceTree = "<group>";
-		};
-		49080A3C1418EDA60092F580 /* MainMenu.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				49080A3D1418EDA60092F580 /* en */,
-			);
-			name = MainMenu.xib;
-			sourceTree = "<group>";
-		};
 		49080A501418EDA70092F580 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
 				49080A511418EDA70092F580 /* en */,
 			);
 			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		490BB5731425478700C447E4 /* Project.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				490BB5741425478700C447E4 /* en */,
-			);
-			name = Project.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
