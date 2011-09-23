@@ -12,17 +12,17 @@
 
 @synthesize name, fg, bg, bold, italic, underline;
 
--(id)init
++ (ThemeAttributeModel*) themeAttributeModelWithName:(NSString*)name fg:(NSColor*) fg bg:(NSColor*) bg 
+                            bold:(NSNumber*) bold italic:(NSNumber*) italic underline:(NSNumber*) underline
 {
-    if (self = [super init]) {
-        self.name = @"Sample Name";
-        self.fg = [NSColor blueColor];
-        self.bg = [NSColor greenColor];
-        self.bold = true;
-        self.italic = false;
-        self.underline = true;
-    }
-    return self;
+    ThemeAttributeModel* model = [[[ThemeAttributeModel alloc] init] autorelease];
+    model.name = name;
+    model.fg = fg;
+    model.bg = bg;
+    model.bold = bold;
+    model.italic = italic;
+    model.underline = underline;
+    return model;
 }
 
 - (void)dealloc
@@ -59,8 +59,8 @@
 - (void)awakeFromNib {
     
     // FIXME: This is just a dummy
-    //[themeAttributes addObject:[NSDictionary dictionaryWithObjectsAndKeys:@"Test Name", @"name", [NSColor blueColor], @"fg",[NSColor greenColor], @"bg", 
-    //    [NSNumber numberWithBool:YES], @"bold", [NSNumber numberWithBool:NO], @"italic", [NSNumber numberWithBool:YES], @"underline", nil]];
+    [themes addObject:[ThemeAttributeModel themeAttributeModelWithName:@"Test Name" fg:[NSColor blueColor] bg:[NSColor greenColor]
+        bold:[NSNumber numberWithBool:YES] italic:[NSNumber numberWithBool:NO] underline:[NSNumber numberWithBool:YES]]];
 }
 
 - (NSString*)label

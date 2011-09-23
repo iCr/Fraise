@@ -15,22 +15,29 @@
     NSString* name;
     NSColor* fg;
     NSColor* bg;
-    bool bold, italic, underline;
+    NSNumber* bold;
+    NSNumber* italice;
+    NSNumber* underline;
 }
 
 @property(copy) NSString* name;
 @property(copy) NSColor* fg;
 @property(copy) NSColor* bg;
-@property(assign) bool bold, italic, underline;
+@property(copy) NSNumber* bold;
+@property(copy) NSNumber* italic;
+@property(copy) NSNumber* underline;
+
++ (ThemeAttributeModel*) themeAttributeModelWithName:(NSString*)name fg:(NSColor*) fg bg:(NSColor*) bg 
+                            bold:(NSNumber*) bold italic:(NSNumber*) italic underline:(NSNumber*) underline; 
 
 @end
 
-@interface PrefThemesController : PrefController <NSTableViewDataSource, NSTableViewDelegate>
+@interface PrefThemesController : PrefController <NSTableViewDelegate>
 {
     IBOutlet NSTableView* table;
     IBOutlet NSArrayController* themes;
     
-    IBOutlet NSMutableArray* themeAttributes;
+    NSMutableArray* themeAttributes;
 }
 
 @property(copy) NSArray* themeAttributes;

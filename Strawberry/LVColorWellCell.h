@@ -9,7 +9,7 @@
 //
 #import <Cocoa/Cocoa.h>
 
-@interface LVColorWellCell : NSActionCell
+@interface LVColorWellCell : NSTextFieldCell
 {
 	id m_delegate;
 	NSString* m_colorKey;
