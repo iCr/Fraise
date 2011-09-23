@@ -8,10 +8,32 @@
 
 #import "PrefController.h"
 
-@interface PrefThemesController : PrefController
+@class ThemeColorArrayController;
+
+@interface ThemeAttributeModel : NSObject
 {
-    IBOutlet NSTableView* m_table;
+    NSString* name;
+    NSColor* fg;
+    NSColor* bg;
+    bool bold, italic, underline;
 }
+
+@property(copy) NSString* name;
+@property(copy) NSColor* fg;
+@property(copy) NSColor* bg;
+@property(assign) bool bold, italic, underline;
+
+@end
+
+@interface PrefThemesController : PrefController <NSTableViewDataSource, NSTableViewDelegate>
+{
+    IBOutlet NSTableView* table;
+    IBOutlet NSArrayController* themes;
+    
+    IBOutlet NSMutableArray* themeAttributes;
+}
+
+@property(copy) NSArray* themeAttributes;
 
 + (PrefThemesController*) controller;
 

@@ -8,11 +8,59 @@
 
 #import "PrefThemesController.h"
 
+@implementation ThemeAttributeModel
+
+@synthesize name, fg, bg, bold, italic, underline;
+
+-(id)init
+{
+    if (self = [super init]) {
+        self.name = @"Sample Name";
+        self.fg = [NSColor blueColor];
+        self.bg = [NSColor greenColor];
+        self.bold = true;
+        self.italic = false;
+        self.underline = true;
+    }
+    return self;
+}
+
+- (void)dealloc
+{
+    self.name = nil;
+    self.fg = nil;
+    self.bg = nil;
+}
+
+@end
+
 @implementation PrefThemesController
+
+@synthesize themeAttributes;
 
 + (PrefThemesController*) controller
 {
     return [[[PrefThemesController alloc] init] autorelease];
+}
+
+- (id)init
+{
+    if (self = [super init])
+        themeAttributes = [[NSMutableArray alloc] init];
+    return self;
+}
+
+- (void)dealloc
+{
+    [themeAttributes release];
+    [super dealloc];
+}
+
+- (void)awakeFromNib {
+    
+    // FIXME: This is just a dummy
+    //[themeAttributes addObject:[NSDictionary dictionaryWithObjectsAndKeys:@"Test Name", @"name", [NSColor blueColor], @"fg",[NSColor greenColor], @"bg", 
+    //    [NSNumber numberWithBool:YES], @"bold", [NSNumber numberWithBool:NO], @"italic", [NSNumber numberWithBool:YES], @"underline", nil]];
 }
 
 - (NSString*)label
@@ -100,4 +148,5 @@
 	return nil;
 }
 */
+
 @end
