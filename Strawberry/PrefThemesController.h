@@ -32,16 +32,15 @@
 
 @end
 
-@interface PrefThemesController : PrefController <NSTableViewDelegate>
+@interface PrefThemesController : PrefController <NSTableViewDelegate, NSTableViewDataSource>
 {
     IBOutlet NSTableView* table;
-    IBOutlet NSArrayController* themes;
     
     NSMutableArray* themeAttributes;
 }
 
-@property(copy) NSArray* themeAttributes;
-
 + (PrefThemesController*) controller;
+
+- (void)addThemeAttribute:(ThemeAttributeModel*)themeAttribute;
 
 @end

@@ -36,8 +36,6 @@
 
 @implementation PrefThemesController
 
-@synthesize themeAttributes;
-
 + (PrefThemesController*) controller
 {
     return [[[PrefThemesController alloc] init] autorelease];
@@ -45,8 +43,14 @@
 
 - (id)init
 {
-    if (self = [super init])
+    if (self = [super init]) {
         themeAttributes = [[NSMutableArray alloc] init];
+
+        // FIXME: This is just a dummy
+        [self addThemeAttribute:[ThemeAttributeModel themeAttributeModelWithName:@"Test Name" fg:[NSColor blueColor] bg:[NSColor greenColor]
+            bold:[NSNumber numberWithBool:YES] italic:[NSNumber numberWithBool:NO] underline:[NSNumber numberWithBool:YES]]];
+    }
+    
     return self;
 }
 
@@ -54,13 +58,6 @@
 {
     [themeAttributes release];
     [super dealloc];
-}
-
-- (void)awakeFromNib {
-    
-    // FIXME: This is just a dummy
-    [themes addObject:[ThemeAttributeModel themeAttributeModelWithName:@"Test Name" fg:[NSColor blueColor] bg:[NSColor greenColor]
-        bold:[NSNumber numberWithBool:YES] italic:[NSNumber numberWithBool:NO] underline:[NSNumber numberWithBool:YES]]];
 }
 
 - (NSString*)label
@@ -76,6 +73,33 @@
 - (NSImage*)image
 {
     return [[[NSImage alloc] initByReferencingFile:@"/System/Library/CoreServices/CoreTypes.bundle/Contents/Resources/ProfileFontAndColor.icns"] autorelease];
+}
+
+- (void)addThemeAttribute:(ThemeAttributeModel*)themeAttribute
+{
+    [themeAttributes addObject:themeAttribute];
+	[table reloadData];
+}
+
+// NSTableViewDataSource overrides
+- (NSInteger)numberOfRowsInTableView:(NSTableView *)aTableView
+{
+	return [themeAttributes count];	
+}
+
+- (id)tableView:(NSTableView *)aTableView objectValueForTableColumn:(NSTableColumn *)aTableColumn row:(NSInteger)rowIndex
+{
+	id objectAtRow = [themeAttributes objectAtIndex:rowIndex];
+	NSString *columnKey = [aTableColumn identifier];
+	return 	[objectAtRow valueForKey:columnKey];
+}
+
+
+- (void)tableView:(NSTableView *)aTableView setObjectValue:(id)anObject forTableColumn:(NSTableColumn *)aTableColumn row:(NSInteger)rowIndex
+{
+	id objectAtRow = [themeAttributes objectAtIndex:rowIndex];
+	NSString *columnKey = [aTableColumn identifier];
+	[objectAtRow setValue:anObject forKey:columnKey];
 }
 
 /*
