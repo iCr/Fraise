@@ -1,15 +1,13 @@
 //
-//  LVColorWellCell.m
+//  ColorWellCell.m
 //  
 //
-//  Created by Lakshmi Vyasarajan on 3/19/09.
-//  Copyright 2009 Ringce. MIT License.
+//  Created by CHris Marrin on 9/25/11.
+//  Copyright (c) 2011 Apple. All rights reserved.
 //
-//	Version: 0.5 Beta
-//
-#import "LVColorWellCell.h"
+#import "ColorWellCell.h"
 
-@implementation LVColorWellCell
+@implementation ColorWellCell
 
 - (id)init
 {
@@ -58,7 +56,7 @@
 		return nil;
 
     NSTableColumn* column = [[table tableColumns] objectAtIndex:[table clickedColumn]];
-    if (![[column dataCell] isKindOfClass:[LVColorWellCell class]])
+    if (![[column dataCell] isKindOfClass:[ColorWellCell class]])
         return nil;
         
     id <NSTableViewDataSource> data = (id <NSTableViewDataSource>) [table dataSource];
@@ -87,7 +85,7 @@
 		return;
 
     NSTableColumn* column = [[colorPickerTableView tableColumns] objectAtIndex:colorPickerClickedColumn];
-    if (![[column dataCell] isKindOfClass:[LVColorWellCell class]])
+    if (![[column dataCell] isKindOfClass:[ColorWellCell class]])
         return;
         
     id <NSTableViewDataSource> data = (id <NSTableViewDataSource>) [colorPickerTableView dataSource];
