@@ -9,16 +9,7 @@
 //
 #import "LVColorWellCell.h"
 
-@interface LVColorWellCell()
-
--(NSColor *)color:(id)sender;
--(void)setColor:(NSColor *) color;
-
-@end
-
 @implementation LVColorWellCell
-
-@synthesize colorKey = m_colorKey, delegate = m_delegate;
 
 - (id)init
 {
@@ -28,6 +19,21 @@
 		[self setAction:@selector(showPicker:)];	
 	}
 	return self;
+}
+
+- (id)initWithCoder:(NSCoder *)decoder
+{
+    return [self init];
+}
+
+- (id)initTextCell:(NSString *)aString
+{
+    return [self init];
+}
+
+- (id)initImageCell:(NSImage *)anImage
+{
+    return [self init];
 }
 
 - (void)drawWithFrame:(NSRect)cellFrame inView:(NSView *)controlView
@@ -46,40 +52,46 @@
 	[NSGraphicsContext restoreGraphicsState];
 }
 
-- (NSColor *)color:(id)sender
+- (NSColor *)currentTableCellColor:(NSTableView*)table
 {
-	if (sender == nil || [sender clickedRow] == -1)
-		return [self objectValue];
+	if ([table clickedColumn] == -1 || [table clickedRow] == -1)
+		return nil;
 
-	m_colorRow = [sender clickedRow];
-	if ([self delegate] && [[self delegate] respondsToSelector:@selector(colorCell:colorForRow:)])
-		return [m_delegate colorCell:self colorForRow:m_colorRow];
-
-	m_colorObject = [[[sender dataSource] arrangedObjects] objectAtIndex:[sender clickedRow]];
-	return [m_colorObject valueForKey:[self colorKey]];
+    NSTableColumn* column = [[table tableColumns] objectAtIndex:[table clickedColumn]];
+    if (![[column dataCell] isKindOfClass:[LVColorWellCell class]])
+        return nil;
+        
+    id <NSTableViewDataSource> data = (id <NSTableViewDataSource>) [table dataSource];
+    return [data tableView:table objectValueForTableColumn:column row:[table clickedRow]];
 }
 
-- (void)setColor:(NSColor *) color
-{
-	if ([self delegate] && [[self delegate] respondsToSelector:@selector(colorCell:setColor:forRow:)])
-		return [m_delegate colorCell:self setColor:color forRow:m_colorRow];
-
-	[m_colorObject setValue:color forKey:[self colorKey]];
-}
-	
 - (void)showPicker:(id)sender
 {
+    colorPickerTableView = sender;
+    colorPickerClickedColumn = [sender clickedColumn];
+    colorPickerClickedRow = [sender clickedRow];
+    
 	[[NSColorPanel sharedColorPanel] setContinuous:YES];
 	[[NSColorPanel sharedColorPanel] setShowsAlpha:YES];
 	[[NSColorPanel sharedColorPanel] setTarget:self];
 	[[NSColorPanel sharedColorPanel] setAction:@selector(colorChanged:)];
-	[[NSColorPanel sharedColorPanel] setColor:[self color:sender]];
+    
+    id color = [self currentTableCellColor:sender];
+	[[NSColorPanel sharedColorPanel] setColor:color];
 	[[NSColorPanel sharedColorPanel] makeKeyAndOrderFront:self];
 }
 
 - (void)colorChanged:(id)sender
 {
-	[self setColor: [[NSColorPanel sharedColorPanel] color]];
+	if (colorPickerClickedColumn == -1 || colorPickerClickedRow == -1)
+		return;
+
+    NSTableColumn* column = [[colorPickerTableView tableColumns] objectAtIndex:colorPickerClickedColumn];
+    if (![[column dataCell] isKindOfClass:[LVColorWellCell class]])
+        return;
+        
+    id <NSTableViewDataSource> data = (id <NSTableViewDataSource>) [colorPickerTableView dataSource];
+    [data tableView:colorPickerTableView setObjectValue:[sender color] forTableColumn:column row:colorPickerClickedRow];
 }
 
 @end

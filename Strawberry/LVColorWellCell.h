@@ -9,20 +9,10 @@
 //
 #import <Cocoa/Cocoa.h>
 
-@interface LVColorWellCell : NSTextFieldCell
+@interface LVColorWellCell : NSActionCell
 {
-	id m_delegate;
-	NSString* m_colorKey;
-	id m_colorObject;	
-	NSInteger m_colorRow;	
+    NSTableView* colorPickerTableView;
+    NSInteger colorPickerClickedColumn, colorPickerClickedRow;
 }
 
-@property (readwrite, copy) NSString* colorKey;
-@property (readwrite, assign) id delegate;
-
-@end
-
-@protocol LVColorWellCellDelegate
-- (void)colorCell:(LVColorWellCell*)colorCell setColor:(NSColor*)color forRow:(NSInteger)row;
-- (NSColor*)colorCell:(LVColorWellCell*)colorCell colorForRow:(NSInteger)row;
 @end
