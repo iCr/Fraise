@@ -51,9 +51,9 @@
 		4949EA41143264D40010EBE9 /* shBrushSql.js in Resources */ = {isa = PBXBuildFile; fileRef = 4949EA081432610B0010EBE9 /* shBrushSql.js */; };
 		4949EA42143264D40010EBE9 /* shBrushVb.js in Resources */ = {isa = PBXBuildFile; fileRef = 4949EA091432610B0010EBE9 /* shBrushVb.js */; };
 		4949EA43143264D40010EBE9 /* shBrushXml.js in Resources */ = {isa = PBXBuildFile; fileRef = 4949EA0A1432610B0010EBE9 /* shBrushXml.js */; };
-		4949EA44143264D40010EBE9 /* shCore.js in Resources */ = {isa = PBXBuildFile; fileRef = 4949EA0B1432610B0010EBE9 /* shCore.js */; };
 		4949EA45143264D40010EBE9 /* XRegExp.js in Resources */ = {isa = PBXBuildFile; fileRef = 4949EA0C1432610B0010EBE9 /* XRegExp.js */; };
 		4949EA4F143295090010EBE9 /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4949EA4E143295090010EBE9 /* JavaScriptCore.framework */; };
+		495FA49B1433D6EB0049A48B /* highlight.js in Sources */ = {isa = PBXBuildFile; fileRef = 495FA49A1433D6EB0049A48B /* highlight.js */; };
 		49DEEEE714280B3000F97C1B /* NoodleLineNumberMarker.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DEEEE414280B3000F97C1B /* NoodleLineNumberMarker.m */; };
 		49DEEEE814280B3000F97C1B /* NoodleLineNumberView.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DEEEE614280B3000F97C1B /* NoodleLineNumberView.m */; };
 		49DEEEEB14280C5000F97C1B /* MarkerLineNumberView.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DEEEEA14280C5000F97C1B /* MarkerLineNumberView.m */; };
@@ -157,9 +157,9 @@
 		4949EA081432610B0010EBE9 /* shBrushSql.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; name = shBrushSql.js; path = js/shBrushSql.js; sourceTree = "<group>"; };
 		4949EA091432610B0010EBE9 /* shBrushVb.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; name = shBrushVb.js; path = js/shBrushVb.js; sourceTree = "<group>"; };
 		4949EA0A1432610B0010EBE9 /* shBrushXml.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; name = shBrushXml.js; path = js/shBrushXml.js; sourceTree = "<group>"; };
-		4949EA0B1432610B0010EBE9 /* shCore.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; name = shCore.js; path = js/shCore.js; sourceTree = "<group>"; };
 		4949EA0C1432610B0010EBE9 /* XRegExp.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; name = XRegExp.js; path = js/XRegExp.js; sourceTree = "<group>"; };
 		4949EA4E143295090010EBE9 /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = ../../../../../../../System/Library/Frameworks/JavaScriptCore.framework; sourceTree = "<group>"; };
+		495FA49A1433D6EB0049A48B /* highlight.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; name = highlight.js; path = js/highlight.js; sourceTree = "<group>"; };
 		49DEEEE314280B3000F97C1B /* NoodleLineNumberMarker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NoodleLineNumberMarker.h; path = NoodleLineNumber/NoodleLineNumberMarker.h; sourceTree = "<group>"; };
 		49DEEEE414280B3000F97C1B /* NoodleLineNumberMarker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NoodleLineNumberMarker.m; path = NoodleLineNumber/NoodleLineNumberMarker.m; sourceTree = "<group>"; };
 		49DEEEE514280B3000F97C1B /* NoodleLineNumberView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NoodleLineNumberView.h; path = NoodleLineNumber/NoodleLineNumberView.h; sourceTree = "<group>"; };
@@ -329,6 +329,7 @@
 		4949E9F0143260EB0010EBE9 /* js */ = {
 			isa = PBXGroup;
 			children = (
+				495FA49A1433D6EB0049A48B /* highlight.js */,
 				4949E9F21432610B0010EBE9 /* shBrushAppleScript.js */,
 				4949E9F31432610B0010EBE9 /* shBrushAS3.js */,
 				4949E9F41432610B0010EBE9 /* shBrushBash.js */,
@@ -354,7 +355,6 @@
 				4949EA081432610B0010EBE9 /* shBrushSql.js */,
 				4949EA091432610B0010EBE9 /* shBrushVb.js */,
 				4949EA0A1432610B0010EBE9 /* shBrushXml.js */,
-				4949EA0B1432610B0010EBE9 /* shCore.js */,
 				4949EA0C1432610B0010EBE9 /* XRegExp.js */,
 			);
 			name = js;
@@ -454,6 +454,13 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				English,
+				French,
+				German,
+				Italian,
+				Japanese,
+				Spanish,
+				sv,
 			);
 			mainGroup = 49080A151418EDA50092F580;
 			productRefGroup = 49080A211418EDA50092F580 /* Products */;
@@ -496,7 +503,6 @@
 				4949EA41143264D40010EBE9 /* shBrushSql.js in Resources */,
 				4949EA42143264D40010EBE9 /* shBrushVb.js in Resources */,
 				4949EA43143264D40010EBE9 /* shBrushXml.js in Resources */,
-				4949EA44143264D40010EBE9 /* shCore.js in Resources */,
 				4949EA45143264D40010EBE9 /* XRegExp.js in Resources */,
 				49080A2F1418EDA60092F580 /* InfoPlist.strings in Resources */,
 				49080A351418EDA60092F580 /* Credits.rtf in Resources */,
@@ -559,6 +565,7 @@
 				49F512E0142BF9B7000FCA43 /* PrefGeneralController.m in Sources */,
 				4935BB8F142CE6FC00BE3F49 /* PrefThemesController.m in Sources */,
 				4935BB96142F951200BE3F49 /* ColorWellCell.m in Sources */,
+				495FA49B1433D6EB0049A48B /* highlight.js in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -662,6 +669,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Frameworks\"",
+					"\"$(SRCROOT)\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Strawberry/Strawberry-Prefix.pch";
@@ -678,6 +686,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Frameworks\"",
+					"\"$(SRCROOT)\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Strawberry/Strawberry-Prefix.pch";
