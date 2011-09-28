@@ -22,11 +22,10 @@
 		490BB57F1425496A00C447E4 /* DocumentController.m in Sources */ = {isa = PBXBuildFile; fileRef = 490BB57E1425496A00C447E4 /* DocumentController.m */; };
 		490BB582142641F400C447E4 /* MainIcon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 490BB581142641F400C447E4 /* MainIcon.icns */; };
 		491A07FC1422DB5900959CFA /* PSMTabBarControl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 491A07FB1422DB5900959CFA /* PSMTabBarControl.framework */; };
-		491A08051422ED4E00959CFA /* PSMTabBarControl.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 491A07FB1422DB5900959CFA /* PSMTabBarControl.framework */; };
+		491A08051422ED4E00959CFA /* PSMTabBarControl.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 491A07FB1422DB5900959CFA /* PSMTabBarControl.framework */; };
 		4935BB6F142A2FCF00BE3F49 /* WindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4935BB6E142A2FCF00BE3F49 /* WindowController.m */; };
 		4935BB8F142CE6FC00BE3F49 /* PrefThemesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4935BB8E142CE6FC00BE3F49 /* PrefThemesController.m */; };
 		4935BB96142F951200BE3F49 /* ColorWellCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4935BB95142F951100BE3F49 /* ColorWellCell.m */; };
-		4949EA2A143261230010EBE9 /* JavaScriptContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 4949EA29143261230010EBE9 /* JavaScriptContext.m */; };
 		4949EA2B143264D40010EBE9 /* shBrushAppleScript.js in Resources */ = {isa = PBXBuildFile; fileRef = 4949E9F21432610B0010EBE9 /* shBrushAppleScript.js */; };
 		4949EA2C143264D40010EBE9 /* shBrushAS3.js in Resources */ = {isa = PBXBuildFile; fileRef = 4949E9F31432610B0010EBE9 /* shBrushAS3.js */; };
 		4949EA2D143264D40010EBE9 /* shBrushBash.js in Resources */ = {isa = PBXBuildFile; fileRef = 4949E9F41432610B0010EBE9 /* shBrushBash.js */; };
@@ -60,6 +59,8 @@
 		49DEEEEB14280C5000F97C1B /* MarkerLineNumberView.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DEEEEA14280C5000F97C1B /* MarkerLineNumberView.m */; };
 		49DEEEFC1428EEAE00F97C1B /* DBPrefsWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DEEEFB1428EEAE00F97C1B /* DBPrefsWindowController.m */; };
 		49DEEEFF1428EEE600F97C1B /* PrefsWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DEEEFE1428EEE600F97C1B /* PrefsWindowController.m */; };
+		49E1B9DE1433898C00FB618F /* JSCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49E1B9DD1433898C00FB618F /* JSCocoa.framework */; };
+		49E1B9F414338FDC00FB618F /* JSCocoa.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 49E1B9DD1433898C00FB618F /* JSCocoa.framework */; };
 		49F5129A1428F5A1000FCA43 /* AppController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49F512991428F5A1000FCA43 /* AppController.m */; };
 		49F512C8142B93C8000FCA43 /* Document.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49F512C5142B93C8000FCA43 /* Document.xib */; };
 		49F512C9142B93C8000FCA43 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49F512C6142B93C8000FCA43 /* MainMenu.xib */; };
@@ -83,14 +84,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		491A08041422ED3100959CFA /* CopyFiles */ = {
+		491A08041422ED3100959CFA /* Copy Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				491A08051422ED4E00959CFA /* PSMTabBarControl.framework in CopyFiles */,
+				491A08051422ED4E00959CFA /* PSMTabBarControl.framework in Copy Frameworks */,
+				49E1B9F414338FDC00FB618F /* JSCocoa.framework in Copy Frameworks */,
 			);
+			name = "Copy Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -156,8 +159,6 @@
 		4949EA0A1432610B0010EBE9 /* shBrushXml.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; name = shBrushXml.js; path = js/shBrushXml.js; sourceTree = "<group>"; };
 		4949EA0B1432610B0010EBE9 /* shCore.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; name = shCore.js; path = js/shCore.js; sourceTree = "<group>"; };
 		4949EA0C1432610B0010EBE9 /* XRegExp.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; name = XRegExp.js; path = js/XRegExp.js; sourceTree = "<group>"; };
-		4949EA28143261230010EBE9 /* JavaScriptContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JavaScriptContext.h; sourceTree = "<group>"; };
-		4949EA29143261230010EBE9 /* JavaScriptContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JavaScriptContext.m; sourceTree = "<group>"; };
 		4949EA4E143295090010EBE9 /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = ../../../../../../../System/Library/Frameworks/JavaScriptCore.framework; sourceTree = "<group>"; };
 		49DEEEE314280B3000F97C1B /* NoodleLineNumberMarker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NoodleLineNumberMarker.h; path = NoodleLineNumber/NoodleLineNumberMarker.h; sourceTree = "<group>"; };
 		49DEEEE414280B3000F97C1B /* NoodleLineNumberMarker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NoodleLineNumberMarker.m; path = NoodleLineNumber/NoodleLineNumberMarker.m; sourceTree = "<group>"; };
@@ -169,6 +170,7 @@
 		49DEEEFB1428EEAE00F97C1B /* DBPrefsWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DBPrefsWindowController.m; path = DBPrefsWindowController/DBPrefsWindowController.m; sourceTree = "<group>"; };
 		49DEEEFD1428EEE600F97C1B /* PrefsWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefsWindowController.h; sourceTree = "<group>"; };
 		49DEEEFE1428EEE600F97C1B /* PrefsWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrefsWindowController.m; sourceTree = "<group>"; };
+		49E1B9DD1433898C00FB618F /* JSCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JSCocoa.framework; path = Frameworks/JSCocoa.framework; sourceTree = "<group>"; };
 		49F512981428F5A1000FCA43 /* AppController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppController.h; sourceTree = "<group>"; };
 		49F512991428F5A1000FCA43 /* AppController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppController.m; sourceTree = "<group>"; };
 		49F512C5142B93C8000FCA43 /* Document.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Document.xib; sourceTree = "<group>"; };
@@ -193,6 +195,7 @@
 				49080A251418EDA50092F580 /* Cocoa.framework in Frameworks */,
 				491A07FC1422DB5900959CFA /* PSMTabBarControl.framework in Frameworks */,
 				4949EA4F143295090010EBE9 /* JavaScriptCore.framework in Frameworks */,
+				49E1B9DE1433898C00FB618F /* JSCocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -230,6 +233,7 @@
 		49080A231418EDA50092F580 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				49E1B9DD1433898C00FB618F /* JSCocoa.framework */,
 				491A07FB1422DB5900959CFA /* PSMTabBarControl.framework */,
 				49080A241418EDA50092F580 /* Cocoa.framework */,
 				49080A481418EDA70092F580 /* SenTestingKit.framework */,
@@ -266,8 +270,6 @@
 				490BB57E1425496A00C447E4 /* DocumentController.m */,
 				490BB57A1425494000C447E4 /* DocumentWindowController.h */,
 				490BB57B1425494000C447E4 /* DocumentWindowController.m */,
-				4949EA28143261230010EBE9 /* JavaScriptContext.h */,
-				4949EA29143261230010EBE9 /* JavaScriptContext.m */,
 				490BB5771425488900C447E4 /* ProjectWindowController.h */,
 				490BB5781425488900C447E4 /* ProjectWindowController.m */,
 				4935BB6D142A2FCF00BE3F49 /* WindowController.h */,
@@ -407,7 +409,7 @@
 				49080A1C1418EDA50092F580 /* Sources */,
 				49080A1D1418EDA50092F580 /* Frameworks */,
 				49080A1E1418EDA50092F580 /* Resources */,
-				491A08041422ED3100959CFA /* CopyFiles */,
+				491A08041422ED3100959CFA /* Copy Frameworks */,
 			);
 			buildRules = (
 			);
@@ -557,7 +559,6 @@
 				49F512E0142BF9B7000FCA43 /* PrefGeneralController.m in Sources */,
 				4935BB8F142CE6FC00BE3F49 /* PrefThemesController.m in Sources */,
 				4935BB96142F951200BE3F49 /* ColorWellCell.m in Sources */,
-				4949EA2A143261230010EBE9 /* JavaScriptContext.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

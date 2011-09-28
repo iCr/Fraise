@@ -8,10 +8,20 @@
 
 #import "AppController.h"
 
+#import <JSCocoa/JSCocoa.h>
 #import "PrefsWindowController.h"
 
-
 @implementation AppController
+
+- (id)init
+{
+    self = [super init];
+    if (self) {
+        [[JSCocoaController sharedController] evalJSFile:[[NSBundle mainBundle] pathForResource:@"XRegExp" ofType:@"js"]];
+        [[JSCocoaController sharedController] evalJSFile:[[NSBundle mainBundle] pathForResource:@"shCore" ofType:@"js"]];
+    }
+    return self;
+}
 
 - (BOOL)applicationShouldHandleReopen:(NSApplication *)theApplication hasVisibleWindows:(BOOL)flag
 {

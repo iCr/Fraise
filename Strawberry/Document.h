@@ -10,11 +10,11 @@
 
 @interface Document : NSDocument
 {
-    NSMutableString* m_contents;
-    NSStringEncoding m_encoding;
+    NSMutableString* content;
+    NSStringEncoding encoding;
 }
 
-@property(readwrite, copy) NSString* contents;
+@property(readwrite, copy) NSString* content;
 @property(readwrite, assign) NSStringEncoding encoding;
 
 @end

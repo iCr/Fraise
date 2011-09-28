@@ -14,7 +14,7 @@
 
 - (void) textDidChange: (NSNotification *) notification
 {
-    ((Document*) [self document]).contents = [[m_textView textStorage] string];
+    ((Document*) [self document]).content = [[m_textView textStorage] string];
 }
 
 @end

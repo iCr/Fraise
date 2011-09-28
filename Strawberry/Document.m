@@ -12,15 +12,12 @@
 
 @implementation Document
 
-@synthesize contents = m_contents;
-@synthesize encoding = m_encoding;
+@synthesize content, encoding;
 
 - (id)init
 {
     self = [super init];
     if (self) {
-        // Add your subclass-specific initialization here.
-        // If an error occurs here, return nil.
     }
     return self;
 }
@@ -30,7 +27,7 @@
     if (![[self windowControllers] count])
         return;
         
-    NSAttributedString* string = [[NSAttributedString alloc]initWithString:self.contents ? self.contents : @""];
+    NSAttributedString* string = [[NSAttributedString alloc]initWithString:self.content ? self.content : @""];
     [[((WindowController*) [[self windowControllers] objectAtIndex:0]).textView textStorage] setAttributedString:string];
 }
 
@@ -47,7 +44,7 @@
     [super windowControllerDidLoadNib:controller];
     
     // FIXME: For now assume a single WindowController
-    if (self.contents)
+    if (self.content)
         [self updateTextView];
 
     [super windowControllerDidLoadNib:controller];
@@ -61,14 +58,14 @@
 - (BOOL)readFromURL:(NSURL *)absoluteURL ofType:(NSString *)typeName error:(NSError **)outError
 {
     NSError* error;
-    self.contents = [NSMutableString stringWithContentsOfURL:absoluteURL usedEncoding:&m_encoding error:&error];
+    self.content = [NSMutableString stringWithContentsOfURL:absoluteURL usedEncoding:&encoding error:&error];
     [self updateTextView];
     return true;
 }
 
 - (BOOL)readFromData:(NSData *)data ofType:(NSString *)typeName error:(NSError **)outError
 {
-    self.contents = [data bytes];
+    self.content = [data bytes];
     [self updateTextView];
     return YES;
 }
@@ -76,7 +73,7 @@
 - (NSData *)dataOfType:(NSString *)typeName error:(NSError **)outError
 {
     // FIXME: Make sure file is ready to save (get text from TextView, call breakUndoCoalescing)
-    return [self.contents dataUsingEncoding:self.encoding];
+    return [self.content dataUsingEncoding:self.encoding];
 }
 
 @end
