@@ -95,7 +95,7 @@ var sh = {
             return null;
             
         highlighter = new brush();
-        return highlighter.findMatches(code);
+        return NSArray.arrayWithArray(highlighter.findMatches(code));
 	}
 }; // end of sh
 
@@ -203,28 +203,19 @@ function getMatches(code, regexInfo)
 	{
 		var resultMatch = func(match, regexInfo);
 		
-		if (typeof(resultMatch) == 'string')
-			resultMatch = [new sh.Match(match.index, resultMatch.length, regexInfo.css)];
-
+		if (typeof(resultMatch) == 'string') {
+            var syntaxMatch = SyntaxMatch.alloc.init.autorelease;
+            syntaxMatch.index = match.index;
+            syntaxMatch.length = resultMatch.length;
+            syntaxMatch.type = regexInfo.css;
+            
+			resultMatch = [syntaxMatch];
+        }
+        
 		matches = matches.concat(resultMatch);
 	}
 	
 	return matches;
-};
-
-/**
- * Match object.
- */
-sh.Match = function(index, length, type)
-{
-	this.index = index;
-	this.length = length;
-	this.type = type;
-};
-
-sh.Match.prototype.toString = function()
-{
-	return this.value;
 };
 
 /**

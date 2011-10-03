@@ -36,21 +36,52 @@ DAMAGE.
 
 #import "SyntaxHighlighter.h"
 
+#import "AppController.h"
+#import <JSCocoa/JSCocoa.h>
+
 @implementation SyntaxMatch
 
 @synthesize index, length;
 
++ (NSMutableDictionary*)typeToIndexMap
+{
+    static NSMutableDictionary* map;
+    if (!map)
+        map = [[NSMutableDictionary alloc] init];
+    return map;
+}
+
 - (void)setType:(NSString*) type
 {
+    static int nextIndex;
+    NSNumber* number = [[SyntaxMatch typeToIndexMap] objectForKey:type];
+    if (!number) {
+        typeIndex = nextIndex++;
+        [[SyntaxMatch typeToIndexMap] setObject:[NSNumber numberWithInt:typeIndex] forKey:type];
+    }
+    else
+        typeIndex = [number intValue];
 }
 
 - (NSString*)type
 {
-    return [[SyntaxMatch typeToIndexMap] objectForKey:<#(id)#>; 
+    for (NSString* key in [SyntaxMatch typeToIndexMap])
+        if (typeIndex == [[[SyntaxMatch typeToIndexMap] objectForKey:key] intValue])
+            return key;
+            
+    return nil; 
 }
 
 @end
 
 @implementation SyntaxHighlighter
+
+- (void)highlightCode:(NSString*)code withSuffix:(NSString*)suffix
+{
+    JSCocoa* js = [AppController lockJSCocoa];
+    NSArray* array = [js toObject:[js callJSFunctionNamed:@"highlight" withArguments:code, suffix, nil]];
+    NSLog(@"Array:%@\n", array);
+    [AppController unlockJSCocoa];
+}
 
 @end

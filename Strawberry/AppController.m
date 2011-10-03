@@ -41,13 +41,19 @@ DAMAGE.
 
 @implementation AppController
 
++ (NSRecursiveLock*) JSCocoaMutex
+{
+    static NSRecursiveLock* sharedMutex;
+    if (!sharedMutex)
+        sharedMutex = [[NSRecursiveLock alloc] init];
+    return sharedMutex;
+}
+
 - (id)init
 {
     self = [super init];
     if (self) {
-        mutex = [[NSRecursiveLock alloc] init];
-        
-        JSCocoa* js = [self lockJSCocoaController];
+        JSCocoa* js = [AppController lockJSCocoa];
         js.useJSLint = NO;
         
         [js evalJSFile:[[NSBundle mainBundle] pathForResource:@"XRegExp" ofType:@"js"]];
@@ -58,29 +64,23 @@ DAMAGE.
             [js evalJSFile:brush];
         
         // FIXME: Testing
-        if (js hasJSFunctionNamed:@-
+        //if (js hasJSFunctionNamed:@-
         
         
-        [self unlockJSCocoaController];
+        [AppController unlockJSCocoa];
     }
     return self;
 }
 
-- (void)dealloc
++ (JSCocoa*)lockJSCocoa
 {
-    [mutex release];
-    [super dealloc];
-}
-
-- (JSCocoaController*)lockJSCocoaController
-{
-    [mutex lock];
+    [[AppController JSCocoaMutex] lock];
     return [JSCocoaController sharedController];
 }
 
-- (void)unlockJSCocoaController
++ (void)unlockJSCocoa
 {
-    [mutex unlock];
+    [[AppController JSCocoaMutex] unlock];
 }
 
 - (BOOL)applicationShouldHandleReopen:(NSApplication *)theApplication hasVisibleWindows:(BOOL)flag
