@@ -37,15 +37,17 @@ DAMAGE.
 #import "Document.h"
 
 #import "DocumentWindowController.h"
+#import "SyntaxHighlighter.h"
 
 @implementation Document
 
-@synthesize content, encoding;
+@synthesize content, encoding, url;
 
 - (id)init
 {
     self = [super init];
     if (self) {
+        syntaxHighlighter = [[SyntaxHighlighter alloc] init];
     }
     return self;
 }
@@ -54,6 +56,9 @@ DAMAGE.
 {
     if (![[self windowControllers] count])
         return;
+        
+    // FIXME: Testing for syntax highlighting
+    [syntaxHighlighter highlightCode:content withSuffix:[url pathExtension]];
         
     NSAttributedString* string = [[NSAttributedString alloc]initWithString:self.content ? self.content : @""];
     [[((WindowController*) [[self windowControllers] objectAtIndex:0]).textView textStorage] setAttributedString:string];
@@ -86,6 +91,7 @@ DAMAGE.
 - (BOOL)readFromURL:(NSURL *)absoluteURL ofType:(NSString *)typeName error:(NSError **)outError
 {
     NSError* error;
+    self.url = absoluteURL;
     self.content = [NSMutableString stringWithContentsOfURL:absoluteURL usedEncoding:&encoding error:&error];
     [self updateTextView];
     return true;

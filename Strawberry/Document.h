@@ -36,13 +36,18 @@ DAMAGE.
 
 #import <Cocoa/Cocoa.h>
 
+@class SyntaxHighlighter;
+
 @interface Document : NSDocument
 {
     NSMutableString* content;
     NSStringEncoding encoding;
+    NSURL* url;
+    SyntaxHighlighter* syntaxHighlighter;
 }
 
-@property(readwrite, copy) NSString* content;
+@property(readwrite, retain) NSString* content;
 @property(readwrite, assign) NSStringEncoding encoding;
+@property(readwrite, copy) NSURL* url;
 
 @end
