@@ -7,6 +7,34 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4905C3931437618C00576F24 /* highlight.js in Resources */ = {isa = PBXBuildFile; fileRef = 495FA49A1433D6EB0049A48B /* highlight.js */; };
+		4905C3941437619A00576F24 /* shBrushAppleScript.js in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4949E9F21432610B0010EBE9 /* shBrushAppleScript.js */; };
+		4905C3951437619A00576F24 /* shBrushAS3.js in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4949E9F31432610B0010EBE9 /* shBrushAS3.js */; };
+		4905C3961437619A00576F24 /* shBrushBash.js in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4949E9F41432610B0010EBE9 /* shBrushBash.js */; };
+		4905C3971437619A00576F24 /* shBrushColdFusion.js in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4949E9F51432610B0010EBE9 /* shBrushColdFusion.js */; };
+		4905C3981437619A00576F24 /* shBrushCpp.js in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4949E9F61432610B0010EBE9 /* shBrushCpp.js */; };
+		4905C3991437619A00576F24 /* shBrushCSharp.js in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4949E9F71432610B0010EBE9 /* shBrushCSharp.js */; };
+		4905C39A1437619A00576F24 /* shBrushCss.js in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4949E9F81432610B0010EBE9 /* shBrushCss.js */; };
+		4905C39B1437619A00576F24 /* shBrushDelphi.js in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4949E9F91432610B0010EBE9 /* shBrushDelphi.js */; };
+		4905C39C1437619A00576F24 /* shBrushDiff.js in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4949E9FA1432610B0010EBE9 /* shBrushDiff.js */; };
+		4905C39D1437619A00576F24 /* shBrushErlang.js in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4949E9FB1432610B0010EBE9 /* shBrushErlang.js */; };
+		4905C39E1437619A00576F24 /* shBrushGroovy.js in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4949E9FC1432610B0010EBE9 /* shBrushGroovy.js */; };
+		4905C39F1437619A00576F24 /* shBrushJava.js in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4949E9FD1432610B0010EBE9 /* shBrushJava.js */; };
+		4905C3A01437619A00576F24 /* shBrushJavaFX.js in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4949E9FE1432610B0010EBE9 /* shBrushJavaFX.js */; };
+		4905C3A11437619A00576F24 /* shBrushJScript.js in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4949E9FF1432610B0010EBE9 /* shBrushJScript.js */; };
+		4905C3A21437619A00576F24 /* shBrushObjC.js in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4905C38D14375B4900576F24 /* shBrushObjC.js */; };
+		4905C3A31437619A00576F24 /* shBrushPerl.js in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4949EA001432610B0010EBE9 /* shBrushPerl.js */; };
+		4905C3A41437619A00576F24 /* shBrushPhp.js in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4949EA011432610B0010EBE9 /* shBrushPhp.js */; };
+		4905C3A51437619A00576F24 /* shBrushPlain.js in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4949EA021432610B0010EBE9 /* shBrushPlain.js */; };
+		4905C3A61437619A00576F24 /* shBrushPowerShell.js in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4949EA031432610B0010EBE9 /* shBrushPowerShell.js */; };
+		4905C3A71437619A00576F24 /* shBrushPython.js in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4949EA041432610B0010EBE9 /* shBrushPython.js */; };
+		4905C3A81437619A00576F24 /* shBrushRuby.js in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4949EA051432610B0010EBE9 /* shBrushRuby.js */; };
+		4905C3A91437619A00576F24 /* shBrushSass.js in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4949EA061432610B0010EBE9 /* shBrushSass.js */; };
+		4905C3AA1437619A00576F24 /* shBrushScala.js in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4949EA071432610B0010EBE9 /* shBrushScala.js */; };
+		4905C3AB1437619A00576F24 /* shBrushSql.js in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4949EA081432610B0010EBE9 /* shBrushSql.js */; };
+		4905C3AC1437619A00576F24 /* shBrushVb.js in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4949EA091432610B0010EBE9 /* shBrushVb.js */; };
+		4905C3AD1437619A00576F24 /* shBrushXml.js in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4949EA0A1432610B0010EBE9 /* shBrushXml.js */; };
+		4905C3B71438CDF700576F24 /* SyntaxHighlighter.m in Sources */ = {isa = PBXBuildFile; fileRef = 4905C3B61438CDF700576F24 /* SyntaxHighlighter.m */; };
 		49080A251418EDA50092F580 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49080A241418EDA50092F580 /* Cocoa.framework */; };
 		49080A2F1418EDA60092F580 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 49080A2D1418EDA60092F580 /* InfoPlist.strings */; };
 		49080A311418EDA60092F580 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 49080A301418EDA60092F580 /* main.m */; };
@@ -26,34 +54,8 @@
 		4935BB6F142A2FCF00BE3F49 /* WindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4935BB6E142A2FCF00BE3F49 /* WindowController.m */; };
 		4935BB8F142CE6FC00BE3F49 /* PrefThemesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4935BB8E142CE6FC00BE3F49 /* PrefThemesController.m */; };
 		4935BB96142F951200BE3F49 /* ColorWellCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4935BB95142F951100BE3F49 /* ColorWellCell.m */; };
-		4949EA2B143264D40010EBE9 /* shBrushAppleScript.js in Resources */ = {isa = PBXBuildFile; fileRef = 4949E9F21432610B0010EBE9 /* shBrushAppleScript.js */; };
-		4949EA2C143264D40010EBE9 /* shBrushAS3.js in Resources */ = {isa = PBXBuildFile; fileRef = 4949E9F31432610B0010EBE9 /* shBrushAS3.js */; };
-		4949EA2D143264D40010EBE9 /* shBrushBash.js in Resources */ = {isa = PBXBuildFile; fileRef = 4949E9F41432610B0010EBE9 /* shBrushBash.js */; };
-		4949EA2E143264D40010EBE9 /* shBrushColdFusion.js in Resources */ = {isa = PBXBuildFile; fileRef = 4949E9F51432610B0010EBE9 /* shBrushColdFusion.js */; };
-		4949EA2F143264D40010EBE9 /* shBrushCpp.js in Resources */ = {isa = PBXBuildFile; fileRef = 4949E9F61432610B0010EBE9 /* shBrushCpp.js */; };
-		4949EA30143264D40010EBE9 /* shBrushCSharp.js in Resources */ = {isa = PBXBuildFile; fileRef = 4949E9F71432610B0010EBE9 /* shBrushCSharp.js */; };
-		4949EA31143264D40010EBE9 /* shBrushCss.js in Resources */ = {isa = PBXBuildFile; fileRef = 4949E9F81432610B0010EBE9 /* shBrushCss.js */; };
-		4949EA32143264D40010EBE9 /* shBrushDelphi.js in Resources */ = {isa = PBXBuildFile; fileRef = 4949E9F91432610B0010EBE9 /* shBrushDelphi.js */; };
-		4949EA33143264D40010EBE9 /* shBrushDiff.js in Resources */ = {isa = PBXBuildFile; fileRef = 4949E9FA1432610B0010EBE9 /* shBrushDiff.js */; };
-		4949EA34143264D40010EBE9 /* shBrushErlang.js in Resources */ = {isa = PBXBuildFile; fileRef = 4949E9FB1432610B0010EBE9 /* shBrushErlang.js */; };
-		4949EA35143264D40010EBE9 /* shBrushGroovy.js in Resources */ = {isa = PBXBuildFile; fileRef = 4949E9FC1432610B0010EBE9 /* shBrushGroovy.js */; };
-		4949EA36143264D40010EBE9 /* shBrushJava.js in Resources */ = {isa = PBXBuildFile; fileRef = 4949E9FD1432610B0010EBE9 /* shBrushJava.js */; };
-		4949EA37143264D40010EBE9 /* shBrushJavaFX.js in Resources */ = {isa = PBXBuildFile; fileRef = 4949E9FE1432610B0010EBE9 /* shBrushJavaFX.js */; };
-		4949EA38143264D40010EBE9 /* shBrushJScript.js in Resources */ = {isa = PBXBuildFile; fileRef = 4949E9FF1432610B0010EBE9 /* shBrushJScript.js */; };
-		4949EA39143264D40010EBE9 /* shBrushPerl.js in Resources */ = {isa = PBXBuildFile; fileRef = 4949EA001432610B0010EBE9 /* shBrushPerl.js */; };
-		4949EA3A143264D40010EBE9 /* shBrushPhp.js in Resources */ = {isa = PBXBuildFile; fileRef = 4949EA011432610B0010EBE9 /* shBrushPhp.js */; };
-		4949EA3B143264D40010EBE9 /* shBrushPlain.js in Resources */ = {isa = PBXBuildFile; fileRef = 4949EA021432610B0010EBE9 /* shBrushPlain.js */; };
-		4949EA3C143264D40010EBE9 /* shBrushPowerShell.js in Resources */ = {isa = PBXBuildFile; fileRef = 4949EA031432610B0010EBE9 /* shBrushPowerShell.js */; };
-		4949EA3D143264D40010EBE9 /* shBrushPython.js in Resources */ = {isa = PBXBuildFile; fileRef = 4949EA041432610B0010EBE9 /* shBrushPython.js */; };
-		4949EA3E143264D40010EBE9 /* shBrushRuby.js in Resources */ = {isa = PBXBuildFile; fileRef = 4949EA051432610B0010EBE9 /* shBrushRuby.js */; };
-		4949EA3F143264D40010EBE9 /* shBrushSass.js in Resources */ = {isa = PBXBuildFile; fileRef = 4949EA061432610B0010EBE9 /* shBrushSass.js */; };
-		4949EA40143264D40010EBE9 /* shBrushScala.js in Resources */ = {isa = PBXBuildFile; fileRef = 4949EA071432610B0010EBE9 /* shBrushScala.js */; };
-		4949EA41143264D40010EBE9 /* shBrushSql.js in Resources */ = {isa = PBXBuildFile; fileRef = 4949EA081432610B0010EBE9 /* shBrushSql.js */; };
-		4949EA42143264D40010EBE9 /* shBrushVb.js in Resources */ = {isa = PBXBuildFile; fileRef = 4949EA091432610B0010EBE9 /* shBrushVb.js */; };
-		4949EA43143264D40010EBE9 /* shBrushXml.js in Resources */ = {isa = PBXBuildFile; fileRef = 4949EA0A1432610B0010EBE9 /* shBrushXml.js */; };
 		4949EA45143264D40010EBE9 /* XRegExp.js in Resources */ = {isa = PBXBuildFile; fileRef = 4949EA0C1432610B0010EBE9 /* XRegExp.js */; };
 		4949EA4F143295090010EBE9 /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4949EA4E143295090010EBE9 /* JavaScriptCore.framework */; };
-		495FA49B1433D6EB0049A48B /* highlight.js in Sources */ = {isa = PBXBuildFile; fileRef = 495FA49A1433D6EB0049A48B /* highlight.js */; };
 		49DEEEE714280B3000F97C1B /* NoodleLineNumberMarker.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DEEEE414280B3000F97C1B /* NoodleLineNumberMarker.m */; };
 		49DEEEE814280B3000F97C1B /* NoodleLineNumberView.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DEEEE614280B3000F97C1B /* NoodleLineNumberView.m */; };
 		49DEEEEB14280C5000F97C1B /* MarkerLineNumberView.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DEEEEA14280C5000F97C1B /* MarkerLineNumberView.m */; };
@@ -84,6 +86,41 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		4905C3921437616700576F24 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = brushes;
+			dstSubfolderSpec = 7;
+			files = (
+				4905C3941437619A00576F24 /* shBrushAppleScript.js in CopyFiles */,
+				4905C3951437619A00576F24 /* shBrushAS3.js in CopyFiles */,
+				4905C3961437619A00576F24 /* shBrushBash.js in CopyFiles */,
+				4905C3971437619A00576F24 /* shBrushColdFusion.js in CopyFiles */,
+				4905C3981437619A00576F24 /* shBrushCpp.js in CopyFiles */,
+				4905C3991437619A00576F24 /* shBrushCSharp.js in CopyFiles */,
+				4905C39A1437619A00576F24 /* shBrushCss.js in CopyFiles */,
+				4905C39B1437619A00576F24 /* shBrushDelphi.js in CopyFiles */,
+				4905C39C1437619A00576F24 /* shBrushDiff.js in CopyFiles */,
+				4905C39D1437619A00576F24 /* shBrushErlang.js in CopyFiles */,
+				4905C39E1437619A00576F24 /* shBrushGroovy.js in CopyFiles */,
+				4905C39F1437619A00576F24 /* shBrushJava.js in CopyFiles */,
+				4905C3A01437619A00576F24 /* shBrushJavaFX.js in CopyFiles */,
+				4905C3A11437619A00576F24 /* shBrushJScript.js in CopyFiles */,
+				4905C3A21437619A00576F24 /* shBrushObjC.js in CopyFiles */,
+				4905C3A31437619A00576F24 /* shBrushPerl.js in CopyFiles */,
+				4905C3A41437619A00576F24 /* shBrushPhp.js in CopyFiles */,
+				4905C3A51437619A00576F24 /* shBrushPlain.js in CopyFiles */,
+				4905C3A61437619A00576F24 /* shBrushPowerShell.js in CopyFiles */,
+				4905C3A71437619A00576F24 /* shBrushPython.js in CopyFiles */,
+				4905C3A81437619A00576F24 /* shBrushRuby.js in CopyFiles */,
+				4905C3A91437619A00576F24 /* shBrushSass.js in CopyFiles */,
+				4905C3AA1437619A00576F24 /* shBrushScala.js in CopyFiles */,
+				4905C3AB1437619A00576F24 /* shBrushSql.js in CopyFiles */,
+				4905C3AC1437619A00576F24 /* shBrushVb.js in CopyFiles */,
+				4905C3AD1437619A00576F24 /* shBrushXml.js in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		491A08041422ED3100959CFA /* Copy Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -99,6 +136,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		4905C38D14375B4900576F24 /* shBrushObjC.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; name = shBrushObjC.js; path = js/shBrushObjC.js; sourceTree = "<group>"; };
+		4905C3B51438CDF700576F24 /* SyntaxHighlighter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SyntaxHighlighter.h; sourceTree = "<group>"; };
+		4905C3B61438CDF700576F24 /* SyntaxHighlighter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SyntaxHighlighter.m; sourceTree = "<group>"; };
 		49080A201418EDA50092F580 /* Strawberry.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Strawberry.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		49080A241418EDA50092F580 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		49080A271418EDA50092F580 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -211,6 +251,39 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4905C391143760D200576F24 /* brushes */ = {
+			isa = PBXGroup;
+			children = (
+				4949E9F21432610B0010EBE9 /* shBrushAppleScript.js */,
+				4949E9F31432610B0010EBE9 /* shBrushAS3.js */,
+				4949E9F41432610B0010EBE9 /* shBrushBash.js */,
+				4949E9F51432610B0010EBE9 /* shBrushColdFusion.js */,
+				4949E9F61432610B0010EBE9 /* shBrushCpp.js */,
+				4949E9F71432610B0010EBE9 /* shBrushCSharp.js */,
+				4949E9F81432610B0010EBE9 /* shBrushCss.js */,
+				4949E9F91432610B0010EBE9 /* shBrushDelphi.js */,
+				4949E9FA1432610B0010EBE9 /* shBrushDiff.js */,
+				4949E9FB1432610B0010EBE9 /* shBrushErlang.js */,
+				4949E9FC1432610B0010EBE9 /* shBrushGroovy.js */,
+				4949E9FD1432610B0010EBE9 /* shBrushJava.js */,
+				4949E9FE1432610B0010EBE9 /* shBrushJavaFX.js */,
+				4949E9FF1432610B0010EBE9 /* shBrushJScript.js */,
+				4905C38D14375B4900576F24 /* shBrushObjC.js */,
+				4949EA001432610B0010EBE9 /* shBrushPerl.js */,
+				4949EA011432610B0010EBE9 /* shBrushPhp.js */,
+				4949EA021432610B0010EBE9 /* shBrushPlain.js */,
+				4949EA031432610B0010EBE9 /* shBrushPowerShell.js */,
+				4949EA041432610B0010EBE9 /* shBrushPython.js */,
+				4949EA051432610B0010EBE9 /* shBrushRuby.js */,
+				4949EA061432610B0010EBE9 /* shBrushSass.js */,
+				4949EA071432610B0010EBE9 /* shBrushScala.js */,
+				4949EA081432610B0010EBE9 /* shBrushSql.js */,
+				4949EA091432610B0010EBE9 /* shBrushVb.js */,
+				4949EA0A1432610B0010EBE9 /* shBrushXml.js */,
+			);
+			name = brushes;
+			sourceTree = "<group>";
+		};
 		49080A151418EDA50092F580 = {
 			isa = PBXGroup;
 			children = (
@@ -272,6 +345,8 @@
 				490BB57B1425494000C447E4 /* DocumentWindowController.m */,
 				490BB5771425488900C447E4 /* ProjectWindowController.h */,
 				490BB5781425488900C447E4 /* ProjectWindowController.m */,
+				4905C3B51438CDF700576F24 /* SyntaxHighlighter.h */,
+				4905C3B61438CDF700576F24 /* SyntaxHighlighter.m */,
 				4935BB6D142A2FCF00BE3F49 /* WindowController.h */,
 				4935BB6E142A2FCF00BE3F49 /* WindowController.m */,
 				490BB58014263F4800C447E4 /* Resources */,
@@ -330,32 +405,8 @@
 			isa = PBXGroup;
 			children = (
 				495FA49A1433D6EB0049A48B /* highlight.js */,
-				4949E9F21432610B0010EBE9 /* shBrushAppleScript.js */,
-				4949E9F31432610B0010EBE9 /* shBrushAS3.js */,
-				4949E9F41432610B0010EBE9 /* shBrushBash.js */,
-				4949E9F51432610B0010EBE9 /* shBrushColdFusion.js */,
-				4949E9F61432610B0010EBE9 /* shBrushCpp.js */,
-				4949E9F71432610B0010EBE9 /* shBrushCSharp.js */,
-				4949E9F81432610B0010EBE9 /* shBrushCss.js */,
-				4949E9F91432610B0010EBE9 /* shBrushDelphi.js */,
-				4949E9FA1432610B0010EBE9 /* shBrushDiff.js */,
-				4949E9FB1432610B0010EBE9 /* shBrushErlang.js */,
-				4949E9FC1432610B0010EBE9 /* shBrushGroovy.js */,
-				4949E9FD1432610B0010EBE9 /* shBrushJava.js */,
-				4949E9FE1432610B0010EBE9 /* shBrushJavaFX.js */,
-				4949E9FF1432610B0010EBE9 /* shBrushJScript.js */,
-				4949EA001432610B0010EBE9 /* shBrushPerl.js */,
-				4949EA011432610B0010EBE9 /* shBrushPhp.js */,
-				4949EA021432610B0010EBE9 /* shBrushPlain.js */,
-				4949EA031432610B0010EBE9 /* shBrushPowerShell.js */,
-				4949EA041432610B0010EBE9 /* shBrushPython.js */,
-				4949EA051432610B0010EBE9 /* shBrushRuby.js */,
-				4949EA061432610B0010EBE9 /* shBrushSass.js */,
-				4949EA071432610B0010EBE9 /* shBrushScala.js */,
-				4949EA081432610B0010EBE9 /* shBrushSql.js */,
-				4949EA091432610B0010EBE9 /* shBrushVb.js */,
-				4949EA0A1432610B0010EBE9 /* shBrushXml.js */,
 				4949EA0C1432610B0010EBE9 /* XRegExp.js */,
+				4905C391143760D200576F24 /* brushes */,
 			);
 			name = js;
 			sourceTree = "<group>";
@@ -410,6 +461,7 @@
 				49080A1D1418EDA50092F580 /* Frameworks */,
 				49080A1E1418EDA50092F580 /* Resources */,
 				491A08041422ED3100959CFA /* Copy Frameworks */,
+				4905C3921437616700576F24 /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -478,31 +530,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4949EA2B143264D40010EBE9 /* shBrushAppleScript.js in Resources */,
-				4949EA2C143264D40010EBE9 /* shBrushAS3.js in Resources */,
-				4949EA2D143264D40010EBE9 /* shBrushBash.js in Resources */,
-				4949EA2E143264D40010EBE9 /* shBrushColdFusion.js in Resources */,
-				4949EA2F143264D40010EBE9 /* shBrushCpp.js in Resources */,
-				4949EA30143264D40010EBE9 /* shBrushCSharp.js in Resources */,
-				4949EA31143264D40010EBE9 /* shBrushCss.js in Resources */,
-				4949EA32143264D40010EBE9 /* shBrushDelphi.js in Resources */,
-				4949EA33143264D40010EBE9 /* shBrushDiff.js in Resources */,
-				4949EA34143264D40010EBE9 /* shBrushErlang.js in Resources */,
-				4949EA35143264D40010EBE9 /* shBrushGroovy.js in Resources */,
-				4949EA36143264D40010EBE9 /* shBrushJava.js in Resources */,
-				4949EA37143264D40010EBE9 /* shBrushJavaFX.js in Resources */,
-				4949EA38143264D40010EBE9 /* shBrushJScript.js in Resources */,
-				4949EA39143264D40010EBE9 /* shBrushPerl.js in Resources */,
-				4949EA3A143264D40010EBE9 /* shBrushPhp.js in Resources */,
-				4949EA3B143264D40010EBE9 /* shBrushPlain.js in Resources */,
-				4949EA3C143264D40010EBE9 /* shBrushPowerShell.js in Resources */,
-				4949EA3D143264D40010EBE9 /* shBrushPython.js in Resources */,
-				4949EA3E143264D40010EBE9 /* shBrushRuby.js in Resources */,
-				4949EA3F143264D40010EBE9 /* shBrushSass.js in Resources */,
-				4949EA40143264D40010EBE9 /* shBrushScala.js in Resources */,
-				4949EA41143264D40010EBE9 /* shBrushSql.js in Resources */,
-				4949EA42143264D40010EBE9 /* shBrushVb.js in Resources */,
-				4949EA43143264D40010EBE9 /* shBrushXml.js in Resources */,
+				4905C3931437618C00576F24 /* highlight.js in Resources */,
 				4949EA45143264D40010EBE9 /* XRegExp.js in Resources */,
 				49080A2F1418EDA60092F580 /* InfoPlist.strings in Resources */,
 				49080A351418EDA60092F580 /* Credits.rtf in Resources */,
@@ -565,7 +593,7 @@
 				49F512E0142BF9B7000FCA43 /* PrefGeneralController.m in Sources */,
 				4935BB8F142CE6FC00BE3F49 /* PrefThemesController.m in Sources */,
 				4935BB96142F951200BE3F49 /* ColorWellCell.m in Sources */,
-				495FA49B1433D6EB0049A48B /* highlight.js in Sources */,
+				4905C3B71438CDF700576F24 /* SyntaxHighlighter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

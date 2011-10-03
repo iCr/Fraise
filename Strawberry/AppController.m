@@ -45,10 +45,42 @@ DAMAGE.
 {
     self = [super init];
     if (self) {
-        [[JSCocoaController sharedController] evalJSFile:[[NSBundle mainBundle] pathForResource:@"XRegExp" ofType:@"js"]];
-        [[JSCocoaController sharedController] evalJSFile:[[NSBundle mainBundle] pathForResource:@"shCore" ofType:@"js"]];
+        mutex = [[NSRecursiveLock alloc] init];
+        
+        JSCocoa* js = [self lockJSCocoaController];
+        js.useJSLint = NO;
+        
+        [js evalJSFile:[[NSBundle mainBundle] pathForResource:@"XRegExp" ofType:@"js"]];
+        [js evalJSFile:[[NSBundle mainBundle] pathForResource:@"highlight" ofType:@"js"]];
+        
+        NSArray* brushes = [[NSBundle mainBundle] pathsForResourcesOfType:@"js" inDirectory:@"brushes"];
+        for (NSString* brush in brushes)
+            [js evalJSFile:brush];
+        
+        // FIXME: Testing
+        if (js hasJSFunctionNamed:@-
+        
+        
+        [self unlockJSCocoaController];
     }
     return self;
+}
+
+- (void)dealloc
+{
+    [mutex release];
+    [super dealloc];
+}
+
+- (JSCocoaController*)lockJSCocoaController
+{
+    [mutex lock];
+    return [JSCocoaController sharedController];
+}
+
+- (void)unlockJSCocoaController
+{
+    [mutex unlock];
 }
 
 - (BOOL)applicationShouldHandleReopen:(NSApplication *)theApplication hasVisibleWindows:(BOOL)flag

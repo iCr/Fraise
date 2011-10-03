@@ -36,8 +36,16 @@ DAMAGE.
 
 #import <Foundation/Foundation.h>
 
+@class JSCocoaController;
+
 @interface AppController : NSObject
+{
+    NSRecursiveLock* mutex;
+}
 
 - (IBAction)openPreferencesWindow:(id)sender;
+
+- (JSCocoaController*)lockJSCocoaController;
+- (void)unlockJSCocoaController;
 
 @end

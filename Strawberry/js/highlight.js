@@ -37,11 +37,12 @@ DAMAGE.
 // Shortcut object which will be assigned to the SyntaxHighlighter variable.
 // This is a shorthand for local reference in order to avoid long namespace 
 // references to SyntaxHighlighter.whatever...
-SyntaxHighlighter = {
+if (typeof(SyntaxHighlighter) == 'undefined') var SyntaxHighlighter = function() { 
+
+var sh = {
 	/** Internal 'global' variables. */
 	vars : {
 		discoveredBrushes : null,
-		highlighters : {}
 	},
 	
 	/** This object is populated by user included external brush files. */
@@ -80,202 +81,23 @@ SyntaxHighlighter = {
 	 * 							provided, all elements in the current document 
 	 * 							are highlighted.
 	 */ 
-	highlight: function(globalParams, element)
+	highlight: function(code, suffix)
 	{
-		var elements = this.findElements(globalParams, element),
-			propertyName = 'innerHTML', 
+		var propertyName = 'innerHTML', 
 			highlighter = null,
 			conf = sh.config
 			;
 
-		if (elements.length === 0) 
-			return;
-	
-		for (var i = 0; i < elements.length; i++) 
-		{
-			var element = elements[i],
-				target = element.target,
-				params = element.params,
-				brushName = params.brush,
-				code
-				;
-
-			if (brushName == null)
-				continue;
-
-			// Instantiate a brush
-            var brush = findBrush(brushName);
+        // Instantiate a brush
+        var brush = findBrush(suffix);
 				
-            if (brush)
-                highlighter = new brush();
-            else
-                continue;
-			
-			code = target[propertyName];
-			
-			// remove CDATA from <SCRIPT/> tags if it's present
-			if (conf.useScriptTags)
-				code = stripCData(code);
-				
-			// Inject title if the attribute is present
-			if ((target.title || '') != '')
-				params.title = target.title;
-				
-			params['brush'] = brushName;
-			highlighter.init(params);
-			element = highlighter.getDiv(code);
-			
-			// carry over ID
-			if ((target.id || '') != '')
-				element.id = target.id;
-			
-			target.parentNode.replaceChild(element, target);
-		}
+        if (!brush)
+            return null;
+            
+        highlighter = new brush();
+        return highlighter.findMatches(code);
 	}
 }; // end of sh
-
-/**
- * Splits block of text into lines.
- * @param {String} block Block of text.
- * @return {Array} Returns array of lines.
- */
-function splitLines(block)
-{
-	return block.split('\n');
-}
-
-/**
- * Generates HTML ID for the highlighter.
- * @param {String} highlighterId Highlighter ID.
- * @return {String} Returns HTML ID.
- */
-function getHighlighterId(id)
-{
-	var prefix = 'highlighter_';
-	return id.indexOf(prefix) == 0 ? id : prefix + id;
-};
-
-/**
- * Finds Highlighter instance by ID.
- * @param {String} highlighterId Highlighter ID.
- * @return {Highlighter} Returns instance of the highlighter.
- */
-function getHighlighterById(id)
-{
-	return sh.vars.highlighters[getHighlighterId(id)];
-};
-
-/**
- * Finds highlighter's DIV container.
- * @param {String} highlighterId Highlighter ID.
- * @return {Element} Returns highlighter's DIV element.
- */
-function getHighlighterDivById(id)
-{
-	return document.getElementById(getHighlighterId(id));
-};
-
-/**
- * Stores highlighter so that getHighlighterById() can do its thing. Each
- * highlighter must call this method to preserve itself.
- * @param {Highilghter} highlighter Highlighter instance.
- */
-function storeHighlighter(highlighter)
-{
-	sh.vars.highlighters[getHighlighterId(highlighter.id)] = highlighter;
-};
-
-/**
- * Looks for a child or parent node which has specified classname.
- * Equivalent to jQuery's $(container).find(".className")
- * @param {Element} target Target element.
- * @param {String} search Class name or node name to look for.
- * @param {Boolean} reverse If set to true, will go up the node tree instead of down.
- * @return {Element} Returns found child or parent element on null.
- */
-function findElement(target, search, reverse /* optional */)
-{
-	if (target == null)
-		return null;
-		
-	var nodes			= reverse != true ? target.childNodes : [ target.parentNode ],
-		propertyToFind	= { '#' : 'id', '.' : 'className' }[search.substr(0, 1)] || 'nodeName',
-		expectedValue,
-		found
-		;
-
-	expectedValue = propertyToFind != 'nodeName'
-		? search.substr(1)
-		: search.toUpperCase()
-		;
-		
-	// main return of the found node
-	if ((target[propertyToFind] || '').indexOf(expectedValue) != -1)
-		return target;
-	
-	for (var i = 0; nodes && i < nodes.length && found == null; i++)
-		found = findElement(nodes[i], search, reverse);
-	
-	return found;
-};
-
-/**
- * Looks for a parent node which has specified classname.
- * This is an alias to <code>findElement(container, className, true)</code>.
- * @param {Element} target Target element.
- * @param {String} className Class name to look for.
- * @return {Element} Returns found parent element on null.
- */
-function findParentElement(target, className)
-{
-	return findElement(target, className, true);
-};
-
-/**
- * Finds an index of element in the array.
- * @ignore
- * @param {Object} searchElement
- * @param {Number} fromIndex
- * @return {Number} Returns index of element if found; -1 otherwise.
- */
-function indexOf(array, searchElement, fromIndex)
-{
-	fromIndex = Math.max(fromIndex || 0, 0);
-
-	for (var i = fromIndex; i < array.length; i++)
-		if(array[i] == searchElement)
-			return i;
-	
-	return -1;
-};
-
-/**
- * Generates a unique element ID.
- */
-function guid(prefix)
-{
-	return (prefix || '') + Math.round(Math.random() * 1000000).toString();
-};
-
-/**
- * Merges two objects. Values from obj2 override values in obj1.
- * Function is NOT recursive and works only for one dimensional objects.
- * @param {Object} obj1 First object.
- * @param {Object} obj2 Second object.
- * @return {Object} Returns combination of both objects.
- */
-function merge(obj1, obj2)
-{
-	var result = {}, name;
-
-	for (name in obj1) 
-		result[name] = obj1[name];
-	
-	for (name in obj2) 
-		result[name] = obj2[name];
-		
-	return result;
-};
 
 /**
  * Attempts to convert string to boolean.
@@ -286,67 +108,6 @@ function toBoolean(value)
 {
 	var result = { "true" : true, "false" : false }[value];
 	return result == null ? value : result;
-};
-
-/**
- * Opens up a centered popup window.
- * @param {String} url		URL to open in the window.
- * @param {String} name		Popup name.
- * @param {int} width		Popup width.
- * @param {int} height		Popup height.
- * @param {String} options	window.open() options.
- * @return {Window}			Returns window instance.
- */
-function popup(url, name, width, height, options)
-{
-	var x = (screen.width - width) / 2,
-		y = (screen.height - height) / 2
-		;
-		
-	options +=	', left=' + x + 
-				', top=' + y +
-				', width=' + width +
-				', height=' + height
-		;
-	options = options.replace(/^,/, '');
-
-	var win = window.open(url, name, options);
-	win.focus();
-	return win;
-};
-
-/**
- * Adds event handler to the target object.
- * @param {Object} obj		Target object.
- * @param {String} type		Name of the event.
- * @param {Function} func	Handling function.
- */
-function attachEvent(obj, type, func, scope)
-{
-	function handler(e)
-	{
-		e = e || window.event;
-		
-		if (!e.target)
-		{
-			e.target = e.srcElement;
-			e.preventDefault = function()
-			{
-				this.returnValue = false;
-			};
-		}
-			
-		func.call(scope || window, e);
-	};
-	
-	if (obj.attachEvent) 
-	{
-		obj.attachEvent('on' + type, handler);
-	}
-	else 
-	{
-		obj.addEventListener(type, handler, false);
-	}
 };
 
 /**
@@ -387,85 +148,6 @@ function findBrush(alias)
 	
 	result = sh.brushes[brushes[alias]];
 
-	return result;
-};
-
-/**
- * Executes a callback on each line and replaces each line with result from the callback.
- * @param {Object} str			Input string.
- * @param {Object} callback		Callback function taking one string argument and returning a string.
- */
-function eachLine(str, callback)
-{
-	var lines = splitLines(str);
-	
-	for (var i = 0; i < lines.length; i++)
-		lines[i] = callback(lines[i], i);
-		
-	return lines.join('\n');
-};
-
-/**
- * This is a special trim which only removes first and last empty lines
- * and doesn't affect valid leading space on the first line.
- * 
- * @param {String} str   Input string
- * @return {String}      Returns string without empty first and last lines.
- */
-function trimFirstAndLastLines(str)
-{
-	return str.replace(/^[ ]*[\n]+|[\n]*[ ]*$/g, '');
-};
-
-/**
- * Parses key/value pairs into hash object.
- * 
- * Understands the following formats:
- * - name: word;
- * - name: [word, word];
- * - name: "string";
- * - name: 'string';
- * 
- * For example:
- *   name1: value; name2: [value, value]; name3: 'value'
- *   
- * @param {String} str    Input string.
- * @return {Object}       Returns deserialized object.
- */
-function parseParams(str)
-{
-	var match, 
-		result = {},
-		arrayRegex = new XRegExp("^\\[(?<values>(.*?))\\]$"),
-		regex = new XRegExp(
-			"(?<name>[\\w-]+)" +
-			"\\s*:\\s*" +
-			"(?<value>" +
-				"[\\w-%#]+|" +		// word
-				"\\[.*?\\]|" +		// [] array
-				'".*?"|' +			// "" string
-				"'.*?'" +			// '' string
-			")\\s*;?",
-			"g"
-		)
-		;
-
-	while ((match = regex.exec(str)) != null) 
-	{
-		var value = match.value
-			.replace(/^['"]|['"]$/g, '') // strip quotes from end of strings
-			;
-		
-		// try to parse array value
-		if (value != null && arrayRegex.test(value))
-		{
-			var m = arrayRegex.exec(value);
-			value = m.values.length > 0 ? m.values.split(/\s*,\s*/) : [];
-		}
-		
-		result[match.name] = value;
-	}
-	
 	return result;
 };
 
@@ -522,7 +204,7 @@ function getMatches(code, regexInfo)
 		var resultMatch = func(match, regexInfo);
 		
 		if (typeof(resultMatch) == 'string')
-			resultMatch = [new sh.Match(resultMatch, match.index, regexInfo.css)];
+			resultMatch = [new sh.Match(match.index, resultMatch.length, regexInfo.css)];
 
 		matches = matches.concat(resultMatch);
 	}
@@ -533,13 +215,11 @@ function getMatches(code, regexInfo)
 /**
  * Match object.
  */
-sh.Match = function(value, index, css)
+sh.Match = function(index, length, type)
 {
-	this.value = value;
 	this.index = index;
-	this.length = value.length;
-	this.css = css;
-	this.brushName = null;
+	this.length = length;
+	this.type = type;
 };
 
 sh.Match.prototype.toString = function()
@@ -558,33 +238,20 @@ sh.Highlighter = function()
 
 sh.Highlighter.prototype = {
 	/**
-	 * Returns value of the parameter passed to the highlighter.
-	 * @param {String} name				Name of the parameter.
-	 * @param {Object} defaultValue		Default value.
-	 * @return {Object}					Returns found value or default value otherwise.
-	 */
-	getParam: function(name, defaultValue)
-	{
-		var result = this.params[name];
-		return toBoolean(result == null ? defaultValue : result);
-	},
-	
-	/**
 	 * Applies all regular expression to the code and stores all found
 	 * matches in the `this.matches` array.
-	 * @param {Array} regexList		List of regular expressions.
 	 * @param {String} code			Source code.
 	 * @return {Array}				Returns list of matches.
 	 */
-	findMatches: function(regexList, code)
+	findMatches: function(code)
 	{
 		var result = [];
 		
-		if (regexList != null)
-			for (var i = 0; i < regexList.length; i++) 
+		if (this.regexList != null)
+			for (var i = 0; i < this.regexList.length; i++) 
 				// BUG: length returns len+1 for array if methods added to prototype chain (oising@gmail.com)
-				if (typeof (regexList[i]) == "object")
-					result = result.concat(getMatches(code, regexList[i]));
+				if (typeof (this.regexList[i]) == "object")
+					result = result.concat(getMatches(code, this.regexList[i]));
 		
 		// sort and remove nested the matches
 		return this.removeNestedMatches(result.sort(matchesSortCallback));
@@ -626,23 +293,6 @@ sh.Highlighter.prototype = {
 	},
 	
 	/**
-	 * Initializes the highlighter/brush.
-	 *
-	 * Constructor isn't used for initialization so that nothing executes during necessary
-	 * `new SyntaxHighlighter.Highlighter()` call when setting up brush inheritence.
-	 *
-	 * @param {Hash} params Highlighter parameters.
-	 */
-	init: function(params)
-	{
-		// register this instance in the highlighters list
-		storeHighlighter(this);
-		
-		// local params take precedence over defaults
-		this.params = merge(sh.defaults, params || {})
-	},
-	
-	/**
 	 * Converts space separated list of keywords into a regular expression string.
 	 * @param {String} str    Space separated keywords.
 	 * @return {String}       Returns regular expression string.
@@ -665,3 +315,7 @@ sh.Highlighter.prototype = {
 	{
 	}
 }; // end of Highlighter
+
+return sh;
+
+}(); // end of anonymous function

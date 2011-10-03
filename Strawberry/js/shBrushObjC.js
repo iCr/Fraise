@@ -28,7 +28,7 @@
         ];
     };
     Brush.prototype	= new SyntaxHighlighter.Highlighter();
-	Brush.aliases	= ['oc'];
+	Brush.aliases	= ['m', 'mm'];
 
 	SyntaxHighlighter.brushes.ObjC = Brush;
 
