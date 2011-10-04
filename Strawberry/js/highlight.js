@@ -83,19 +83,23 @@ var sh = {
 	 */ 
 	highlight: function(code, suffix)
 	{
-		var propertyName = 'innerHTML', 
-			highlighter = null,
-			conf = sh.config
-			;
-
+        log("******** highlight - enter: suffix="+suffix);
+        
         // Instantiate a brush
         var brush = findBrush(suffix);
 				
         if (!brush)
             return null;
-            
-        highlighter = new brush();
-        return NSArray.arrayWithArray(highlighter.findMatches(code));
+
+        var highlighter = new brush();
+        
+        log("******** highlight: brush="+highlighter);
+        
+        var result = highlighter.findMatches(code);
+        
+        log("******** highlight: result="+result);
+        
+        return result;
 	}
 }; // end of sh
 
@@ -310,3 +314,8 @@ sh.Highlighter.prototype = {
 return sh;
 
 }(); // end of anonymous function
+
+function doSyntaxHighlight(code, suffix)
+{
+    return SyntaxHighlighter.highlight(code, suffix);
+}

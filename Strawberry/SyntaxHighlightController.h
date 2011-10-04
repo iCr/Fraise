@@ -36,7 +36,7 @@ DAMAGE.
 
 #import <Foundation/Foundation.h>
 
-@interface SyntaxMatch
+@interface SyntaxMatch : NSObject
 {
     int index, length, typeIndex;
 }

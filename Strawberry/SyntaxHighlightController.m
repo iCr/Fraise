@@ -79,7 +79,8 @@ DAMAGE.
 - (void)highlightCode:(NSString*)code withSuffix:(NSString*)suffix
 {
     JSCocoa* js = [AppController lockJSCocoa];
-    NSArray* array = [js toObject:[js callJSFunctionNamed:@"highlight" withArguments:code, suffix, nil]];
+    JSValueRef result = [js callJSFunctionNamed:@"doSyntaxHighlight" withArguments:code, suffix, nil];
+    NSArray* array = [js toObject:result];
     NSLog(@"Array:%@\n", array);
     [AppController unlockJSCocoa];
 }
