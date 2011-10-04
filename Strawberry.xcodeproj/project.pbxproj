@@ -34,7 +34,6 @@
 		4905C3AB1437619A00576F24 /* shBrushSql.js in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4949EA081432610B0010EBE9 /* shBrushSql.js */; };
 		4905C3AC1437619A00576F24 /* shBrushVb.js in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4949EA091432610B0010EBE9 /* shBrushVb.js */; };
 		4905C3AD1437619A00576F24 /* shBrushXml.js in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4949EA0A1432610B0010EBE9 /* shBrushXml.js */; };
-		4905C3B71438CDF700576F24 /* SyntaxHighlighter.m in Sources */ = {isa = PBXBuildFile; fileRef = 4905C3B61438CDF700576F24 /* SyntaxHighlighter.m */; };
 		49080A251418EDA50092F580 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49080A241418EDA50092F580 /* Cocoa.framework */; };
 		49080A2F1418EDA60092F580 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 49080A2D1418EDA60092F580 /* InfoPlist.strings */; };
 		49080A311418EDA60092F580 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 49080A301418EDA60092F580 /* main.m */; };
@@ -56,6 +55,7 @@
 		4935BB96142F951200BE3F49 /* ColorWellCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4935BB95142F951100BE3F49 /* ColorWellCell.m */; };
 		4949EA45143264D40010EBE9 /* XRegExp.js in Resources */ = {isa = PBXBuildFile; fileRef = 4949EA0C1432610B0010EBE9 /* XRegExp.js */; };
 		4949EA4F143295090010EBE9 /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4949EA4E143295090010EBE9 /* JavaScriptCore.framework */; };
+		49A2A512143A842400FB945D /* SyntaxHighlightController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49A2A511143A842400FB945D /* SyntaxHighlightController.m */; };
 		49DEEEE714280B3000F97C1B /* NoodleLineNumberMarker.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DEEEE414280B3000F97C1B /* NoodleLineNumberMarker.m */; };
 		49DEEEE814280B3000F97C1B /* NoodleLineNumberView.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DEEEE614280B3000F97C1B /* NoodleLineNumberView.m */; };
 		49DEEEEB14280C5000F97C1B /* MarkerLineNumberView.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DEEEEA14280C5000F97C1B /* MarkerLineNumberView.m */; };
@@ -137,8 +137,6 @@
 
 /* Begin PBXFileReference section */
 		4905C38D14375B4900576F24 /* shBrushObjC.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; name = shBrushObjC.js; path = js/shBrushObjC.js; sourceTree = "<group>"; };
-		4905C3B51438CDF700576F24 /* SyntaxHighlighter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SyntaxHighlighter.h; sourceTree = "<group>"; };
-		4905C3B61438CDF700576F24 /* SyntaxHighlighter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SyntaxHighlighter.m; sourceTree = "<group>"; };
 		49080A201418EDA50092F580 /* Strawberry.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Strawberry.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		49080A241418EDA50092F580 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		49080A271418EDA50092F580 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -200,6 +198,8 @@
 		4949EA0C1432610B0010EBE9 /* XRegExp.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; name = XRegExp.js; path = js/XRegExp.js; sourceTree = "<group>"; };
 		4949EA4E143295090010EBE9 /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = ../../../../../../../System/Library/Frameworks/JavaScriptCore.framework; sourceTree = "<group>"; };
 		495FA49A1433D6EB0049A48B /* highlight.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; name = highlight.js; path = js/highlight.js; sourceTree = "<group>"; };
+		49A2A510143A842400FB945D /* SyntaxHighlightController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SyntaxHighlightController.h; sourceTree = "<group>"; };
+		49A2A511143A842400FB945D /* SyntaxHighlightController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SyntaxHighlightController.m; sourceTree = "<group>"; };
 		49DEEEE314280B3000F97C1B /* NoodleLineNumberMarker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NoodleLineNumberMarker.h; path = NoodleLineNumber/NoodleLineNumberMarker.h; sourceTree = "<group>"; };
 		49DEEEE414280B3000F97C1B /* NoodleLineNumberMarker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NoodleLineNumberMarker.m; path = NoodleLineNumber/NoodleLineNumberMarker.m; sourceTree = "<group>"; };
 		49DEEEE514280B3000F97C1B /* NoodleLineNumberView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NoodleLineNumberView.h; path = NoodleLineNumber/NoodleLineNumberView.h; sourceTree = "<group>"; };
@@ -345,8 +345,8 @@
 				490BB57B1425494000C447E4 /* DocumentWindowController.m */,
 				490BB5771425488900C447E4 /* ProjectWindowController.h */,
 				490BB5781425488900C447E4 /* ProjectWindowController.m */,
-				4905C3B51438CDF700576F24 /* SyntaxHighlighter.h */,
-				4905C3B61438CDF700576F24 /* SyntaxHighlighter.m */,
+				49A2A510143A842400FB945D /* SyntaxHighlightController.h */,
+				49A2A511143A842400FB945D /* SyntaxHighlightController.m */,
 				4935BB6D142A2FCF00BE3F49 /* WindowController.h */,
 				4935BB6E142A2FCF00BE3F49 /* WindowController.m */,
 				490BB58014263F4800C447E4 /* Resources */,
@@ -593,7 +593,7 @@
 				49F512E0142BF9B7000FCA43 /* PrefGeneralController.m in Sources */,
 				4935BB8F142CE6FC00BE3F49 /* PrefThemesController.m in Sources */,
 				4935BB96142F951200BE3F49 /* ColorWellCell.m in Sources */,
-				4905C3B71438CDF700576F24 /* SyntaxHighlighter.m in Sources */,
+				49A2A512143A842400FB945D /* SyntaxHighlightController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

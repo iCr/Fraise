@@ -1,5 +1,5 @@
 //
-//  SyntaxHighlighter.m
+//  SyntaxHighlightController.m
 //  Strawberry
 //
 //  Created by Chris Marrin on 9/17/11.
@@ -34,7 +34,7 @@ ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF S
 DAMAGE.
 */
 
-#import "SyntaxHighlighter.h"
+#import "SyntaxHighlightController.h"
 
 #import "AppController.h"
 #import <JSCocoa/JSCocoa.h>
@@ -74,7 +74,7 @@ DAMAGE.
 
 @end
 
-@implementation SyntaxHighlighter
+@implementation SyntaxHighlightController
 
 - (void)highlightCode:(NSString*)code withSuffix:(NSString*)suffix
 {

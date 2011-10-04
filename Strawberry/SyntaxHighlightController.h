@@ -1,5 +1,5 @@
 //
-//  SyntaxHighlighter.h
+//  SyntaxHighlightController.h
 //  Strawberry
 //
 //  Created by Chris Marrin on 9/17/11.
@@ -47,7 +47,7 @@ DAMAGE.
 
 @end
 
-@interface SyntaxHighlighter : NSObject
+@interface SyntaxHighlightController : NSObject
 
 - (void)highlightCode:(NSString*)code withSuffix:(NSString*)suffix;
 
