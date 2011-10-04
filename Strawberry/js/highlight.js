@@ -97,9 +97,13 @@ var sh = {
         
         var result = highlighter.findMatches(code);
         
-        log("******** highlight: result="+result);
+        log("******** highlight: result="+result.length);
         
-        return result;
+        var array = NSMutableArray.alloc.init;
+        for (var i = 0; i < result.length; ++i)
+            array.addObject(result[i]);
+        return array;
+        //return NSArray.arrayWithArray(result);
 	}
 }; // end of sh
 
