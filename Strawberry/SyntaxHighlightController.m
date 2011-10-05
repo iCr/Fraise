@@ -76,8 +76,11 @@ DAMAGE.
 
 @implementation SyntaxHighlightController
 
-- (void)highlightCode:(NSString*)code withSuffix:(NSString*)suffix
+- (NSAttributedString*)highlightCode:(NSString*)code withSuffix:(NSString*)suffix
 {
+    if (!code)
+        return nil;
+        
     JSCocoa* js = [AppController lockJSCocoa];
     
     double now = [NSDate timeIntervalSinceReferenceDate];
@@ -86,16 +89,18 @@ DAMAGE.
     
     NSLog(@"*** Syntax Highlight took %8.2f seconds\n", [NSDate timeIntervalSinceReferenceDate] - now);
     
-    /*
     NSArray* array = [js toObject:result];
-        
+    NSMutableAttributedString* string = [[NSMutableAttributedString alloc] initWithString:code];
+    NSDictionary* testAttrs = [NSDictionary dictionaryWithObjectsAndKeys:
+													[NSColor redColor], NSForegroundColorAttributeName,
+													nil];
     for (int i = 0; i < [array count]; ++i) {
         SyntaxMatch* match = [array objectAtIndex:i];
-        NSLog(@"item %d='%@'\n", i, [code substringWithRange:NSMakeRange(match.index, match.length)]);
+        [string setAttributes:testAttrs range:NSMakeRange(match.index, match.length)];
     }
-    */
-    
+
     [AppController unlockJSCocoa];
+    return [string autorelease];
 }
 
 @end

@@ -49,6 +49,6 @@ DAMAGE.
 
 @interface SyntaxHighlightController : NSObject
 
-- (void)highlightCode:(NSString*)code withSuffix:(NSString*)suffix;
+- (NSAttributedString*)highlightCode:(NSString*)code withSuffix:(NSString*)suffix;
 
 @end

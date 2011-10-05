@@ -58,9 +58,8 @@ DAMAGE.
         return;
         
     // FIXME: Testing for syntax highlighting
-    [syntaxHighlightController highlightCode:content withSuffix:[url pathExtension]];
-        
-    NSAttributedString* string = [[NSAttributedString alloc]initWithString:self.content ? self.content : @""];
+    NSAttributedString* string = [syntaxHighlightController highlightCode:content withSuffix:[url pathExtension]];
+
     [[((WindowController*) [[self windowControllers] objectAtIndex:0]).textView textStorage] setAttributedString:string];
 }
 
