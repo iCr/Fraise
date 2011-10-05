@@ -101,7 +101,8 @@ var sh = {
         
         var array = NSMutableArray.alloc.init;
         for (var i = 0; i < result.length; ++i)
-            array.addObject(result[i]);
+            if (result[i] != null)
+                array.addObject(result[i]);
         return array;
         //return NSArray.arrayWithArray(result);
 	}
