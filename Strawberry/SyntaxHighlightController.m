@@ -79,9 +79,22 @@ DAMAGE.
 - (void)highlightCode:(NSString*)code withSuffix:(NSString*)suffix
 {
     JSCocoa* js = [AppController lockJSCocoa];
+    
+    double now = [NSDate timeIntervalSinceReferenceDate];
+    
     JSValueRef result = [js callJSFunctionNamed:@"doSyntaxHighlight" withArguments:code, suffix, nil];
+    
+    NSLog(@"*** Syntax Highlight took %8.2f seconds\n", [NSDate timeIntervalSinceReferenceDate] - now);
+    
+    /*
     NSArray* array = [js toObject:result];
-    NSLog(@"Array:%@\n", array);
+        
+    for (int i = 0; i < [array count]; ++i) {
+        SyntaxMatch* match = [array objectAtIndex:i];
+        NSLog(@"item %d='%@'\n", i, [code substringWithRange:NSMakeRange(match.index, match.length)]);
+    }
+    */
+    
     [AppController unlockJSCocoa];
 }
 

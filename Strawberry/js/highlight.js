@@ -83,8 +83,6 @@ var sh = {
 	 */ 
 	highlight: function(code, suffix)
 	{
-        log("******** highlight - enter: suffix="+suffix);
-        
         // Instantiate a brush
         var brush = findBrush(suffix);
 				
@@ -92,19 +90,8 @@ var sh = {
             return null;
 
         var highlighter = new brush();
-        
-        log("******** highlight: brush="+highlighter);
-        
         var result = highlighter.findMatches(code);
-        
-        log("******** highlight: result="+result.length);
-        
-        var array = NSMutableArray.alloc.init;
-        for (var i = 0; i < result.length; ++i)
-            if (result[i] != null)
-                array.addObject(result[i]);
-        return array;
-        //return NSArray.arrayWithArray(result);
+        return result;
 	}
 }; // end of sh
 
@@ -247,14 +234,21 @@ sh.Highlighter.prototype = {
 	{
 		var result = [];
 		
+        var now = (new Date).getTime();
+        
 		if (this.regexList != null)
 			for (var i = 0; i < this.regexList.length; i++) 
 				// BUG: length returns len+1 for array if methods added to prototype chain (oising@gmail.com)
 				if (typeof (this.regexList[i]) == "object")
 					result = result.concat(getMatches(code, this.regexList[i]));
 		
+        log("****** findMatches took "+((new Date).getTime() - now)+" seconds");
+        now = (new Date).getTime();
+        
 		// sort and remove nested the matches
-		return this.removeNestedMatches(result.sort(matchesSortCallback));
+		var finalResult = this.removeNestedMatches(result.sort(matchesSortCallback));
+        log("****** removeNestedMatches took "+((new Date).getTime() - now)+" seconds");
+        return finalResult;
 	},
 	
 	/**
@@ -264,15 +258,18 @@ sh.Highlighter.prototype = {
 	 */
 	removeNestedMatches: function(matches)
 	{
+        var array = NSMutableArray.alloc.init;
+                
 		// Optimized by Jose Prado (http://joseprado.com)
 		for (var i = 0; i < matches.length; i++) 
 		{ 
 			if (matches[i] === null)
 				continue;
 			
-			var itemI = matches[i],
-				itemIEndPos = itemI.index + itemI.length
-				;
+			var itemI = matches[i];
+            var itemIEndPos = itemI.index + itemI.length;
+            
+            array.addObject(itemI);
 			
 			for (var j = i + 1; j < matches.length && matches[i] !== null; j++) 
 			{
@@ -289,7 +286,7 @@ sh.Highlighter.prototype = {
 			}
 		}
 		
-		return matches;
+		return array;
 	},
 	
 	/**
