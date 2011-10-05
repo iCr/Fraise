@@ -198,6 +198,7 @@
 		4949EA0C1432610B0010EBE9 /* XRegExp.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; name = XRegExp.js; path = js/XRegExp.js; sourceTree = "<group>"; };
 		4949EA4E143295090010EBE9 /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = ../../../../../../../System/Library/Frameworks/JavaScriptCore.framework; sourceTree = "<group>"; };
 		495FA49A1433D6EB0049A48B /* highlight.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; name = highlight.js; path = js/highlight.js; sourceTree = "<group>"; };
+		49988736143D16E7008469AB /* ThemeDefault.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; name = ThemeDefault.js; path = js/ThemeDefault.js; sourceTree = "<group>"; };
 		49A2A510143A842400FB945D /* SyntaxHighlightController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SyntaxHighlightController.h; sourceTree = "<group>"; };
 		49A2A511143A842400FB945D /* SyntaxHighlightController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SyntaxHighlightController.m; sourceTree = "<group>"; };
 		49DEEEE314280B3000F97C1B /* NoodleLineNumberMarker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NoodleLineNumberMarker.h; path = NoodleLineNumber/NoodleLineNumberMarker.h; sourceTree = "<group>"; };
@@ -407,8 +408,17 @@
 				495FA49A1433D6EB0049A48B /* highlight.js */,
 				4949EA0C1432610B0010EBE9 /* XRegExp.js */,
 				4905C391143760D200576F24 /* brushes */,
+				49988739143D174D008469AB /* themes */,
 			);
 			name = js;
+			sourceTree = "<group>";
+		};
+		49988739143D174D008469AB /* themes */ = {
+			isa = PBXGroup;
+			children = (
+				49988736143D16E7008469AB /* ThemeDefault.js */,
+			);
+			name = themes;
 			sourceTree = "<group>";
 		};
 		49DEEED714280A4300F97C1B /* NoodleLineNumber */ = {
