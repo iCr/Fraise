@@ -36,6 +36,12 @@ DAMAGE.
 
 #import <Foundation/Foundation.h>
 
+@interface NSColor (ColorAdditions)
+
++ (NSColor *)colorWithHexString:(NSString *) string;
+
+@end
+
 @interface SyntaxMatch : NSObject
 {
     int index, length, typeIndex;
@@ -50,10 +56,14 @@ DAMAGE.
 @interface ThemeController : NSObject
 {
     NSMutableDictionary* themes;
+    NSString* currentThemeName;
 }
 
 + (ThemeController*)sharedController;
 
 - (NSAttributedString*)highlightCode:(NSString*)code withSuffix:(NSString*)suffix;
+
+@property(copy) NSString* currentThemeName;
+@property(readonly) NSDictionary* currentTheme;
 
 @end

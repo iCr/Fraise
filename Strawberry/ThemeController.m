@@ -39,6 +39,51 @@ DAMAGE.
 #import "AppController.h"
 #import <JSCocoa/JSCocoa.h>
 
+@implementation NSColor (ColorAdditions)
+
++ (NSColor *)colorWithHexString:(NSString *) string
+{
+    if (!string || [string characterAtIndex:0] != '#')
+        return [NSColor blackColor];
+    
+    uint32_t value;
+    if (![[NSScanner scannerWithString:[string substringFromIndex:1]] scanHexInt:&value])
+        return [NSColor blackColor];
+        
+    uint8_t r, g, b, a = 0xff;
+
+    switch([string length]) {
+        case 4: // RGB
+            r = (value >> 8) & 0xf;
+            g = (value >> 4) & 0xf;
+            b = value & 0xf;
+            break;
+        case 5: // RGBA
+            r = (value >> 12) & 0xf;
+            g = (value >> 8) & 0xf;
+            b = (value >> 4) & 0xf;
+            a = value & 0xf;
+            break;
+        case 7: // RRGGBB
+            r = (value >> 16) & 0xff;
+            g = (value >> 8) & 0xff;
+            b = value & 0xff;
+            break;
+        case 9: // RRGGBBAA
+            break;
+            r = (value >> 24) & 0xff;
+            g = (value >> 16) & 0xff;
+            b = (value >> 8) & 0xff;
+            a = value & 0xff;
+        default:
+            return [NSColor blackColor];
+    }
+
+	return [NSColor colorWithCalibratedRed:((float) r) / 255 green:((float) r) / 255 blue:((float) b) / 255 alpha:((float) a) / 255];
+}
+
+@end
+
 @implementation SyntaxMatch
 
 @synthesize index, length;
@@ -76,6 +121,13 @@ DAMAGE.
 
 @implementation ThemeController
 
+@synthesize currentThemeName;
+
+- (NSDictionary*)currentTheme
+{
+    return themes ? [themes objectForKey:currentThemeName] : nil;
+}
+
 + (ThemeController*)sharedController
 {
     static ThemeController* controller;
@@ -111,8 +163,31 @@ DAMAGE.
         }
             
         [AppController unlockJSCocoa];
+        
+        // FIXME: For now we default to the "Default" theme
+        self.currentThemeName = @"Default";
     }
     return self;
+}
+
+- (NSDictionary*) attributesForSyntaxType:(NSString*)type
+{
+    NSDictionary* styles = [self.currentTheme objectForKey:@"styles"];
+    if (!styles)
+        return nil;
+        
+    NSDictionary* syntax = [styles objectForKey:@"syntax"];
+    if (!syntax)
+        return nil;
+        
+    NSDictionary* style = [syntax objectForKey:type];
+    if (!style)
+        return nil;
+        
+    // FIXME: For now just return foreground color
+    NSColor* color = [NSColor colorWithHexString:[style objectForKey:@"foreground"]];
+    
+    return [NSDictionary dictionaryWithObjectsAndKeys:color, NSForegroundColorAttributeName, nil];
 }
 
 - (NSAttributedString*)highlightCode:(NSString*)code withSuffix:(NSString*)suffix
@@ -130,12 +205,10 @@ DAMAGE.
     
     NSArray* array = [js toObject:result];
     NSMutableAttributedString* string = [[NSMutableAttributedString alloc] initWithString:code];
-    NSDictionary* testAttrs = [NSDictionary dictionaryWithObjectsAndKeys:
-													[NSColor redColor], NSForegroundColorAttributeName,
-													nil];
+    
     for (int i = 0; i < [array count]; ++i) {
         SyntaxMatch* match = [array objectAtIndex:i];
-        [string setAttributes:testAttrs range:NSMakeRange(match.index, match.length)];
+        [string setAttributes:[self attributesForSyntaxType:match.type] range:NSMakeRange(match.index, match.length)];
     }
 
     [AppController unlockJSCocoa];

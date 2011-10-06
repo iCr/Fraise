@@ -242,12 +242,12 @@ sh.Highlighter.prototype = {
 				if (typeof (this.regexList[i]) == "object")
 					result = result.concat(getMatches(code, this.regexList[i]));
 		
-        log("****** findMatches took "+((new Date).getTime() - now)+" seconds");
+        log("****** findMatches took "+(((new Date).getTime() - now) / 1000)+" seconds");
         now = (new Date).getTime();
         
 		// sort and remove nested the matches
 		var finalResult = this.removeNestedMatches(result.sort(matchesSortCallback));
-        log("****** removeNestedMatches took "+((new Date).getTime() - now)+" seconds");
+        log("****** removeNestedMatches took "+(((new Date).getTime() - now) / 1000)+" seconds");
         return finalResult;
 	},
 	

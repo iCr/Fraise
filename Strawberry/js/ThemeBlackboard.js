@@ -36,7 +36,7 @@ DAMAGE.
 
 {
     "author" : "Chris Marrin",
-    "name" : "Default",
+    "name" : "Blackboard",
     "styles" : {
         "general" : {
             "background" : "#0C1021",
@@ -50,62 +50,82 @@ DAMAGE.
             "comments" : {
                 "description" : "Comment",
                 "fontStyle" : "",
-                "foreground" : "#008200"
+                "foreground" : "#AEAEAE"
             },
             "constants" : {
                 "description" : "Constant",
                 "fontStyle" : "",
-                "foreground" : "#0066cc"
+                "foreground" : "#D8FA3C"
+            },
+            "entity" : { // From TextMate
+                "description" : "Entity",
+                "fontStyle" : "",
+                "foreground" : "#FF6400"
             },
             "keyword" : {
                 "description" : "Keyword",
                 "fontStyle" : "",
-                "foreground" : "#006699"
+                "foreground" : "#FBDE2D"
             },
             "string" : {
                 "description" : "String",
                 "fontStyle" : "",
-                "foreground" : "blue"
+                "foreground" : "#61CE3C"
+            },
+            "storage" : { // From TextMate
+                "description" : "Storage",
+                "fontStyle" : "",
+                "foreground" : "#61CE3C"
             },
             "variable" : {
                 "description" : "Variable",
                 "fontStyle" : "",
-                "foreground" : "#aa7700"
+                "foreground" : "#AEAEAE"
             },
             "value" : {
                 "description" : "Value",
                 "fontStyle" : "",
-                "foreground" : "#009900"
+                "foreground" : "#AEAEAE"
+            },
+            "variable" : {
+                "description" : "Variable",
+                "fontStyle" : "",
+                "foreground" : "#AEAEAE"
             },
             "preprocessor" : {
                 "description" : "Preprocessor",
                 "fontStyle" : "",
-                "foreground" : "gray"
+                "foreground" : "#AEAEAE"
             },
             "plain" : {
                 "description" : "Plain",
                 "fontStyle" : "",
-                "foreground" : "black"
+                "foreground" : "#AEAEAE"
             },
             "functions" : {
                 "description" : "Function",
                 "fontStyle" : "",
-                "foreground" : "#ff1493"
+                "foreground" : "#AEAEAE"
+            },
+            "decorator" : {
+                "description" : "Decorator",
+                "fontStyle" : "",
+                "foreground" : "#AEAEAE"
             },
             "color1" : {
                 "description" : "color1",
                 "fontStyle" : "",
-                "foreground" : "gray"
+                "foreground" : "#AEAEAE"
             },
             "color2" : {
                 "description" : "color2",
                 "fontStyle" : "",
-                "foreground" : "#ff1493"
+                "foreground" : "#AEAEAE"
             },
             "color3" : {
                 "description" : "color3",
                 "fontStyle" : "",
-                "foreground" : "red"
+                "foreground" : "#AEAEAE"
             }
         }
     }
