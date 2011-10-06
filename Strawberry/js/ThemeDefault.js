@@ -51,77 +51,77 @@ DAMAGE.
                 "description" : "Comment",
                 "fontStyle" : "",
                 "foreground" : "#AEAEAE"
-            }
+            },
             "constants" : {
                 "description" : "Constant",
                 "fontStyle" : "",
                 "foreground" : "#D8FA3C"
-            }
+            },
             "entity" : { // From TextMate
                 "description" : "Entity",
                 "fontStyle" : "",
                 "foreground" : "#FF6400"
-            }
+            },
             "keyword" : {
                 "description" : "Keyword",
                 "fontStyle" : "",
                 "foreground" : "#FBDE2D"
-            }
+            },
             "string" : {
                 "description" : "String",
                 "fontStyle" : "",
                 "foreground" : "#61CE3C"
-            }
+            },
             "storage" : { // From TextMate
                 "description" : "Storage",
                 "fontStyle" : "",
                 "foreground" : "#61CE3C"
-            }
+            },
             "variable" : {
                 "description" : "Variable",
                 "fontStyle" : "",
                 "foreground" : "#AEAEAE"
-            }
+            },
             "value" : {
                 "description" : "Value",
                 "fontStyle" : "",
                 "foreground" : "#AEAEAE"
-            }
+            },
             "variable" : {
                 "description" : "Variable",
                 "fontStyle" : "",
                 "foreground" : "#AEAEAE"
-            }
+            },
             "preprocessor" : {
                 "description" : "Preprocessor",
                 "fontStyle" : "",
                 "foreground" : "#AEAEAE"
-            }
+            },
             "plain" : {
                 "description" : "Plain",
                 "fontStyle" : "",
                 "foreground" : "#AEAEAE"
-            }
+            },
             "functions" : {
                 "description" : "Function",
                 "fontStyle" : "",
                 "foreground" : "#AEAEAE"
-            }
+            },
             "decorator" : {
                 "description" : "Decorator",
                 "fontStyle" : "",
                 "foreground" : "#AEAEAE"
-            }
+            },
             "color1" : {
                 "description" : "color1",
                 "fontStyle" : "",
                 "foreground" : "#AEAEAE"
-            }
+            },
             "color2" : {
                 "description" : "color2",
                 "fontStyle" : "",
                 "foreground" : "#AEAEAE"
-            }
+            },
             "color3" : {
                 "description" : "color3",
                 "fontStyle" : "",

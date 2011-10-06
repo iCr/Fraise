@@ -1,5 +1,5 @@
 //
-//  SyntaxHighlightController.m
+//  ThemeController.m
 //  Strawberry
 //
 //  Created by Chris Marrin on 9/17/11.
@@ -34,7 +34,7 @@ ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF S
 DAMAGE.
 */
 
-#import "SyntaxHighlightController.h"
+#import "ThemeController.h"
 
 #import "AppController.h"
 #import <JSCocoa/JSCocoa.h>
@@ -74,7 +74,46 @@ DAMAGE.
 
 @end
 
-@implementation SyntaxHighlightController
+@implementation ThemeController
+
++ (ThemeController*)sharedController
+{
+    static ThemeController* controller;
+    if (!controller)
+        controller = [[ThemeController alloc] init];
+    return controller;
+}
+
+- (id)init
+{
+    self = [super init];
+    if (self) {
+        themes = [[NSMutableDictionary alloc] init];
+    
+        JSCocoa* js = [AppController lockJSCocoa];
+        js.useJSLint = NO;
+        
+        [js evalJSFile:[[NSBundle mainBundle] pathForResource:@"XRegExp" ofType:@"js"]];
+        [js evalJSFile:[[NSBundle mainBundle] pathForResource:@"highlight" ofType:@"js"]];
+        
+        NSArray* brushes = [[NSBundle mainBundle] pathsForResourcesOfType:@"js" inDirectory:@"brushes"];
+        for (NSString* brush in brushes)
+            [js evalJSFile:brush];
+        
+        NSArray* themeFiles = [[NSBundle mainBundle] pathsForResourcesOfType:@"js" inDirectory:@"themes"];
+        
+        for (NSString* themeFile in themeFiles) {
+            NSString* string = [NSString stringWithContentsOfFile:themeFile encoding:NSUTF8StringEncoding error:nil];
+            NSDictionary* dictionary = [js callFunction:@"doParseJSON" withArguments:[NSArray arrayWithObject:string]];
+            NSString* themeName = [dictionary objectForKey:@"name"];
+            if (themeName && [themeName length] > 0)
+                [themes setObject:dictionary forKey:themeName];
+        }
+            
+        [AppController unlockJSCocoa];
+    }
+    return self;
+}
 
 - (NSAttributedString*)highlightCode:(NSString*)code withSuffix:(NSString*)suffix
 {

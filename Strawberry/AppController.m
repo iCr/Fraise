@@ -53,21 +53,6 @@ DAMAGE.
 {
     self = [super init];
     if (self) {
-        JSCocoa* js = [AppController lockJSCocoa];
-        js.useJSLint = NO;
-        
-        [js evalJSFile:[[NSBundle mainBundle] pathForResource:@"XRegExp" ofType:@"js"]];
-        [js evalJSFile:[[NSBundle mainBundle] pathForResource:@"highlight" ofType:@"js"]];
-        
-        NSArray* brushes = [[NSBundle mainBundle] pathsForResourcesOfType:@"js" inDirectory:@"brushes"];
-        for (NSString* brush in brushes)
-            [js evalJSFile:brush];
-        
-        // FIXME: Testing
-        //if (js hasJSFunctionNamed:@-
-        
-        
-        [AppController unlockJSCocoa];
     }
     return self;
 }

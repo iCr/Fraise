@@ -43,7 +43,6 @@ DAMAGE.
     NSMutableString* content;
     NSStringEncoding encoding;
     NSURL* url;
-    SyntaxHighlightController* syntaxHighlightController;
 }
 
 @property(readwrite, retain) NSString* content;

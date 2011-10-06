@@ -321,3 +321,9 @@ function doSyntaxHighlight(code, suffix)
 {
     return SyntaxHighlighter.highlight(code, suffix);
 }
+
+function doParseJSON(string)
+{
+    return eval('(' + string + ')');
+}
+

@@ -37,7 +37,7 @@ DAMAGE.
 #import "Document.h"
 
 #import "DocumentWindowController.h"
-#import "SyntaxHighlightController.h"
+#import "ThemeController.h"
 
 @implementation Document
 
@@ -47,7 +47,6 @@ DAMAGE.
 {
     self = [super init];
     if (self) {
-        syntaxHighlightController = [[SyntaxHighlightController alloc] init];
     }
     return self;
 }
@@ -58,7 +57,7 @@ DAMAGE.
         return;
         
     // FIXME: Testing for syntax highlighting
-    NSAttributedString* string = [syntaxHighlightController highlightCode:content withSuffix:[url pathExtension]];
+    NSAttributedString* string = [[ThemeController sharedController] highlightCode:content withSuffix:[url pathExtension]];
 
     [[((WindowController*) [[self windowControllers] objectAtIndex:0]).textView textStorage] setAttributedString:string];
 }
