@@ -65,7 +65,7 @@ DAMAGE.
             "string" : {
                 "description" : "String",
                 "fontStyle" : "",
-                "foreground" : "blue"
+                "foreground" : "#00f"
             },
             "variable" : {
                 "description" : "Variable",
@@ -80,12 +80,12 @@ DAMAGE.
             "preprocessor" : {
                 "description" : "Preprocessor",
                 "fontStyle" : "",
-                "foreground" : "gray"
+                "foreground" : "#888"
             },
             "plain" : {
                 "description" : "Plain",
                 "fontStyle" : "",
-                "foreground" : "black"
+                "foreground" : "#000"
             },
             "functions" : {
                 "description" : "Function",
@@ -95,7 +95,7 @@ DAMAGE.
             "color1" : {
                 "description" : "color1",
                 "fontStyle" : "",
-                "foreground" : "gray"
+                "foreground" : "#888"
             },
             "color2" : {
                 "description" : "color2",
@@ -105,7 +105,7 @@ DAMAGE.
             "color3" : {
                 "description" : "color3",
                 "fontStyle" : "",
-                "foreground" : "red"
+                "foreground" : "#f00"
             }
         }
     }

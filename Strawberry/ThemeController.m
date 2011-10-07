@@ -50,36 +50,36 @@ DAMAGE.
     if (![[NSScanner scannerWithString:[string substringFromIndex:1]] scanHexInt:&value])
         return [NSColor blackColor];
         
-    uint8_t r, g, b, a = 0xff;
+    float r, g, b, a = 1;
 
     switch([string length]) {
         case 4: // RGB
-            r = (value >> 8) & 0xf;
-            g = (value >> 4) & 0xf;
-            b = value & 0xf;
+            r = (float) ((value >> 8) & 0xf) / 15;
+            g = (float) ((value >> 4) & 0xf) / 15;
+            b = (float) (value & 0xf) / 15;
             break;
         case 5: // RGBA
-            r = (value >> 12) & 0xf;
-            g = (value >> 8) & 0xf;
-            b = (value >> 4) & 0xf;
-            a = value & 0xf;
+            r = (float) ((value >> 12) & 0xf) / 15;
+            g = (float) ((value >> 8) & 0xf) / 15;
+            b = (float) ((value >> 4) & 0xf) / 15;
+            a = (float) (value & 0xf) / 15;
             break;
         case 7: // RRGGBB
-            r = (value >> 16) & 0xff;
-            g = (value >> 8) & 0xff;
-            b = value & 0xff;
+            r = (float) ((value >> 16) & 0xff) / 255;
+            g = (float) ((value >> 8) & 0xff) / 255;
+            b = (float) (value & 0xff) / 255;
             break;
         case 9: // RRGGBBAA
             break;
-            r = (value >> 24) & 0xff;
-            g = (value >> 16) & 0xff;
-            b = (value >> 8) & 0xff;
-            a = value & 0xff;
+            r = (float) ((value >> 24) & 0xff) / 255;
+            g = (float) ((value >> 16) & 0xff) / 255;
+            b = (float) ((value >> 8) & 0xff) / 255;
+            a = (float) (value & 0xff) / 255;
         default:
             return [NSColor blackColor];
     }
 
-	return [NSColor colorWithCalibratedRed:((float) r) / 255 green:((float) r) / 255 blue:((float) b) / 255 alpha:((float) a) / 255];
+	return [NSColor colorWithCalibratedRed:r green:g blue:b alpha:a];
 }
 
 @end
