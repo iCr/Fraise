@@ -36,6 +36,8 @@ DAMAGE.
 
 #import <Foundation/Foundation.h>
 
+#define NotifyThemeChanged @"NotifyThemeChanged"
+
 @interface NSColor (ColorAdditions)
 
 + (NSColor *)colorWithHexString:(NSString *) string;
@@ -65,5 +67,12 @@ DAMAGE.
 
 @property(copy) NSString* currentThemeName;
 @property(readonly) NSDictionary* currentTheme;
+
+@property(readonly) NSColor* backgroundColor;
+@property(readonly) NSColor* caretColor;
+@property(readonly) NSColor* foregroundColor;
+@property(readonly) NSColor* invisiblesColor;
+@property(readonly) NSColor* lineHighlightColor;
+@property(readonly) NSColor* selectionColor;
 
 @end

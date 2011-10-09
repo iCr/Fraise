@@ -43,12 +43,27 @@ DAMAGE.
 
 @synthesize content, encoding, url;
 
+- (void)themeChanged:(NSNotification*) notification
+{
+    if (![[self windowControllers] count])
+        return;
+        
+    NSTextView* textView = ((WindowController*) [[self windowControllers] objectAtIndex:0]).textView;
+    [textView setBackgroundColor:[ThemeController sharedController].backgroundColor];
+}
 - (id)init
 {
     self = [super init];
     if (self) {
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(themeChanged:) name:NotifyThemeChanged object:nil];
     }
     return self;
+}
+
+- (void)dealloc
+{
+    
+    [super dealloc];
 }
 
 - (void)updateTextView
@@ -68,6 +83,7 @@ DAMAGE.
     DocumentWindowController* controller = [[DocumentWindowController alloc] initWithWindowNibName:@"Document"];
     [self addWindowController:controller];
     [self updateTextView];
+    [self themeChanged:nil];
 }
 
 - (void)windowControllerDidLoadNib:(NSWindowController *)controller

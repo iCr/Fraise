@@ -121,11 +121,56 @@ DAMAGE.
 
 @implementation ThemeController
 
-@synthesize currentThemeName;
+- (NSString*)currentThemeName
+{
+    return currentThemeName;
+}
+
+- (void)setCurrentThemeName:(NSString*) name
+{
+    currentThemeName = name;
+    [[NSNotificationCenter defaultCenter] postNotificationName:NotifyThemeChanged object:nil];
+}
 
 - (NSDictionary*)currentTheme
 {
     return themes ? [themes objectForKey:currentThemeName] : nil;
+}
+
+- (NSColor*) backgroundColor
+{
+    NSColor* color = [NSColor colorWithHexString:[self.currentTheme objectForKey:@"background"]];
+    return color ? color : [NSColor whiteColor];
+}
+
+- (NSColor*) caretColor
+{
+    NSColor* color = [NSColor colorWithHexString:[self.currentTheme objectForKey:@"caret"]];
+    return color ? color : [NSColor greenColor];
+}
+
+- (NSColor*) foregroundColor
+{
+    NSColor* color = [NSColor colorWithHexString:[self.currentTheme objectForKey:@"foreground"]];
+    return color ? color : [NSColor blackColor];
+}
+
+- (NSColor*) invisiblesColor
+{
+    NSColor* color = [NSColor colorWithHexString:[self.currentTheme objectForKey:@"invisibles"]];
+    return color ? color : [NSColor blackColor];
+}
+
+- (NSColor*) lineHighlightColor
+{
+    NSColor* color = [NSColor colorWithHexString:[self.currentTheme objectForKey:@"lineHighligh"]];
+    return color ? color : [NSColor whiteColor];
+}
+
+- (NSColor*) selectionColor
+{
+    NSColor* color = [NSColor colorWithHexString:[self.currentTheme objectForKey:@"selection"]];
+    return color ? color : [NSColor blueColor];
 }
 
 + (ThemeController*)sharedController
@@ -165,7 +210,7 @@ DAMAGE.
         [AppController unlockJSCocoa];
         
         // FIXME: For now we default to the "Default" theme
-        self.currentThemeName = @"Default";
+        currentThemeName = @"Default";
     }
     return self;
 }
