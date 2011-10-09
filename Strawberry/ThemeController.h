@@ -61,18 +61,12 @@ DAMAGE.
     NSString* currentThemeName;
 }
 
-+ (ThemeController*)sharedController;
-
-- (NSAttributedString*)highlightCode:(NSString*)code withSuffix:(NSString*)suffix;
-
 @property(copy) NSString* currentThemeName;
 @property(readonly) NSDictionary* currentTheme;
 
-@property(readonly) NSColor* backgroundColor;
-@property(readonly) NSColor* caretColor;
-@property(readonly) NSColor* foregroundColor;
-@property(readonly) NSColor* invisiblesColor;
-@property(readonly) NSColor* lineHighlightColor;
-@property(readonly) NSColor* selectionColor;
++ (ThemeController*)sharedController;
+
+- (NSAttributedString*)highlightCode:(NSString*)code withSuffix:(NSString*)suffix;
+- (NSColor*) colorForGeneralType:(NSString*)type;
 
 @end

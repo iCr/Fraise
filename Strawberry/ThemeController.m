@@ -137,42 +137,6 @@ DAMAGE.
     return themes ? [themes objectForKey:currentThemeName] : nil;
 }
 
-- (NSColor*) backgroundColor
-{
-    NSColor* color = [NSColor colorWithHexString:[self.currentTheme objectForKey:@"background"]];
-    return color ? color : [NSColor whiteColor];
-}
-
-- (NSColor*) caretColor
-{
-    NSColor* color = [NSColor colorWithHexString:[self.currentTheme objectForKey:@"caret"]];
-    return color ? color : [NSColor greenColor];
-}
-
-- (NSColor*) foregroundColor
-{
-    NSColor* color = [NSColor colorWithHexString:[self.currentTheme objectForKey:@"foreground"]];
-    return color ? color : [NSColor blackColor];
-}
-
-- (NSColor*) invisiblesColor
-{
-    NSColor* color = [NSColor colorWithHexString:[self.currentTheme objectForKey:@"invisibles"]];
-    return color ? color : [NSColor blackColor];
-}
-
-- (NSColor*) lineHighlightColor
-{
-    NSColor* color = [NSColor colorWithHexString:[self.currentTheme objectForKey:@"lineHighligh"]];
-    return color ? color : [NSColor whiteColor];
-}
-
-- (NSColor*) selectionColor
-{
-    NSColor* color = [NSColor colorWithHexString:[self.currentTheme objectForKey:@"selection"]];
-    return color ? color : [NSColor blueColor];
-}
-
 + (ThemeController*)sharedController
 {
     static ThemeController* controller;
@@ -233,6 +197,19 @@ DAMAGE.
     NSColor* color = [NSColor colorWithHexString:[style objectForKey:@"foreground"]];
     
     return [NSDictionary dictionaryWithObjectsAndKeys:color, NSForegroundColorAttributeName, nil];
+}
+
+- (NSColor*) colorForGeneralType:(NSString*)type
+{
+    NSDictionary* styles = [self.currentTheme objectForKey:@"styles"];
+    if (!styles)
+        return nil;
+        
+    NSDictionary* general = [styles objectForKey:@"general"];
+    if (!general)
+        return nil;
+        
+    return [NSColor colorWithHexString:[general objectForKey:type]];
 }
 
 - (NSAttributedString*)highlightCode:(NSString*)code withSuffix:(NSString*)suffix

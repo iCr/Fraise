@@ -49,7 +49,7 @@ DAMAGE.
         return;
         
     NSTextView* textView = ((WindowController*) [[self windowControllers] objectAtIndex:0]).textView;
-    [textView setBackgroundColor:[ThemeController sharedController].backgroundColor];
+    [textView setBackgroundColor:[[ThemeController sharedController] colorForGeneralType:@"background"]];
 }
 - (id)init
 {

@@ -39,7 +39,7 @@ DAMAGE.
     "name" : "Default",
     "styles" : {
         "general" : {
-            "background" : "#0C1021",
+            "background" : "#FFFFFF",
 			"caret" : "#FFFFFFA6",
             "foreground" : "#F8F8F8",
             "invisibles" : "#FFFFFF40",
