@@ -129,6 +129,7 @@ DAMAGE.
 - (void)setCurrentThemeName:(NSString*) name
 {
     currentThemeName = name;
+    [[[NSUserDefaultsController sharedUserDefaultsController] values] setValue:currentThemeName forKey:@"currentThemeName"];    
     [[NSNotificationCenter defaultCenter] postNotificationName:NotifyThemeChanged object:nil];
 }
 
@@ -173,8 +174,7 @@ DAMAGE.
             
         [AppController unlockJSCocoa];
         
-        // FIXME: For now we default to the "Default" theme
-        currentThemeName = @"Default";
+        currentThemeName = [[[NSUserDefaultsController sharedUserDefaultsController] values] valueForKey:@"currentThemeName"];
     }
     return self;
 }

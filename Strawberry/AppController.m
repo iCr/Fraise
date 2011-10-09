@@ -53,6 +53,9 @@ DAMAGE.
 {
     self = [super init];
     if (self) {
+        [[NSUserDefaultsController sharedUserDefaultsController] setInitialValues:[NSDictionary dictionaryWithObjectsAndKeys:
+            @"Default", @"currentThemeName",
+            nil]];
     }
     return self;
 }
