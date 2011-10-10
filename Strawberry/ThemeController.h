@@ -63,6 +63,7 @@ DAMAGE.
 
 @property(copy) NSString* currentThemeName;
 @property(readonly) NSDictionary* currentTheme;
+@property(readonly) NSArray* themeNames;
 
 + (ThemeController*)sharedController;
 

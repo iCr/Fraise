@@ -8,6 +8,8 @@
 
 #import "PrefThemesController.h"
 
+#import "ThemeController.h"
+
 @implementation ThemeAttributeModel
 
 @synthesize name, fg, bg, bold, italic, underline;
@@ -41,14 +43,32 @@
     return [[[PrefThemesController alloc] init] autorelease];
 }
 
+- (void)populateThemeMenu
+{
+    NSString* currentSelection = [m_themeButton titleOfSelectedItem];
+    
+    while (1) {
+        if (![m_themeButton numberOfItems])
+            break;
+        if ([[m_themeButton itemAtIndex:0] tag] < 0)
+            break;
+        [m_themeButton removeItemAtIndex:0];
+    }
+    
+    NSArray* themeNames = [ThemeController sharedController].themeNames;
+    for (NSString* name in themeNames)
+        [m_themeButton insertItemWithTitle:name atIndex:0];
+        
+    [m_themeButton selectItemWithTitle:currentSelection];
+    if (![m_themeButton selectedItem] || [[m_themeButton selectedItem] tag] < 0)
+        [m_themeButton selectItemWithTitle:@"Default"];
+}
+
 - (id)init
 {
     if (self = [super init]) {
         themeAttributes = [[NSMutableArray alloc] init];
-
-        // FIXME: This is just a dummy
-        [self addThemeAttribute:[ThemeAttributeModel themeAttributeModelWithName:@"Test Name" fg:[NSColor blueColor] bg:[NSColor greenColor]
-            bold:[NSNumber numberWithBool:YES] italic:[NSNumber numberWithBool:NO] underline:[NSNumber numberWithBool:YES]]];
+        [self populateThemeMenu];
     }
     
     return self;
@@ -58,6 +78,10 @@
 {
     [themeAttributes release];
     [super dealloc];
+}
+
+- (IBAction)changeTheme:(id)sender
+{
 }
 
 - (NSString*)label

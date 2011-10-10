@@ -126,6 +126,14 @@ DAMAGE.
     return currentThemeName;
 }
 
+- (NSArray*)themeNames
+{
+    NSMutableArray* array = [[[NSMutableArray alloc] init] autorelease];
+    for (NSString* name in themes)
+        [array addObject:name];
+    return array;
+}
+
 - (void)setCurrentThemeName:(NSString*) name
 {
     currentThemeName = name;

@@ -35,11 +35,14 @@
 @interface PrefThemesController : PrefController <NSTableViewDelegate, NSTableViewDataSource>
 {
     IBOutlet NSTableView* table;
-    
+    IBOutlet NSPopUpButton* m_themeButton;
+        
     NSMutableArray* themeAttributes;
 }
 
 + (PrefThemesController*) controller;
+
+- (IBAction)changeTheme:(id)sender;
 
 - (void)addThemeAttribute:(ThemeAttributeModel*)themeAttribute;
 
