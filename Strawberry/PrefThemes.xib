@@ -61,7 +61,6 @@
 						<int key="NSvFlags">265</int>
 						<string key="NSFrame">{{269, 434}, {175, 26}}</string>
 						<reference key="NSSuperview" ref="489587675"/>
-						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:828</string>
 						<bool key="NSEnabled">YES</bool>
 						<object class="NSPopUpButtonCell" key="NSCell" id="225093526">
@@ -80,23 +79,23 @@
 							<string key="NSKeyEquivalent"/>
 							<int key="NSPeriodicDelay">400</int>
 							<int key="NSPeriodicInterval">75</int>
-							<object class="NSMenuItem" key="NSMenuItem" id="1029229573">
+							<object class="NSMenuItem" key="NSMenuItem" id="506193031">
 								<reference key="NSMenu" ref="82005615"/>
-								<bool key="NSIsDisabled">YES</bool>
-								<bool key="NSIsSeparator">YES</bool>
-								<string key="NSTitle"/>
+								<string key="NSTitle">Delete Theme...</string>
 								<string key="NSKeyEquiv"/>
+								<int key="NSKeyEquivModMask">1048576</int>
 								<int key="NSMnemonicLoc">2147483647</int>
-								<object class="NSCustomResource" key="NSOnImage" id="211831221">
+								<int key="NSState">1</int>
+								<object class="NSCustomResource" key="NSOnImage" id="1070410123">
 									<string key="NSClassName">NSImage</string>
 									<string key="NSResourceName">NSMenuCheckmark</string>
 								</object>
-								<object class="NSCustomResource" key="NSMixedImage" id="555897912">
+								<object class="NSCustomResource" key="NSMixedImage" id="722806454">
 									<string key="NSClassName">NSImage</string>
 									<string key="NSResourceName">NSMenuMixedState</string>
 								</object>
 								<string key="NSAction">_popUpItemAction:</string>
-								<int key="NSTag">-1</int>
+								<int key="NSTag">-3</int>
 								<reference key="NSTarget" ref="225093526"/>
 							</object>
 							<bool key="NSMenuItemRespectAlignment">YES</bool>
@@ -104,32 +103,32 @@
 								<string key="NSTitle">OtherViews</string>
 								<object class="NSMutableArray" key="NSMenuItems">
 									<bool key="EncodedWithXMLCoder">YES</bool>
-									<reference ref="1029229573"/>
+									<object class="NSMenuItem" id="1029229573">
+										<reference key="NSMenu" ref="82005615"/>
+										<bool key="NSIsDisabled">YES</bool>
+										<bool key="NSIsSeparator">YES</bool>
+										<string key="NSTitle"/>
+										<string key="NSKeyEquiv"/>
+										<int key="NSMnemonicLoc">2147483647</int>
+										<reference key="NSOnImage" ref="1070410123"/>
+										<reference key="NSMixedImage" ref="722806454"/>
+										<string key="NSAction">_popUpItemAction:</string>
+										<int key="NSTag">-1</int>
+										<reference key="NSTarget" ref="225093526"/>
+									</object>
 									<object class="NSMenuItem" id="618956932">
 										<reference key="NSMenu" ref="82005615"/>
 										<string key="NSTitle">New Theme...</string>
 										<string key="NSKeyEquiv"/>
 										<int key="NSKeyEquivModMask">1048576</int>
 										<int key="NSMnemonicLoc">2147483647</int>
-										<reference key="NSOnImage" ref="211831221"/>
-										<reference key="NSMixedImage" ref="555897912"/>
+										<reference key="NSOnImage" ref="1070410123"/>
+										<reference key="NSMixedImage" ref="722806454"/>
 										<string key="NSAction">_popUpItemAction:</string>
 										<int key="NSTag">-2</int>
 										<reference key="NSTarget" ref="225093526"/>
 									</object>
-									<object class="NSMenuItem" id="506193031">
-										<reference key="NSMenu" ref="82005615"/>
-										<string key="NSTitle">Delete Theme...</string>
-										<string key="NSKeyEquiv"/>
-										<int key="NSKeyEquivModMask">1048576</int>
-										<int key="NSMnemonicLoc">2147483647</int>
-										<int key="NSState">1</int>
-										<reference key="NSOnImage" ref="211831221"/>
-										<reference key="NSMixedImage" ref="555897912"/>
-										<string key="NSAction">_popUpItemAction:</string>
-										<int key="NSTag">-3</int>
-										<reference key="NSTarget" ref="225093526"/>
-									</object>
+									<reference ref="506193031"/>
 								</object>
 								<reference key="NSMenuFont" ref="553207885"/>
 							</object>
@@ -165,7 +164,7 @@
 														<int key="NSvFlags">256</int>
 														<string key="NSFrameSize">{409, 190}</string>
 														<reference key="NSSuperview" ref="267932652"/>
-														<reference key="NSNextKeyView" ref="147313627"/>
+														<reference key="NSNextKeyView" ref="428838241"/>
 														<string key="NSReuseIdentifierKey">_NS:1807</string>
 														<bool key="NSEnabled">YES</bool>
 														<object class="NSTableHeaderView" key="NSHeaderView" id="887299860">
@@ -480,7 +479,7 @@
 										</object>
 										<string key="NSFrame">{{18, 35}, {411, 208}}</string>
 										<reference key="NSSuperview" ref="776929890"/>
-										<reference key="NSNextKeyView" ref="428838241"/>
+										<reference key="NSNextKeyView" ref="267932652"/>
 										<string key="NSReuseIdentifierKey">_NS:1803</string>
 										<int key="NSsFlags">133682</int>
 										<reference key="NSVScroller" ref="147313627"/>

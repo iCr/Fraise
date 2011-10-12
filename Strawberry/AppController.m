@@ -56,6 +56,8 @@ DAMAGE.
         [[NSUserDefaultsController sharedUserDefaultsController] setInitialValues:[NSDictionary dictionaryWithObjectsAndKeys:
             @"Default", @"currentThemeName",
             nil]];
+
+        [[NSColorPanel sharedColorPanel] setShowsAlpha:YES];
     }
     return self;
 }
