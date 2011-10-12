@@ -66,16 +66,45 @@ DAMAGE.
 - (void)drawWithFrame:(NSRect)cellFrame inView:(NSView *)controlView
 {
 	[NSGraphicsContext saveGraphicsState];
-	[[NSColor whiteColor] setStroke];	
+    
+    [[NSGraphicsContext currentContext] setShouldAntialias:NO];
+    
+	cellFrame = NSInsetRect(cellFrame, 2.0, 2.0);
+	[[NSColor grayColor] setStroke];
+    [NSBezierPath strokeRect:cellFrame];
+    
+	cellFrame = NSInsetRect(cellFrame, 1.0, 1.0);
+    
+    // FIXME: This should really be a gradient
+    [[NSColor whiteColor] drawSwatchInRect:cellFrame];
+
+	cellFrame = NSInsetRect(cellFrame, 2.0, 2.0);
+	NSColor * color = (NSColor *)[self objectValue];
+    [color drawSwatchInRect:cellFrame];
+	[[NSColor grayColor] setStroke];
+    [NSBezierPath strokeRect:cellFrame];
+
+    /*
 	NSBezierPath * path = [NSBezierPath bezierPathWithRect:cellFrame];
 	[path setLineWidth:1];
 	[path stroke];	
-	cellFrame = NSInsetRect(cellFrame, 2.0, 2.0);
-	NSColor * color = (NSColor *)[self objectValue];
+	cellFrame = NSInsetRect(cellFrame, 1.0, 1.0);
     
+    // FIXME: This should really be a gradient
+    [[NSColor whiteColor] drawSwatchInRect:cellFrame];
+
+	cellFrame = NSInsetRect(cellFrame, 4.0, 4.0);
+
+	[[NSColor grayColor] setStroke];
+    path = [NSBezierPath bezierPathWithRect:cellFrame];
+	[path stroke];	
+    
+	NSColor * color = (NSColor *)[self objectValue];
+	cellFrame = NSInsetRect(cellFrame, 1.0, 1.0);
 	if ( [color respondsToSelector:@selector(setFill)] )
 		[color drawSwatchInRect:cellFrame];
-
+    */
+    
 	[NSGraphicsContext restoreGraphicsState];
 }
 

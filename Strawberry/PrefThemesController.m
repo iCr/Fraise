@@ -121,7 +121,7 @@
 
 - (CGFloat)tableView:(NSTableView *)tableView heightOfRow:(NSInteger)row
 {
-    return 22;
+    return 20;
 }
 
 @end
