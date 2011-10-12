@@ -119,6 +119,31 @@ DAMAGE.
 
 @end
 
+@implementation ThemeAttributeModel
+
+@synthesize name, fg, bg, bold, italic, underline;
+
++ (ThemeAttributeModel*) themeAttributeModelWithName:(NSString*)name attributes:(NSDictionary*)attrs
+{
+    ThemeAttributeModel* model = [[[ThemeAttributeModel alloc] init] autorelease];
+    model.name = name;
+    model.fg = [NSColor colorWithHexString:[attrs objectForKey:@"foreground"]];
+    model.bg = [NSColor colorWithHexString:[attrs objectForKey:@"background"]];
+    model.bold = [attrs objectForKey:@"bold"];
+    model.italic = [attrs objectForKey:@"italic"];
+    model.underline = [attrs objectForKey:@"underline"];
+    return model;
+}
+
+- (void)dealloc
+{
+    self.name = nil;
+    self.fg = nil;
+    self.bg = nil;
+}
+
+@end
+
 @implementation ThemeController
 
 - (NSString*)currentThemeName
@@ -144,6 +169,15 @@ DAMAGE.
 - (NSDictionary*)currentTheme
 {
     return themes ? [themes objectForKey:currentThemeName] : nil;
+}
+
+- (NSDictionary*)currentSyntaxTypes
+{
+    NSDictionary* styles = [self.currentTheme objectForKey:@"styles"];
+    if (!styles)
+        return nil;
+        
+    return [styles objectForKey:@"syntax"];
 }
 
 + (ThemeController*)sharedController
@@ -189,15 +223,7 @@ DAMAGE.
 
 - (NSDictionary*) attributesForSyntaxType:(NSString*)type
 {
-    NSDictionary* styles = [self.currentTheme objectForKey:@"styles"];
-    if (!styles)
-        return nil;
-        
-    NSDictionary* syntax = [styles objectForKey:@"syntax"];
-    if (!syntax)
-        return nil;
-        
-    NSDictionary* style = [syntax objectForKey:type];
+    NSDictionary* style = [self.currentSyntaxTypes objectForKey:type];
     if (!style)
         return nil;
         

@@ -9,28 +9,7 @@
 #import "PrefController.h"
 
 @class ThemeColorArrayController;
-
-@interface ThemeAttributeModel : NSObject
-{
-    NSString* name;
-    NSColor* fg;
-    NSColor* bg;
-    NSNumber* bold;
-    NSNumber* italice;
-    NSNumber* underline;
-}
-
-@property(copy) NSString* name;
-@property(copy) NSColor* fg;
-@property(copy) NSColor* bg;
-@property(copy) NSNumber* bold;
-@property(copy) NSNumber* italic;
-@property(copy) NSNumber* underline;
-
-+ (ThemeAttributeModel*) themeAttributeModelWithName:(NSString*)name fg:(NSColor*) fg bg:(NSColor*) bg 
-                            bold:(NSNumber*) bold italic:(NSNumber*) italic underline:(NSNumber*) underline; 
-
-@end
+@class ThemeAttributeModel;
 
 @interface PrefThemesController : PrefController <NSTableViewDelegate, NSTableViewDataSource>
 {

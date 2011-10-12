@@ -55,6 +55,27 @@ DAMAGE.
 
 @end
 
+@interface ThemeAttributeModel : NSObject
+{
+    NSString* name;
+    NSColor* fg;
+    NSColor* bg;
+    NSNumber* bold;
+    NSNumber* italice;
+    NSNumber* underline;
+}
+
+@property(copy) NSString* name;
+@property(copy) NSColor* fg;
+@property(copy) NSColor* bg;
+@property(copy) NSNumber* bold;
+@property(copy) NSNumber* italic;
+@property(copy) NSNumber* underline;
+
++ (ThemeAttributeModel*) themeAttributeModelWithName:(NSString*)name attributes:(NSDictionary*)attrs; 
+
+@end
+
 @interface ThemeController : NSObject
 {
     NSMutableDictionary* themes;
@@ -62,7 +83,7 @@ DAMAGE.
 }
 
 @property(copy) NSString* currentThemeName;
-@property(readonly) NSDictionary* currentTheme;
+@property(readonly) NSDictionary* currentSyntaxTypes;
 @property(readonly) NSArray* themeNames;
 
 + (ThemeController*)sharedController;

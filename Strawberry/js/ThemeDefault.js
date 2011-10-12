@@ -50,7 +50,9 @@ DAMAGE.
             "comments" : {
                 "description" : "Comment",
                 "fontStyle" : "",
-                "foreground" : "#008200"
+                "foreground" : "#008200",
+                "bold" : 4,
+                "italic" : 6
             },
             "constants" : {
                 "description" : "Constant",

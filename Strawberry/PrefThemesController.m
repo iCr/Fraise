@@ -10,37 +10,20 @@
 
 #import "ThemeController.h"
 
-@implementation ThemeAttributeModel
-
-@synthesize name, fg, bg, bold, italic, underline;
-
-+ (ThemeAttributeModel*) themeAttributeModelWithName:(NSString*)name fg:(NSColor*) fg bg:(NSColor*) bg 
-                            bold:(NSNumber*) bold italic:(NSNumber*) italic underline:(NSNumber*) underline
-{
-    ThemeAttributeModel* model = [[[ThemeAttributeModel alloc] init] autorelease];
-    model.name = name;
-    model.fg = fg;
-    model.bg = bg;
-    model.bold = bold;
-    model.italic = italic;
-    model.underline = underline;
-    return model;
-}
-
-- (void)dealloc
-{
-    self.name = nil;
-    self.fg = nil;
-    self.bg = nil;
-}
-
-@end
-
 @implementation PrefThemesController
 
 + (PrefThemesController*) controller
 {
     return [[[PrefThemesController alloc] init] autorelease];
+}
+
+- (void)showCurrentTheme
+{
+    NSDictionary* syntaxTypes = [ThemeController sharedController].currentSyntaxTypes;
+    for (NSString* name in syntaxTypes) {
+        NSDictionary* attrs = [syntaxTypes objectForKey:name];
+        [self addThemeAttribute:[ThemeAttributeModel themeAttributeModelWithName:name attributes:attrs]];
+    }
 }
 
 - (void)populateThemeMenu
@@ -62,6 +45,8 @@
     [m_themeButton selectItemWithTitle:currentSelection];
     if (![m_themeButton selectedItem] || [[m_themeButton selectedItem] tag] < 0)
         [m_themeButton selectItemWithTitle:@"Default"];
+        
+    [self showCurrentTheme];
 }
 
 - (id)init
@@ -82,6 +67,13 @@
 
 - (IBAction)changeTheme:(id)sender
 {
+    if ([[sender selectedItem] tag] < 0) {
+        // FIXME: Deal with add/delete theme
+        return;
+    }
+    
+    [ThemeController sharedController].currentThemeName = [sender titleOfSelectedItem];
+    [self showCurrentTheme];
 }
 
 - (NSString*)label
@@ -125,6 +117,11 @@
 	NSString *columnKey = [aTableColumn identifier];
 	[objectAtRow setValue:anObject forKey:columnKey];
 	[table reloadData];
+}
+
+- (CGFloat)tableView:(NSTableView *)tableView heightOfRow:(NSInteger)row
+{
+    return 22;
 }
 
 @end
