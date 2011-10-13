@@ -19,17 +19,18 @@
 
 - (void)showCurrentTheme
 {
+    [themeAttributes removeAllObjects];
+    
     NSDictionary* syntaxTypes = [ThemeController sharedController].currentSyntaxTypes;
     for (NSString* name in syntaxTypes) {
         NSDictionary* attrs = [syntaxTypes objectForKey:name];
         [self addThemeAttribute:[ThemeAttributeModel themeAttributeModelWithName:name attributes:attrs]];
     }
+	[table reloadData];
 }
 
 - (void)populateThemeMenu
 {
-    NSString* currentSelection = [m_themeButton titleOfSelectedItem];
-    
     while (1) {
         if (![m_themeButton numberOfItems])
             break;
@@ -42,10 +43,12 @@
     for (NSString* name in themeNames)
         [m_themeButton insertItemWithTitle:name atIndex:0];
         
-    [m_themeButton selectItemWithTitle:currentSelection];
-    if (![m_themeButton selectedItem] || [[m_themeButton selectedItem] tag] < 0)
-        [m_themeButton selectItemWithTitle:@"Default"];
-        
+    [m_themeButton selectItemWithTitle:[ThemeController sharedController].currentThemeName];
+    if (![m_themeButton selectedItem] || [[m_themeButton selectedItem] tag] < 0) {
+        [ThemeController sharedController].currentThemeName = @"Default";
+        [m_themeButton selectItemWithTitle:[ThemeController sharedController].currentThemeName];
+    }
+    
     [self showCurrentTheme];
 }
 

@@ -43,14 +43,6 @@ DAMAGE.
 
 @synthesize content, encoding, url;
 
-- (void)themeChanged:(NSNotification*) notification
-{
-    if (![[self windowControllers] count])
-        return;
-        
-    NSTextView* textView = ((WindowController*) [[self windowControllers] objectAtIndex:0]).textView;
-    [textView setBackgroundColor:[[ThemeController sharedController] colorForGeneralType:@"background"]];
-}
 - (id)init
 {
     self = [super init];
@@ -71,10 +63,19 @@ DAMAGE.
     if (![[self windowControllers] count])
         return;
         
-    // FIXME: Testing for syntax highlighting
     NSAttributedString* string = [[ThemeController sharedController] highlightCode:content withSuffix:[url pathExtension]];
 
     [[((WindowController*) [[self windowControllers] objectAtIndex:0]).textView textStorage] setAttributedString:string];
+}
+
+- (void)themeChanged:(NSNotification*) notification
+{
+    if (![[self windowControllers] count])
+        return;
+        
+    NSTextView* textView = ((WindowController*) [[self windowControllers] objectAtIndex:0]).textView;
+    [textView setBackgroundColor:[[ThemeController sharedController] colorForGeneralType:@"background"]];
+    [self updateTextView];
 }
 
 - (void)makeWindowControllers
