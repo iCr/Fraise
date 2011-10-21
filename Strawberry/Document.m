@@ -65,7 +65,9 @@ DAMAGE.
         
     NSAttributedString* string = [[ThemeController sharedController] highlightCode:content withSuffix:[url pathExtension]];
 
-    [[((WindowController*) [[self windowControllers] objectAtIndex:0]).textView textStorage] setAttributedString:string];
+    NSTextView* textView = ((WindowController*) [[self windowControllers] objectAtIndex:0]).textView;
+    [textView.textStorage setAttributedString:string];
+    [textView setFont:[ThemeController sharedController].font];
 }
 
 - (void)themeChanged:(NSNotification*) notification

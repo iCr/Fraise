@@ -80,15 +80,17 @@ DAMAGE.
 {
     NSMutableDictionary* themes;
     NSString* currentThemeName;
+    NSFont* font;
 }
 
-@property(copy) NSString* currentThemeName;
+@property(retain) NSString* currentThemeName;
 @property(readonly) NSDictionary* currentSyntaxTypes;
 @property(readonly) NSArray* themeNames;
+@property(readonly) NSFont* font;
 
 + (ThemeController*)sharedController;
 
 - (NSAttributedString*)highlightCode:(NSString*)code withSuffix:(NSString*)suffix;
-- (NSColor*) colorForGeneralType:(NSString*)type;
+- (NSColor*)colorForGeneralType:(NSString*)type;
 
 @end

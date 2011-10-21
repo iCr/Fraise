@@ -55,6 +55,8 @@ DAMAGE.
     if (self) {
         [[NSUserDefaultsController sharedUserDefaultsController] setInitialValues:[NSDictionary dictionaryWithObjectsAndKeys:
             @"Default", @"currentThemeName",
+            @"Monaco", @"currentFontName",
+            [NSNumber numberWithFloat:12], @"currentFontSize",
             nil]];
 
         [[NSColorPanel sharedColorPanel] setShowsAlpha:YES];

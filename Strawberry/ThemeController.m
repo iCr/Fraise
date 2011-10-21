@@ -146,6 +146,8 @@ DAMAGE.
 
 @implementation ThemeController
 
+@synthesize font;
+
 - (NSString*)currentThemeName
 {
     return currentThemeName;
@@ -217,8 +219,19 @@ DAMAGE.
         [AppController unlockJSCocoa];
         
         currentThemeName = [[[NSUserDefaultsController sharedUserDefaultsController] values] valueForKey:@"currentThemeName"];
+        
+        NSString* fontName = [[[NSUserDefaultsController sharedUserDefaultsController] values] valueForKey:@"currentFontName"];
+        CGFloat fontSize = [[[[NSUserDefaultsController sharedUserDefaultsController] values] valueForKey:@"currentFontSize"] floatValue];
+        font = [[NSFont fontWithName:fontName size:fontSize] retain];
     }
     return self;
+}
+
+- (void)dealloc
+{
+    [themes release];
+    self.currentThemeName = nil;
+    [font release];
 }
 
 - (NSDictionary*) attributesForSyntaxType:(NSString*)type
