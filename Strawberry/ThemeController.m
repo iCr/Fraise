@@ -127,8 +127,11 @@ DAMAGE.
 {
     ThemeAttributeModel* model = [[[ThemeAttributeModel alloc] init] autorelease];
     model.name = name;
-    model.fg = [NSColor colorWithHexString:[attrs objectForKey:@"foreground"]];
-    model.bg = [NSColor colorWithHexString:[attrs objectForKey:@"background"]];
+    
+    NSString* colorString = [attrs objectForKey:@"foreground"];
+    model.fg = colorString ? [NSColor colorWithHexString:colorString] : [NSColor colorWithCalibratedWhite:0 alpha:0];
+    colorString = [attrs objectForKey:@"background"];
+    model.bg = colorString ? [NSColor colorWithHexString:colorString] : [NSColor colorWithCalibratedWhite:0 alpha:0];
     model.bold = [attrs objectForKey:@"bold"];
     model.italic = [attrs objectForKey:@"italic"];
     model.underline = [attrs objectForKey:@"underline"];

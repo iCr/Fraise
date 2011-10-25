@@ -65,6 +65,10 @@ DAMAGE.
 
 - (void)drawWithFrame:(NSRect)cellFrame inView:(NSView *)controlView
 {
+	NSColor * color = (NSColor *)[self objectValue];
+    if ([color alphaComponent] == 0)
+        return;
+
 	[NSGraphicsContext saveGraphicsState];
 
 	cellFrame = NSInsetRect(cellFrame, 2.0, 2.0);
@@ -78,7 +82,6 @@ DAMAGE.
     [[NSGraphicsContext currentContext] setShouldAntialias:YES];
 
 	cellFrame = NSInsetRect(cellFrame, 3.0, 3.0);
-	NSColor * color = (NSColor *)[self objectValue];
     [color drawSwatchInRect:cellFrame];
 	[[NSColor grayColor] setStroke];
     [[NSGraphicsContext currentContext] setShouldAntialias:NO];
