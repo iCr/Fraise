@@ -26,6 +26,13 @@
         NSDictionary* attrs = [syntaxTypes objectForKey:name];
         [self addThemeAttribute:[ThemeAttributeModel themeAttributeModelWithName:name attributes:attrs]];
     }
+    
+    m_foregroundColorWell.color = [[ThemeController sharedController] colorForGeneralType:@"foreground"];
+    m_backgroundColorWell.color = [[ThemeController sharedController] colorForGeneralType:@"background"];
+    m_selectionColorWell.color = [[ThemeController sharedController] colorForGeneralType:@"selection"];
+    m_invisiblesColorWell.color = [[ThemeController sharedController] colorForGeneralType:@"invisibles"];
+    m_lineHighlightColorWell.color = [[ThemeController sharedController] colorForGeneralType:@"lineHighlight"];
+    m_caretColorWell.color = [[ThemeController sharedController] colorForGeneralType:@"caret"];
 	[table reloadData];
 }
 
@@ -77,6 +84,30 @@
     
     [ThemeController sharedController].currentThemeName = [sender titleOfSelectedItem];
     [self showCurrentTheme];
+}
+
+- (IBAction)changeForegroundColor:(id)sender
+{
+}
+
+- (IBAction)changeBackgroundColor:(id)sender
+{
+}
+
+- (IBAction)changeSelectionColor:(id)sender
+{
+}
+
+- (IBAction)changeInvisiblesColor:(id)sender
+{
+}
+
+- (IBAction)changeLineHighlightColor:(id)sender
+{
+}
+
+- (IBAction)changeCaretColor:(id)sender
+{
 }
 
 - (NSString*)label

@@ -41,7 +41,7 @@ DAMAGE.
         "general" : {
             "background" : "#FFFFFF",
 			"caret" : "#FFFFFFA6",
-            "foreground" : "#F8F8F8",
+            "foreground" : "#000",
             "invisibles" : "#FFFFFF40",
             "lineHighlight" : "#FFFFFF0F",
             "selection" : "#253B76"

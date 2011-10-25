@@ -84,6 +84,7 @@ DAMAGE.
 }
 
 @property(retain) NSString* currentThemeName;
+@property(readonly) NSDictionary* currentGeneralTypes;
 @property(readonly) NSDictionary* currentSyntaxTypes;
 @property(readonly) NSArray* themeNames;
 @property(readonly) NSFont* font;

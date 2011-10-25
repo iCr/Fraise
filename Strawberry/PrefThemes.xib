@@ -2,13 +2,13 @@
 <archive type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="7.10">
 	<data>
 		<int key="IBDocument.SystemTarget">1070</int>
-		<string key="IBDocument.SystemVersion">11C68</string>
-		<string key="IBDocument.InterfaceBuilderVersion">1938</string>
-		<string key="IBDocument.AppKitVersion">1138.23</string>
+		<string key="IBDocument.SystemVersion">11C57</string>
+		<string key="IBDocument.InterfaceBuilderVersion">1928</string>
+		<string key="IBDocument.AppKitVersion">1138.21</string>
 		<string key="IBDocument.HIToolboxVersion">567.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin</string>
-			<string key="NS.object.0">1938</string>
+			<string key="NS.object.0">1928</string>
 		</object>
 		<object class="NSArray" key="IBDocument.IntegratedClassDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -24,7 +24,6 @@
 			<string>NSButtonCell</string>
 			<string>NSTableView</string>
 			<string>NSColorWell</string>
-			<string>NSButton</string>
 			<string>NSCustomObject</string>
 			<string>NSCustomView</string>
 			<string>NSPopUpButtonCell</string>
@@ -564,7 +563,7 @@
 										</object>
 										<string key="NSFrame">{{136, 313}, {44, 23}}</string>
 										<reference key="NSSuperview" ref="776929890"/>
-										<reference key="NSNextKeyView" ref="852454306"/>
+										<reference key="NSNextKeyView"/>
 										<string key="NSReuseIdentifierKey">_NS:3979</string>
 										<bool key="NSEnabled">YES</bool>
 										<bool key="NSIsBordered">YES</bool>
@@ -734,29 +733,6 @@
 											<reference key="NSTextColor" ref="77932984"/>
 										</object>
 									</object>
-									<object class="NSButton" id="852454306">
-										<reference key="NSNextResponder" ref="776929890"/>
-										<int key="NSvFlags">268</int>
-										<string key="NSFrame">{{188, 312}, {44, 25}}</string>
-										<reference key="NSSuperview" ref="776929890"/>
-										<reference key="NSNextKeyView" ref="416062639"/>
-										<string key="NSReuseIdentifierKey">_NS:2466</string>
-										<bool key="NSEnabled">YES</bool>
-										<object class="NSButtonCell" key="NSCell" id="757723184">
-											<int key="NSCellFlags">-2080244224</int>
-											<int key="NSCellFlags2">134217728</int>
-											<string key="NSContents"/>
-											<reference key="NSSupport" ref="553207885"/>
-											<string key="NSCellIdentifier">_NS:2466</string>
-											<reference key="NSControlView" ref="852454306"/>
-											<int key="NSButtonFlags">-2033434369</int>
-											<int key="NSButtonFlags2">162</int>
-											<string key="NSAlternateContents"/>
-											<string key="NSKeyEquivalent"/>
-											<int key="NSPeriodicDelay">400</int>
-											<int key="NSPeriodicInterval">75</int>
-										</object>
-									</object>
 								</object>
 								<string key="NSFrame">{{1, 1}, {447, 359}}</string>
 								<reference key="NSSuperview" ref="578147214"/>
@@ -839,6 +815,102 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
+						<string key="label">m_foregroundColorWell</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="492800982"/>
+					</object>
+					<int key="connectionID">180</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">changeForegroundColor:</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="492800982"/>
+					</object>
+					<int key="connectionID">181</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">changeBackgroundColor:</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="384776596"/>
+					</object>
+					<int key="connectionID">182</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">m_backgroundColorWell</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="384776596"/>
+					</object>
+					<int key="connectionID">183</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">changeSelectionColor:</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="793382001"/>
+					</object>
+					<int key="connectionID">184</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">m_selectionColorWell</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="793382001"/>
+					</object>
+					<int key="connectionID">185</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">changeInvisiblesColor:</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="859145865"/>
+					</object>
+					<int key="connectionID">186</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">m_invisiblesColorWell</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="859145865"/>
+					</object>
+					<int key="connectionID">187</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">changeLineHighlightColor:</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="588615927"/>
+					</object>
+					<int key="connectionID">188</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">m_lineHighlightColorWell</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="588615927"/>
+					</object>
+					<int key="connectionID">189</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">changeCaretColor:</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="9916693"/>
+					</object>
+					<int key="connectionID">190</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">m_caretColorWell</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="9916693"/>
+					</object>
+					<int key="connectionID">191</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
 						<string key="label">delegate</string>
 						<reference key="source" ref="1025095288"/>
 						<reference key="destination" ref="1001"/>
@@ -912,7 +984,6 @@
 							<reference ref="416062639"/>
 							<reference ref="498474893"/>
 							<reference ref="261777086"/>
-							<reference ref="852454306"/>
 						</object>
 						<reference key="parent" ref="489587675"/>
 					</object>
@@ -1204,20 +1275,6 @@
 						<reference key="object" ref="906351583"/>
 						<reference key="parent" ref="416062639"/>
 					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">178</int>
-						<reference key="object" ref="852454306"/>
-						<object class="NSMutableArray" key="children">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="757723184"/>
-						</object>
-						<reference key="parent" ref="578147214"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">179</int>
-						<reference key="object" ref="757723184"/>
-						<reference key="parent" ref="852454306"/>
-					</object>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="flattenedProperties">
@@ -1258,8 +1315,6 @@
 					<string>175.IBPluginDependency</string>
 					<string>176.IBPluginDependency</string>
 					<string>177.IBPluginDependency</string>
-					<string>178.IBPluginDependency</string>
-					<string>179.IBPluginDependency</string>
 					<string>18.IBPluginDependency</string>
 					<string>19.IBPluginDependency</string>
 					<string>20.IBPluginDependency</string>
@@ -1333,8 +1388,6 @@
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="unlocalizedProperties">
@@ -1349,7 +1402,7 @@
 				<reference key="dict.values" ref="1002"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">179</int>
+			<int key="maxID">191</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes"/>
 		<int key="IBDocument.localizationMode">0</int>

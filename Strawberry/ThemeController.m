@@ -70,11 +70,11 @@ DAMAGE.
             b = (float) (value & 0xff) / 255;
             break;
         case 9: // RRGGBBAA
-            break;
             r = (float) ((value >> 24) & 0xff) / 255;
             g = (float) ((value >> 16) & 0xff) / 255;
             b = (float) ((value >> 8) & 0xff) / 255;
             a = (float) (value & 0xff) / 255;
+            break;
         default:
             return [NSColor blackColor];
     }
@@ -174,6 +174,15 @@ DAMAGE.
 - (NSDictionary*)currentTheme
 {
     return themes ? [themes objectForKey:currentThemeName] : nil;
+}
+
+- (NSDictionary*)currentGeneralTypes
+{
+    NSDictionary* styles = [self.currentTheme objectForKey:@"styles"];
+    if (!styles)
+        return nil;
+        
+    return [styles objectForKey:@"general"];
 }
 
 - (NSDictionary*)currentSyntaxTypes

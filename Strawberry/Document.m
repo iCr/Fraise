@@ -64,7 +64,9 @@ DAMAGE.
         return;
         
     NSAttributedString* string = [[ThemeController sharedController] highlightCode:content withSuffix:[url pathExtension]];
-
+    if (!string)
+        return;
+        
     NSTextView* textView = ((WindowController*) [[self windowControllers] objectAtIndex:0]).textView;
     [textView.textStorage setAttributedString:string];
     [textView setFont:[ThemeController sharedController].font];
