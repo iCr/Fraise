@@ -23,6 +23,9 @@
     IBOutlet NSColorWell* m_caretColorWell;
         
     NSMutableArray* themeAttributes;
+    
+    BOOL m_locked;
+    BOOL m_builtin;
 }
 
 + (PrefThemesController*) controller;

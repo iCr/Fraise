@@ -63,6 +63,7 @@ DAMAGE.
     NSNumber* bold;
     NSNumber* italice;
     NSNumber* underline;
+    BOOL locked;
 }
 
 @property(copy) NSString* name;
@@ -71,8 +72,9 @@ DAMAGE.
 @property(copy) NSNumber* bold;
 @property(copy) NSNumber* italic;
 @property(copy) NSNumber* underline;
+@property BOOL locked;
 
-+ (ThemeAttributeModel*) themeAttributeModelWithName:(NSString*)name attributes:(NSDictionary*)attrs; 
++ (ThemeAttributeModel*) themeAttributeModelWithName:(NSString*)name attributes:(NSDictionary*)attrs locked:(BOOL)locked; 
 
 @end
 
@@ -86,6 +88,8 @@ DAMAGE.
 @property(retain) NSString* currentThemeName;
 @property(readonly) NSDictionary* currentGeneralTypes;
 @property(readonly) NSDictionary* currentSyntaxTypes;
+@property(readonly) BOOL currentThemeLocked;
+@property(readonly) BOOL currentThemeBuiltin;
 @property(readonly) NSArray* themeNames;
 @property(readonly) NSFont* font;
 

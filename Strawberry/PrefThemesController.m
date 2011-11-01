@@ -19,20 +19,28 @@
 
 - (void)showCurrentTheme
 {
+    BOOL locked = [ThemeController sharedController].currentThemeLocked;
+    
     [themeAttributes removeAllObjects];
     
     NSDictionary* syntaxTypes = [ThemeController sharedController].currentSyntaxTypes;
     for (NSString* name in syntaxTypes) {
         NSDictionary* attrs = [syntaxTypes objectForKey:name];
-        [self addThemeAttribute:[ThemeAttributeModel themeAttributeModelWithName:name attributes:attrs]];
+        [self addThemeAttribute:[ThemeAttributeModel themeAttributeModelWithName:name attributes:attrs locked:locked]];
     }
     
     m_foregroundColorWell.color = [[ThemeController sharedController] colorForGeneralType:@"foreground"];
+    m_foregroundColorWell.enabled = !locked;
     m_backgroundColorWell.color = [[ThemeController sharedController] colorForGeneralType:@"background"];
+    m_backgroundColorWell.enabled = !locked;
     m_selectionColorWell.color = [[ThemeController sharedController] colorForGeneralType:@"selection"];
+    m_selectionColorWell.enabled = !locked;
     m_invisiblesColorWell.color = [[ThemeController sharedController] colorForGeneralType:@"invisibles"];
+    m_invisiblesColorWell.enabled = !locked;
     m_lineHighlightColorWell.color = [[ThemeController sharedController] colorForGeneralType:@"lineHighlight"];
+    m_lineHighlightColorWell.enabled = !locked;
     m_caretColorWell.color = [[ThemeController sharedController] colorForGeneralType:@"caret"];
+    m_caretColorWell.enabled = !locked;
 	[table reloadData];
 }
 
@@ -47,8 +55,10 @@
     }
     
     NSArray* themeNames = [ThemeController sharedController].themeNames;
-    for (NSString* name in themeNames)
-        [m_themeButton insertItemWithTitle:name atIndex:0];
+    for (NSAttributedString* name in themeNames) {
+        [m_themeButton insertItemWithTitle:@"" atIndex:0];
+        [[m_themeButton itemAtIndex:0] setAttributedTitle:name];
+    }
         
     [m_themeButton selectItemWithTitle:[ThemeController sharedController].currentThemeName];
     if (![m_themeButton selectedItem] || [[m_themeButton selectedItem] tag] < 0) {
@@ -88,6 +98,7 @@
 
 - (IBAction)changeForegroundColor:(id)sender
 {
+	[table reloadData];
 }
 
 - (IBAction)changeBackgroundColor:(id)sender
@@ -141,7 +152,8 @@
 {
 	id objectAtRow = [themeAttributes objectAtIndex:rowIndex];
 	NSString *columnKey = [aTableColumn identifier];
-	return 	[objectAtRow valueForKey:columnKey];
+	NSColor* color = [objectAtRow valueForKey:columnKey];
+    return color;
 }
 
 

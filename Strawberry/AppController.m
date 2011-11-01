@@ -57,6 +57,7 @@ DAMAGE.
             @"Default", @"currentThemeName",
             @"Monaco", @"currentFontName",
             [NSNumber numberWithFloat:12], @"currentFontSize",
+            [NSArray array], @"themes",
             nil]];
 
         [[NSColorPanel sharedColorPanel] setShowsAlpha:YES];

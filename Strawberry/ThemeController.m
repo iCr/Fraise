@@ -121,9 +121,9 @@ DAMAGE.
 
 @implementation ThemeAttributeModel
 
-@synthesize name, fg, bg, bold, italic, underline;
+@synthesize name, fg, bg, bold, italic, underline, locked;
 
-+ (ThemeAttributeModel*) themeAttributeModelWithName:(NSString*)name attributes:(NSDictionary*)attrs
++ (ThemeAttributeModel*) themeAttributeModelWithName:(NSString*)name attributes:(NSDictionary*)attrs locked:(BOOL)locked
 {
     ThemeAttributeModel* model = [[[ThemeAttributeModel alloc] init] autorelease];
     model.name = name;
@@ -135,6 +135,7 @@ DAMAGE.
     model.bold = [attrs objectForKey:@"bold"];
     model.italic = [attrs objectForKey:@"italic"];
     model.underline = [attrs objectForKey:@"underline"];
+    model.locked = locked;
     return model;
 }
 
@@ -156,11 +157,28 @@ DAMAGE.
     return currentThemeName;
 }
 
+- (BOOL)themeLocked:(NSDictionary*)theme
+{
+    return [[theme objectForKey:@"locked"] boolValue];
+}
+
+- (BOOL)themeBuiltin:(NSDictionary*)theme
+{
+    return [[theme objectForKey:@"builtin"] boolValue];
+}
+
 - (NSArray*)themeNames
 {
     NSMutableArray* array = [[[NSMutableArray alloc] init] autorelease];
-    for (NSString* name in themes)
-        [array addObject:name];
+    for (NSString* name in themes) {
+        NSAttributedString* string;
+        if ([self themeBuiltin:[themes objectForKey:name]])
+            string = [[[NSAttributedString alloc] initWithString:name attributes:[NSDictionary dictionaryWithObject:[NSFont boldSystemFontOfSize:0] forKey:NSFontAttributeName]] autorelease];
+        else
+            string = [[[NSAttributedString alloc] initWithString:name] autorelease];
+
+        [array addObject:string];
+    }
     return array;
 }
 
@@ -174,6 +192,16 @@ DAMAGE.
 - (NSDictionary*)currentTheme
 {
     return themes ? [themes objectForKey:currentThemeName] : nil;
+}
+
+- (BOOL)currentThemeLocked
+{
+    return [self themeLocked:[self currentTheme]];
+}
+
+- (BOOL)currentThemeBuiltin
+{
+    return [self themeBuiltin:[self currentTheme]];
 }
 
 - (NSDictionary*)currentGeneralTypes
@@ -218,16 +246,36 @@ DAMAGE.
         for (NSString* brush in brushes)
             [js evalJSFile:brush];
         
+        // Load built-in themes
         NSArray* themeFiles = [[NSBundle mainBundle] pathsForResourcesOfType:@"js" inDirectory:@"themes"];
         
         for (NSString* themeFile in themeFiles) {
             NSString* string = [NSString stringWithContentsOfFile:themeFile encoding:NSUTF8StringEncoding error:nil];
-            NSDictionary* dictionary = [js callFunction:@"doParseJSON" withArguments:[NSArray arrayWithObject:string]];
+            NSMutableDictionary* dictionary = [[NSMutableDictionary alloc] initWithDictionary:[js callFunction:@"doParseJSON" withArguments:[NSArray arrayWithObject:string]]];
+            [dictionary setObject:[NSNumber numberWithBool:YES] forKey:@"builtin"];
+            [dictionary setObject:[NSNumber numberWithBool:YES] forKey:@"locked"];
+            
             NSString* themeName = [dictionary objectForKey:@"name"];
             if (themeName && [themeName length] > 0)
                 [themes setObject:dictionary forKey:themeName];
+                
+            [dictionary release];
         }
-            
+        
+        // Load added themes
+        NSArray* addedThemes = [[[NSUserDefaultsController sharedUserDefaultsController] values] valueForKey:@"themes"];
+        for (NSString* theme in addedThemes) {
+            NSMutableDictionary* dictionary = [[NSMutableDictionary alloc] initWithDictionary:[js callFunction:@"doParseJSON" withArguments:[NSArray arrayWithObject:theme]]];
+            [dictionary setObject:[NSNumber numberWithBool:NO] forKey:@"builtin"];
+            [dictionary setObject:[NSNumber numberWithBool:YES] forKey:@"locked"];
+
+            NSString* themeName = [dictionary objectForKey:@"name"];
+            if (themeName && [themeName length] > 0)
+                [themes setObject:dictionary forKey:themeName];
+
+            [dictionary release];
+        }
+        
         [AppController unlockJSCocoa];
         
         currentThemeName = [[[NSUserDefaultsController sharedUserDefaultsController] values] valueForKey:@"currentThemeName"];
