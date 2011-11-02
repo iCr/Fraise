@@ -30,7 +30,7 @@
     }
     
     m_foregroundColorWell.color = [[ThemeController sharedController] colorForGeneralType:@"foreground"];
-    m_foregroundColorWell.enabled = !locked;
+    //m_foregroundColorWell.enabled = !locked;
     m_backgroundColorWell.color = [[ThemeController sharedController] colorForGeneralType:@"background"];
     m_backgroundColorWell.enabled = !locked;
     m_selectionColorWell.color = [[ThemeController sharedController] colorForGeneralType:@"selection"];
@@ -152,8 +152,11 @@
 {
 	id objectAtRow = [themeAttributes objectAtIndex:rowIndex];
 	NSString *columnKey = [aTableColumn identifier];
-	NSColor* color = [objectAtRow valueForKey:columnKey];
-    return color;
+	id item = [objectAtRow valueForKey:columnKey];
+
+    ((NSCell*) aTableColumn.dataCell).enabled = !((ThemeAttributeModel*) objectAtRow).locked;
+
+    return item;
 }
 
 

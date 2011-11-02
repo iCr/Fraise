@@ -70,20 +70,25 @@ DAMAGE.
         return;
 
 	[NSGraphicsContext saveGraphicsState];
-
+    
 	cellFrame = NSInsetRect(cellFrame, 2.0, 2.0);
+    
+    NSColor* bgColor = self.isEnabled ? [NSColor colorWithDeviceRed:0.95 green:0.95 blue:0.95 alpha:1] : [NSColor colorWithDeviceRed:0.9 green:0.9 blue:0.9 alpha:1];
+    NSColor* innerColor = self.isEnabled ? [NSColor colorWithDeviceRed:0.54 green:0.54 blue:0.54 alpha:1] : [NSColor colorWithDeviceRed:0.66 green:0.66 blue:0.66 alpha:1];
+    NSColor* outerColor = self.isEnabled ? [NSColor colorWithDeviceRed:0.58 green:0.58 blue:0.58 alpha:1] : [NSColor colorWithDeviceRed:0.73 green:0.73 blue:0.73 alpha:1];
 
     // FIXME: This should really be a gradient
-    [[NSColor whiteColor] drawSwatchInRect:cellFrame];
+    [bgColor set];
+    [NSBezierPath fillRect:cellFrame];
 
-	[[NSColor grayColor] setStroke];
+	[outerColor setStroke];
     [[NSGraphicsContext currentContext] setShouldAntialias:NO];
     [NSBezierPath strokeRect:cellFrame];
     [[NSGraphicsContext currentContext] setShouldAntialias:YES];
 
 	cellFrame = NSInsetRect(cellFrame, 3.0, 3.0);
     [color drawSwatchInRect:cellFrame];
-	[[NSColor grayColor] setStroke];
+	[innerColor setStroke];
     [[NSGraphicsContext currentContext] setShouldAntialias:NO];
     [NSBezierPath strokeRect:cellFrame];
     [[NSGraphicsContext currentContext] setShouldAntialias:YES];
