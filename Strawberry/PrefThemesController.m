@@ -41,6 +41,8 @@
     m_lineHighlightColorWell.enabled = !locked;
     m_caretColorWell.color = [[ThemeController sharedController] colorForGeneralType:@"caret"];
     m_caretColorWell.enabled = !locked;
+    
+    m_deleteMenuItem.enabled = !locked;
 	[table reloadData];
 }
 
@@ -118,6 +120,14 @@
 }
 
 - (IBAction)changeCaretColor:(id)sender
+{
+}
+
+- (IBAction)duplicateTheme:(id)sender
+{
+}
+
+- (IBAction)deleteTheme:(id)sender
 {
 }
 

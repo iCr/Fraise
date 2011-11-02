@@ -21,6 +21,7 @@
     IBOutlet NSColorWell* m_invisiblesColorWell;
     IBOutlet NSColorWell* m_lineHighlightColorWell;
     IBOutlet NSColorWell* m_caretColorWell;
+    IBOutlet NSMenuItem* m_deleteMenuItem;
         
     NSMutableArray* themeAttributes;
     
@@ -37,6 +38,8 @@
 - (IBAction)changeInvisiblesColor:(id)sender;
 - (IBAction)changeLineHighlightColor:(id)sender;
 - (IBAction)changeCaretColor:(id)sender;
+- (IBAction)duplicateTheme:(id)sender;
+- (IBAction)deleteTheme:(id)sender;
 
 - (void)addThemeAttribute:(ThemeAttributeModel*)themeAttribute;
 
