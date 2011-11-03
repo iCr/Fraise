@@ -327,3 +327,37 @@ function doParseJSON(string)
     return eval('(' + string + ')');
 }
 
+function serialize(obj)
+{
+    switch (typeof obj) {
+        case 'number':
+        case 'boolean':
+        case 'function':
+            return obj;
+        case 'string':
+            return '"' + obj + '"';
+        case 'object':
+            var str;
+            if (obj.constructor === Array || typeof obj.callee !== 'undefined') {
+                str = '[ \n';
+                for (var i = 0; i < obj.length-1; i++)
+                    str += serialize(obj[i]) + ', \n';
+                str += serialize(obj[i]) + ' \n';
+                str += '] \n';
+            } else {
+                str = '{ \n';
+                for (var key in obj)
+                    str += key + ' : ' + serialize(obj[key]) + ', \n';
+                str = str.replace(/\,$/, '');
+                str += '} \n';
+         }
+         return str;
+      default:
+         return 'UNKNOWN';
+   }
+}
+
+function doSerializeJSON(obj)
+{
+    return serialize(obj);
+}

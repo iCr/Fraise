@@ -344,4 +344,70 @@ DAMAGE.
     return [string autorelease];
 }
 
+- (NSString*)serialize:(id)obj
+{
+    if ([obj isKindOfClass:[NSNumber class]])
+        return [obj stringValue];
+        
+    if ([obj isKindOfClass:[NSString class]])
+        return [NSString stringWithFormat:@"\"%@\"", obj];
+        
+    if ([obj isKindOfClass:[NSArray class]]) {
+        NSMutableString* str = [NSMutableString string];
+        [str appendString:@"[ \n"];
+        BOOL first = YES;
+        
+        for (id o in obj) {
+            if (!first)
+                [str appendString:@", \n"];
+            else
+                first = NO;
+                
+            [str appendString:[self serialize:o]];
+        }
+        [str appendString:@" \n] \n"];
+        return str;
+    }
+
+    if ([obj isKindOfClass:[NSDictionary class]]) {
+        NSMutableString* str = [NSMutableString string];
+        [str appendString:@"{ \n"];
+        BOOL first = YES;
+        
+        for (id p in obj) {
+            id o = [obj objectForKey:p];
+            
+            if (!first)
+                [str appendString:@", \n"];
+            else
+                first = NO;
+                
+            [str appendFormat:@"\"%@\" : %@", p, [self serialize:o]];
+        }
+        [str appendString:@" \n} \n"];
+        return str;
+    }
+    
+    return @"*** unknown ***";
+}
+
+- (void)duplicateCurrentTheme:(NSString*)name
+{
+    // FIXME: Verify that name is not taken and is a valid name
+    NSMutableDictionary* theme = [NSMutableDictionary dictionaryWithDictionary:[self currentTheme]];
+    [theme setObject:name forKey:@"name"];
+    [theme setObject:[NSNumber numberWithBool:NO] forKey:@"builtin"];
+    [themes setObject:theme forKey:name];
+    
+    NSMutableArray* addedThemes = [NSMutableArray arrayWithArray:
+        [[[NSUserDefaultsController sharedUserDefaultsController] values] valueForKey:@"themes"]];
+
+    NSString* themeString = [self serialize:theme];
+    [addedThemes addObject:themeString];
+
+    [[[NSUserDefaultsController sharedUserDefaultsController] values] setValue:addedThemes forKey:@"themes"];
+    
+    self.currentThemeName = name;
+}
+
 @end

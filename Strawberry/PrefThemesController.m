@@ -143,7 +143,7 @@
 {
     [m_duplicateSheet orderOut:self];
     if (returnCode)
-        NSLog(@"*** duplicate theme: name=%@\n", m_duplicateThemeName.stringValue);
+        [[ThemeController sharedController] duplicateCurrentTheme:m_duplicateThemeName.stringValue];
 }
 
 - (IBAction)deleteTheme:(id)sender
