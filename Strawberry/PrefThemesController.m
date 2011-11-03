@@ -30,7 +30,7 @@
     }
     
     m_foregroundColorWell.color = [[ThemeController sharedController] colorForGeneralType:@"foreground"];
-    //m_foregroundColorWell.enabled = !locked;
+    m_foregroundColorWell.enabled = !locked;
     m_backgroundColorWell.color = [[ThemeController sharedController] colorForGeneralType:@"background"];
     m_backgroundColorWell.enabled = !locked;
     m_selectionColorWell.color = [[ThemeController sharedController] colorForGeneralType:@"selection"];
@@ -124,7 +124,26 @@
 }
 
 - (IBAction)duplicateTheme:(id)sender
+{    
+    [NSApp beginSheet:m_duplicateSheet modalForWindow:[m_view window] modalDelegate:self 
+        didEndSelector:@selector(didEndDuplicateSheet:returnCode:contextInfo:) contextInfo:nil];
+}
+
+- (IBAction)duplicateThemeAccept:(id)sender
 {
+	[NSApp endSheet:m_duplicateSheet returnCode: NSOKButton];
+}
+
+- (IBAction)duplicateThemeCancel:(id)sender
+{
+    [NSApp endSheet:m_duplicateSheet returnCode: NSCancelButton];
+}
+
+- (void)didEndDuplicateSheet:(NSWindow *)sheet returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo
+{
+    [m_duplicateSheet orderOut:self];
+    if (returnCode)
+        NSLog(@"*** duplicate theme: name=%@\n", m_duplicateThemeName.stringValue);
 }
 
 - (IBAction)deleteTheme:(id)sender

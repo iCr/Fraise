@@ -22,6 +22,8 @@
     IBOutlet NSColorWell* m_lineHighlightColorWell;
     IBOutlet NSColorWell* m_caretColorWell;
     IBOutlet NSMenuItem* m_deleteMenuItem;
+    IBOutlet NSWindow* m_duplicateSheet;
+    IBOutlet NSTextField* m_duplicateThemeName;
         
     NSMutableArray* themeAttributes;
     
@@ -39,6 +41,8 @@
 - (IBAction)changeLineHighlightColor:(id)sender;
 - (IBAction)changeCaretColor:(id)sender;
 - (IBAction)duplicateTheme:(id)sender;
+- (IBAction)duplicateThemeAccept:(id)sender;
+- (IBAction)duplicateThemeCancel:(id)sender;
 - (IBAction)deleteTheme:(id)sender;
 
 - (void)addThemeAttribute:(ThemeAttributeModel*)themeAttribute;
