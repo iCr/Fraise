@@ -225,8 +225,10 @@ DAMAGE.
 + (ThemeController*)sharedController
 {
     static ThemeController* controller;
-    if (!controller)
+    if (!controller) {
         controller = [[ThemeController alloc] init];
+        [[NSNotificationCenter defaultCenter] postNotificationName:NotifyThemeChanged object:nil];
+    }
     return controller;
 }
 

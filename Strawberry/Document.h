@@ -49,4 +49,6 @@ DAMAGE.
 @property(readwrite, assign) NSStringEncoding encoding;
 @property(readwrite, copy) NSURL* url;
 
+- (void)updateTextView;
+
 @end

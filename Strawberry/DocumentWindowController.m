@@ -45,4 +45,10 @@ DAMAGE.
     ((Document*) [self document]).content = [[m_textView textStorage] string];
 }
 
+- (void)windowDidLoad
+{
+    [super windowDidLoad];
+    [((Document*) [self document]) updateTextView];
+}
+
 @end

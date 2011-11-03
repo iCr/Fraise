@@ -41,7 +41,7 @@ DAMAGE.
 
 @implementation Document
 
-@synthesize content, encoding, url;
+@synthesize encoding, url, content;
 
 - (id)init
 {
@@ -65,20 +65,16 @@ DAMAGE.
         
     NSAttributedString* string = [[ThemeController sharedController] highlightCode:content withSuffix:[url pathExtension]];
     if (!string)
-        return;
+        string = [[[NSAttributedString alloc] init] autorelease];;
         
     NSTextView* textView = ((WindowController*) [[self windowControllers] objectAtIndex:0]).textView;
     [textView.textStorage setAttributedString:string];
     [textView setFont:[ThemeController sharedController].font];
+    [textView setBackgroundColor:[[ThemeController sharedController] colorForGeneralType:@"background"]];
 }
 
 - (void)themeChanged:(NSNotification*) notification
 {
-    if (![[self windowControllers] count])
-        return;
-        
-    NSTextView* textView = ((WindowController*) [[self windowControllers] objectAtIndex:0]).textView;
-    [textView setBackgroundColor:[[ThemeController sharedController] colorForGeneralType:@"background"]];
     [self updateTextView];
 }
 
@@ -87,8 +83,6 @@ DAMAGE.
     // FIXME: For now just make a DocumentWindowController. Later on we need to deal with ProjectWindowControllers
     DocumentWindowController* controller = [[DocumentWindowController alloc] initWithWindowNibName:@"Document"];
     [self addWindowController:controller];
-    [self updateTextView];
-    [self themeChanged:nil];
 }
 
 - (void)windowControllerDidLoadNib:(NSWindowController *)controller
@@ -98,8 +92,6 @@ DAMAGE.
     // FIXME: For now assume a single WindowController
     if (self.content)
         [self updateTextView];
-
-    [super windowControllerDidLoadNib:controller];
 }
 
 + (BOOL)autosavesInPlace

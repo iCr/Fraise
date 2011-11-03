@@ -124,7 +124,8 @@
 }
 
 - (IBAction)duplicateTheme:(id)sender
-{    
+{
+    m_duplicateThemeName.stringValue = @"";
     [NSApp beginSheet:m_duplicateSheet modalForWindow:[m_view window] modalDelegate:self 
         didEndSelector:@selector(didEndDuplicateSheet:returnCode:contextInfo:) contextInfo:nil];
 }
@@ -142,8 +143,11 @@
 - (void)didEndDuplicateSheet:(NSWindow *)sheet returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo
 {
     [m_duplicateSheet orderOut:self];
-    if (returnCode)
+    if (returnCode) {
         [[ThemeController sharedController] duplicateCurrentTheme:m_duplicateThemeName.stringValue];
+        [self populateThemeMenu];
+        [self showCurrentTheme];
+    }
 }
 
 - (IBAction)deleteTheme:(id)sender
