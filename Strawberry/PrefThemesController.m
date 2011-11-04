@@ -8,6 +8,7 @@
 
 #import "PrefThemesController.h"
 
+#import "AppController.h"
 #import "ThemeController.h"
 
 @implementation PrefThemesController
@@ -144,6 +145,19 @@
 {
     [m_duplicateSheet orderOut:self];
     if (returnCode) {
+        NSString* name = [m_duplicateThemeName.stringValue stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+        if (![name length]) {
+            [AppController showAlertSheetForWindow:[m_view window] messageText:@"Invalid theme name"
+                informativeText:@"Name must contain at least one non-whitespace character"];
+            return;
+        }
+        
+        if ([[ThemeController sharedController] themeExists:name]) {
+            [AppController showAlertSheetForWindow:[m_view window] messageText:@"Theme name already in use"
+                informativeText:@"Please select a different name"];
+            return;
+        }
+
         [[ThemeController sharedController] duplicateCurrentTheme:m_duplicateThemeName.stringValue];
         [self populateThemeMenu];
         [self showCurrentTheme];

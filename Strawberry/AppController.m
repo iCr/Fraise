@@ -87,4 +87,15 @@ DAMAGE.
   [[PrefsWindowController sharedPrefsWindowController] showWindow:nil];
 }
 
++ (void)showAlertSheetForWindow:(NSWindow*)window messageText:(NSString*)messageText informativeText:(NSString*)informativeText
+{
+    NSAlert *alert = [[[NSAlert alloc] init] autorelease];
+    [alert addButtonWithTitle:@"OK"];
+    [alert setMessageText:messageText];
+    [alert setInformativeText:informativeText];
+    [alert setAlertStyle:NSWarningAlertStyle];
+    
+    [alert beginSheetModalForWindow:window modalDelegate:nil didEndSelector:nil contextInfo:nil];
+}
+
 @end

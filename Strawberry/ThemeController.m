@@ -395,7 +395,6 @@ DAMAGE.
 
 - (void)duplicateCurrentTheme:(NSString*)name
 {
-    // FIXME: Verify that name is not taken and is a valid name
     NSMutableDictionary* theme = [NSMutableDictionary dictionaryWithDictionary:[self currentTheme]];
     [theme setObject:name forKey:@"name"];
     [theme setObject:[NSNumber numberWithBool:NO] forKey:@"builtin"];
@@ -410,6 +409,11 @@ DAMAGE.
     [[[NSUserDefaultsController sharedUserDefaultsController] values] setValue:addedThemes forKey:@"themes"];
     
     self.currentThemeName = name;
+}
+
+- (BOOL)themeExists:(NSString*)name
+{
+    return [themes objectForKey:name] != nil;
 }
 
 @end
