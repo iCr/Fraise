@@ -265,8 +265,15 @@ DAMAGE.
         }
         
         // Load added themes
-        NSArray* addedThemes = [[[NSUserDefaultsController sharedUserDefaultsController] values] valueForKey:@"themes"];
-        for (NSString* theme in addedThemes) {
+        NSDictionary* addedThemes = [[[NSUserDefaultsController sharedUserDefaultsController] values] valueForKey:@"themes"];
+        if (![addedThemes isKindOfClass:[NSDictionary class]]) {
+            // old-fashioned themes. Get rid of them
+            addedThemes = [NSDictionary dictionary];
+            [[[NSUserDefaultsController sharedUserDefaultsController] values] setValue:addedThemes forKey:@"themes"];
+        }
+        
+        for (NSString* themeName in addedThemes) {
+            NSString* theme = [addedThemes objectForKey:themeName];
             NSMutableDictionary* dictionary = [[NSMutableDictionary alloc] initWithDictionary:[js callFunction:@"doParseJSON" withArguments:[NSArray arrayWithObject:theme]]];
             [dictionary setObject:[NSNumber numberWithBool:NO] forKey:@"builtin"];
             [dictionary setObject:[NSNumber numberWithBool:YES] forKey:@"locked"];
@@ -400,15 +407,25 @@ DAMAGE.
     [theme setObject:[NSNumber numberWithBool:NO] forKey:@"builtin"];
     [themes setObject:theme forKey:name];
     
-    NSMutableArray* addedThemes = [NSMutableArray arrayWithArray:
+    NSMutableDictionary* addedThemes = [NSMutableDictionary dictionaryWithDictionary:
         [[[NSUserDefaultsController sharedUserDefaultsController] values] valueForKey:@"themes"]];
 
     NSString* themeString = [self serialize:theme];
-    [addedThemes addObject:themeString];
+    [addedThemes setObject:themeString forKey:name];
 
     [[[NSUserDefaultsController sharedUserDefaultsController] values] setValue:addedThemes forKey:@"themes"];
     
     self.currentThemeName = name;
+}
+
+- (void)deleteCurrentTheme
+{
+    NSMutableDictionary* addedThemes = [NSMutableDictionary dictionaryWithDictionary:
+        [[[NSUserDefaultsController sharedUserDefaultsController] values] valueForKey:@"themes"]];
+    
+    [addedThemes removeObjectForKey:currentThemeName];
+    [themes removeObjectForKey:currentThemeName];
+    self.currentThemeName = @"Default";
 }
 
 - (BOOL)themeExists:(NSString*)name

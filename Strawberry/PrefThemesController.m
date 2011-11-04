@@ -20,6 +20,8 @@
 
 - (void)showCurrentTheme
 {
+    [m_themeButton selectItemWithTitle:[ThemeController sharedController].currentThemeName];
+
     BOOL locked = [ThemeController sharedController].currentThemeLocked;
     
     [themeAttributes removeAllObjects];
@@ -43,7 +45,7 @@
     m_caretColorWell.color = [[ThemeController sharedController] colorForGeneralType:@"caret"];
     m_caretColorWell.enabled = !locked;
     
-    m_deleteMenuItem.enabled = !locked;
+    m_deleteMenuItem.enabled = ![ThemeController sharedController].currentThemeBuiltin;
 	[table reloadData];
 }
 
@@ -147,25 +149,41 @@
     if (returnCode) {
         NSString* name = [m_duplicateThemeName.stringValue stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
         if (![name length]) {
-            [AppController showAlertSheetForWindow:[m_view window] messageText:@"Invalid theme name"
+            [AppController showWarningSheetForWindow:[m_view window] messageText:@"Invalid theme name"
                 informativeText:@"Name must contain at least one non-whitespace character"];
-            return;
+        } else if ([[ThemeController sharedController] themeExists:name]) {
+            [AppController showWarningSheetForWindow:[m_view window] messageText:@"Theme name already in use"
+                informativeText:@"Please select a different name"];
+        } else {
+
+            [[ThemeController sharedController] duplicateCurrentTheme:m_duplicateThemeName.stringValue];
+            [self populateThemeMenu];
         }
         
-        if ([[ThemeController sharedController] themeExists:name]) {
-            [AppController showAlertSheetForWindow:[m_view window] messageText:@"Theme name already in use"
-                informativeText:@"Please select a different name"];
-            return;
-        }
-
-        [[ThemeController sharedController] duplicateCurrentTheme:m_duplicateThemeName.stringValue];
-        [self populateThemeMenu];
         [self showCurrentTheme];
     }
 }
 
+- (void)doDeleteTheme
+{
+    [[ThemeController sharedController] deleteCurrentTheme];
+    [self populateThemeMenu];
+    [self showCurrentTheme];
+}
+
 - (IBAction)deleteTheme:(id)sender
 {
+    if ([ThemeController sharedController].currentThemeBuiltin) {
+        [AppController showWarningSheetForWindow:[m_view window] messageText:@"Can't delete built-in theme"
+            informativeText:@"This theme is built-in and can't be deleted"];
+    } else {
+        NSString* name = [ThemeController sharedController] .currentThemeName;
+        [AppController showConfirmationSheetForWindow:[m_view window] 
+            messageText:[NSString stringWithFormat:@"Delete theme '%@'?", name]
+            informativeText:@"Choose OK to delete this theme" target:self selector:@selector(doDeleteTheme)];
+    }
+
+    [self showCurrentTheme];
 }
 
 - (NSString*)label

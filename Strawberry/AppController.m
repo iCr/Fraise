@@ -39,6 +39,35 @@ DAMAGE.
 #import <JSCocoa/JSCocoa.h>
 #import "PrefsWindowController.h"
 
+@interface ConfirmationSheetResponse : NSObject
+{
+    id target;
+    SEL selector;
+}
+
++ (ConfirmationSheetResponse*) responseWithTarget:(id)target selector:(SEL)selector;
+- (void)alertDidEnd:(NSAlert *)alert returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo;
+
+@end
+
+@implementation ConfirmationSheetResponse
+
++ (ConfirmationSheetResponse*) responseWithTarget:(id)target selector:(SEL)selector
+{
+    ConfirmationSheetResponse* response = [[[ConfirmationSheetResponse alloc] init] autorelease];
+    response->target = target;
+    response->selector = selector;
+    return response;
+}
+
+- (void)alertDidEnd:(NSAlert *)alert returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo
+{
+    if (returnCode == NSAlertFirstButtonReturn)
+        [target performSelector:selector];
+    [self release];
+}
+
+@end
 @implementation AppController
 
 + (NSRecursiveLock*) JSCocoaMutex
@@ -87,7 +116,7 @@ DAMAGE.
   [[PrefsWindowController sharedPrefsWindowController] showWindow:nil];
 }
 
-+ (void)showAlertSheetForWindow:(NSWindow*)window messageText:(NSString*)messageText informativeText:(NSString*)informativeText
++ (void)showWarningSheetForWindow:(NSWindow*)window messageText:(NSString*)messageText informativeText:(NSString*)informativeText
 {
     NSAlert *alert = [[[NSAlert alloc] init] autorelease];
     [alert addButtonWithTitle:@"OK"];
@@ -96,6 +125,31 @@ DAMAGE.
     [alert setAlertStyle:NSWarningAlertStyle];
     
     [alert beginSheetModalForWindow:window modalDelegate:nil didEndSelector:nil contextInfo:nil];
+}
+
++ (void)showInformationSheetForWindow:(NSWindow*)window messageText:(NSString*)messageText informativeText:(NSString*)informativeText
+{
+    NSAlert *alert = [[[NSAlert alloc] init] autorelease];
+    [alert addButtonWithTitle:@"OK"];
+    [alert setMessageText:messageText];
+    [alert setInformativeText:informativeText];
+    [alert setAlertStyle:NSInformationalAlertStyle];
+    
+    [alert beginSheetModalForWindow:window modalDelegate:nil didEndSelector:nil contextInfo:nil];
+}
+
++ (void)showConfirmationSheetForWindow:(NSWindow*)window messageText:(NSString*)messageText 
+    informativeText:(NSString*)informativeText target:(id)target selector:(SEL)selector
+{
+    NSAlert *alert = [[[NSAlert alloc] init] autorelease];
+    [alert addButtonWithTitle:@"OK"];
+    [alert addButtonWithTitle:@"Cancel"];
+    [alert setMessageText:messageText];
+    [alert setInformativeText:informativeText];
+    [alert setAlertStyle:NSInformationalAlertStyle];
+    
+    ConfirmationSheetResponse* response = [[ConfirmationSheetResponse responseWithTarget:target selector:selector] retain];
+    [alert beginSheetModalForWindow:window modalDelegate:response didEndSelector:@selector(alertDidEnd:returnCode:contextInfo:) contextInfo:nil];
 }
 
 @end

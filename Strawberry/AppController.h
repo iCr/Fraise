@@ -45,6 +45,9 @@ DAMAGE.
 + (JSCocoa*)lockJSCocoa;
 + (void)unlockJSCocoa;
 
-+ (void)showAlertSheetForWindow:(NSWindow*)window messageText:(NSString*)messageText informativeText:(NSString*)informativeText;
++ (void)showWarningSheetForWindow:(NSWindow*)window messageText:(NSString*)messageText informativeText:(NSString*)informativeText;
++ (void)showInformationSheetForWindow:(NSWindow*)window messageText:(NSString*)messageText informativeText:(NSString*)informativeText;
++ (void)showConfirmationSheetForWindow:(NSWindow*)window messageText:(NSString*)messageText 
+    informativeText:(NSString*)informativeText target:(id)target selector:(SEL)selector;
 
 @end
