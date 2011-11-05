@@ -97,6 +97,7 @@ DAMAGE.
 
 - (NSAttributedString*)highlightCode:(NSString*)code withSuffix:(NSString*)suffix;
 - (NSColor*)colorForGeneralType:(NSString*)type;
+- (void)setColor:(NSColor*)color forGeneralType:(NSString*)type;
 - (void)duplicateCurrentTheme:(NSString*)name;
 - (void)deleteCurrentTheme;
 - (BOOL)themeExists:(NSString*)name;

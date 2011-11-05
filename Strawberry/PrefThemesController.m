@@ -123,27 +123,32 @@
 
 - (IBAction)changeForegroundColor:(id)sender
 {
-	[table reloadData];
+    [[ThemeController sharedController] setColor:[sender color] forGeneralType:@"foreground"];
 }
 
 - (IBAction)changeBackgroundColor:(id)sender
 {
+    [[ThemeController sharedController] setColor:[sender color] forGeneralType:@"background"];
 }
 
 - (IBAction)changeSelectionColor:(id)sender
 {
+    [[ThemeController sharedController] setColor:[sender color] forGeneralType:@"selection"];
 }
 
 - (IBAction)changeInvisiblesColor:(id)sender
 {
+    [[ThemeController sharedController] setColor:[sender color] forGeneralType:@"invisibles"];
 }
 
 - (IBAction)changeLineHighlightColor:(id)sender
 {
+    [[ThemeController sharedController] setColor:[sender color] forGeneralType:@"lineHighlight"];
 }
 
 - (IBAction)changeCaretColor:(id)sender
 {
+    [[ThemeController sharedController] setColor:[sender color] forGeneralType:@"caret"];
 }
 
 - (IBAction)duplicateTheme:(id)sender

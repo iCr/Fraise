@@ -82,6 +82,22 @@ DAMAGE.
 	return [NSColor colorWithCalibratedRed:r green:g blue:b alpha:a];
 }
 
+- (NSString*)hexStringValue
+{
+    NSMutableString* string = [NSMutableString string];
+    [string appendString:@"#"];
+    int n = [self redComponent] * 255;
+    [string appendFormat:@"%02x", n];
+    n = [self greenComponent] * 255;
+    [string appendFormat:@"%02x", n];
+    n = [self blueComponent] * 255;
+    [string appendFormat:@"%02x", n];
+    n = [self alphaComponent] * 255;
+    [string appendFormat:@"%02x", n];
+    //NSString* string = [NSString stringWithFormat:@"#%02x%02x%02x%02x", (int) [self redComponent] * 255, (int) [self greenComponent] * 255, (int) [self blueComponent] * 255, (int) [self alphaComponent] * 255];
+    return string;
+}
+
 @end
 
 @implementation SyntaxMatch
@@ -201,6 +217,9 @@ DAMAGE.
 
 - (void)setCurrentThemeLocked:(BOOL)locked
 {
+    if ([self currentThemeBuiltin])
+        return;
+        
     [[self currentTheme] setObject:[NSNumber numberWithBool:locked] forKey:@"locked"];
 }
 
@@ -308,56 +327,6 @@ DAMAGE.
     [font release];
 }
 
-- (NSDictionary*) attributesForSyntaxType:(NSString*)type
-{
-    NSDictionary* style = [self.currentSyntaxTypes objectForKey:type];
-    if (!style)
-        return nil;
-        
-    // FIXME: For now just return foreground color
-    NSColor* color = [NSColor colorWithHexString:[style objectForKey:@"foreground"]];
-    
-    return [NSDictionary dictionaryWithObjectsAndKeys:color, NSForegroundColorAttributeName, nil];
-}
-
-- (NSColor*) colorForGeneralType:(NSString*)type
-{
-    NSDictionary* styles = [self.currentTheme objectForKey:@"styles"];
-    if (!styles)
-        return nil;
-        
-    NSDictionary* general = [styles objectForKey:@"general"];
-    if (!general)
-        return nil;
-        
-    return [NSColor colorWithHexString:[general objectForKey:type]];
-}
-
-- (NSAttributedString*)highlightCode:(NSString*)code withSuffix:(NSString*)suffix
-{
-    if (!code)
-        return nil;
-        
-    JSCocoa* js = [AppController lockJSCocoa];
-    
-    double now = [NSDate timeIntervalSinceReferenceDate];
-    
-    JSValueRef result = [js callJSFunctionNamed:@"doSyntaxHighlight" withArguments:code, suffix, nil];
-    
-    NSLog(@"*** Syntax Highlight took %8.2f seconds\n", [NSDate timeIntervalSinceReferenceDate] - now);
-    
-    NSArray* array = [js toObject:result];
-    NSMutableAttributedString* string = [[NSMutableAttributedString alloc] initWithString:code];
-    
-    for (int i = 0; i < [array count]; ++i) {
-        SyntaxMatch* match = [array objectAtIndex:i];
-        [string setAttributes:[self attributesForSyntaxType:match.type] range:NSMakeRange(match.index, match.length)];
-    }
-
-    [AppController unlockJSCocoa];
-    return [string autorelease];
-}
-
 - (NSString*)serialize:(id)obj
 {
     if ([obj isKindOfClass:[NSNumber class]])
@@ -405,22 +374,89 @@ DAMAGE.
     return @"*** unknown ***";
 }
 
+- (void)saveCurrentTheme
+{
+    NSMutableDictionary* addedThemes = [NSMutableDictionary dictionaryWithDictionary:
+        [[[NSUserDefaultsController sharedUserDefaultsController] values] valueForKey:@"themes"]];
+
+    NSString* themeString = [self serialize:[self currentTheme]];
+    [addedThemes setObject:themeString forKey:self.currentThemeName];
+
+    [[[NSUserDefaultsController sharedUserDefaultsController] values] setValue:addedThemes forKey:@"themes"];
+}
+
+- (NSDictionary*) attributesForSyntaxType:(NSString*)type
+{
+    NSDictionary* style = [self.currentSyntaxTypes objectForKey:type];
+    if (!style)
+        return nil;
+        
+    // FIXME: For now just return foreground color
+    NSColor* color = [NSColor colorWithHexString:[style objectForKey:@"foreground"]];
+    
+    return [NSDictionary dictionaryWithObjectsAndKeys:color, NSForegroundColorAttributeName, nil];
+}
+
+- (NSColor*) colorForGeneralType:(NSString*)type
+{
+    NSDictionary* styles = [self.currentTheme objectForKey:@"styles"];
+    if (!styles)
+        return nil;
+        
+    NSDictionary* general = [styles objectForKey:@"general"];
+    if (!general)
+        return nil;
+        
+    return [NSColor colorWithHexString:[general objectForKey:type]];
+}
+
+- (void)setColor:(NSColor*)color forGeneralType:(NSString*)type
+{
+    NSMutableDictionary* styles = [NSMutableDictionary dictionaryWithDictionary:[self.currentTheme objectForKey:@"styles"]];
+    NSMutableDictionary* general = [NSMutableDictionary dictionaryWithDictionary:[styles objectForKey:@"general"]];
+    [general setObject:[color hexStringValue] forKey:type];
+    [styles setObject:general forKey:@"general"];
+    [self.currentTheme setObject:styles forKey:@"styles"];
+    
+    [self saveCurrentTheme];
+
+    [[NSNotificationCenter defaultCenter] postNotificationName:NotifyThemeChanged object:nil];
+}
+
+- (NSAttributedString*)highlightCode:(NSString*)code withSuffix:(NSString*)suffix
+{
+    if (!code)
+        return nil;
+        
+    JSCocoa* js = [AppController lockJSCocoa];
+    
+    double now = [NSDate timeIntervalSinceReferenceDate];
+    
+    JSValueRef result = [js callJSFunctionNamed:@"doSyntaxHighlight" withArguments:code, suffix, nil];
+    
+    NSLog(@"*** Syntax Highlight took %8.2f seconds\n", [NSDate timeIntervalSinceReferenceDate] - now);
+    
+    NSArray* array = [js toObject:result];
+    NSMutableAttributedString* string = [[NSMutableAttributedString alloc] initWithString:code];
+    
+    for (int i = 0; i < [array count]; ++i) {
+        SyntaxMatch* match = [array objectAtIndex:i];
+        [string setAttributes:[self attributesForSyntaxType:match.type] range:NSMakeRange(match.index, match.length)];
+    }
+
+    [AppController unlockJSCocoa];
+    return [string autorelease];
+}
+
 - (void)duplicateCurrentTheme:(NSString*)name
 {
     NSMutableDictionary* theme = [NSMutableDictionary dictionaryWithDictionary:[self currentTheme]];
     [theme setObject:name forKey:@"name"];
     [theme setObject:[NSNumber numberWithBool:NO] forKey:@"builtin"];
     [themes setObject:theme forKey:name];
-    
-    NSMutableDictionary* addedThemes = [NSMutableDictionary dictionaryWithDictionary:
-        [[[NSUserDefaultsController sharedUserDefaultsController] values] valueForKey:@"themes"]];
 
-    NSString* themeString = [self serialize:theme];
-    [addedThemes setObject:themeString forKey:name];
-
-    [[[NSUserDefaultsController sharedUserDefaultsController] values] setValue:addedThemes forKey:@"themes"];
-    
     self.currentThemeName = name;
+    [self saveCurrentTheme];
 }
 
 - (void)deleteCurrentTheme
