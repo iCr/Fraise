@@ -189,7 +189,7 @@ DAMAGE.
     [[NSNotificationCenter defaultCenter] postNotificationName:NotifyThemeChanged object:nil];
 }
 
-- (NSDictionary*)currentTheme
+- (NSMutableDictionary*)currentTheme
 {
     return themes ? [themes objectForKey:currentThemeName] : nil;
 }
@@ -197,6 +197,11 @@ DAMAGE.
 - (BOOL)currentThemeLocked
 {
     return [self themeLocked:[self currentTheme]];
+}
+
+- (void)setCurrentThemeLocked:(BOOL)locked
+{
+    [[self currentTheme] setObject:[NSNumber numberWithBool:locked] forKey:@"locked"];
 }
 
 - (BOOL)currentThemeBuiltin

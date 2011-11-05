@@ -13,6 +13,8 @@
 
 @implementation PrefThemesController
 
+@synthesize tooltip;
+
 + (PrefThemesController*) controller
 {
     return [[[PrefThemesController alloc] init] autorelease];
@@ -23,7 +25,14 @@
     [m_themeButton selectItemWithTitle:[ThemeController sharedController].currentThemeName];
 
     BOOL locked = [ThemeController sharedController].currentThemeLocked;
-    
+    BOOL builtin = [ThemeController sharedController].currentThemeBuiltin;
+
+    self.tooltip = @"Click on this item to change it";
+    if (builtin)
+        self.tooltip = @"This theme is built-in and cannot be changed";
+    else if (locked)
+        self.tooltip = @"This theme is locked. Click the lock icon to unlock it if you want to make changes";
+
     [themeAttributes removeAllObjects];
     
     NSDictionary* syntaxTypes = [ThemeController sharedController].currentSyntaxTypes;
@@ -33,19 +42,30 @@
     }
     
     m_foregroundColorWell.color = [[ThemeController sharedController] colorForGeneralType:@"foreground"];
+    m_foregroundColorWell.toolTip = self.tooltip;
     m_foregroundColorWell.enabled = !locked;
     m_backgroundColorWell.color = [[ThemeController sharedController] colorForGeneralType:@"background"];
+    m_backgroundColorWell.toolTip = self.tooltip;
     m_backgroundColorWell.enabled = !locked;
     m_selectionColorWell.color = [[ThemeController sharedController] colorForGeneralType:@"selection"];
+    m_selectionColorWell.toolTip = self.tooltip;
     m_selectionColorWell.enabled = !locked;
     m_invisiblesColorWell.color = [[ThemeController sharedController] colorForGeneralType:@"invisibles"];
+    m_invisiblesColorWell.toolTip = self.tooltip;
     m_invisiblesColorWell.enabled = !locked;
     m_lineHighlightColorWell.color = [[ThemeController sharedController] colorForGeneralType:@"lineHighlight"];
+    m_lineHighlightColorWell.toolTip = self.tooltip;
     m_lineHighlightColorWell.enabled = !locked;
     m_caretColorWell.color = [[ThemeController sharedController] colorForGeneralType:@"caret"];
+    m_caretColorWell.toolTip = self.tooltip;
     m_caretColorWell.enabled = !locked;
     
-    m_deleteMenuItem.enabled = ![ThemeController sharedController].currentThemeBuiltin;
+    m_deleteMenuItem.enabled = !builtin;
+    
+    m_lockButton.state = locked ?  NSOnState :  NSOffState;
+    m_lockButton.enabled = !builtin;
+    m_lockButton.toolTip = builtin ? @"This theme is built-in and cannot be changed" : (locked ? @"Click to make changes to theme" : @"Click to no longer be able to make changes to theme");
+    
 	[table reloadData];
 }
 
@@ -186,6 +206,12 @@
     [self showCurrentTheme];
 }
 
+- (IBAction)lockButtonToggle:(id)sender
+{
+    [ThemeController sharedController].currentThemeLocked = m_lockButton.state == NSOnState;
+    [self showCurrentTheme];
+}
+
 - (NSString*)label
 {
     return @"Themes";
@@ -236,6 +262,11 @@
 - (CGFloat)tableView:(NSTableView *)tableView heightOfRow:(NSInteger)row
 {
     return 20;
+}
+
+- (NSString *)tableView:(NSTableView *)aTableView toolTipForCell:(NSCell *)aCell rect:(NSRectPointer)rect tableColumn:(NSTableColumn *)aTableColumn row:(NSInteger)row mouseLocation:(NSPoint)mouseLocation
+{
+    return self.tooltip;
 }
 
 @end

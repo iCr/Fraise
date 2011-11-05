@@ -54,6 +54,8 @@
 		4935BB6F142A2FCF00BE3F49 /* WindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4935BB6E142A2FCF00BE3F49 /* WindowController.m */; };
 		4935BB8F142CE6FC00BE3F49 /* PrefThemesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4935BB8E142CE6FC00BE3F49 /* PrefThemesController.m */; };
 		4935BB96142F951200BE3F49 /* ColorWellCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4935BB95142F951100BE3F49 /* ColorWellCell.m */; };
+		4936F07D1465A5E100B51667 /* LockedIcon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 4936F07C1465A5E100B51667 /* LockedIcon.icns */; };
+		4936F07F1465A60E00B51667 /* UnlockedIcon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 4936F07E1465A5F300B51667 /* UnlockedIcon.icns */; };
 		4949EA45143264D40010EBE9 /* XRegExp.js in Resources */ = {isa = PBXBuildFile; fileRef = 4949EA0C1432610B0010EBE9 /* XRegExp.js */; };
 		4949EA4F143295090010EBE9 /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4949EA4E143295090010EBE9 /* JavaScriptCore.framework */; };
 		49DEEEE714280B3000F97C1B /* NoodleLineNumberMarker.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DEEEE414280B3000F97C1B /* NoodleLineNumberMarker.m */; };
@@ -185,6 +187,8 @@
 		4935BB8E142CE6FC00BE3F49 /* PrefThemesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrefThemesController.m; sourceTree = "<group>"; };
 		4935BB94142F951100BE3F49 /* ColorWellCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorWellCell.h; sourceTree = "<group>"; };
 		4935BB95142F951100BE3F49 /* ColorWellCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColorWellCell.m; sourceTree = "<group>"; };
+		4936F07C1465A5E100B51667 /* LockedIcon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = LockedIcon.icns; sourceTree = "<group>"; };
+		4936F07E1465A5F300B51667 /* UnlockedIcon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = UnlockedIcon.icns; sourceTree = "<group>"; };
 		4949E9F21432610B0010EBE9 /* shBrushAppleScript.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; name = shBrushAppleScript.js; path = js/shBrushAppleScript.js; sourceTree = "<group>"; };
 		4949E9F31432610B0010EBE9 /* shBrushAS3.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; name = shBrushAS3.js; path = js/shBrushAS3.js; sourceTree = "<group>"; };
 		4949E9F41432610B0010EBE9 /* shBrushBash.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; name = shBrushBash.js; path = js/shBrushBash.js; sourceTree = "<group>"; };
@@ -414,6 +418,8 @@
 				49F512CD142B94DF000FCA43 /* PrefThemes.xib */,
 				49F512C7142B93C8000FCA43 /* Project.xib */,
 				490BB581142641F400C447E4 /* MainIcon.icns */,
+				4936F07C1465A5E100B51667 /* LockedIcon.icns */,
+				4936F07E1465A5F300B51667 /* UnlockedIcon.icns */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -569,6 +575,8 @@
 				49F512CE142B94DF000FCA43 /* PrefAdvanced.xib in Resources */,
 				49F512CF142B94DF000FCA43 /* PrefGeneral.xib in Resources */,
 				49F512D0142B94DF000FCA43 /* PrefThemes.xib in Resources */,
+				4936F07D1465A5E100B51667 /* LockedIcon.icns in Resources */,
+				4936F07F1465A60E00B51667 /* UnlockedIcon.icns in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

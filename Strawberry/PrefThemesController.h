@@ -24,12 +24,17 @@
     IBOutlet NSMenuItem* m_deleteMenuItem;
     IBOutlet NSWindow* m_duplicateSheet;
     IBOutlet NSTextField* m_duplicateThemeName;
+    IBOutlet NSButton* m_lockButton;
         
     NSMutableArray* themeAttributes;
     
     BOOL m_locked;
     BOOL m_builtin;
+    
+    NSString* tooltip;
 }
+
+@property(retain) NSString* tooltip;
 
 + (PrefThemesController*) controller;
 
@@ -44,6 +49,7 @@
 - (IBAction)duplicateThemeAccept:(id)sender;
 - (IBAction)duplicateThemeCancel:(id)sender;
 - (IBAction)deleteTheme:(id)sender;
+- (IBAction)lockButtonToggle:(id)sender;
 
 - (void)addThemeAttribute:(ThemeAttributeModel*)themeAttribute;
 
