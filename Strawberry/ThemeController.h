@@ -58,8 +58,8 @@ DAMAGE.
 @interface ThemeAttributeModel : NSObject
 {
     NSString* name;
-    NSColor* fg;
-    NSColor* bg;
+    NSColor* foreground;
+    NSColor* background;
     NSNumber* bold;
     NSNumber* italice;
     NSNumber* underline;
@@ -67,8 +67,8 @@ DAMAGE.
 }
 
 @property(copy) NSString* name;
-@property(copy) NSColor* fg;
-@property(copy) NSColor* bg;
+@property(copy) NSColor* foreground;
+@property(copy) NSColor* background;
 @property(copy) NSNumber* bold;
 @property(copy) NSNumber* italic;
 @property(copy) NSNumber* underline;
@@ -96,8 +96,12 @@ DAMAGE.
 + (ThemeController*)sharedController;
 
 - (NSAttributedString*)highlightCode:(NSString*)code withSuffix:(NSString*)suffix;
+
+- (void)setObject:(id)object withAttribute:(NSString*)attr forSyntaxType:(NSString*)type;
+
 - (NSColor*)colorForGeneralType:(NSString*)type;
 - (void)setColor:(NSColor*)color forGeneralType:(NSString*)type;
+
 - (void)duplicateCurrentTheme:(NSString*)name;
 - (void)deleteCurrentTheme;
 - (BOOL)themeExists:(NSString*)name;

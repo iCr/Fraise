@@ -68,10 +68,10 @@ DAMAGE.
         string = [[[NSAttributedString alloc] init] autorelease];;
         
     NSTextView* textView = ((WindowController*) [[self windowControllers] objectAtIndex:0]).textView;
-    [textView.textStorage setAttributedString:string];
-    [textView setFont:[ThemeController sharedController].font];
     [textView setBackgroundColor:[[ThemeController sharedController] colorForGeneralType:@"background"]];
     [textView setTextColor:[[ThemeController sharedController] colorForGeneralType:@"foreground"]];
+    [textView.textStorage setAttributedString:string];
+    [textView setFont:[ThemeController sharedController].font];
 }
 
 - (void)themeChanged:(NSNotification*) notification

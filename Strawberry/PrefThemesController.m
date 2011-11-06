@@ -258,9 +258,10 @@
 
 - (void)tableView:(NSTableView *)aTableView setObjectValue:(id)anObject forTableColumn:(NSTableColumn *)aTableColumn row:(NSInteger)rowIndex
 {
-	id objectAtRow = [themeAttributes objectAtIndex:rowIndex];
+	ThemeAttributeModel* objectAtRow = [themeAttributes objectAtIndex:rowIndex];
 	NSString *columnKey = [aTableColumn identifier];
 	[objectAtRow setValue:anObject forKey:columnKey];
+    [[ThemeController sharedController] setObject:anObject withAttribute:columnKey forSyntaxType:objectAtRow.name];
 	[table reloadData];
 }
 

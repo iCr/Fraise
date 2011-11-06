@@ -137,7 +137,7 @@ DAMAGE.
 
 @implementation ThemeAttributeModel
 
-@synthesize name, fg, bg, bold, italic, underline, locked;
+@synthesize name, foreground, background, bold, italic, underline, locked;
 
 + (ThemeAttributeModel*) themeAttributeModelWithName:(NSString*)name attributes:(NSDictionary*)attrs locked:(BOOL)locked
 {
@@ -145,9 +145,9 @@ DAMAGE.
     model.name = name;
     
     NSString* colorString = [attrs objectForKey:@"foreground"];
-    model.fg = colorString ? [NSColor colorWithHexString:colorString] : [NSColor colorWithCalibratedWhite:0 alpha:0];
+    model.foreground = colorString ? [NSColor colorWithHexString:colorString] : [NSColor colorWithCalibratedWhite:0 alpha:0];
     colorString = [attrs objectForKey:@"background"];
-    model.bg = colorString ? [NSColor colorWithHexString:colorString] : [NSColor colorWithCalibratedWhite:0 alpha:0];
+    model.background = colorString ? [NSColor colorWithHexString:colorString] : [NSColor colorWithCalibratedWhite:0 alpha:0];
     model.bold = [attrs objectForKey:@"bold"];
     model.italic = [attrs objectForKey:@"italic"];
     model.underline = [attrs objectForKey:@"underline"];
@@ -158,8 +158,8 @@ DAMAGE.
 - (void)dealloc
 {
     self.name = nil;
-    self.fg = nil;
-    self.bg = nil;
+    self.foreground = nil;
+    self.background = nil;
 }
 
 @end
@@ -395,6 +395,25 @@ DAMAGE.
     NSColor* color = [NSColor colorWithHexString:[style objectForKey:@"foreground"]];
     
     return [NSDictionary dictionaryWithObjectsAndKeys:color, NSForegroundColorAttributeName, nil];
+}
+
+- (void)setObject:(id)object withAttribute:(NSString*)attr forSyntaxType:(NSString*)type
+{
+    if ([object isKindOfClass:[NSColor class]])
+        object = [object hexStringValue];
+        
+    NSMutableDictionary* styles = [NSMutableDictionary dictionaryWithDictionary:[self.currentTheme objectForKey:@"styles"]];
+    NSMutableDictionary* syntax = [NSMutableDictionary dictionaryWithDictionary:[styles objectForKey:@"syntax"]];
+    NSMutableDictionary* dictionary = [NSMutableDictionary dictionaryWithDictionary:[styles objectForKey:type]];
+    [dictionary setObject:object forKey:attr];
+    
+    [syntax setObject:dictionary forKey:type];
+    [styles setObject:syntax forKey:@"syntax"];
+    [self.currentTheme setObject:styles forKey:@"styles"];
+    
+    [self saveCurrentTheme];
+
+    [[NSNotificationCenter defaultCenter] postNotificationName:NotifyThemeChanged object:nil];
 }
 
 - (NSColor*) colorForGeneralType:(NSString*)type
