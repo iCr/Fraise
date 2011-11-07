@@ -71,7 +71,7 @@ DAMAGE.
     [textView setBackgroundColor:[[ThemeController sharedController] colorForGeneralType:@"background"]];
     [textView setTextColor:[[ThemeController sharedController] colorForGeneralType:@"foreground"]];
     [textView.textStorage setAttributedString:string];
-    [textView setFont:[ThemeController sharedController].font];
+    [textView setFont:[ThemeController sharedController].normalFont];
 }
 
 - (void)themeChanged:(NSNotification*) notification

@@ -82,7 +82,7 @@ DAMAGE.
 {
     NSMutableDictionary* themes;
     NSString* currentThemeName;
-    NSFont* font;
+    NSFont *normalFont, *boldFont, *italicFont, *boldItalicFont;
 }
 
 @property(retain) NSString* currentThemeName;
@@ -91,7 +91,10 @@ DAMAGE.
 @property BOOL currentThemeLocked;
 @property(readonly) BOOL currentThemeBuiltin;
 @property(readonly) NSArray* themeNames;
-@property(readonly) NSFont* font;
+@property(readonly) NSFont* normalFont;
+@property(readonly) NSFont* boldFont;
+@property(readonly) NSFont* italicFont;
+@property(readonly) NSFont* boldItalicFont;
 
 + (ThemeController*)sharedController;
 

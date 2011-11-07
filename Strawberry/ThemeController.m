@@ -44,7 +44,7 @@ DAMAGE.
 + (NSColor *)colorWithHexString:(NSString *) string
 {
     if (!string || [string characterAtIndex:0] != '#')
-        return [NSColor blackColor];
+        return [NSColor colorWithCalibratedRed:0 green:0 blue:0 alpha:0];
     
     uint32_t value;
     if (![[NSScanner scannerWithString:[string substringFromIndex:1]] scanHexInt:&value])
@@ -84,17 +84,20 @@ DAMAGE.
 
 - (NSString*)hexStringValue
 {
+    NSColor* color = self;
+    if (![color.colorSpaceName isEqualToString:NSCalibratedRGBColorSpace])
+        color = [color colorUsingColorSpaceName:NSCalibratedRGBColorSpace];
+        
     NSMutableString* string = [NSMutableString string];
     [string appendString:@"#"];
-    int n = [self redComponent] * 255;
+    int n = [color redComponent] * 255;
     [string appendFormat:@"%02x", n];
-    n = [self greenComponent] * 255;
+    n = [color greenComponent] * 255;
     [string appendFormat:@"%02x", n];
-    n = [self blueComponent] * 255;
+    n = [color blueComponent] * 255;
     [string appendFormat:@"%02x", n];
-    n = [self alphaComponent] * 255;
+    n = [color alphaComponent] * 255;
     [string appendFormat:@"%02x", n];
-    //NSString* string = [NSString stringWithFormat:@"#%02x%02x%02x%02x", (int) [self redComponent] * 255, (int) [self greenComponent] * 255, (int) [self blueComponent] * 255, (int) [self alphaComponent] * 255];
     return string;
 }
 
@@ -166,7 +169,7 @@ DAMAGE.
 
 @implementation ThemeController
 
-@synthesize font;
+@synthesize normalFont, boldFont, italicFont, boldItalicFont;
 
 - (NSString*)currentThemeName
 {
@@ -315,7 +318,14 @@ DAMAGE.
         
         NSString* fontName = [[[NSUserDefaultsController sharedUserDefaultsController] values] valueForKey:@"currentFontName"];
         CGFloat fontSize = [[[[NSUserDefaultsController sharedUserDefaultsController] values] valueForKey:@"currentFontSize"] floatValue];
-        font = [[NSFont fontWithName:fontName size:fontSize] retain];
+        NSFontDescriptor* descriptor = [NSFontDescriptor fontDescriptorWithName:fontName size:fontSize];
+        normalFont = [NSFont fontWithDescriptor:descriptor size:fontSize];
+        descriptor = [descriptor fontDescriptorWithSymbolicTraits:NSFontBoldTrait];
+        boldFont = [NSFont fontWithDescriptor:descriptor size:fontSize];
+        descriptor = [descriptor fontDescriptorWithSymbolicTraits:NSFontItalicTrait];
+        italicFont = [NSFont fontWithDescriptor:descriptor size:fontSize];
+        descriptor = [descriptor fontDescriptorWithSymbolicTraits:NSFontBoldTrait | NSFontItalicTrait];
+        boldItalicFont = [NSFont fontWithDescriptor:descriptor size:fontSize];
     }
     return self;
 }
@@ -324,7 +334,10 @@ DAMAGE.
 {
     [themes release];
     self.currentThemeName = nil;
-    [font release];
+    [normalFont release];
+    [boldFont release];
+    [italicFont release];
+    [boldItalicFont release];
 }
 
 - (NSString*)serialize:(id)obj
@@ -391,10 +404,31 @@ DAMAGE.
     if (!style)
         return nil;
         
-    // FIXME: For now just return foreground color
+    NSMutableDictionary* attributes = [NSMutableDictionary dictionary];
     NSColor* color = [NSColor colorWithHexString:[style objectForKey:@"foreground"]];
+    if ([color alphaComponent] != 0)
+        [attributes setObject:color forKey:NSForegroundColorAttributeName];
+        
+    color = [NSColor colorWithHexString:[style objectForKey:@"background"]];
+    if ([color alphaComponent] != 0)
+        [attributes setObject:color forKey:NSBackgroundColorAttributeName];
     
-    return [NSDictionary dictionaryWithObjectsAndKeys:color, NSForegroundColorAttributeName, nil];
+    NSFont* font = nil;
+    if ([[style objectForKey:@"bold"] boolValue])
+        if ([[style objectForKey:@"italic"] boolValue])
+            font = boldItalicFont;
+        else
+            font = boldFont;
+    if ([[style objectForKey:@"italic"] boolValue])
+            font = italicFont;
+
+    if (font)
+        [attributes setObject:font forKey:NSFontAttributeName];
+
+    if ([[style objectForKey:@"underline"] boolValue])
+        [attributes setObject:[NSNumber numberWithInteger:NSUnderlineStyleSingle] forKey:NSUnderlineStyleAttributeName];
+
+    return attributes;
 }
 
 - (void)setObject:(id)object withAttribute:(NSString*)attr forSyntaxType:(NSString*)type
@@ -404,7 +438,7 @@ DAMAGE.
         
     NSMutableDictionary* styles = [NSMutableDictionary dictionaryWithDictionary:[self.currentTheme objectForKey:@"styles"]];
     NSMutableDictionary* syntax = [NSMutableDictionary dictionaryWithDictionary:[styles objectForKey:@"syntax"]];
-    NSMutableDictionary* dictionary = [NSMutableDictionary dictionaryWithDictionary:[styles objectForKey:type]];
+    NSMutableDictionary* dictionary = [NSMutableDictionary dictionaryWithDictionary:[syntax objectForKey:type]];
     [dictionary setObject:object forKey:attr];
     
     [syntax setObject:dictionary forKey:type];
