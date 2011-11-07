@@ -171,6 +171,40 @@ DAMAGE.
 
 @synthesize normalFont, boldFont, italicFont, boldItalicFont;
 
+- (void)setFonts
+{
+    NSString* fontName = self.currentFontName;
+    CGFloat fontSize = self.currentFontSize;
+    
+    normalFont = [[NSFont fontWithName:fontName size:fontSize] retain];
+    boldFont = [[[NSFontManager sharedFontManager] convertFont:normalFont toHaveTrait:NSBoldFontMask] retain];
+    
+    italicFont = [[[NSFontManager sharedFontManager] convertFont:normalFont toHaveTrait:NSItalicFontMask] retain];
+    boldItalicFont = [[[NSFontManager sharedFontManager] convertFont:normalFont toHaveTrait:NSBoldFontMask | NSItalicFontMask] retain];
+}
+
+- (NSString*)currentFontName
+{
+    return [[[NSUserDefaultsController sharedUserDefaultsController] values] valueForKey:@"currentFontName"];
+}
+
+- (void)setCurrentFontName:(NSString*)fontName
+{
+    [[[NSUserDefaultsController sharedUserDefaultsController] values] setValue:fontName forKey:@"currentFontName"];
+    [self setFonts];
+}
+
+- (CGFloat)currentFontSize
+{
+    return [[[[NSUserDefaultsController sharedUserDefaultsController] values] valueForKey:@"currentFontSize"] floatValue];
+}
+
+- (void)setCurrentFontSize:(CGFloat)fontSize
+{
+    [[[NSUserDefaultsController sharedUserDefaultsController] values] setValue:[NSNumber numberWithDouble:fontSize] forKey:@"currentFontSize"];
+    [self setFonts];
+}
+
 - (NSString*)currentThemeName
 {
     return currentThemeName;
@@ -316,16 +350,7 @@ DAMAGE.
         
         currentThemeName = [[[NSUserDefaultsController sharedUserDefaultsController] values] valueForKey:@"currentThemeName"];
         
-        NSString* fontName = [[[NSUserDefaultsController sharedUserDefaultsController] values] valueForKey:@"currentFontName"];
-        CGFloat fontSize = [[[[NSUserDefaultsController sharedUserDefaultsController] values] valueForKey:@"currentFontSize"] floatValue];
-        NSFontDescriptor* descriptor = [NSFontDescriptor fontDescriptorWithName:fontName size:fontSize];
-        normalFont = [NSFont fontWithDescriptor:descriptor size:fontSize];
-        descriptor = [descriptor fontDescriptorWithSymbolicTraits:NSFontBoldTrait];
-        boldFont = [NSFont fontWithDescriptor:descriptor size:fontSize];
-        descriptor = [descriptor fontDescriptorWithSymbolicTraits:NSFontItalicTrait];
-        italicFont = [NSFont fontWithDescriptor:descriptor size:fontSize];
-        descriptor = [descriptor fontDescriptorWithSymbolicTraits:NSFontBoldTrait | NSFontItalicTrait];
-        boldItalicFont = [NSFont fontWithDescriptor:descriptor size:fontSize];
+        [self setFonts];
     }
     return self;
 }
@@ -413,7 +438,7 @@ DAMAGE.
     if ([color alphaComponent] != 0)
         [attributes setObject:color forKey:NSBackgroundColorAttributeName];
     
-    NSFont* font = nil;
+    NSFont* font = normalFont;
     if ([[style objectForKey:@"bold"] boolValue])
         if ([[style objectForKey:@"italic"] boolValue])
             font = boldItalicFont;

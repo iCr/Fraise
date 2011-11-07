@@ -15,17 +15,17 @@
     return [[[PrefAdvancedController alloc] init] autorelease];
 }
 
-- (NSString*)label
++ (NSString*)label
 {
     return @"Advanced";
 }
 
-- (NSString*)nibName
++ (NSString*)nibName
 {
     return @"PrefAdvanced";
 }
 
-- (NSImage*)image
++ (NSImage*)image
 {
     return [[[NSImage alloc] initByReferencingFile:@"/System/Library/CoreServices/CoreTypes.bundle/Contents/Resources/ToolbarAdvanced.icns"] autorelease];
 }

@@ -95,6 +95,8 @@ DAMAGE.
 @property(readonly) NSFont* boldFont;
 @property(readonly) NSFont* italicFont;
 @property(readonly) NSFont* boldItalicFont;
+@property(retain) NSString* currentFontName;
+@property(assign) CGFloat currentFontSize;
 
 + (ThemeController*)sharedController;
 

@@ -70,8 +70,8 @@ DAMAGE.
     NSTextView* textView = ((WindowController*) [[self windowControllers] objectAtIndex:0]).textView;
     [textView setBackgroundColor:[[ThemeController sharedController] colorForGeneralType:@"background"]];
     [textView setTextColor:[[ThemeController sharedController] colorForGeneralType:@"foreground"]];
-    [textView.textStorage setAttributedString:string];
     [textView setFont:[ThemeController sharedController].normalFont];
+    [textView.textStorage setAttributedString:string];
 }
 
 - (void)themeChanged:(NSNotification*) notification

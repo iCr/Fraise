@@ -210,10 +210,13 @@ static DBPrefsWindowController *_sharedPrefsWindowController = nil;
 		[[self window] setToolbar:toolbar];
 		[toolbar release];
 	}
-	
-	NSString *firstIdentifier = [toolbarIdentifiers objectAtIndex:0];
-	[[[self window] toolbar] setSelectedItemIdentifier:firstIdentifier];
-	[self displayViewForIdentifier:firstIdentifier animate:NO];
+
+    NSString* prefPanelIdentifier = [[[NSUserDefaultsController sharedUserDefaultsController] values] valueForKey:@"currentPrefPanel"];
+    if (!prefPanelIdentifier)
+        prefPanelIdentifier = [toolbarIdentifiers objectAtIndex:0];
+
+	[[[self window] toolbar] setSelectedItemIdentifier:prefPanelIdentifier];
+	[self displayViewForIdentifier:prefPanelIdentifier animate:NO];
 	
 	[[self window] center];
 
@@ -276,6 +279,8 @@ static DBPrefsWindowController *_sharedPrefsWindowController = nil;
 
 - (void)displayViewForIdentifier:(NSString *)identifier animate:(BOOL)animate
 {	
+    [[[NSUserDefaultsController sharedUserDefaultsController] values] setValue:identifier forKey:@"currentPrefPanel"];
+
 		// Find the view we want to display.
 	NSView *newView = [toolbarViews objectForKey:identifier];
 

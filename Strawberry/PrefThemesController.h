@@ -25,6 +25,8 @@
     IBOutlet NSWindow* m_duplicateSheet;
     IBOutlet NSTextField* m_duplicateThemeName;
     IBOutlet NSButton* m_lockButton;
+    IBOutlet NSButton* m_fontPanelButton;
+    IBOutlet NSTextField* m_fontNameField;
         
     NSMutableArray* themeAttributes;
     

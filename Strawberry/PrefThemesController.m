@@ -20,6 +20,21 @@
     return [[[PrefThemesController alloc] init] autorelease];
 }
 
++ (NSString*)label
+{
+    return @"Themes";
+}
+
++ (NSString*)nibName
+{
+    return @"PrefThemes";
+}
+
++ (NSImage*)image
+{
+    return [[[NSImage alloc] initByReferencingFile:@"/System/Library/CoreServices/CoreTypes.bundle/Contents/Resources/ProfileFontAndColor.icns"] autorelease];
+}
+
 - (void)showCurrentTheme
 {
     [m_themeButton selectItemWithTitle:[ThemeController sharedController].currentThemeName];
@@ -65,6 +80,8 @@
     m_lockButton.state = locked ?  NSOnState :  NSOffState;
     m_lockButton.enabled = !builtin;
     m_lockButton.toolTip = builtin ? @"This theme is built-in and cannot be changed" : (locked ? @"Click to make changes to theme" : @"Click to no longer be able to make changes to theme");
+    
+    m_fontNameField.stringValue = [NSString stringWithFormat:@"%@ %d pt.", [ThemeController sharedController].currentFontName, (int) [ThemeController sharedController].currentFontSize];
     
 	[table reloadData];
 }
@@ -215,21 +232,6 @@
 {
     [ThemeController sharedController].currentThemeLocked = m_lockButton.state == NSOnState;
     [self showCurrentTheme];
-}
-
-- (NSString*)label
-{
-    return @"Themes";
-}
-
-- (NSString*)nibName
-{
-    return @"PrefThemes";
-}
-
-- (NSImage*)image
-{
-    return [[[NSImage alloc] initByReferencingFile:@"/System/Library/CoreServices/CoreTypes.bundle/Contents/Resources/ProfileFontAndColor.icns"] autorelease];
 }
 
 - (void)addThemeAttribute:(ThemeAttributeModel*)themeAttribute

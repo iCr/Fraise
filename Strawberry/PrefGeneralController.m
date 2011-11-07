@@ -15,17 +15,17 @@
     return [[[PrefGeneralController alloc] init] autorelease];
 }
 
-- (NSString*)label
++ (NSString*)label
 {
     return @"General";
 }
 
-- (NSString*)nibName
++ (NSString*)nibName
 {
     return @"PrefGeneral";
 }
 
-- (NSImage*)image
++ (NSImage*)image
 {
     return [[[NSImage alloc] initByReferencingFile:@"/System/Library/CoreServices/CoreTypes.bundle/Contents/Resources/General.icns"] autorelease];
 }

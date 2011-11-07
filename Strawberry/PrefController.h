@@ -15,8 +15,8 @@
     NSImage* m_icon;
 }
 
-- (NSString*)label;
-- (NSString*)nibName;
-- (NSImage*)image;
++ (NSString*)label;
++ (NSString*)nibName;
++ (NSImage*)image;
 
 @end

@@ -30,8 +30,6 @@
     [m_panels addObject:[PrefGeneralController controller]];
     [m_panels addObject:[PrefThemesController controller]];
     [m_panels addObject:[PrefAdvancedController controller]];
-    
-    
 }
 
 @end

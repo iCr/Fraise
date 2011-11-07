@@ -15,22 +15,22 @@
 - (id)init
 {
     [super init];
-    [NSBundle loadNibNamed:[self nibName] owner:self];
-    [[PrefsWindowController sharedPrefsWindowController] addView:m_view label:[self label] image:[self image]];
+    [NSBundle loadNibNamed:[[self class] nibName] owner:self];
+    [[PrefsWindowController sharedPrefsWindowController] addView:m_view label:[[self class] label] image:[[self class] image]];
     return self;
 }
 
-- (NSString*)label
++ (NSString*)label
 {
     return @"Unknown";
 }
 
-- (NSString*)nibName
++ (NSString*)nibName
 {
     return @"PrefUnknown";
 }
 
-- (NSImage*)image
++ (NSImage*)image
 {
     return [[[NSImage alloc] initByReferencingFile:@"/System/Library/CoreServices/CoreTypes.bundle/Contents/Resources/GenericQuestionMarkIcon.icns"] autorelease];
 }
