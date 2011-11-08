@@ -52,6 +52,7 @@
 - (IBAction)duplicateThemeCancel:(id)sender;
 - (IBAction)deleteTheme:(id)sender;
 - (IBAction)lockButtonToggle:(id)sender;
+- (IBAction)showFontPanel:(id)sender;
 
 - (void)addThemeAttribute:(ThemeAttributeModel*)themeAttribute;
 

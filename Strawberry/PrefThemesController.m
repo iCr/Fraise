@@ -234,6 +234,22 @@
     [self showCurrentTheme];
 }
 
+- (IBAction)showFontPanel:(id)sender
+{
+    NSFontManager * fontManager = [NSFontManager sharedFontManager];
+    [fontManager setTarget:self];
+    [fontManager setSelectedFont:[NSFont fontWithName:[ThemeController sharedController].currentFontName size:[ThemeController sharedController].currentFontSize] isMultiple:NO];
+    [fontManager orderFrontFontPanel:self];
+}
+
+- (void)changeFont:(id)sender
+{
+    NSFont *newFont = [sender convertFont:[ThemeController sharedController].normalFont];
+    [ThemeController sharedController].currentFontName = [newFont fontName];
+    [ThemeController sharedController].currentFontSize = [newFont pointSize];
+    [self showCurrentTheme];
+}
+
 - (void)addThemeAttribute:(ThemeAttributeModel*)themeAttribute
 {
     [themeAttributes addObject:themeAttribute];

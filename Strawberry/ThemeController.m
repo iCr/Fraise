@@ -181,6 +181,7 @@ DAMAGE.
     
     italicFont = [[[NSFontManager sharedFontManager] convertFont:normalFont toHaveTrait:NSItalicFontMask] retain];
     boldItalicFont = [[[NSFontManager sharedFontManager] convertFont:normalFont toHaveTrait:NSBoldFontMask | NSItalicFontMask] retain];
+    [[NSNotificationCenter defaultCenter] postNotificationName:NotifyThemeChanged object:nil];
 }
 
 - (NSString*)currentFontName
@@ -288,7 +289,7 @@ DAMAGE.
     static ThemeController* controller;
     if (!controller) {
         controller = [[ThemeController alloc] init];
-        [[NSNotificationCenter defaultCenter] postNotificationName:NotifyThemeChanged object:nil];
+        [controller setFonts];
     }
     return controller;
 }
@@ -349,8 +350,6 @@ DAMAGE.
         [AppController unlockJSCocoa];
         
         currentThemeName = [[[NSUserDefaultsController sharedUserDefaultsController] values] valueForKey:@"currentThemeName"];
-        
-        [self setFonts];
     }
     return self;
 }
