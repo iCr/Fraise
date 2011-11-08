@@ -11,7 +11,7 @@
 @class ThemeColorArrayController;
 @class ThemeAttributeModel;
 
-@interface PrefThemesController : PrefController <NSTableViewDelegate, NSTableViewDataSource>
+@interface PrefThemesController : PrefController <NSTableViewDelegate, NSTableViewDataSource, NSWindowDelegate>
 {
     IBOutlet NSTableView* table;
     IBOutlet NSPopUpButton* m_themeButton;

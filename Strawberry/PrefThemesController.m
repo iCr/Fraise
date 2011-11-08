@@ -239,7 +239,13 @@
     NSFontManager * fontManager = [NSFontManager sharedFontManager];
     [fontManager setTarget:self];
     [fontManager setSelectedFont:[NSFont fontWithName:[ThemeController sharedController].currentFontName size:[ThemeController sharedController].currentFontSize] isMultiple:NO];
+    [[m_view window] makeFirstResponder:self];
     [fontManager orderFrontFontPanel:self];
+}
+
+- (NSUInteger)validModesForFontPanel:(NSFontPanel *)fontPanel
+{
+    return NSFontPanelFaceModeMask | NSFontPanelSizeModeMask | NSFontPanelCollectionModeMask;
 }
 
 - (void)changeFont:(id)sender

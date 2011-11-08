@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface PrefController : NSObject
+@interface PrefController : NSResponder
 {
     IBOutlet NSView* m_view;
     
