@@ -69,6 +69,7 @@ DAMAGE.
         
     NSTextView* textView = ((WindowController*) [[self windowControllers] objectAtIndex:0]).textView;
     [textView setBackgroundColor:[[ThemeController sharedController] colorForGeneralType:@"background"]];
+    [textView setInsertionPointColor:[[ThemeController sharedController] colorForGeneralType:@"caret"]];
     NSArray* selection = [textView selectedRanges];
     [textView.textStorage setAttributedString:string];
     [textView setSelectedRanges:selection];
@@ -76,7 +77,13 @@ DAMAGE.
 
 - (void)themeChanged:(NSNotification*) notification
 {
-    [self updateTextView];
+    if (![[self windowControllers] count])
+        return;
+        
+    NSTextView* textView = ((WindowController*) [[self windowControllers] objectAtIndex:0]).textView;
+    [textView setBackgroundColor:[[ThemeController sharedController] colorForGeneralType:@"background"]];
+    [textView setInsertionPointColor:[[ThemeController sharedController] colorForGeneralType:@"caret"]];
+    [textView setSelectedTextAttributes:[NSDictionary dictionaryWithObject:[[ThemeController sharedController] colorForGeneralType:@"selection"] forKey:NSBackgroundColorAttributeName]];
 }
 
 - (NSString*)content
