@@ -40,7 +40,7 @@ DAMAGE.
 
 @interface Document : NSDocument
 {
-    NSMutableString* content;
+    NSString* content;
     NSStringEncoding encoding;
     NSURL* url;
 }

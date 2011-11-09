@@ -41,7 +41,7 @@ DAMAGE.
 
 @implementation Document
 
-@synthesize encoding, url, content;
+@synthesize encoding, url;
 
 - (id)init
 {
@@ -69,13 +69,26 @@ DAMAGE.
         
     NSTextView* textView = ((WindowController*) [[self windowControllers] objectAtIndex:0]).textView;
     [textView setBackgroundColor:[[ThemeController sharedController] colorForGeneralType:@"background"]];
-    [textView setTextColor:[[ThemeController sharedController] colorForGeneralType:@"foreground"]];
-    [textView setFont:[ThemeController sharedController].normalFont];
+    NSArray* selection = [textView selectedRanges];
     [textView.textStorage setAttributedString:string];
+    [textView setSelectedRanges:selection];
 }
 
 - (void)themeChanged:(NSNotification*) notification
 {
+    [self updateTextView];
+}
+
+- (NSString*)content
+{
+    return content;
+}
+
+- (void)setContent:(NSString*)string
+{
+    [string retain];
+    [content release];
+    content = string;
     [self updateTextView];
 }
 

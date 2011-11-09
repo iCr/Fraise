@@ -424,11 +424,14 @@ DAMAGE.
 
 - (NSDictionary*) attributesForSyntaxType:(NSString*)type
 {
-    NSDictionary* style = [self.currentSyntaxTypes objectForKey:type];
-    if (!style)
-        return nil;
-        
     NSMutableDictionary* attributes = [NSMutableDictionary dictionary];
+    NSDictionary* style = type ? [self.currentSyntaxTypes objectForKey:type] : nil;
+    if (!style) {
+        [attributes setObject:normalFont forKey:NSFontAttributeName];
+        [attributes setObject:[self colorForGeneralType:@"foreground"] forKey:NSForegroundColorAttributeName];
+        return attributes;
+    }
+        
     NSColor* color = [NSColor colorWithHexString:[style objectForKey:@"foreground"]];
     if ([color alphaComponent] != 0)
         [attributes setObject:color forKey:NSForegroundColorAttributeName];
@@ -516,9 +519,11 @@ DAMAGE.
     NSArray* array = [js toObject:result];
     NSMutableAttributedString* string = [[NSMutableAttributedString alloc] initWithString:code];
     
+    [string addAttributes:[self attributesForSyntaxType:nil] range:NSMakeRange(0, [string length])];
+    
     for (int i = 0; i < [array count]; ++i) {
         SyntaxMatch* match = [array objectAtIndex:i];
-        [string setAttributes:[self attributesForSyntaxType:match.type] range:NSMakeRange(match.index, match.length)];
+        [string addAttributes:[self attributesForSyntaxType:match.type] range:NSMakeRange(match.index, match.length)];
     }
 
     [AppController unlockJSCocoa];
