@@ -65,5 +65,6 @@
 
 - (NSUInteger)lineNumberForLocation:(CGFloat)location;
 - (NoodleLineNumberMarker *)markerAtLine:(NSUInteger)line;
+- (NSUInteger)lineNumberForCharacterIndex:(NSUInteger)index;
 
 @end

@@ -38,6 +38,49 @@ DAMAGE.
 
 #import "Document.h"
 #import "MarkerLineNumberView.h"
+#import "ThemeController.h"
+
+@implementation TextView
+
+@synthesize windowController = m_windowController;
+
+- (void)drawViewBackgroundInRect:(NSRect)rect
+{
+    [super drawViewBackgroundInRect:rect];
+    NSRange selection = [self selectedRange];
+    if (selection.length != 0)
+        return;
+        
+    NSRange range = [[self string] lineRangeForRange:selection];
+    NSRect boundingRect = [[self layoutManager] boundingRectForGlyphRange:range inTextContainer:[self textContainer]];
+    
+    boundingRect.origin.x = 0;
+    boundingRect.size.width = [self bounds].size.width;
+    
+    if (NSEqualRects(boundingRect, m_lineHighlightRect))
+        return;
+    
+    if (!NSContainsRect(rect, boundingRect)) {
+        [self setNeedsDisplay:YES];
+        return;
+    }
+        
+    NSColor* lineColor = [[ThemeController sharedController] colorForGeneralType:@"lineHighlight"];
+
+    [lineColor set];
+    [NSBezierPath fillRect:boundingRect];
+
+    m_lineHighlightRect = boundingRect;
+}
+
+- (id)init
+{
+    if (self = [super init]) {
+    }
+    return self;
+}
+
+@end
 
 @implementation WindowController
 
@@ -47,7 +90,6 @@ DAMAGE.
 {
     self = [super initWithWindow:window];
     if (self) {
-        // Initialization code here.
     }
     
     return self;
@@ -65,12 +107,19 @@ DAMAGE.
     [m_scrollView setRulersVisible:YES];
 	
     // FIXME: This disables word wrap. Eventually we need this as a per-document flag that gets set when the document is active
-    NSSize layoutSize = [m_textView maxSize];
-    layoutSize.width = layoutSize.height;
-    [m_textView setMaxSize:layoutSize];
-    [[m_textView textContainer] setWidthTracksTextView:NO];
-    [m_textView setHorizontallyResizable:YES];
-    [[m_textView textContainer] setContainerSize:layoutSize];
+    //NSSize layoutSize = [m_textView maxSize];
+    //layoutSize.width = layoutSize.height;
+    //[m_textView setMaxSize:layoutSize];
+    //[[m_textView textContainer] setWidthTracksTextView:NO];
+    //[m_textView setHorizontallyResizable:YES];
+    //[[m_textView textContainer] setContainerSize:layoutSize];
+
+    m_textView.windowController = self;
+}
+
+- (NSUInteger)lineNumberForCharacterIndex:(NSUInteger)index
+{
+    return [m_lineNumberView lineNumberForCharacterIndex:index];
 }
 
 @end

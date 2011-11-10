@@ -37,14 +37,26 @@ DAMAGE.
 #import <Cocoa/Cocoa.h>
 
 @class MarkerLineNumberView;
+@class WindowController;
+
+@interface TextView : NSTextView
+{
+    WindowController* m_windowController;
+    NSRect m_lineHighlightRect;
+}
+
+@property(assign) WindowController* windowController;
+@end
 
 @interface WindowController : NSWindowController
 {
     IBOutlet NSScrollView* m_scrollView;
-    IBOutlet NSTextView* m_textView;
+    IBOutlet TextView* m_textView;
 	MarkerLineNumberView* m_lineNumberView;
 }
 
 @property(readonly) NSTextView* textView;
+
+- (NSUInteger)lineNumberForCharacterIndex:(NSUInteger)index;
 
 @end

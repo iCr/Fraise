@@ -39,7 +39,6 @@
 - (NSMutableArray *)lineIndices;
 - (void)invalidateLineIndices;
 - (void)calculateLines;
-- (NSUInteger)lineNumberForCharacterIndex:(NSUInteger)index inText:(NSString *)text;
 - (NSDictionary *)textAttributes;
 - (NSDictionary *)markerTextAttributes;
 
@@ -291,7 +290,7 @@
 	}
 }
 
-- (NSUInteger)lineNumberForCharacterIndex:(NSUInteger)index inText:(NSString *)text
+- (NSUInteger)lineNumberForCharacterIndex:(NSUInteger)index
 {
     NSUInteger			left, right, mid, lineStart;
 	NSMutableArray		*lines;
@@ -419,7 +418,7 @@
         
         count = [lines count];
         
-        for (line = [self lineNumberForCharacterIndex:range.location inText:text]; line < count; line++)
+        for (line = [self lineNumberForCharacterIndex:range.location]; line < count; line++)
         {
             index = [[lines objectAtIndex:line] unsignedIntegerValue];
             
