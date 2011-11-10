@@ -42,26 +42,42 @@ DAMAGE.
 
 @implementation TextView
 
-@synthesize windowController = m_windowController;
-
 - (void)drawViewBackgroundInRect:(NSRect)rect
 {
     [super drawViewBackgroundInRect:rect];
     NSRange selection = [self selectedRange];
-    if (selection.length != 0)
-        return;
-        
+    
     NSRange range = [[self string] lineRangeForRange:selection];
     NSRect boundingRect = [[self layoutManager] boundingRectForGlyphRange:range inTextContainer:[self textContainer]];
     
     boundingRect.origin.x = 0;
     boundingRect.size.width = [self bounds].size.width;
     
-    if (NSEqualRects(boundingRect, m_lineHighlightRect))
-        return;
+    BOOL hasOldLineHighlight = m_lastInsertionPoint >= 0;
+    BOOL hasNewLineHighlight = !selection.length;
     
-    if (!NSContainsRect(rect, boundingRect)) {
-        [self setNeedsDisplay:YES];
+    NSRect newRect;
+    
+    if (hasNewLineHighlight && hasOldLineHighlight) {
+    // Case 1: Going from one insertion point to another -> render new lineHighlight and remove old
+        if (NSEqualRects(boundingRect, m_lastLineHighlight) && !NSIntersectsRect(boundingRect, rect))
+            return;
+        newRect = NSUnionRect(boundingRect, m_lastLineHighlight);
+    } else if (hasNewLineHighlight && !hasOldLineHighlight) {
+        // Case 2: Going from no insertion point to insertion point -> render new lineHighlight
+        newRect = boundingRect;
+    } else if (!hasNewLineHighlight && hasOldLineHighlight) {
+        // Case 3: Going from insertion point to no insertion point -> render area of old lineHighlight
+        newRect = m_lastLineHighlight;
+    } else {
+        // Nothing to do
+        return;
+    }
+    
+    newRect = NSIntersectionRect(newRect, [self visibleRect]);
+    
+    if (!NSContainsRect(rect, newRect)) {
+        [self setNeedsDisplayInRect:NSUnionRect(rect, newRect)];
         return;
     }
         
@@ -70,14 +86,15 @@ DAMAGE.
     [lineColor set];
     [NSBezierPath fillRect:boundingRect];
 
-    m_lineHighlightRect = boundingRect;
+    m_lastLineHighlight = boundingRect;
+    m_lastInsertionPoint = selection.length ? -1 : selection.location;
 }
 
-- (id)init
+- (void)setWindowController:(WindowController*)controller;
 {
-    if (self = [super init]) {
-    }
-    return self;
+    m_windowController = controller;
+    m_lastInsertionPoint = -1;
+    m_lastLineHighlight = NSZeroRect;
 }
 
 @end
@@ -114,7 +131,7 @@ DAMAGE.
     //[m_textView setHorizontallyResizable:YES];
     //[[m_textView textContainer] setContainerSize:layoutSize];
 
-    m_textView.windowController = self;
+    [m_textView setWindowController:self];
 }
 
 - (NSUInteger)lineNumberForCharacterIndex:(NSUInteger)index

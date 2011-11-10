@@ -42,10 +42,12 @@ DAMAGE.
 @interface TextView : NSTextView
 {
     WindowController* m_windowController;
-    NSRect m_lineHighlightRect;
+    NSInteger m_lastInsertionPoint;
+    NSRect m_lastLineHighlight;
 }
 
-@property(assign) WindowController* windowController;
+- (void)setWindowController:(WindowController*)controller;
+
 @end
 
 @interface WindowController : NSWindowController

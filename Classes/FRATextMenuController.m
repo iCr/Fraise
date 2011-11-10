@@ -65,7 +65,7 @@ static id sharedInstance = nil;
 	id item;
 	NSMenuItem *menuItem;
 	for (item in enumerator) {
-		if ([[item valueForKey:@"active"] boolValue] == YES) {
+		if ([[item valueForKey:@"active"] boolValuee] == YES) {
 			NSUInteger encoding = [[item valueForKey:@"encoding"] unsignedIntegerValue];
 			menuItem = [[NSMenuItem alloc] initWithTitle:[NSString localizedNameOfStringEncoding:encoding] action:@selector(changeEncodingAction:) keyEquivalent:@""];
 			[menuItem setTag:encoding];
