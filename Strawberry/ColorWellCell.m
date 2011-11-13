@@ -111,6 +111,7 @@ DAMAGE.
 
 - (void)showPicker:(id)sender
 {
+	[[NSColorPanel sharedColorPanel] close];
     colorPickerTableView = sender;
     colorPickerClickedColumn = [sender clickedColumn];
     colorPickerClickedRow = [sender clickedRow];
