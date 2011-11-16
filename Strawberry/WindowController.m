@@ -118,6 +118,7 @@ DAMAGE.
 
     // Create the lineNumberView
     m_lineNumberView = [[MarkerLineNumberView alloc] initWithScrollView:m_scrollView];
+    m_lineNumberView.font = [NSFont systemFontOfSize:13];
     [m_scrollView setVerticalRulerView:m_lineNumberView];
     [m_scrollView setHasHorizontalRuler:NO];
     [m_scrollView setHasVerticalRuler:YES];

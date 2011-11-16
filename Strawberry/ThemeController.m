@@ -429,6 +429,12 @@ DAMAGE.
     if (!style) {
         [attributes setObject:normalFont forKey:NSFontAttributeName];
         [attributes setObject:[self colorForGeneralType:@"foreground"] forKey:NSForegroundColorAttributeName];
+
+        NSMutableParagraphStyle* ps = [[NSMutableParagraphStyle alloc]init];
+        [ps setLineHeightMultiple:1.13];
+        [attributes setObject:ps forKey:NSParagraphStyleAttributeName];
+        [ps release];
+
         return attributes;
     }
         
