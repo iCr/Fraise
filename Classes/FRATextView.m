@@ -26,7 +26,7 @@ Unless required by applicable law or agreed to in writing, software distributed 
 
 @implementation FRATextView
 
-@synthesize colouredIBeamCursor, inCompleteMethod;
+@synthesize colouredIBeamCursor, inCompleteMethod, allWords;
 
 - (id)initWithFrame:(NSRect)frame
 {
@@ -34,9 +34,17 @@ Unless required by applicable law or agreed to in writing, software distributed 
 		FRALayoutManager *layoutManager = [[FRALayoutManager alloc] init];
 		[[self textContainer] replaceLayoutManager:layoutManager];
 		
-		[self setDefaults];		
+		[self setDefaults];
+        indexedOffset = 0;
+        [self setAllWords:[NSMutableSet set]];
 	}
 	return self;
+}
+
+- (void) dealloc
+{
+    [self setAllWords:nil];
+    [super dealloc];
 }
 
 
@@ -639,6 +647,33 @@ Unless required by applicable law or agreed to in writing, software distributed 
 - (void)performFindPanelAction:(id)sender
 {
 	[super performFindPanelAction:sender];
+}
+
+- (NSArray *)completionsForPartialWordRange:(NSRange)charRange indexOfSelectedItem:(NSInteger *)index
+{
+    NSString* contents = [[self textStorage] string];
+    NSString* filter = [[contents substringWithRange:charRange] uppercaseString];
+    NSString* forIndexing = [contents substringFromIndex:indexedOffset];
+    indexedOffset = [contents length]-1;
+    
+    NSMutableCharacterSet *whiteSpaces = [[NSCharacterSet whitespaceAndNewlineCharacterSet] mutableCopy];
+    [whiteSpaces addCharactersInString:@"{}()+-*/=:.,;&|!"];
+    NSArray *newWords = [forIndexing componentsSeparatedByCharactersInSet:whiteSpaces];
+    [whiteSpaces release];
+    [[self allWords] addObjectsFromArray:newWords];
+    
+    NSMutableArray* completer = [NSMutableArray array];
+    for (NSString* currWord in [self allWords])
+    {
+        if ([[currWord uppercaseString] hasPrefix:filter] && ![[currWord uppercaseString] isEqualToString:filter])
+        {
+            [completer addObject:currWord];
+        }
+    }
+    
+    [completer addObjectsFromArray:[super completionsForPartialWordRange:charRange indexOfSelectedItem:index]];
+    // do modifications to the array here
+    return completer;
 }
 
 

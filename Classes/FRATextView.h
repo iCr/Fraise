@@ -28,10 +28,15 @@ Unless required by applicable law or agreed to in writing, software distributed 
 	NSCursor *colouredIBeamCursor;
 	
 	BOOL inCompleteMethod;
+    
+    int indexedOffset;
+    
+    NSMutableSet* allWords;
 }
 
 @property (assign) NSCursor *colouredIBeamCursor;
 @property (assign) BOOL inCompleteMethod;
+@property (nonatomic, retain) NSMutableSet* allWords;
 
 - (void)setDefaults;
 
