@@ -655,6 +655,7 @@ Unless required by applicable law or agreed to in writing, software distributed 
     if ([contents length] - 1 < indexedOffset)
     {
         indexedOffset = 0;
+        [self setAllWords:[NSMutableSet set]];
     }
     NSString* filter = [[contents substringWithRange:charRange] uppercaseString];
     NSString* forIndexing = [contents substringFromIndex:indexedOffset];
