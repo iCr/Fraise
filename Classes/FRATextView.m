@@ -652,12 +652,16 @@ Unless required by applicable law or agreed to in writing, software distributed 
 - (NSArray *)completionsForPartialWordRange:(NSRange)charRange indexOfSelectedItem:(NSInteger *)index
 {
     NSString* contents = [[self textStorage] string];
+    if ([contents length] - 1 < indexedOffset)
+    {
+        indexedOffset = 0;
+    }
     NSString* filter = [[contents substringWithRange:charRange] uppercaseString];
     NSString* forIndexing = [contents substringFromIndex:indexedOffset];
     indexedOffset = [contents length]-1;
     
     NSMutableCharacterSet *whiteSpaces = [[NSCharacterSet whitespaceAndNewlineCharacterSet] mutableCopy];
-    [whiteSpaces addCharactersInString:@"{}()+-*/=:.,;&|!"];
+    [whiteSpaces addCharactersInString:@"{}()<>+-*/\\=:.,;&|!@#$%^*'\""];
     NSArray *newWords = [forIndexing componentsSeparatedByCharactersInSet:whiteSpaces];
     [whiteSpaces release];
     [[self allWords] addObjectsFromArray:newWords];
