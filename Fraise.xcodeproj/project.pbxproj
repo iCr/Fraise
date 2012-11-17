@@ -1603,6 +1603,7 @@
 				PREBINDING = NO;
 				PRODUCT_NAME = fraise;
 				SDKROOT = "";
+				SKIP_INSTALL = YES;
 				ZERO_LINK = YES;
 			};
 			name = Debug;
@@ -1617,6 +1618,7 @@
 				PREBINDING = NO;
 				PRODUCT_NAME = fraise;
 				SDKROOT = "";
+				SKIP_INSTALL = YES;
 				ZERO_LINK = NO;
 			};
 			name = Release;
@@ -1635,6 +1637,7 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				PRODUCT_NAME = Fraise;
 				SDKROOT = "";
 				WRAPPER_EXTENSION = app;
@@ -1656,6 +1659,7 @@
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				PRODUCT_NAME = Fraise;
 				SDKROOT = "";
 				WRAPPER_EXTENSION = app;
