@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
 	<key>List</key>
@@ -59,8 +59,8 @@
 			<key>text</key>
 			<string>#!/usr/bin/php
 &lt;?php
-$data = file_get_contents("%%s");
-$data = mb_convert_encoding($data, "HTML-ENTITIES", "UTF-8");
+$data = file_get_contents(&quot;%%s&quot;);
+$data = mb_convert_encoding($data, &quot;HTML-ENTITIES&quot;, &quot;UTF-8&quot;);
 echo $data;
 ?&gt;</string>
 			<key>inline</key>
@@ -74,8 +74,8 @@ echo $data;
 			<key>text</key>
 			<string>#!/usr/bin/php
 &lt;?php
-$data = file_get_contents("%%s");
-$data = mb_convert_encoding($data, "UTF-8", "HTML-ENTITIES");
+$data = file_get_contents(&quot;%%s&quot;);
+$data = mb_convert_encoding($data, &quot;UTF-8&quot;, &quot;HTML-ENTITIES&quot;);
 echo $data;
 ?&gt;</string>
 			<key>inline</key>
@@ -87,7 +87,7 @@ echo $data;
 			<key>text</key>
 			<string>#!/bin/sh
 
-tempFile=/tmp/FraiseTempFile.`/bin/date +%H%M%S`.$$
+tempFile=/tmp/StrawberryTempFile.`/bin/date +%H%M%S`.$$
 
 /usr/bin/plutil -convert xml1 -o $tempFile %%p
 /bin/cat $tempFile
@@ -99,7 +99,7 @@ tempFile=/tmp/FraiseTempFile.`/bin/date +%H%M%S`.$$
 			<key>text</key>
 			<string>#!/bin/sh
 
-tempFile=/tmp/FraiseTempFile.`/bin/date +%H%M%S`.$$
+tempFile=/tmp/StrawberryTempFile.`/bin/date +%H%M%S`.$$
 
 /usr/bin/plutil -convert binary1 -o $tempFile %%p
 /bin/cat $tempFile
@@ -151,7 +151,7 @@ tempFile=/tmp/FraiseTempFile.`/bin/date +%H%M%S`.$$
 			<key>name</key>
 			<string>Insert current date</string>
 			<key>text</key>
-			<string>/bin/date '+%Y-%m-%d %H:%M'</string>
+			<string>/bin/date &apos;+%Y-%m-%d %H:%M&apos;</string>
 			<key>inline</key>
 			<true/>
 		</dict>

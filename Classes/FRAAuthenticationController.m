@@ -1,15 +1,19 @@
 /*
-Fraise version 3.7 - Based on Smultron by Peter Borg
-Written by Jean-François Moy - jeanfrancois.moy@gmail.com
-Find the latest version at http://github.com/jfmoy/Fraise
+Strawberry - Based on Fraise by Jean-François Moy
+Written by Chris Marrin - chris@marrin.com
+Find the latest version at http://github.com/cmarrin/Strawberry
 
 Copyright 2010 Jean-François Moy
  
-Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
+Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file 
+except in compliance with the License. You may obtain a copy of the License at
  
 http://www.apache.org/licenses/LICENSE-2.0
  
-Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
+Unless required by applicable law or agreed to in writing, software distributed under the 
+License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, 
+either express or implied. See the License for the specific language governing permissions 
+and limitations under the License.
 */
 
 #import "FRAStandardHeader.h"
@@ -124,17 +128,17 @@ static id sharedInstance = nil;
 
 - (void)installCommandLineUtility
 {
-	NSString *fraisePath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"fraise"];
-	NSData *fraiseData = [[NSData alloc] initWithContentsOfFile:fraisePath];
-	NSString *fraiseManPagePath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"fraise.1"];
-	NSData *fraiseManPageData = [[NSData alloc] initWithContentsOfFile:fraiseManPagePath];
+	NSString *path = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"berry"];
+	NSData *data = [[NSData alloc] initWithContentsOfFile:path];
+	NSString *manPagePath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"berry.1"];
+	NSData *manPageData = [[NSData alloc] initWithContentsOfFile:manPagePath];
 	
 	NSTask *task = [[NSTask alloc] init];
     NSPipe *pipe = [[NSPipe alloc] init];
     NSFileHandle *writeHandle = [pipe fileHandleForWriting];
 	
     [task setLaunchPath:@"/usr/libexec/authopen"];
-    [task setArguments:[NSArray arrayWithObjects:@"-c", @"-m", @"0755", @"-w", @"/usr/bin/fraise", nil]];
+    [task setArguments:[NSArray arrayWithObjects:@"-c", @"-m", @"0755", @"-w", @"/usr/bin/berry", nil]];
     [task setStandardInput:pipe];
 	
 	[task launch];
@@ -142,7 +146,7 @@ static id sharedInstance = nil;
 	NSInteger status;
 	signal(SIGPIPE, SIG_IGN); // One seems to need this code if someone writes the wrong password three times, otherwise it crashes the application
 	@try {
-		[writeHandle writeData:fraiseData];
+		[writeHandle writeData:data];
 		
 		close([writeHandle fileDescriptor]); // Close it manually
 		[writeHandle setValue:[NSNumber numberWithUnsignedShort:1] forKey:@"_flags"];
@@ -163,11 +167,11 @@ static id sharedInstance = nil;
 		writeHandle = [pipe fileHandleForWriting];
 		
 		[task setLaunchPath:@"/usr/libexec/authopen"];
-		[task setArguments:[NSArray arrayWithObjects:@"-c", @"-w", @"/usr/share/man/man1/fraise.1", nil]];
+		[task setArguments:[NSArray arrayWithObjects:@"-c", @"-w", @"/usr/share/man/man1/berry.1", nil]];
 		[task setStandardInput:pipe];
 		
 		[task launch];
-		[writeHandle writeData:fraiseManPageData];
+		[writeHandle writeData:manPageData];
 		
 		close([writeHandle fileDescriptor]); // Close it manually
 		[writeHandle setValue:[NSNumber numberWithUnsignedShort:1] forKey:@"_flags"];
