@@ -1,15 +1,19 @@
 /*
-Fraise version 3.7 - Based on Smultron by Peter Borg
-Written by Jean-François Moy - jeanfrancois.moy@gmail.com
-Find the latest version at http://github.com/jfmoy/Fraise
+Strawberry - Based on Fraise by Jean-François Moy
+Written by Chris Marrin - chris@marrin.com
+Find the latest version at http://github.com/cmarrin/Strawberry
 
 Copyright 2010 Jean-François Moy
  
-Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
+Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file 
+except in compliance with the License. You may obtain a copy of the License at
  
 http://www.apache.org/licenses/LICENSE-2.0
  
-Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
+Unless required by applicable law or agreed to in writing, software distributed under the 
+License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, 
+either express or implied. See the License for the specific language governing permissions 
+and limitations under the License.
 */
 
 #import "FRAStandardHeader.h"
@@ -69,7 +73,6 @@ static id sharedInstance = nil;
 	[[[FRAExtraInterfaceController sharedInstance] newProjectWindow] makeKeyAndOrderFront:nil];
 }
 
-
 - (IBAction)openAction:(id)sender
 {
 	[FRABasic removeAllItemsFromMenu:[[[FRAExtraInterfaceController sharedInstance] openPanelEncodingsPopUp] menu]];
@@ -91,12 +94,9 @@ static id sharedInstance = nil;
 
 	[[[FRAExtraInterfaceController sharedInstance] openPanelEncodingsPopUp] selectItemAtIndex:0]; // Reset it to: Use settings from Preferences
 	
-	if ([sender tag] == 7) { // Needs to be set before it is created
-		[[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"AppleShowAllFiles"];
-	}
-	
 	openPanel = [[NSOpenPanel alloc] init];
 
+    [self showHiddenFiles:[[[FRAExtraInterfaceController sharedInstance] openPanelShowHiddenFilesButton] state] == NSOnState];
 	[openPanel setResolvesAliases:YES];
 	[openPanel setAllowsMultipleSelection:YES];
 	[openPanel setAccessoryView:[[FRAExtraInterfaceController sharedInstance] openPanelAccessoryView]];
@@ -108,30 +108,25 @@ static id sharedInstance = nil;
 	if ([sender tag] == 7) {
 		[openPanel setTreatsFilePackagesAsDirectories:YES];
 	}
-	
-	[openPanel beginSheetForDirectory:[FRAInterface whichDirectoryForOpen]
-							 file:nil
-							types:nil
-				   modalForWindow:FRACurrentWindow
-					modalDelegate:self
-				   didEndSelector:@selector(openPanelDidEnd:returnCode:contextInfo:)
-					  contextInfo:nil];
+
+    [openPanel setDirectoryURL:[NSURL URLWithString:[FRAInterface whichDirectoryForOpen]]];
+    [openPanel beginSheetModalForWindow:FRACurrentWindow completionHandler:^(NSInteger result) {
+        if (result == NSOKButton) {
+            [FRADefaults setValue:[[[openPanel URL] path] stringByDeletingLastPathComponent] forKey:@"LastOpenDirectory"];
+            NSArray *array = [openPanel URLs];
+            for (id item in array) {
+                [FRAOpenSave shouldOpen:item withEncoding:[[[FRAExtraInterfaceController sharedInstance] openPanelEncodingsPopUp] selectedTag]];
+            }
+        }
+    }];
+    
+    [openPanel release];
 }
 
-
-- (void)openPanelDidEnd:(NSOpenPanel *)sheet returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo
+- (void)showHiddenFiles:(BOOL)show
 {
-	[[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"AppleShowAllFiles"];
-	
-	if (returnCode == NSOKButton) {	
-		[FRADefaults setValue:[[sheet filename] stringByDeletingLastPathComponent] forKey:@"LastOpenDirectory"];
-		NSArray *array = [sheet filenames];
-		for (id item in array) {
-			[FRAOpenSave shouldOpen:item withEncoding:[[[FRAExtraInterfaceController sharedInstance] openPanelEncodingsPopUp] selectedTag]];
-		}
-	}
+    [openPanel setShowsHiddenFiles:show];
 }
-
 
 - (IBAction)saveAction:(id)sender
 {
@@ -151,66 +146,33 @@ static id sharedInstance = nil;
 	if ([[FRADefaults valueForKey:@"AppendNameInSaveAs"] boolValue] == YES) {
 		[name appendString:[FRADefaults valueForKey:@"AppendNameInSaveAsWith"]];
 	}
-	[savePanel beginSheetForDirectory:[FRAInterface whichDirectoryForSave]				
-								 file:name
-					   modalForWindow:FRACurrentWindow
-						modalDelegate:self
-					   didEndSelector:@selector(savePanelDidEnd:returnCode:contextInfo:)
-						  contextInfo:nil];
+
+    [savePanel setDirectoryURL:[NSURL URLWithString:[FRAInterface whichDirectoryForSave]]];
+    [savePanel beginSheetModalForWindow:FRACurrentWindow completionHandler:^(NSInteger result) {
+        [savePanel close];
+        [FRAVarious stopModalLoop];
+        
+        if (result == NSOKButton) {						
+            if ([[FRACurrentDocument valueForKey:@"fromExternal"] boolValue] == YES) {
+                [FRAVarious sendClosedEventToExternalDocument:FRACurrentDocument];
+                [FRACurrentDocument setValue:[NSNumber numberWithBool:NO] forKey:@"fromExternal"]; // If it is "fromExternal" it shouldn't be that after it has gone through a Save As, but rather, it should be a normal document
+            }
+            
+            [FRAOpenSave performSaveOfDocument:FRACurrentDocument path:[savePanel URL] fromSaveAs:YES aCopy:NO];
+            if ([[NSFileManager defaultManager] fileExistsAtPath:[[savePanel URL] path]]) {// Check that it has actually been saved
+                [[FRAProjectsController sharedDocumentController] putInRecentWithPath:[[savePanel URL] path]];
+            }
+            [FRADefaults setValue:[[[savePanel URL] path] stringByDeletingLastPathComponent] forKey:@"LastSaveAsDirectory"];
+            [[FRACurrentDocument valueForKey:@"syntaxColouring"] setSyntaxDefinition];
+            
+            [[FRACurrentDocument valueForKey:@"syntaxColouring"] pageRecolour];
+            
+            [FRAInterface updateStatusBar];
+        }
+    }];
 	
 	[NSApp runModalForWindow:savePanel]; // Run as modal to handle if there are more than one document that needs saving
 }
-
-
-- (void)savePanelDidEnd:(NSSavePanel *)sheet returnCode:(NSInteger)returnCode contextInfo:(void *)context
-{
-	[sheet close];
-	[FRAVarious stopModalLoop];
-	
-	if (returnCode == NSOKButton) {						
-		if ([[FRACurrentDocument valueForKey:@"fromExternal"] boolValue] == YES) {
-			[FRAVarious sendClosedEventToExternalDocument:FRACurrentDocument];
-			[FRACurrentDocument setValue:[NSNumber numberWithBool:NO] forKey:@"fromExternal"]; // If it is "fromExternal" it shouldn't be that after it has gone through a Save As, but rather, it should be a normal document
-		}
-		
-		[FRAOpenSave performSaveOfDocument:FRACurrentDocument path:[sheet filename] fromSaveAs:YES aCopy:NO];
-		if ([[NSFileManager defaultManager] fileExistsAtPath:[sheet filename]]) {// Check that it has actually been saved
-			[[FRAProjectsController sharedDocumentController] putInRecentWithPath:[sheet filename]];
-		}
-		[FRADefaults setValue:[[sheet filename] stringByDeletingLastPathComponent] forKey:@"LastSaveAsDirectory"];
-		[[FRACurrentDocument valueForKey:@"syntaxColouring"] setSyntaxDefinition];
-		
-		[[FRACurrentDocument valueForKey:@"syntaxColouring"] pageRecolour];
-		
-		[FRAInterface updateStatusBar];
-	}
-}
-
-
-- (IBAction)saveACopyAsAction:(id)sender
-{
-	NSSavePanel *savePanel = [NSSavePanel savePanel];
-	
-	NSString *copyName = [NSString stringWithFormat:@"%@ %@", [FRACurrentDocument valueForKey:@"name"], NSLocalizedString(@"copy", @"The word to indicate that the filename is a copy in Save-A-Copy-As save-panel")];
-	
-	[savePanel beginSheetForDirectory:[FRAInterface whichDirectoryForSave]				
-								 file:copyName
-					   modalForWindow:FRACurrentWindow
-						modalDelegate:self
-					   didEndSelector:@selector(saveACopyAsPanelDidEnd:returnCode:contextInfo:)
-						  contextInfo:nil];
-	
-}
-
-
-- (void)saveACopyAsPanelDidEnd:(NSSavePanel *)sheet returnCode:(NSInteger)returnCode contextInfo:(void *)context
-{
-	if (returnCode == NSOKButton) {						
-		[FRAOpenSave performSaveOfDocument:FRACurrentDocument path:[sheet filename] fromSaveAs:YES aCopy:YES];
-		[FRADefaults setValue:[[sheet filename] stringByDeletingLastPathComponent] forKey:@"LastSaveAsDirectory"];
-	}
-}
-
 
 - (IBAction)revertAction:(id)sender
 {
@@ -311,7 +273,7 @@ static id sharedInstance = nil;
 		}
 			
 	} else {
-		if (tag == 1 || tag == 7) { // All items that should be active all the time and Open Hidden...
+		if (tag == 1) { // All items that should be active all the time
 			enableMenuItem = YES;
 		} else if (tag == 6) { // Close
 			if ([NSApp mainWindow] == nil && [NSApp keyWindow] == nil) {
@@ -357,44 +319,30 @@ static id sharedInstance = nil;
 - (void)saveAsInSaveAllForDocument:(id)document
 {
 	NSSavePanel *savePanel = [NSSavePanel savePanel];				
-	
-	[savePanel beginSheetForDirectory:[FRAInterface whichDirectoryForSave]				
-								 file:[document valueForKey:@"name"]
-					   modalForWindow:FRACurrentWindow
-						modalDelegate:self
-					   didEndSelector:@selector(saveAsPanelInSaveAllDidEnd:returnCode:contextInfo:)
-						  contextInfo:(void *)[NSArray arrayWithObject:document]];
-	
-	[NSApp runModalForWindow:savePanel]; // Run as modal to handle if there are more than one document that needs saving
+    [savePanel setDirectoryURL:[NSURL URLWithString:[FRAInterface whichDirectoryForSave]]];
+    
+    // FIXME: Need to show initial file: [document valueForKey:@"name"]
+    [savePanel beginSheetModalForWindow:FRACurrentWindow completionHandler:^(NSInteger result) {
+        [savePanel close];
+        [FRAVarious stopModalLoop];
+        
+        if (result == NSOKButton) {
+            NSString *path = [[savePanel URL] path];
+            [FRAOpenSave performSaveOfDocument:document path:[savePanel URL] fromSaveAs:NO aCopy:NO];
+            if ([[NSFileManager defaultManager] fileExistsAtPath:path]) { // Check that it has actually been saved
+                [[FRAProjectsController sharedDocumentController] putInRecentWithPath:path];
+            }
+            [FRADefaults setValue:[path stringByDeletingLastPathComponent] forKey:@"LastSaveAsDirectory"];
+            [[document valueForKey:@"syntaxColouring"] setSyntaxDefinition];
+            [[document valueForKey:@"syntaxColouring"] pageRecolour];
+        }
+    }];
 }
-
-
-- (void)saveAsPanelInSaveAllDidEnd:(NSSavePanel *)sheet returnCode:(NSInteger)returnCode contextInfo:(void *)context
-{
-	[sheet close];
-	[FRAVarious stopModalLoop];
-	
-	if (returnCode == NSOKButton) {
-		id document = [(NSArray *)context objectAtIndex:0];
-		NSString *path = [sheet filename];
-		[FRAOpenSave performSaveOfDocument:document path:path fromSaveAs:NO aCopy:NO];
-		if ([[NSFileManager defaultManager] fileExistsAtPath:path]) { // Check that it has actually been saved
-			[[FRAProjectsController sharedDocumentController] putInRecentWithPath:path];
-		}
-		[FRADefaults setValue:[path stringByDeletingLastPathComponent] forKey:@"LastSaveAsDirectory"];
-		[[document valueForKey:@"syntaxColouring"] setSyntaxDefinition];
-		[[document valueForKey:@"syntaxColouring"] pageRecolour];
-	}
-}
-
 
 - (void)printAction:(id)sender 
 {
 	[FRACurrentProject printDocument:sender];
 }
-
-
-
 
 - (IBAction)revealInFinderAction:(id)sender
 {

@@ -1,15 +1,19 @@
 /*
-Fraise version 3.7 - Based on Smultron by Peter Borg
-Written by Jean-François Moy - jeanfrancois.moy@gmail.com
-Find the latest version at http://github.com/jfmoy/Fraise
+Strawberry - Based on Fraise by Jean-François Moy
+Written by Chris Marrin - chris@marrin.com
+Find the latest version at http://github.com/cmarrin/Strawberry
 
 Copyright 2010 Jean-François Moy
  
-Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
+Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file 
+except in compliance with the License. You may obtain a copy of the License at
  
 http://www.apache.org/licenses/LICENSE-2.0
  
-Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
+Unless required by applicable law or agreed to in writing, software distributed under the 
+License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, 
+either express or implied. See the License for the specific language governing permissions 
+and limitations under the License.
 */
 
 
@@ -179,7 +183,6 @@ static id sharedInstance = nil;
 	[dictionary setValue:[NSNumber numberWithBool:NO] forKey:@"HasInsertedDefaultSnippets"];
 	[dictionary setValue:[NSNumber numberWithBool:NO] forKey:@"HasImportedFromVersion2"];
 	[dictionary setValue:[NSNumber numberWithBool:NO] forKey:@"HasInsertedDefaultCommands3"];
-	[dictionary setValue:[NSNumber numberWithBool:NO] forKey:@"UserHasBeenShownAlertHowToReturnFromFullScreen"];
 	[dictionary setValue:[NSNumber numberWithBool:NO] forKey:@"UpdateDocumentAutomaticallyWithoutWarning"];
 	[dictionary setValue:[NSNumber numberWithInteger:4] forKey:@"SpacesPerTabEntabDetab"];
 	[dictionary setValue:[NSNumber numberWithInteger:15] forKey:@"TimeBetweenDocumentUpdateChecks"];
@@ -560,45 +563,25 @@ static id sharedInstance = nil;
 	NSOpenPanel *openPanel = [NSOpenPanel openPanel];
 	[openPanel setCanChooseDirectories:YES];
 	[openPanel setCanChooseFiles:NO];
-	[openPanel beginSheetForDirectory:NSHomeDirectory()
-								 file:nil
-								types:nil
-					   modalForWindow:preferencesWindow
-						modalDelegate:self
-					   didEndSelector:@selector(openPanelDidEnd:returnCode:contextInfo:)
-						  contextInfo:nil];
+    [openPanel setDirectoryURL:[NSURL URLWithString:NSHomeDirectory()]];
+    [openPanel beginSheetModalForWindow:preferencesWindow completionHandler:^(NSInteger result) {
+        if (result == NSOKButton)
+            [FRADefaults setValue:[[[openPanel URL] path] stringByAbbreviatingWithTildeInPath] forKey:@"OpenAlwaysUseTextField"];
+    }];
 }
-
-
-- (void)openPanelDidEnd:(NSOpenPanel *)sheet returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo
-{
-	if (returnCode == NSOKButton) {						
-		[FRADefaults setValue:[[sheet filename] stringByAbbreviatingWithTildeInPath] forKey:@"OpenAlwaysUseTextField"];
-	}
-}
-
 
 - (IBAction)saveAsSetFolderAction:(id)sender
 {
 	NSOpenPanel *openPanel = [NSOpenPanel openPanel];
 	[openPanel setCanChooseDirectories:YES];
 	[openPanel setCanChooseFiles:NO];
-	[openPanel beginSheetForDirectory:NSHomeDirectory()
-								 file:nil
-								types:nil
-					   modalForWindow:preferencesWindow
-						modalDelegate:self
-					   didEndSelector:@selector(saveAsPanelDidEnd:returnCode:contextInfo:)
-						  contextInfo:nil];
+    [openPanel setDirectoryURL:[NSURL URLWithString:NSHomeDirectory()]];
+    [openPanel beginSheetModalForWindow:preferencesWindow completionHandler:^(NSInteger result) {
+        if (result == NSOKButton)
+            [FRADefaults setValue:[[[openPanel URL] path] stringByAbbreviatingWithTildeInPath] forKey:@"SaveAsAlwaysUseTextField"];
+    }];
 }
 
-
-- (void)saveAsPanelDidEnd:(NSOpenPanel *)sheet returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo
-{
-	if (returnCode == NSOKButton) {						
-		[FRADefaults setValue:[[sheet filename] stringByAbbreviatingWithTildeInPath] forKey:@"SaveAsAlwaysUseTextField"];
-	}
-}
 
 - (IBAction)changeGutterWidth:(id)sender {
 	NSEnumerator *documentEnumerator =  [[[FRACurrentProject documentsArrayController] arrangedObjects] objectEnumerator];

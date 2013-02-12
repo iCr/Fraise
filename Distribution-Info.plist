@@ -15,7 +15,7 @@
 			<key>CFBundleTypeIconFile</key>
 			<string>FRAProjectIcon</string>
 			<key>CFBundleTypeName</key>
-			<string>Fraise Project</string>
+			<string>Strawberry Project</string>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>LSTypeIsPackage</key>
@@ -29,7 +29,7 @@
 			<key>CFBundleTypeIconFile</key>
 			<string>FRADocumentIcon</string>
 			<key>CFBundleTypeName</key>
-			<string>Fraise Document</string>
+			<string>Strawberry Document</string>
 			<key>CFBundleTypeOSTypes</key>
 			<array>
 				<string>FRAd</string>
@@ -38,7 +38,7 @@
 			<string>Editor</string>
 			<key>LSItemContentTypes</key>
 			<array>
-				<string>org.fraise.fraise.document</string>
+				<string>org.marrin.strawberry.document</string>
 				<string>public.plain-text</string>
 				<string>public.html</string>
 				<string>public.xml</string>
@@ -86,13 +86,13 @@
 		<dict>
 			<key>CFBundleTypeExtensions</key>
 			<array>
-				<string>fraiseSnippets</string>
+				<string>strawberruSnippets</string>
 				<string>fralc</string>
 			</array>
 			<key>CFBundleTypeIconFile</key>
 			<string>FRASnippetsIcon</string>
 			<key>CFBundleTypeName</key>
-			<string>Fraise Snippets</string>
+			<string>Strawberry Snippets</string>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>LSTypeIsPackage</key>
@@ -101,12 +101,12 @@
 		<dict>
 			<key>CFBundleTypeExtensions</key>
 			<array>
-				<string>fraiseCommands</string>
+				<string>strawberryCommands</string>
 			</array>
 			<key>CFBundleTypeIconFile</key>
 			<string>FRACommandsIcon</string>
 			<key>CFBundleTypeName</key>
-			<string>Fraise Commands</string>
+			<string>Strawberry Commands</string>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>LSTypeIsPackage</key>
@@ -116,23 +116,23 @@
 		</dict>
 	</array>
 	<key>CFBundleExecutable</key>
-	<string>Fraise</string>
+	<string>Strawberry</string>
 	<key>CFBundleHelpBookFolder</key>
-	<string>Fraise Help</string>
+	<string>Strawberry Help</string>
 	<key>CFBundleHelpBookName</key>
-	<string>Fraise Help</string>
+	<string>Strawberry Help</string>
 	<key>CFBundleIconFile</key>
 	<string>FRAMainIcon</string>
 	<key>CFBundleIdentifier</key>
-	<string>org.fraise.Fraise</string>
+	<string>org.marrin.Strawberry</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>Fraise</string>
+	<string>Strawberry</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleSignature</key>
-	<string>FRAI</string>
+	<string>STRA</string>
 	<key>CFBundleVersion</key>
 	<string>3.7.2</string>
 	<key>ExcludeSyncKeys</key>
@@ -156,12 +156,12 @@
 			<key>NSMenuItem</key>
 			<dict>
 				<key>default</key>
-				<string>Fraise/Open Selected File</string>
+				<string>Strawberry/Open Selected File</string>
 			</dict>
 			<key>NSMessage</key>
 			<string>openFile</string>
 			<key>NSPortName</key>
-			<string>Fraise</string>
+			<string>Strawberry</string>
 			<key>NSSendTypes</key>
 			<array>
 				<string>NSStringPboardType</string>
@@ -172,12 +172,12 @@
 			<key>NSMenuItem</key>
 			<dict>
 				<key>default</key>
-				<string>Fraise/Insert Selection Into Current Document</string>
+				<string>Strawberry/Insert Selection Into Current Document</string>
 			</dict>
 			<key>NSMessage</key>
 			<string>insertSelection</string>
 			<key>NSPortName</key>
-			<string>Fraise</string>
+			<string>Strawberry</string>
 			<key>NSSendTypes</key>
 			<array>
 				<string>NSStringPboardType</string>
@@ -187,12 +187,12 @@
 			<key>NSMenuItem</key>
 			<dict>
 				<key>default</key>
-				<string>Fraise/New Document Containing Selection</string>
+				<string>Strawberry/New Document Containing Selection</string>
 			</dict>
 			<key>NSMessage</key>
 			<string>openSelection</string>
 			<key>NSPortName</key>
-			<string>Fraise</string>
+			<string>Strawberry</string>
 			<key>NSSendTypes</key>
 			<array>
 				<string>NSStringPboardType</string>
@@ -200,9 +200,9 @@
 		</dict>
 	</array>
 	<key>OSAScriptingDefinition</key>
-	<string>Fraise.sdef</string>
+	<string>Strawberry.sdef</string>
 	<key>SUFeedURL</key>
-	<string>http://www.bloggezmoy.com/fraise/appcast.xml</string>
+	<string>http://marrin.org/strawberry/appcast.xml</string>
 	<key>SUPublicDSAKeyFile</key>
 	<string>dsa_pub.pem</string>
 	<key>UTExportedTypeDeclarations</key>
@@ -215,11 +215,11 @@
 				<string>public.data</string>
 			</array>
 			<key>UTTypeDescription</key>
-			<string>Fraise Document</string>
+			<string>Strawberry Document</string>
 			<key>UTTypeIconFile</key>
 			<string>DocumentIcon</string>
 			<key>UTTypeIdentifier</key>
-			<string>org.fraise.fraise.document</string>
+			<string>org.marrin.strawberry.document</string>
 			<key>UTTypeTagSpecification</key>
 			<dict>
 				<key>com.apple.ostype</key>

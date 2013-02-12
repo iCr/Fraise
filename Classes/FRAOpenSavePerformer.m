@@ -1,15 +1,19 @@
 /*
-Fraise version 3.7 - Based on Smultron by Peter Borg
-Written by Jean-François Moy - jeanfrancois.moy@gmail.com
-Find the latest version at http://github.com/jfmoy/Fraise
+Strawberry - Based on Fraise by Jean-François Moy
+Written by Chris Marrin - chris@marrin.com
+Find the latest version at http://github.com/cmarrin/Strawberry
 
 Copyright 2010 Jean-François Moy
  
-Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
+Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file 
+except in compliance with the License. You may obtain a copy of the License at
  
 http://www.apache.org/licenses/LICENSE-2.0
  
-Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
+Unless required by applicable law or agreed to in writing, software distributed under the 
+License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, 
+either express or implied. See the License for the specific language governing permissions 
+and limitations under the License.
 */
 
 #import "FRAStandardHeader.h"
@@ -77,19 +81,19 @@ static id sharedInstance = nil;
 }
 
 
-- (void)shouldOpen:(NSString *)path withEncoding:(NSStringEncoding)chosenEncoding
+- (void)shouldOpen:(NSURL *)path withEncoding:(NSStringEncoding)chosenEncoding
 {
 	NSFileManager *fileManager = [NSFileManager defaultManager];
 	BOOL isDirectory;
-	if ([fileManager fileExistsAtPath:path isDirectory:&isDirectory] && isDirectory) { // Check if folder
+	if ([fileManager fileExistsAtPath:[path path] isDirectory:&isDirectory] && isDirectory) { // Check if folder
 		if ([[FRADefaults valueForKey:@"OpenAllFilesWithinAFolder"] boolValue] == YES) {
 			NSEnumerator *enumerator;
 			if ([[FRADefaults valueForKey:@"OpenAllFilesInAFolderRecursively"] boolValue] == YES){
-				enumerator = [fileManager enumeratorAtPath:path];
+				enumerator = [fileManager enumeratorAtPath:[path path]];
 			} else {
-				enumerator = [[fileManager contentsOfDirectoryAtPath:path error:nil] objectEnumerator];
+				enumerator = [[fileManager contentsOfDirectoryAtPath:[path path] error:nil] objectEnumerator];
 			}
-			NSString *temporaryPath;
+			NSURL *temporaryPath;
 			NSMutableString *extensionsToFilterOutString = [NSMutableString stringWithString:[FRADefaults valueForKey:@"FilterOutExtensionsString"]];
 			[extensionsToFilterOutString replaceOccurrencesOfString:@"." withString:@"" options:NSLiteralSearch range:NSMakeRange(0, [extensionsToFilterOutString length])]; // If the user has included some dots
 			NSArray *extensionsToFilterOut = [extensionsToFilterOutString componentsSeparatedByString:@" "];
@@ -102,7 +106,7 @@ static id sharedInstance = nil;
 					continue;
 				}
 				temporaryPath = [NSString stringWithFormat:@"%@/%@", path, file];
-				if ([fileManager fileExistsAtPath:temporaryPath isDirectory:&isDirectory] && !isDirectory && ![[temporaryPath lastPathComponent] hasPrefix:@"."]) {
+				if ([fileManager fileExistsAtPath:[temporaryPath path] isDirectory:&isDirectory] && !isDirectory && ![[temporaryPath lastPathComponent] hasPrefix:@"."]) {
 					[self shouldOpen:temporaryPath withEncoding:chosenEncoding];
 				}
 			}
@@ -120,7 +124,7 @@ static id sharedInstance = nil;
 	id document;
 	BOOL documentAlreadyOpened = NO;
 	for (document in array) {
-		if ([[document valueForKey:@"path"] isEqualToString:path]) {
+		if ([[document valueForKey:@"path"] isEqualToString:[path path]]) {
 			documentAlreadyOpened = YES;
 			break;
 		}
@@ -130,13 +134,13 @@ static id sharedInstance = nil;
 		[FRACurrentProject selectDocument:document];
 		[[FRAProjectsController sharedDocumentController] putInRecentWithPath:[document valueForKey:@"path"]];
 	} else {
-		if (![fileManager fileExistsAtPath:path]) {
+		if (![fileManager fileExistsAtPath:[path path]]) {
 			NSString *title = [NSString stringWithFormat:NSLocalizedString(@"The file %@ does not exist", @"Indicate that the file %@ does not exist Open-file-does-not-exist sheet"), path];
 			[FRAVarious standardAlertSheetWithTitle:title message:[NSString stringWithFormat:NSLocalizedString(@"Please find it at a different location by choosing Open%C in the File menu", @"Indicate that they should find it at different location by choosing Open%C in the File menu Open-file-does-not-exist sheet"), 0x2026] window:FRACurrentWindow];
 			return;
 		}
 		
-		if (![fileManager isReadableFileAtPath:path]) { // Check if the document can be read
+		if (![fileManager isReadableFileAtPath:[path path]]) { // Check if the document can be read
 			if (FRACurrentWindow == nil) {
 				[[FRAProjectsController sharedDocumentController] newDocument:nil];
 			}
@@ -188,7 +192,7 @@ static id sharedInstance = nil;
 
 
 // Split this method in two to allow the latter part to be called from FRAAuthenticationController
-- (void)shouldOpenPartTwo:(NSString *)path withEncoding:(NSStringEncoding)chosenEncoding data:(NSData *)textData
+- (void)shouldOpenPartTwo:(NSURL *)path withEncoding:(NSStringEncoding)chosenEncoding data:(NSData *)textData
 {
 	NSString *string = nil;
 	NSStringEncoding encoding = 0;
@@ -196,10 +200,10 @@ static id sharedInstance = nil;
 		encoding = chosenEncoding;
 	} else if ([[FRADefaults valueForKey:@"EncodingsMatrix"] integerValue] == 0) {
 		NSError *error = nil;
-		string = [NSString stringWithContentsOfFile:path usedEncoding:&encoding error:&error];
+		string = [NSString stringWithContentsOfFile:[path path] usedEncoding:&encoding error:&error];
 		if (error != nil || string == nil) { // It hasn't found an encoding so return the default
 			if (textData == nil) {
-				textData = [[NSData alloc] initWithContentsOfFile:path];
+				textData = [[NSData alloc] initWithContentsOfFile:[path path]];
 			}
 			encoding = [FRAText guessEncodingFromData:textData];
 			if (encoding == 0 || encoding == -1) { // Something has gone wrong or it hasn't found an encoding, so use default
@@ -212,17 +216,17 @@ static id sharedInstance = nil;
 	}
 
 	if (string == nil) {
-		string = [[NSString alloc] initWithContentsOfFile:path encoding:encoding error:nil];
+		string = [[NSString alloc] initWithContentsOfFile:[path path] encoding:encoding error:nil];
 	}
 
 	if (string == nil) { // Test if encoding worked, else try NSUTF8StringEncoding
-		string = [[NSString alloc] initWithContentsOfFile:path encoding:NSUTF8StringEncoding error:nil];
+		string = [[NSString alloc] initWithContentsOfFile:[path path] encoding:NSUTF8StringEncoding error:nil];
 		encoding = NSUTF8StringEncoding;
 		if (string == nil) { // Test if encoding worked, else try NSISOLatin1StringEncoding
-			string = [[NSString alloc] initWithContentsOfFile:path encoding:NSISOLatin1StringEncoding error:nil];
+			string = [[NSString alloc] initWithContentsOfFile:[path path] encoding:NSISOLatin1StringEncoding error:nil];
 			encoding = NSISOLatin1StringEncoding;
 			if (string == nil) { // Test if encoding worked, else try defaultCStringEncoding
-				string = [[NSString alloc] initWithContentsOfFile:path encoding:[NSString defaultCStringEncoding] error:nil];
+				string = [[NSString alloc] initWithContentsOfFile:[path path] encoding:[NSString defaultCStringEncoding] error:nil];
 				encoding = [NSString defaultCStringEncoding];
 				if (string == nil) { // If it still is nil set it to empty string
 					string = @"";
@@ -234,7 +238,7 @@ static id sharedInstance = nil;
 	[self performOpenWithPath:path contents:string encoding:encoding];
 }
 
-- (void)performOpenWithPath:(NSString *)path contents:(NSString *)textString encoding:(NSStringEncoding)encoding
+- (void)performOpenWithPath:(NSURL *)path contents:(NSString *)textString encoding:(NSStringEncoding)encoding
 {
 	if (FRACurrentProject == nil) {
 		if ([[[FRAProjectsController sharedDocumentController] documents] count] > 0) { // When working as an external editor some programs cause Fraise to not have an active document and thus no current project
@@ -276,7 +280,7 @@ static id sharedInstance = nil;
 			externalPath = [[keyAEPropDataDescriptor paramDescriptorForKeyword:keyFileCustomPath] stringValue];
 		}
 		if (!externalPath) {
-			externalPath = path;
+			externalPath = [path path];
 		}
 		
 		document = [FRACurrentProject createNewDocumentWithPath:externalPath andContents:textString];
@@ -302,8 +306,8 @@ static id sharedInstance = nil;
 		
 		[[FRAProjectsController sharedDocumentController] putInRecentWithPath:externalPath];
 	} else {
-		document = [FRACurrentProject createNewDocumentWithPath:path andContents:textString];
-		[[FRAProjectsController sharedDocumentController] putInRecentWithPath:path];
+		document = [FRACurrentProject createNewDocumentWithPath:[path path] andContents:textString];
+		[[FRAProjectsController sharedDocumentController] putInRecentWithPath:[path path]];
 	}
 	[[FRAApplicationDelegate sharedInstance] setAppleEventDescriptor:nil];
 	
@@ -320,7 +324,7 @@ static id sharedInstance = nil;
 //	[document setValue:[icons objectAtIndex:0] forKey:@"icon"];
 //	[document setValue:[icons objectAtIndex:1] forKey:@"unsavedIcon"];
 	
-	NSDictionary *fileAttributes = [NSDictionary dictionaryWithDictionary:[[NSFileManager defaultManager] attributesOfItemAtPath:path error:nil]];
+	NSDictionary *fileAttributes = [NSDictionary dictionaryWithDictionary:[[NSFileManager defaultManager] attributesOfItemAtPath:[path path] error:nil]];
 	[document setValue:fileAttributes forKey:@"fileAttributes"];
 	[FRAVarious setLastSavedDateForDocument:document date:[fileAttributes fileModificationDate]];
 	[FRAInterface updateStatusBar];
@@ -350,7 +354,7 @@ static id sharedInstance = nil;
 }
 
 
-- (void)performSaveOfDocument:(id)document path:(NSString *)path fromSaveAs:(BOOL)fromSaveAs aCopy:(BOOL)aCopy
+- (void)performSaveOfDocument:(id)document path:(NSURL *)path fromSaveAs:(BOOL)fromSaveAs aCopy:(BOOL)aCopy
 {
 	NSString *string = [FRAText convertLineEndings:[[[document valueForKey:@"firstTextScrollView"] documentView] string] inDocument:document];
 	if ([[FRADefaults valueForKey:@"AlwaysEndFileWithLineFeed"] boolValue] == YES) {
@@ -369,23 +373,23 @@ static id sharedInstance = nil;
 	
 	NSFileManager *fileManager = [NSFileManager defaultManager];
 	BOOL isDirectory;
-	if ([fileManager fileExistsAtPath:path isDirectory:&isDirectory] && isDirectory) { // Check if it is a folder
+	if ([fileManager fileExistsAtPath:[path path] isDirectory:&isDirectory] && isDirectory) { // Check if it is a folder
 		NSString *title = [NSString stringWithFormat:IS_NOW_FOLDER_STRING, path];
 		[FRAVarious standardAlertSheetWithTitle:title message:[NSString stringWithFormat:NSLocalizedString(@"Please save it at a different location with Save As%C in the File menu", @"Indicate that they should try to save at a different location with Save As%C in File menu in Path-is-a-directory sheet"), 0x2026] window:FRACurrentWindow];
 		return;
 	}
-	BOOL fileAlreadyExists = [fileManager fileExistsAtPath:path];
+	BOOL fileAlreadyExists = [fileManager fileExistsAtPath:[path path]];
 	BOOL folderIsWritable = YES;
 	if (fileAlreadyExists) {
-		folderIsWritable = [fileManager isWritableFileAtPath:[path stringByDeletingLastPathComponent]];
+		folderIsWritable = [fileManager isWritableFileAtPath:[[path path] stringByDeletingLastPathComponent]];
 	}
 	BOOL hasWritePermission = YES;
 	
 	if (fileAlreadyExists) {
-		hasWritePermission = [fileManager isWritableFileAtPath:path];
+		hasWritePermission = [fileManager isWritableFileAtPath:[path path]];
 	} else {
 		if ([[document valueForKey:@"isNewDocument"] boolValue] == YES) { // Check only if it's anew file as if it's an old file but the path does not exist, the folder e.g. has changed name so it will be caught later
-			hasWritePermission = [fileManager isWritableFileAtPath:[path stringByDeletingLastPathComponent]];
+			hasWritePermission = [fileManager isWritableFileAtPath:[[path path] stringByDeletingLastPathComponent]];
 		}
 	}		
 
@@ -415,8 +419,8 @@ static id sharedInstance = nil;
 	
 	if ([[document valueForKey:@"isNewDocument"] boolValue] == YES || fromSaveAs || !folderIsWritable) { // If it's a new file
 		
-		if (![string writeToURL:[NSURL fileURLWithPath:path] atomically:folderIsWritable encoding:[[document valueForKey:@"encoding"] integerValue] error:nil]) {
-			if (![string writeToURL:[NSURL fileURLWithPath:path] atomically:NO encoding:[[document valueForKey:@"encoding"] integerValue] error:nil]) { // Try it again without backup file
+		if (![string writeToURL:path atomically:folderIsWritable encoding:[[document valueForKey:@"encoding"] integerValue] error:nil]) {
+			if (![string writeToURL:path atomically:NO encoding:[[document valueForKey:@"encoding"] integerValue] error:nil]) { // Try it again without backup file
 				error = YES;
 			}
 		}
@@ -436,7 +440,7 @@ static id sharedInstance = nil;
 				[attributes setValue:[NSNumber numberWithUnsignedLong:'FRAd'] forKey:@"NSFileHFSTypeCode"];
 			}
 			
-			[fileManager setAttributes:attributes ofItemAtPath:path error:nil];
+			[fileManager setAttributes:attributes ofItemAtPath:[path path] error:nil];
 			if (!aCopy) {
 				[self updateAfterSaveForDocument:document path:path];
 			}
@@ -444,14 +448,14 @@ static id sharedInstance = nil;
 		
 	} else { // There is an old file...
 		
-		if (![fileManager fileExistsAtPath:path]) { // Check if the old file has been removed
+		if (![fileManager fileExistsAtPath:[path path]]) { // Check if the old file has been removed
 			NSString *title = [NSString stringWithFormat:NSLocalizedString(@"Could not overwrite the file %@ because it has been removed", @"Indicate that the program could not overwrite the file %@ because it has been removed in File-has-been-removed sheet"), path];
 			[FRAVarious standardAlertSheetWithTitle:title message:[NSString stringWithFormat:NSLocalizedString(@"Please use Save As%C in the File menu", @"Indicate that they should please use Save As%C in the File menu in File-has-been-removed sheet"), 0x2026] window:FRACurrentWindow];
 			return;
 		}
 		
 		NSDictionary *extraMetaData = [self getExtraMetaDataFromPath:path];
-		attributes = [NSMutableDictionary dictionaryWithDictionary:[fileManager attributesOfItemAtPath:path error:nil]];
+		attributes = [NSMutableDictionary dictionaryWithDictionary:[fileManager attributesOfItemAtPath:[path path] error:nil]];
 		if ([[FRADefaults valueForKey:@"AssignDocumentToFraiseWhenSaving"] boolValue] == YES) {
 			[attributes setObject:[NSNumber numberWithUnsignedLong:'SMUL'] forKey:@"NSFileHFSCreatorCode"];
 			[attributes setObject:[NSNumber numberWithUnsignedLong:'FRAd'] forKey:@"NSFileHFSTypeCode"];
@@ -459,14 +463,14 @@ static id sharedInstance = nil;
 		[attributes removeObjectForKey:@"NSFileSize"]; // Remove those values which has to be updated 
 		[attributes removeObjectForKey:@"NSFileModificationDate"];
 		
-		if (![string writeToURL:[NSURL fileURLWithPath:path] atomically:folderIsWritable encoding:[[document valueForKey:@"encoding"] integerValue] error:nil]) {
-			if (![string writeToURL:[NSURL fileURLWithPath:path] atomically:NO encoding:[[document valueForKey:@"encoding"] integerValue] error:nil]) { // Try it again without backup file as e.g. sshfs seems to object otherwise when overwriting a file
+		if (![string writeToURL:path atomically:folderIsWritable encoding:[[document valueForKey:@"encoding"] integerValue] error:nil]) {
+			if (![string writeToURL:path atomically:NO encoding:[[document valueForKey:@"encoding"] integerValue] error:nil]) { // Try it again without backup file as e.g. sshfs seems to object otherwise when overwriting a file
 				error = YES;
 			}
 		}
 		
 		if (!error) {
-			[fileManager setAttributes:attributes ofItemAtPath:path error:nil];
+			[fileManager setAttributes:attributes ofItemAtPath:[path path] error:nil];
 			[self resetExtraMetaData:extraMetaData path:path];
 			[self updateAfterSaveForDocument:document path:path];
 		}
@@ -479,36 +483,36 @@ static id sharedInstance = nil;
 }
 
 
-- (void)performDataSaveWith:(NSData *)data path:(NSString *)path
+- (void)performDataSaveWith:(NSData *)data path:(NSURL *)path
 {
 	NSFileManager *fileManager = [NSFileManager defaultManager];
 	BOOL isDirectory;
-	if ([fileManager fileExistsAtPath:path isDirectory:&isDirectory] && isDirectory) { // Check if folder
+	if ([fileManager fileExistsAtPath:[path path] isDirectory:&isDirectory] && isDirectory) { // Check if folder
 		NSString *title = [NSString stringWithFormat:IS_NOW_FOLDER_STRING, path];
 		[FRAVarious standardAlertSheetWithTitle:title message:TRY_SAVING_AT_A_DIFFERENT_LOCATION_STRING window:FRACurrentWindow];
 		return;
 	}
 	
-	BOOL fileExists = [fileManager fileExistsAtPath:path];
-	BOOL hasPermission = ([fileManager isWritableFileAtPath:[path stringByDeletingLastPathComponent]] && (!fileExists || (fileExists && [fileManager isWritableFileAtPath:path])));
+	BOOL fileExists = [fileManager fileExistsAtPath:[path path]];
+	BOOL hasPermission = ([fileManager isWritableFileAtPath:[[path path] stringByDeletingLastPathComponent]] && (!fileExists || (fileExists && [fileManager isWritableFileAtPath:[path path]])));
 	if (!hasPermission) { // Check permission
 		NSString *title = [NSString stringWithFormat:FILE_IS_UNWRITABLE_SAVE_STRING, path];
 		[FRAVarious standardAlertSheetWithTitle:title message:TRY_SAVING_AT_A_DIFFERENT_LOCATION_STRING window:FRACurrentWindow];
 		return;
 	}
 	
-	if (![data writeToURL:[NSURL fileURLWithPath:path] atomically:YES]) {
+	if (![data writeToURL:path atomically:YES]) {
 		NSString *title = [NSString stringWithFormat:NSLocalizedString(@"There was a unknown error when trying to save the file %@", @"Indicate that there was a unknown error when trying to save the file %@ in Unknown-error-when-saving sheet"), path];
 		[FRAVarious standardAlertSheetWithTitle:title message:NSLocalizedString(@"Please try to save in a different location", @"Indicate that they should try to save in a different location with in Unknown-error-when-data-saving sheet") window:FRACurrentWindow];
 	}
 }
 
 
-- (void)updateAfterSaveForDocument:(id)document path:(NSString *)path
+- (void)updateAfterSaveForDocument:(id)document path:(NSURL *)path
 {
-	[FRAVarious setNameAndPathForDocument:document path:path];
+	[FRAVarious setNameAndPathForDocument:document path:[path path]];
 	if ([[document valueForKey:@"fromExternal"] boolValue] == YES) {
-		[FRAVarious sendModifiedEventToExternalDocument:document path:path];
+		[FRAVarious sendModifiedEventToExternalDocument:document path:[path path]];
 	} 
 	
 	[document setValue:[NSNumber numberWithBool:NO] forKey:@"isEdited"];
@@ -526,9 +530,9 @@ static id sharedInstance = nil;
 //		[document setValue:[icons objectAtIndex:1] forKey:@"unsavedIcon"];
 	}
 	
-	[[NSWorkspace sharedWorkspace] noteFileSystemChanged:path];
+	[[NSWorkspace sharedWorkspace] noteFileSystemChanged:[path path]];
 	[FRAInterface updateStatusBar];
-	[document setValue:[[NSFileManager defaultManager] attributesOfItemAtPath:path error:nil] forKey:@"fileAttributes"];
+	[document setValue:[[NSFileManager defaultManager] attributesOfItemAtPath:[path path] error:nil] forKey:@"fileAttributes"];
 	
 	[FRACurrentProject documentsListHasUpdated];
 	
@@ -536,20 +540,21 @@ static id sharedInstance = nil;
 }
 
 
-- (NSDictionary *)getExtraMetaDataFromPath:(NSString *)path
+- (NSDictionary *)getExtraMetaDataFromPath:(NSURL *)path
 {
 	NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
 	
 	@try {
-		size_t size = listxattr([path fileSystemRepresentation], NULL, ULONG_MAX, 0);
+        const char* filename = [[path path] UTF8String];
+		size_t size = listxattr(filename, NULL, ULONG_MAX, 0);
 		NSMutableData *data = [NSMutableData dataWithLength:size];
-		size = listxattr([path fileSystemRepresentation], [data mutableBytes], size, 0);
+		size = listxattr(filename, [data mutableBytes], size, 0);
 		char *key;
 		char *start = (char *)[data bytes];
 		for (key = start; (key - start) < [data length]; key+= strlen(key) + 1) {
-			size_t valueSize = getxattr([path fileSystemRepresentation], key, NULL, ULONG_MAX, 0, 0);
+			size_t valueSize = getxattr(filename, key, NULL, ULONG_MAX, 0, 0);
 			NSMutableData *value = [NSMutableData dataWithLength:valueSize];
-			getxattr([path fileSystemRepresentation], key, [value mutableBytes], valueSize, 0, 0);
+			getxattr(filename, key, [value mutableBytes], valueSize, 0, 0);
 			
 			[dictionary setValue:value forKey:[NSString stringWithUTF8String:key]];
 		}
@@ -563,13 +568,13 @@ static id sharedInstance = nil;
 }
 
 
-- (void)resetExtraMetaData:(NSDictionary *)dictionary path:(NSString *)path
+- (void)resetExtraMetaData:(NSDictionary *)dictionary path:(NSURL *)path
 {
 	NSArray *array = [dictionary allKeys];
 	for (id item in array) {
 		@try {
 			NSData *value = [dictionary valueForKey:item];
-			setxattr([path fileSystemRepresentation], [item UTF8String], [value bytes], [value length], 0, 0);
+			setxattr([[path path] UTF8String], [item UTF8String], [value bytes], [value length], 0, 0);
 		}
 		@catch (NSException *exception) {
 		}
@@ -579,24 +584,15 @@ static id sharedInstance = nil;
 }
 
 
-- (BOOL)isPathVisible:(NSString *)path
+- (BOOL)isPathVisible:(NSURL *)path
 {
 	LSItemInfoRecord itemInfo;
-	LSCopyItemInfoForURL((CFURLRef)[NSURL URLWithString:[@"file:///" stringByAppendingString:path]], kLSRequestAllInfo, &itemInfo);
-	
-	if ((itemInfo.flags & kLSItemInfoIsInvisible) != 0) {
-		return NO;
-	} else {
-		if ([path isEqualToString:@"/.vol"] || [path isEqualToString:@"/automount"] || [path isEqualToString:@"/dev"] || [path isEqualToString:@"/mach"] || [path isEqualToString:@"/mach.sym"]) { // It seems to miss these...
-			return NO;
-		} else {
-			return YES;
-		}
-	}
+	LSCopyItemInfoForURL((CFURLRef)path, kLSRequestAllInfo, &itemInfo);
+	return itemInfo.flags & kLSItemInfoIsInvisible;
 }
 
 
-- (BOOL)isPartOfSVN:(NSString *)path
+- (BOOL)isPartOfSVN:(NSURL *)path
 {
 	NSArray *array = [path pathComponents];
 	for (id item in array) {

@@ -1,15 +1,19 @@
 /*
-Fraise version 3.7 - Based on Smultron by Peter Borg
-Written by Jean-François Moy - jeanfrancois.moy@gmail.com
-Find the latest version at http://github.com/jfmoy/Fraise
+Strawberry - Based on Fraise by Jean-François Moy
+Written by Chris Marrin - chris@marrin.com
+Find the latest version at http://github.com/cmarrin/Strawberry
 
 Copyright 2010 Jean-François Moy
  
-Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
+Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file 
+except in compliance with the License. You may obtain a copy of the License at
  
 http://www.apache.org/licenses/LICENSE-2.0
  
-Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
+Unless required by applicable law or agreed to in writing, software distributed under the 
+License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, 
+either express or implied. See the License for the specific language governing permissions 
+and limitations under the License.
 */
 
 #import "FRAStandardHeader.h"
@@ -26,7 +30,7 @@ Unless required by applicable law or agreed to in writing, software distributed 
 #import "FRAProject+DocumentViewsController.h"
 #import "FRALayoutManager.h"
 
-#import "PSMTabBarControl.h"
+#import "PSMTabBarControl/PSMTabBarControl.h"
 
 @implementation FRAViewMenuController
 
@@ -354,27 +358,6 @@ static id sharedInstance = nil;
 	[FRAInterface insertDocumentIntoThirdContentView:document orderFront:YES];
 	[FRACurrentProject updateWindowTitleBarForDocument:document];
 	
-}
-
-
-- (IBAction)viewDocumentInFullScreenAction:(id)sender
-{
-	if ([FRAMain isInFullScreenMode] == NO) {
-		if ([[FRADefaults valueForKey:@"UserHasBeenShownAlertHowToReturnFromFullScreen"] boolValue] == NO) {
-			[FRAVarious alertWithMessage:NSLocalizedString(@"Press the Escape-button on the keyboard to return from the full screen mode", @"Press the Escape-button on the keyboard to return from the full screen mode in Show Document In Full Screen") informativeText:NSLocalizedString(@"This message will NOT appear again so try to remember it:-)", @"This message will NOT appear again so try to remember it:-) in Show Document In Full Screen") defaultButton:OK_BUTTON alternateButton:nil otherButton:nil];
-			[FRADefaults setValue:[NSNumber numberWithBool:YES] forKey:@"UserHasBeenShownAlertHowToReturnFromFullScreen"];
-		}
-		id currentDocument = [[[FRACurrentProject documentsArrayController] selectedObjects] objectAtIndex:0];
-		if ([currentDocument valueForKey:@"singleDocumentWindow"] == nil) {
-			[FRAInterface insertDocumentIntoThirdContentView:currentDocument orderFront:NO];
-			[FRAMain setSingleDocumentWindowWasOpenBeforeEnteringFullScreen:NO];
-		} else {
-			[FRAMain setSingleDocumentWindowWasOpenBeforeEnteringFullScreen:YES];
-		}
-		
-		[FRAInterface enterFullScreenForDocument:currentDocument];
-		[FRAMain setIsInFullScreenMode:YES];
-	}
 }
 
 
